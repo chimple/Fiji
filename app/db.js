@@ -6,5 +6,8 @@ global.navigator.mimeTypes = '';
 global.navigator.userAgent = 'reactnative';    
 
 const fijiDB = new PouchDB('fiji', { adapter: 'asyncstorage' });
-
+console.log(fijiDB.adapter)
+fijiDB.info().then(function (info) {
+  console.log(info);
+})
 export default fijiDB
