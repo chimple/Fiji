@@ -5,9 +5,29 @@ import PouchDB from 'pouchdb-react-native';
 global.navigator.mimeTypes = '';
 global.navigator.userAgent = 'reactnative';    
 
-const fijiDB = new PouchDB('fiji', { adapter: 'asyncstorage' });
-console.log(fijiDB.adapter)
-fijiDB.info().then(function (info) {
-  console.log(info);
-})
-export default fijiDB
+// const db = new PouchDB('http://localhost:5984/chat')
+// console.log(db.adapter)
+// db.info().then(function (info) {
+//   console.log(info)
+// })
+
+// db.allDocs({include_docs: true}).then(function(result) {
+//   console.log(result)
+// }).catch(function (err) {
+//   console.log(err)
+// })
+
+// var attachment = new Blob(['Is there life on Mars?'], {type: 'text/plain'})
+// db.putAttachment('doc', 'att.txt', attachment, 'text/plain').then(function (result) {
+//   db.get('doc', {attachments: true}).then(function (doc) {
+//     console.log(doc)
+//   })
+// }).catch(function (err) {
+//   console.log(err);
+// })
+
+const remoteURL = 'http://localhost:5984/'
+const usersDB = new PouchDB('users')
+const remoteUsersDB = new PouchDB(remoteURL + 'users')
+
+export {usersDB, remoteUsersDB}
