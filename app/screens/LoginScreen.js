@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 
 import UserList from '../components/UserList'
 import { fetchUsers } from '../redux/users'
+import { syncUser } from '../redux/auth'
 
 class LoginScreen extends Component {
   componentDidMount() {
@@ -21,9 +22,9 @@ class LoginScreen extends Component {
           this.props.users.length
             ?
               <UserList
-                users={ this.props.users.filter((user) => user._id != this.props.user._id) }
+                users={ this.props.users }
                 navigation={ this.props.navigation }
-                onPressItem = { this._handleChat }
+                onPressItem = { this._handleLogin }
               />
             :
               <View>
@@ -32,8 +33,9 @@ class LoginScreen extends Component {
     )
   }
 
-  _handleChat = (friend) => {
-    this.props.navigation.navigate('ChatWith', { friend })
+  _handleLogin = (user) => {
+    this.props.dispatch(syncUser(user))
+    this.props.navigation.navigate('Main')
   }
 }
 
@@ -41,12 +43,10 @@ LoginScreen.propTypes = {
   users: PropTypes.arrayOf(PropTypes.shape({
     _id: PropTypes.string,
     name: PropTypes.string
-  })),
-  user: PropTypes.object
+  }))
 }
 
 export default connect(state => ({
   users: state.users.list,
-  isFetching: state.users.isFetching,
-  user: state.auth.user
+  isFetching: state.users.isFetching
 }))(LoginScreen)

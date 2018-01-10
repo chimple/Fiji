@@ -6,7 +6,7 @@ import logger from 'redux-logger'
 import fijiDB from './db'
 
 import AppWithNavigationState from './navigators/AppNavigator'
-import rootReducer from './reducers'
+import rootReducer from './redux'
 
 const store = createStore(
   rootReducer,
