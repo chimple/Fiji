@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import { addNavigationHelpers, TabNavigator } from 'react-navigation'
+import { addNavigationHelpers, TabNavigator, StackNavigator } from 'react-navigation'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -13,19 +13,27 @@ import FriendsScreen from '../screens/FriendsScreen'
 import GamesScreen from '../screens/GamesScreen'
 import StoriesScreen from '../screens/StoriesScreen'
 import HomeScreen from '../screens/HomeScreen'
+import LoginScreen from '../screens/LoginScreen'
+import ChatScreen from '../screens/ChatScreen'
 
-export const AppNavigator = TabNavigator({
-  Home: {
-    screen: HomeScreen,
-    navigationOptions: {
-      headerTitle: 'Homez',
-    },
-  },
+const ChatNavigator = StackNavigator({
   Friends: {
     screen: FriendsScreen,
     navigationOptions: {
       headerTitle: 'Friends',
     },
+  },
+  ChatWith: {
+    screen: ChatScreen,
+    navigationOptions: {
+      headerTitle: 'Chat'
+    }
+  }  
+})
+
+const MainNavigator = TabNavigator({
+  Chat: {
+    screen: ChatNavigator
   },
   Stories: {
     screen: StoriesScreen,
@@ -38,7 +46,19 @@ export const AppNavigator = TabNavigator({
     navigationOptions: {
       headerTitle: 'Games'
     }
+  }
+})
+
+export const AppNavigator = StackNavigator({
+  Home: {
+    screen: LoginScreen,
+    navigationOptions: {
+      headerTitle: 'Homez',
+    }
   },
+  Main: {
+    screen: MainNavigator
+  }
 })
 
 const AppWithNavigationState = ({ dispatch, nav }) => (
