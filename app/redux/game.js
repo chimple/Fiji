@@ -1,8 +1,8 @@
 import { contentDB, remoteContentDB } from '../db'
 
-const FETCH_GAMES_REQUEST = 'Fiji/story/FETCH_GAMES_REQUEST'
-const FETCH_GAMES_SUCCESS = 'Fiji/story/FETCH_GAMES_SUCCESS'
-const FETCH_GAMES_FAILURE = 'Fiji/story/FETCH_GAMES_FAILURE'
+const FETCH_GAMES_REQUEST = 'Fiji/game/FETCH_GAMES_REQUEST'
+const FETCH_GAMES_SUCCESS = 'Fiji/game/FETCH_GAMES_SUCCESS'
+const FETCH_GAMES_FAILURE = 'Fiji/game/FETCH_GAMES_FAILURE'
 
 const initialState = {
   isFetching: false,
@@ -46,7 +46,8 @@ export const fetchGamesFailure = () => ({
 export const fetchGames = () => {
   return function(dispatch, getState) {
     dispatch(fetchGamesRequest())
-    contentDB.allDocs({startKey: 'game:', endKey: 'game:'+'\ufff0', include_docs: true}).then(function (result) {
+    contentDB.allDocs({startkey: 'game:', endkey: 'game:'+'\ufff0', include_docs: true}).then(function (result) {
+      console.log('fetchGames')
       console.log(result)
       let categories = result.rows.reduce(function(grouped, item) { 
         let key = item.doc['category']

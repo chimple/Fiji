@@ -1,0 +1,49 @@
+{
+  "docs": [
+    {
+      "_id": "game:alphamon",
+      "name": "Alphamon",
+      "category": "reading"
+    },
+    {
+      "_id": "game:connect-the-dots",
+      "name": "Connect The Dots",
+      "category": "maths"
+    },
+    {
+      "_id": "game:grocery-store",
+      "name": "Grocery Store",
+      "category": "maths"
+    },
+    {
+      "_id": "storytitle:alice-in-wonderland",
+      "title": "Alice in Wonderland"
+    },
+    {
+      "_id": "storytitle:phantasmagoria",
+      "title": "Phantasmagoria"
+    },
+    {
+      "_id": "story:alice-in-wonderland",
+      "characters": {
+      "Alice": "alice.png",
+      "White Rabbit": "white_rabbit.png"
+      },
+      "pages": [
+      {
+        "bg": "xyz.png",
+        "dialog": [
+        {
+          "text": "Look inside here",
+          "speaker": "Alice"
+        },
+        {
+          "text": "Whats there",
+          "speaker": "White Rabbit"
+        }
+        ]
+      }
+      ]
+    }
+  ]
+}

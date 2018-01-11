@@ -75,7 +75,7 @@ export const sendMessage = (friend, message) => {
     let msg = {
       _id: 'chat:'+friend._id+ (new Date()).toJSON(),
       sender: getState().auth.user._id,
-      message: message
+      text: message
     }
     addMessage(msg)
     userDB.put(msg).then(function (response) {

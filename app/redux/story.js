@@ -1,4 +1,4 @@
-import PouchDB from 'pouchdb-react-native';
+import { contentDB, remoteContentDB } from '../db'
 
 const FETCH_TITLES_REQUEST = 'Fiji/story/FETCH_TITLES_REQUEST'
 const FETCH_TITLES_SUCCESS = 'Fiji/story/FETCH_TITLES_SUCCESS'
@@ -77,16 +77,16 @@ export const fetchStoryFailure = () => ({
 export const fetchTitles = () => {
   return function(dispatch, getState) {
     dispatch(fetchTitlesRequest())
-    let storiesDB = new PouchDB('stories')
-    storiesDB.replicate.from('http://localhost:5984/' + 'stories').then(function (result) {
-      storiesDB.allDocs({startKey: 'storytitle:', endKey: 'storytitle:'+'\ufff0', include_docs: true}).then(function (result) {
+    contentDB.replicate.from(remoteContentDB).then(function (result) {
+      contentDB.allDocs({startkey: 'storytitle:', endkey: 'storytitle:'+'\ufff0', include_docs: true}).then(function (result) {
+        console.log('fetchTitles')
         console.log(result)
           dispatch(fetchTitlesSuccess(result.rows.map(function(row) { return row.doc})))
         }).catch(function (err) {
             console.log('fetchTitles: ' + err)
         })
       }).catch(function (err) {
-        storiesDB.allDocs({startKey: 'storytitle:', endKey: 'storytitle:'+'\ufff0', include_docs: true}).then(function (result) {
+        contentDB.allDocs({startkey: 'storytitle:', endkey: 'storytitle:'+'\ufff0', include_docs: true}).then(function (result) {
           console.log(result)
             dispatch(fetchTitlesSuccess(result.rows.map(function(row) { return row.doc})))
           }).catch(function (err) {
@@ -99,9 +99,8 @@ export const fetchTitles = () => {
 export const fetchStory = ( title ) => {
   return function(dispatch, getState) {
     dispatch(fetchStoryRequest())
-    let storiesDB = new PouchDB('stories')
     // story._id is storytitle:xyz, so strip out storytitle:
-    storiesDB.get( 'story:' + title._id.substring(11)).then(function (doc) {
+    contentDB.get( 'story:' + title._id.substring(11)).then(function (doc) {
       console.log(doc)
         dispatch(fetchStorySuccess(doc))
       }).catch(function (err) {
