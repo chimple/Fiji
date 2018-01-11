@@ -30,12 +30,15 @@ export const syncUser = (user) => {
       live: true,
       retry: true
     }).on('change', function (info) { // handle change
-      console.log('change: ' + info)
-      info.docs.forEach(doc => {
-        if(doc._id.startsWith('chat:')) {
-          dispatch(receiveMessage(doc))
-        }
-      })
+      console.log('change: ')
+      console.log(info)
+      if(info.direction == 'pull') {
+        info.change.docs.forEach(doc => {
+          if(doc._id.startsWith('chat:')) {
+            dispatch(receiveMessage(doc))
+          }
+        })  
+      }
     }).on('paused', function (err) { // replication paused (e.g. replication up to date, user went offline)
       console.log('paused: ' + err)
     }).on('active', function () { // replicate resumed (e.g. new changes replicating, user went back online)
