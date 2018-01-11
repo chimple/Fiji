@@ -38,8 +38,9 @@ export default reducer = (state = initialState, action) => {
   }
 }
 
-export const fetchChatRequest = () => ({
-  type: FETCH_CHAT_REQUEST
+export const fetchChatRequest = (friend) => ({
+  type: FETCH_CHAT_REQUEST,
+  friend
 })
 
 export const fetchChatSuccess = (messages) => ({
@@ -52,7 +53,7 @@ export const fetchChatFailure = () => ({
 })
 
 export const addMessage = (message) => ({
-  type: SEND_MESSAGE_REQUEST,
+  type: ADD_MESSAGE,
   message
 })
 
@@ -60,7 +61,7 @@ export const fetchChat = (friend) => {
   return function(dispatch, getState) {
     dispatch(fetchChatRequest(friend))
     let userDB = new PouchDB('user_' + getState().auth.user._id)
-    userDB.allDocs({startKey: 'chat:'+friend._id+'\ufff0', endKey: 'chat:'+friend._id, include_docs: true, descending: true}).then(function (result) {
+    userDB.allDocs({startkey: 'chat:'+friend._id+'\ufff0', endkey: 'chat:'+friend._id, include_docs: true, descending: true}).then(function (result) {
       console.log(result)
         dispatch(fetchChatSuccess(result.rows.map(function(row) { return row.doc})))
       }).catch(function (err) {
@@ -94,8 +95,10 @@ export const sendMessage = (friend, message) => {
 export const receiveMessage = (message) => {
   return function(dispatch, getState) {
     //TODO: currently all messages are coming here and getting filtered
+    console.log(message)
+    console.log(getState().chat.friend._id)
     if(message.sender == getState().chat.friend._id) {
-      addMessage(msg)
+      dispatch(addMessage(message))
     }
   }
 }
