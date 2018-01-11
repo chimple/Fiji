@@ -5,11 +5,15 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import MessageList from '../components/MessageList'
-import { fetchChat } from '../redux/chat'
+import { startChat, endChat } from '../redux/chat'
 
 class ChatScreen extends Component {
   componentDidMount() {
-    this.props.dispatch(fetchChat(this.props.navigation.state.params.friend))
+    this.props.dispatch(startChat(this.props.navigation.state.params.friend))
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(endChat())
   }
 
   render() {
