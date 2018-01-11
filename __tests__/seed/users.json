@@ -1,0 +1,16 @@
+{
+  "docs": [
+    {
+      "name": "Alice",
+      "_id": "alice"
+    },
+    {
+      "name": "Mad Hatter",
+      "_id": "mad-hatter"
+    },
+    {
+      "name": "White Rabbit",
+      "_id": "white-rabbit"
+    }
+  ]
+}

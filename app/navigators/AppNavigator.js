@@ -12,6 +12,7 @@ import { connect } from 'react-redux'
 import FriendsScreen from '../screens/FriendsScreen'
 import GamesScreen from '../screens/GamesScreen'
 import StoriesScreen from '../screens/StoriesScreen'
+import StoryScreen from '../screens/StoryScreen'
 import HomeScreen from '../screens/HomeScreen'
 import LoginScreen from '../screens/LoginScreen'
 import ChatScreen from '../screens/ChatScreen'
@@ -31,15 +32,27 @@ const ChatNavigator = StackNavigator({
   }  
 })
 
+const StoryNavigator = StackNavigator({
+  Titles: {
+    screen: StoriesScreen,
+    navigationOptions: {
+      headerTitle: 'Stories',
+    },
+  },
+  Story: {
+    screen: StoryScreen,
+    navigationOptions: {
+      headerTitle: 'Story'
+    }
+  }  
+})
+
 const MainNavigator = TabNavigator({
   Chat: {
     screen: ChatNavigator
   },
   Stories: {
-    screen: StoriesScreen,
-    navigationOptions: {
-      headerTitle: 'Stories'
-    }
+    screen: StoryNavigator
   },
   Games: {
     screen: GamesScreen,
