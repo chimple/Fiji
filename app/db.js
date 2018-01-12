@@ -29,5 +29,15 @@ global.navigator.userAgent = 'reactnative';
 const remoteURL = 'http://localhost:5984/'
 const usersDB = new PouchDB('users')
 const remoteUsersDB = new PouchDB(remoteURL + 'users')
+const contentDB = new PouchDB('content')
+const remoteContentDB = new PouchDB(remoteURL + 'content')
 
-export {usersDB, remoteUsersDB}
+contentDB.replicate.from(remoteContentDB).then(function (result) {
+  console.log("contentDB replication")
+  console.log(result)
+}).catch(function (err) {
+  console.log("contentDB replication error")
+  console.log(err)
+}) 
+
+export { usersDB, remoteUsersDB, contentDB, remoteContentDB }
