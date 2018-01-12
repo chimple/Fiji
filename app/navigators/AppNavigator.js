@@ -22,15 +22,17 @@ const ChatNavigator = StackNavigator({
     screen: FriendsScreen,
     navigationOptions: {
       headerTitle: 'Friends',
+      headerStyle:{backgroundColor: '#c11562'}
     },
   },
   ChatWith: {
     screen: ChatScreen,
     navigationOptions: {
-      headerTitle: 'Chat'
+      headerTitle: 'Chat',
+      headerStyle:{backgroundColor: '#c11562'}
     }
   }  
-})
+},{headerMode:'none'})
 
 const StoryNavigator = StackNavigator({
   Titles: {
@@ -55,10 +57,13 @@ const MainNavigator = TabNavigator({
     screen: StoryNavigator
   },
   Games: {
-    screen: GamesScreen,
-    navigationOptions: {
-      headerTitle: 'Games'
-    }
+    screen: GamesScreen
+  }
+}, {
+  tabBarOptions:{
+    labelStyle:{fontSize: 15, fontWeight:'bold', color:'black'},
+    style:{backgroundColor:'#c11562'},
+    indicatorStyle:{backgroundColor:'white'}
   }
 })
 
@@ -67,6 +72,7 @@ export const AppNavigator = StackNavigator({
     screen: LoginScreen,
     navigationOptions: {
       headerTitle: 'Homez',
+      headerStyle:{backgroundColor:'#c11562'}
     }
   },
   Main: {
