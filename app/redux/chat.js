@@ -1,8 +1,9 @@
 import PouchDB from 'pouchdb-react-native';
 
-const FETCH_CHAT_REQUEST = 'Fiji/chat/FETCH_CHAT_REQUEST'
-const FETCH_CHAT_SUCCESS = 'Fiji/chat/FETCH_CHAT_SUCCESS'
-const FETCH_CHAT_FAILURE = 'Fiji/chat/FETCH_CHAT_FAILURE'
+const START_CHAT_REQUEST = 'Fiji/chat/START_CHAT_REQUEST'
+const START_CHAT_SUCCESS = 'Fiji/chat/START_CHAT_SUCCESS'
+const START_CHAT_FAILURE = 'Fiji/chat/START_CHAT_FAILURE'
+const END_CHAT = 'Fiji/chat/END_CHAT'
 const ADD_MESSAGE = 'Fiji/chat/ADD_MESSAGE'
 
 const initialState = {
@@ -13,21 +14,27 @@ const initialState = {
 
 export default reducer = (state = initialState, action) => {
   switch(action.type) {
-    case FETCH_CHAT_REQUEST:
+    case START_CHAT_REQUEST:
       return Object.assign({}, state, {
         isFetching: true,
         friend: action.friend
       })
-    case FETCH_CHAT_SUCCESS:
+    case START_CHAT_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
         messages: action.messages
       })
-    case FETCH_CHAT_FAILURE:
+    case START_CHAT_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
         messages: []
       })
+    case END_CHAT:
+      return {
+        ...state,
+        friend: {},
+        messages: []
+      }
     case ADD_MESSAGE:
       return { 
         ...state,
@@ -38,33 +45,38 @@ export default reducer = (state = initialState, action) => {
   }
 }
 
-export const fetchChatRequest = () => ({
-  type: FETCH_CHAT_REQUEST
+export const startChatRequest = (friend) => ({
+  type: START_CHAT_REQUEST,
+  friend
 })
 
-export const fetchChatSuccess = (messages) => ({
-  type: FETCH_CHAT_SUCCESS,
+export const startChatSuccess = (messages) => ({
+  type: START_CHAT_SUCCESS,
   messages
 })
 
-export const fetchChatFailure = () => ({
-  type: FETCH_CHAT_FAILURE
+export const startChatFailure = () => ({
+  type: START_CHAT_FAILURE
+})
+
+export const endChat = () => ({
+  type: END_CHAT
 })
 
 export const addMessage = (message) => ({
-  type: SEND_MESSAGE_REQUEST,
+  type: ADD_MESSAGE,
   message
 })
 
-export const fetchChat = (friend) => {
+export const startChat = (friend) => {
   return function(dispatch, getState) {
-    dispatch(fetchChatRequest(friend))
+    dispatch(startChatRequest(friend))
     let userDB = new PouchDB('user_' + getState().auth.user._id)
-    userDB.allDocs({startKey: 'chat:'+friend._id+'\ufff0', endKey: 'chat:'+friend._id, include_docs: true, descending: true}).then(function (result) {
+    userDB.allDocs({startkey: 'chat:'+friend._id+'\ufff0', endkey: 'chat:'+friend._id, include_docs: true, descending: true}).then(function (result) {
       console.log(result)
-        dispatch(fetchChatSuccess(result.rows.map(function(row) { return row.doc})))
+        dispatch(startChatSuccess(result.rows.map(function(row) { return row.doc})))
       }).catch(function (err) {
-          console.log('fetchChat: ' + err)
+          console.log('startChat: ' + err)
       })
   }
 }
@@ -75,7 +87,7 @@ export const sendMessage = (friend, message) => {
     let msg = {
       _id: 'chat:'+friend._id+ (new Date()).toJSON(),
       sender: getState().auth.user._id,
-      message: message
+      text: message
     }
     addMessage(msg)
     userDB.put(msg).then(function (response) {
@@ -93,9 +105,8 @@ export const sendMessage = (friend, message) => {
 
 export const receiveMessage = (message) => {
   return function(dispatch, getState) {
-    //TODO: currently all messages are coming here and getting filtered
-    if(message.sender == getState().chat.friend._id) {
-      addMessage(msg)
+    if(message.sender === getState().chat.friend._id) {
+      dispatch(addMessage(message))
     }
   }
 }
