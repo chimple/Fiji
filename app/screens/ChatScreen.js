@@ -27,6 +27,7 @@ class ChatScreen extends Component {
               <MessageList
                 messages = { this.props.messages }
                 navigation={ this.props.navigation }
+                user={this.props.user}
               />
             :
               <View>
@@ -44,6 +45,7 @@ ChatScreen.propTypes = {
       })
     })
   })
+  
 }
 
 export default connect(state => ({
