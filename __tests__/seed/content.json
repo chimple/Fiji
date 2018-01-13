@@ -1,8 +1,63 @@
 {
   "docs": [
     {
+      "_id": "game:xyz1",
+      "name": "Xyz1",
+      "category": "listening"
+    },
+    {
+      "_id": "game:xyz2",
+      "name": "Xyz2",
+      "category": "listening"
+    },
+    {
+      "_id": "game:xyz3",
+      "name": "Xyz3",
+      "category": "listening"
+    },
+    {
+      "_id": "game:xyz4",
+      "name": "Xyz4",
+      "category": "listening"
+    },
+    {
+      "_id": "game:xyz5",
+      "name": "Xyz5",
+      "category": "writing"
+    },
+    {
+      "_id": "game:xyz6",
+      "name": "Xyz6",
+      "category": "writing"
+    },
+    {
+      "_id": "game:xyz7",
+      "name": "Xyz7",
+      "category": "writing"
+    },
+    {
+      "_id": "game:xyz8",
+      "name": "Xyz8",
+      "category": "writing"
+    },
+    {
       "_id": "game:alphamon",
       "name": "Alphamon",
+      "category": "reading"
+    },
+    {
+      "_id": "game:alphamon1",
+      "name": "Alphamon1",
+      "category": "reading"
+    },
+    {
+      "_id": "game:alphamon2",
+      "name": "Alphamon2",
+      "category": "reading"
+    },
+    {
+      "_id": "game:alphamon3",
+      "name": "Alphamon3",
       "category": "reading"
     },
     {
@@ -11,8 +66,18 @@
       "category": "maths"
     },
     {
+      "_id": "game:connect-the-dot1",
+      "name": "Connect The Dots1",
+      "category": "maths"
+    },
+    {
       "_id": "game:grocery-store",
       "name": "Grocery Store",
+      "category": "maths"
+    },
+    {
+      "_id": "game:grocery-store2",
+      "name": "Grocery Store2",
       "category": "maths"
     },
     {
