@@ -10,12 +10,13 @@ export default class MessageList extends PureComponent {
  
   _keyExtractor = (item, index) => item._id
 
-  _renderItem = ({item,user,friend}) => (
+  _renderItem = ({item}) => (
     <View >
       <ChatView 
       item = {item}
-      user={this.props.user}
-      friend={this.props.friend}
+      // to send user,friend to chatview
+     user={this.props.user}
+       friend={this.props.friend}
      />
     </View>
    

@@ -15,6 +15,11 @@
       "_id": "chat:mad-hatter:2018-01-11T08:45:35.341Z",
       "text": "Where are you?",
       "sender": "mad-hatter"
+    },
+    {
+      "_id": "chat:mad-hatter:2018-01-11T09:45:35.341Z",
+      "text": "Beerra is our Brand now dont forget",
+      "sender": "alice"
     }
   ]
 }

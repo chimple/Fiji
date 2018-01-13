@@ -1,23 +1,19 @@
 import React, { Component } from 'react';
- import { Text,View,StyleSheet,Image} from 'react-native';
+ import { Text,View,StyleSheet,Image,KeyboardAvoidingView,ListView} from 'react-native';
 import PropTypes from 'prop-types'
 import SvgUri from 'react-native-svg-uri'
 
+
 import { sendMessage, startChat } from '../redux/chat';
 
+
  class ChatView extends Component{
-  constructor(props){
-    super(props)
-    this.state ={
-
-      message:[]
-    }
-
-  }
-  
+    
 render(){
 console.log("this is sender::"+this.props.item.sender)
-console.log("this is user::"+this.props.user.image)
+console.log("this is user::"+this.props.friend._id)
+const Eachmsg =() =>{
+  //show message from sender
   if(this.props.item.sender == this.props.user._id ){
         return(
           <View style={styles.eachMsg}>
@@ -29,16 +25,22 @@ console.log("this is user::"+this.props.user.image)
         </View>
       </View>
         );
-      }else if(this.props.item.sender !== this.props.user._id ){
+      }else {
         return(
                   <View style={styles.rightMsg} >
               <View style={styles.rightBlock} >
                  <Text style={styles.rightTxt}>{this.props.item.text}</Text>
               </View>
-              <Image source={{ uri:  'data:image/png;base64,' +this.props.user.image }}style={styles.userPic} />
+              <Image source={{ uri:  'data:image/png;base64,' +this.props.friend.image }}style={styles.userPic} />
               </View>
         );
       }
+    }
+      return(
+        <View>
+            <Eachmsg />
+          </View>
+      );
 
 }
 }
@@ -46,6 +48,7 @@ ChatView.propTypes = {
     text: PropTypes.object,
     sender:PropTypes.object,
     user: PropTypes.object,
+    friend:PropTypes.object,
     image:PropTypes.object
   }
 export default ChatView;

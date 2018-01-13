@@ -17,17 +17,21 @@ class ChatScreen extends Component {
   }
 
   render() {
+    console.log("friend");
+    console.log(this.props.navigation.state.params.friend);
     return (
       this.props.isFetching
         ?
           <ActivityIndicator size="large" style={{ marginTop: 100 }}/>
         :
           this.props.messages.length
+        
             ?
               <MessageList
                 messages = { this.props.messages }
                 navigation={ this.props.navigation }
                 user={this.props.user}
+                friend={this.props.navigation.state.params.friend}
               />
             :
               <View>
