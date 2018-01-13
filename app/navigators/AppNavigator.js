@@ -39,14 +39,18 @@ const StoryNavigator = StackNavigator({
     screen: StoriesScreen,
     navigationOptions: {
       headerTitle: 'Stories',
+      headerStyle:{backgroundColor:'#c11562'}
     },
   },
   Story: {
     screen: StoryScreen,
     navigationOptions: {
-      headerTitle: 'Story'
+      headerTitle: 'Story',
+      headerStyle:{backgroundColor:'#c11562'}
     }
   }  
+},{
+  headerMode:'none'
 })
 
 const MainNavigator = TabNavigator({
@@ -57,7 +61,11 @@ const MainNavigator = TabNavigator({
     screen: StoryNavigator
   },
   Games: {
-    screen: GamesScreen
+    screen: GamesScreen,
+    navigationOptions: {
+      headerTitle: 'Games',
+      headerStyle:{backgroundColor:'#c11562'}
+    }
   }
 }, {
   tabBarOptions:{
