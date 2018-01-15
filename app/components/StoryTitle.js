@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     padding:'4%'
   },
   ImageStyle:{
-    width: '80%',
+    width: '100%',
     height: '100%',
     //resizeMode: Image.resizeMode.contain,
     borderRadius:60,

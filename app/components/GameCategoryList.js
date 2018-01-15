@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 
 import { FlatList, View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import PropTypes from 'prop-types'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 export default class GameCategoryList extends PureComponent {
   _keyExtractor = (item, index) => item._id
@@ -15,17 +16,25 @@ export default class GameCategoryList extends PureComponent {
         <Text style={styles.CategoryHeaderStyle}>{ item.category }</Text>
       </View>
       <View style={styles.CategoryGamesViewStyle}>
-        <FlatList
-        showsHorizontalScrollIndicator={false}
-        horizontal={true}
-        data={item.games}
-        keyExtractor={this._keyExtractor}
-        renderItem={({item}) => (
-          <TouchableOpacity style={styles.EachGameButtonStyle}>
-            <View style={styles.EachGameViewStyle}/>
-          </TouchableOpacity>
-        )}
-        />
+          <View style={styles.IconViewStyle}> 
+            <Icon name="keyboard-arrow-left" color="white" size={35} style={styles.IconStyle} />
+          </View>
+          <View style={{flex:10, }}>             
+          <FlatList
+          showsHorizontalScrollIndicator={false}
+          horizontal={true}
+          data={item.games}
+          keyExtractor={this._keyExtractor}
+          renderItem={({item}) => (
+            <TouchableOpacity style={styles.EachGameButtonStyle}>
+              <View style={styles.EachGameViewStyle}/>
+            </TouchableOpacity>
+          )}
+          />
+          </View>
+          <View style={styles.IconViewStyle}>
+            <Icon name="keyboard-arrow-right" color="white" size={35} style={styles.IconStyle} />
+          </View>
       </View>
     </View>
     
@@ -74,12 +83,15 @@ const styles = StyleSheet.create({
   CategoryHeaderStyle:{
     fontSize:25, 
     fontWeight:"bold", 
-    color:'#1f898e'
+    color:'#19a4f2'
   },
   CategoryGamesViewStyle:{
-    flex:3 ,
-    padding:'4%',
+    flex:3.5 ,
+    //padding:'4%',
+    paddingTop:'4%',
+    paddingBottom:'4%',
     backgroundColor:'#eaefef',
+    flexDirection:'row',
     //justifyContent:'center', 
     //alignContent:"center", 
     borderBottomLeftRadius:20, 
@@ -90,22 +102,31 @@ const styles = StyleSheet.create({
     //alignItems:'center',
     //alignContent:"space-around",
     //marginHorizontal:'2%,
-    backgroundColor:'red',
-    borderWidth:4,
+    //backgroundColor:'red',
+    //borderWidth:4,
     borderRadius:40,
    },
   EachGameViewStyle:{
     borderColor:'black',  
     borderWidth:2,
     borderRadius:40, 
-    height:80, 
-    width:80,
-    backgroundColor:'black'
+    height:70, 
+    width:70,
+    backgroundColor:'black',
   },
   TextStyle:{
     fontSize:20,
     fontWeight:'bold',
     color:'black',
+  },
+  IconViewStyle:{
+    flex:1,
+    justifyContent:"center",
+    alignItems:"center",
+    paddingRight:'3%'
+  },
+  IconStyle:{
+    color:'#19a4f2'
   }
 });
 
