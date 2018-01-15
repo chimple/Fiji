@@ -4,7 +4,7 @@ const FETCH_USERS_REQUEST = 'Fiji/users/FETCH_USERS_REQUEST'
 const FETCH_USERS_SUCCESS = 'Fiji/users/FETCH_USERS_SUCCESS'
 const FETCH_USERS_FAILURE = 'Fiji/users/FETCH_USERS_FAILURE'
 
-const initialState = {
+export const initialState = {
   isFetching: false,
   list: []
 }
@@ -43,19 +43,16 @@ export const fetchUsersFailure = () => ({
   type: FETCH_USERS_FAILURE
 })
 
-export const fetchUsers = () => {
-  return function(dispatch) {
+export const fetchUsers = () => async(dispatch) => {
+  try {
     dispatch(fetchUsersRequest())
-    usersDB.sync(remoteUsersDB).then(function (result) {
-      console.log(result)
-      usersDB.allDocs({include_docs: true})
-      .then(function(result) {
-        dispatch(fetchUsersSuccess(result.rows.map(function(row) { return row.doc})))
-      }).catch(function (err) {
-          console.log('_getAllUsers: ' + err)
-      })  
-    }).catch(function (err) {
-      console.log(err)
-    })
+    const syncResult = await usersDB.sync(remoteUsersDB)
+    console.log(syncResult)
+    const result = await usersDB.allDocs({include_docs: true})
+    dispatch(fetchUsersSuccess(result.rows.map(function(row) { return row.doc})))
+  } catch(error) {
+    console.log('_getAllUsers: ' + error)
+    dispatch(fetchUsersFailure())
   }
+
 }
