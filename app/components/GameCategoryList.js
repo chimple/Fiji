@@ -15,6 +15,17 @@ export default class GameCategoryList extends PureComponent {
         <Text style={styles.CategoryHeaderStyle}>{ item.category }</Text>
       </View>
       <View style={styles.CategoryGamesViewStyle}>
+        <FlatList
+        showsHorizontalScrollIndicator={false}
+        horizontal={true}
+        data={item.games}
+        keyExtractor={this._keyExtractor}
+        renderItem={({item}) => (
+          <TouchableOpacity style={styles.EachGameButtonStyle}>
+            <Text style={styles.TextStyle}>{item.name}</Text>
+          </TouchableOpacity>
+        )}
+        />
       </View>
     </View>
     
@@ -68,9 +79,18 @@ const styles = StyleSheet.create({
     flex:3 ,
     padding:'4%',
     backgroundColor:'#eaefef',
-    justifyContent:'center', 
-    alignContent:"center", 
+    //justifyContent:'center', 
+    //alignContent:"center", 
     borderBottomLeftRadius:20, 
     borderBottomRightRadius:20
   },
+  EachGameButtonStyle:{ 
+    justifyContent:'center',
+    //alignItems:'center'
+   },
+  TextStyle:{
+    fontSize:20,
+    fontWeight:'bold',
+    color:'black',
+  }
 });
