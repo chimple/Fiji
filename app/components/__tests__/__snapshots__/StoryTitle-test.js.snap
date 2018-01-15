@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  accessibilityComponentType={undefined}
+  accessibilityLabel={undefined}
+  accessibilityTraits={undefined}
+  accessible={true}
+  collapsable={undefined}
+  hasTVPreferredFocus={undefined}
+  hitSlop={undefined}
+  isTVSelectable={true}
+  nativeID={undefined}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "borderBottomLeftRadius": 30,
+      "borderBottomRightRadius": 30,
+      "borderColor": "black",
+      "borderTopLeftRadius": 30,
+      "borderTopRightRadius": 30,
+      "borderWidth": 2,
+      "flex": 1,
+      "height": 140,
+      "margin": "2%",
+      "opacity": 1,
+      "width": 170,
+    }
+  }
+  testID={undefined}
+  tvParallaxProperties={undefined}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#d80463",
+        "borderTopLeftRadius": 30,
+        "borderTopRightRadius": 30,
+        "flex": 2,
+        "justifyContent": "center",
+        "padding": "1%",
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "black",
+          "fontSize": 20,
+          "fontWeight": "bold",
+          "marginTop": "1%",
+        }
+      }
+    >
+      Alice in Wonderland
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 3,
+        "padding": "4%",
+      }
+    }
+  >
+    <Image
+      style={
+        Object {
+          "borderColor": "black",
+          "borderRadius": 60,
+          "borderWidth": 2,
+          "height": "100%",
+          "width": "80%",
+        }
+      }
+    />
+  </View>
+</View>
+`;

@@ -1,5 +1,6 @@
 jest.mock('../../db')
 
+import { usersDB } from '../../db'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
@@ -45,6 +46,14 @@ const mockStore = configureMockStore(middlewares)
 
 it('handles fetchUsers action', async () => {
   const store = mockStore(initialState)
+  usersDB.sync = jest.fn()
+    .mockReturnValue({})
+  usersDB.allDocs = jest.fn()
+    .mockReturnValue({
+      rows: usersData.map(function(doc) {
+        return { doc }
+      })
+    })
   await store.dispatch(fetchUsers());
   expect(store.getActions()).toMatchSnapshot();
 })
