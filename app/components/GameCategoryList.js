@@ -22,7 +22,7 @@ export default class GameCategoryList extends PureComponent {
         keyExtractor={this._keyExtractor}
         renderItem={({item}) => (
           <TouchableOpacity style={styles.EachGameButtonStyle}>
-            <View style={{borderColor:'black',  borderWidth:2,borderRadius:40, height:70, width:70}}/>
+            <View style={styles.EachGameViewStyle}/>
           </TouchableOpacity>
         )}
         />
@@ -89,8 +89,19 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     //alignItems:'center',
     //alignContent:"space-around",
-    //marginHorizontal:'2%'
+    //marginHorizontal:'2%,
+    backgroundColor:'red',
+    borderWidth:4,
+    borderRadius:40,
    },
+  EachGameViewStyle:{
+    borderColor:'black',  
+    borderWidth:2,
+    borderRadius:40, 
+    height:80, 
+    width:80,
+    backgroundColor:'black'
+  },
   TextStyle:{
     fontSize:20,
     fontWeight:'bold',
