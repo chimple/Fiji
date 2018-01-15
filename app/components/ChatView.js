@@ -1,56 +1,56 @@
 import React, { Component } from 'react';
- import { Text,View,StyleSheet,Image,KeyboardAvoidingView,ListView} from 'react-native';
+import { Text, View, StyleSheet, Image, KeyboardAvoidingView, ListView, TextInput } from 'react-native';
 import PropTypes from 'prop-types'
 import SvgUri from 'react-native-svg-uri'
-
-
+import InvertibleScrollView from 'react-native-invertible-scroll-view'
 import { sendMessage, startChat } from '../redux/chat';
 
 
- class ChatView extends Component{
-    
-render(){
-console.log("this is sender::"+this.props.item.sender)
-console.log("this is user::"+this.props.friend._id)
-const Eachmsg =() =>{
-  //show message from sender
-  if(this.props.item.sender == this.props.user._id ){
-        return(
+class ChatView extends Component {
+  
+  render() {
+
+    console.log("this is sender::" + this.props.item.sender)
+    console.log("this is user::" + this.props.friend._id)
+    const Eachmsg = (props) => {
+      //show message from sender
+      if (this.props.item.sender == this.props.friend._id) 
+        return (
           <View style={styles.eachMsg}>
-        <Image source={{ uri: 'data:image/png;base64,' +this.props.user.image }}style={styles.userPic} />
-
-        {/* <Image source={{uri:'https://www.shareicon.net/data/2016/06/25/786533_people_512x512.png'}}style={styles.userPic} /> */}
-        <View style={styles.msgBlock}>
-          <Text style={styles.msgTxt}>{this.props.item.text}</Text>
-        </View>
-      </View>
-        );
-      }else {
-        return(
-                  <View style={styles.rightMsg} >
-              <View style={styles.rightBlock} >
-                 <Text style={styles.rightTxt}>{this.props.item.text}</Text>
-              </View>
-              <Image source={{ uri:  'data:image/png;base64,' +this.props.friend.image }}style={styles.userPic} />
-              </View>
-        );
-      }
-    }
-      return(
-        <View>
-            <Eachmsg />
+            <Image source={{ uri: 'data:image/png;base64,' + this.props.friend.image }} style={styles.userPic} />
+              <View style={styles.msgBlock}>
+              <Text style={styles.msgTxt}>{this.props.item.text}</Text>
+            </View>
           </View>
-      );
+        );
 
-}
-}
-ChatView.propTypes = {
-    text: PropTypes.object,
-    sender:PropTypes.object,
-    user: PropTypes.object,
-    friend:PropTypes.object,
-    image:PropTypes.object
+        return (
+          <View style={styles.rightMsg} >
+            <View style={styles.rightBlock} >
+              <Text style={styles.rightTxt}>{this.props.item.text}</Text>
+            </View>
+            <Image source={{ uri: 'data:image/png;base64,' + this.props.user.image }} style={styles.userPic} />
+          </View>
+        );
+      
+    }
+    return (
+          <View>
+          <Eachmsg />
+          </View>
+    );
+
   }
+}
+
+ChatView.propTypes = {
+  text: PropTypes.object,
+  sender: PropTypes.object,
+  user: PropTypes.object,
+  message: PropTypes.object,
+  friend: PropTypes.object,
+  image: PropTypes.object
+}
 export default ChatView;
 
 const styles = StyleSheet.create({
@@ -59,9 +59,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   image: {
-      position:"absolute",
-    width:"100%",
-    height:"100%",
+    position: "absolute",
+    width: "100%",
+    height: "100%",
   },
   header: {
     height: 65,
@@ -93,11 +93,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignSelf: 'flex-end',
     padding: 10,
-// height: 60,
-    width:"90%",
+    // height: 60,
+    width: "90%",
     backgroundColor: '#fff',
     margin: 10,
-    borderRadius:30,
+    borderRadius: 30,
     shadowColor: '#3d3d3d',
     shadowRadius: 2,
     shadowOpacity: 0.5,
