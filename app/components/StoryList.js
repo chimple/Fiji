@@ -39,8 +39,8 @@ StoryList.propTypes = {
 
 const styles = StyleSheet.create({
   StoryListStyle:{flex:1,
-    backgroundColor:'#c9b57c', 
+    backgroundColor:'white', 
     paddingTop:'8%', 
-    paddingLeft:'6%', 
+    paddingLeft:'7%', 
     paddingRight:'4%'}
 });

@@ -1,10 +1,4 @@
-const usersDB = {
-  sync: () => {
-    return {rows: []}
-  },
-  allDocs: () => {
-    return {rows: []}
-  }
-}
+const usersDB = {}
+const contentDB = {}
 
-export { usersDB }
+export { usersDB, contentDB }
