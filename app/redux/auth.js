@@ -10,9 +10,10 @@ const initialState = {
 export default reducer = (state = initialState, action) => {
   switch(action.type) {
     case SYNC_USER_BEGIN:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         user: action.user
-      })
+      }
     default:
       return state
   }
