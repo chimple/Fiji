@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Icon } from 'react-native-elements'
 import { fetchStory } from '../redux/story'
-import SvgUri from 'react-native-svg-uri'
+//import SvgUri from 'react-native-svg-uri'
 
 
 class StoryScreen extends Component {

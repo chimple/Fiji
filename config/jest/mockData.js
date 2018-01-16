@@ -6,6 +6,10 @@ export const titles = contentJson['docs'].filter(function (doc) {
   return doc._id.startsWith('storytitle:')
 })
 
+export const stories = contentJson['docs'].filter(function (doc) {
+  return doc._id.startsWith('story:')
+})
+
 export const games = contentJson['docs'].filter(function (doc) {
   return doc._id.startsWith('game:')
 })

@@ -54,6 +54,6 @@ it('handles fetchUsers action', async () => {
         return { doc }
       })
     })
-  await store.dispatch(fetchUsers());
-  expect(store.getActions()).toMatchSnapshot();
+  await store.dispatch(fetchUsers())
+  expect(store.getActions()).toMatchSnapshot()
 })
