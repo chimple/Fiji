@@ -108,11 +108,13 @@ const styles = StyleSheet.create({
   eachMsg: {
     flexDirection: 'row',
     alignItems: 'flex-end',
+    // backgroundColor:"#19a4f2",
     margin: 5,
   },
   rightMsg: {
     flexDirection: 'row',
     alignItems: 'flex-end',
+    // backgroundColor:"#19a4f2",
     margin: 5,
     alignSelf: 'flex-end',
   },
@@ -126,11 +128,11 @@ const styles = StyleSheet.create({
   msgBlock: {
     width: 220,
     borderRadius: 5,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#edeeef',
     padding: 10,
-    shadowColor: '#3d3d3d',
+    shadowColor: '#adef12',
     shadowRadius: 2,
-    shadowOpacity: 0.5,
+    shadowOpacity: 0.8,
     shadowOffset: {
       height: 1,
     },
@@ -138,7 +140,7 @@ const styles = StyleSheet.create({
   rightBlock: {
     width: 220,
     borderRadius: 5,
-    backgroundColor: '#97c163',
+    backgroundColor:"#19a4f2",
     padding: 10,
     shadowColor: '#3d3d3d',
     shadowRadius: 2,
