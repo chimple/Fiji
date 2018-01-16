@@ -5,28 +5,37 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import MessageList from '../components/MessageList'
-import { startChat, endChat } from '../redux/chat'
+import { startChat, endChat,sendMessage } from '../redux/chat'
 
 class ChatScreen extends Component {
   componentDidMount() {
     this.props.dispatch(startChat(this.props.navigation.state.params.friend))
   }
-
   componentWillUnmount() {
     this.props.dispatch(endChat())
   }
 
+  _onPress = (message) => {
+    this.props.dispatch(sendMessage(this.props.navigation.state.params.friend, message))
+  }
+
   render() {
+    // console.log("friend");
+    // console.log(this.props.navigation.state.params.friend);
     return (
       this.props.isFetching
         ?
           <ActivityIndicator size="large" style={{ marginTop: 100 }}/>
         :
           this.props.messages.length
+        
             ?
               <MessageList
                 messages = { this.props.messages }
                 navigation={ this.props.navigation }
+                user={this.props.user}
+                friend={this.props.navigation.state.params.friend}
+                onPress= { this._onPress }
               />
             :
               <View>
@@ -44,6 +53,7 @@ ChatScreen.propTypes = {
       })
     })
   })
+  
 }
 
 export default connect(state => ({
