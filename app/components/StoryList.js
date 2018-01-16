@@ -9,10 +9,13 @@ export default class StoryList extends PureComponent {
   _keyExtractor = (item, index) => item._id
 
   _renderItem = ({item}) => (
+    <View>
+    <Text>Hello</Text>
     <StoryTitle
       title = { item }
       onPressItem = { this.props.onPressItem }
     />
+    </View>
   )
 
   render() {

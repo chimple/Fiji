@@ -2,8 +2,8 @@ import PouchDB from 'pouchdb-react-native';
 
 // these settings let us use cuids
 // see: https://github.com/ericelliott/cuid/issues/54
-global.navigator.mimeTypes = '';
-global.navigator.userAgent = 'reactnative';    
+// global.navigator.mimeTypes = '';
+// global.navigator.userAgent = 'reactnative';    
 
 // const db = new PouchDB('http://localhost:5984/chat')
 // console.log(db.adapter)
