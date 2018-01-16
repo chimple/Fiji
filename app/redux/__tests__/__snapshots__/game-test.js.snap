@@ -1,0 +1,327 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`creates a FETCH_GAMES_FAILURE action 1`] = `
+Object {
+  "type": "Fiji/game/FETCH_GAMES_FAILURE",
+}
+`;
+
+exports[`creates a FETCH_GAMES_REQUEST action 1`] = `
+Object {
+  "type": "Fiji/game/FETCH_GAMES_REQUEST",
+}
+`;
+
+exports[`creates a FETCH_GAMES_SUCCESS action 1`] = `
+Object {
+  "games": Array [
+    Object {
+      "_id": "game:xyz1",
+      "category": "listening",
+      "name": "Xyz1",
+    },
+    Object {
+      "_id": "game:xyz2",
+      "category": "listening",
+      "name": "Xyz2",
+    },
+    Object {
+      "_id": "game:xyz3",
+      "category": "listening",
+      "name": "Xyz3",
+    },
+    Object {
+      "_id": "game:xyz4",
+      "category": "listening",
+      "name": "Xyz4",
+    },
+    Object {
+      "_id": "game:xyz5",
+      "category": "writing",
+      "name": "Xyz5",
+    },
+    Object {
+      "_id": "game:xyz6",
+      "category": "writing",
+      "name": "Xyz6",
+    },
+    Object {
+      "_id": "game:xyz7",
+      "category": "writing",
+      "name": "Xyz7",
+    },
+    Object {
+      "_id": "game:xyz8",
+      "category": "writing",
+      "name": "Xyz8",
+    },
+    Object {
+      "_id": "game:alphamon",
+      "category": "reading",
+      "name": "Alphamon",
+    },
+    Object {
+      "_id": "game:alphamon1",
+      "category": "reading",
+      "name": "Alphamon1",
+    },
+    Object {
+      "_id": "game:alphamon2",
+      "category": "reading",
+      "name": "Alphamon2",
+    },
+    Object {
+      "_id": "game:alphamon3",
+      "category": "reading",
+      "name": "Alphamon3",
+    },
+    Object {
+      "_id": "game:connect-the-dots",
+      "category": "maths",
+      "name": "Connect The Dots",
+    },
+    Object {
+      "_id": "game:connect-the-dot1",
+      "category": "maths",
+      "name": "Connect The Dots1",
+    },
+    Object {
+      "_id": "game:grocery-store",
+      "category": "maths",
+      "name": "Grocery Store",
+    },
+    Object {
+      "_id": "game:grocery-store2",
+      "category": "maths",
+      "name": "Grocery Store2",
+    },
+  ],
+  "type": "Fiji/game/FETCH_GAMES_SUCCESS",
+}
+`;
+
+exports[`handles FETCH_GAMES_FAILURE action 1`] = `
+Object {
+  "games": Array [],
+  "isFetching": false,
+}
+`;
+
+exports[`handles FETCH_GAMES_REQUEST action 1`] = `
+Object {
+  "games": Array [],
+  "isFetching": true,
+}
+`;
+
+exports[`handles FETCH_GAMES_SUCCESS action 1`] = `
+Object {
+  "games": Array [
+    Object {
+      "_id": "game:xyz1",
+      "category": "listening",
+      "name": "Xyz1",
+    },
+    Object {
+      "_id": "game:xyz2",
+      "category": "listening",
+      "name": "Xyz2",
+    },
+    Object {
+      "_id": "game:xyz3",
+      "category": "listening",
+      "name": "Xyz3",
+    },
+    Object {
+      "_id": "game:xyz4",
+      "category": "listening",
+      "name": "Xyz4",
+    },
+    Object {
+      "_id": "game:xyz5",
+      "category": "writing",
+      "name": "Xyz5",
+    },
+    Object {
+      "_id": "game:xyz6",
+      "category": "writing",
+      "name": "Xyz6",
+    },
+    Object {
+      "_id": "game:xyz7",
+      "category": "writing",
+      "name": "Xyz7",
+    },
+    Object {
+      "_id": "game:xyz8",
+      "category": "writing",
+      "name": "Xyz8",
+    },
+    Object {
+      "_id": "game:alphamon",
+      "category": "reading",
+      "name": "Alphamon",
+    },
+    Object {
+      "_id": "game:alphamon1",
+      "category": "reading",
+      "name": "Alphamon1",
+    },
+    Object {
+      "_id": "game:alphamon2",
+      "category": "reading",
+      "name": "Alphamon2",
+    },
+    Object {
+      "_id": "game:alphamon3",
+      "category": "reading",
+      "name": "Alphamon3",
+    },
+    Object {
+      "_id": "game:connect-the-dots",
+      "category": "maths",
+      "name": "Connect The Dots",
+    },
+    Object {
+      "_id": "game:connect-the-dot1",
+      "category": "maths",
+      "name": "Connect The Dots1",
+    },
+    Object {
+      "_id": "game:grocery-store",
+      "category": "maths",
+      "name": "Grocery Store",
+    },
+    Object {
+      "_id": "game:grocery-store2",
+      "category": "maths",
+      "name": "Grocery Store2",
+    },
+  ],
+  "isFetching": false,
+}
+`;
+
+exports[`handles fetchGames action 1`] = `
+Array [
+  Object {
+    "type": "Fiji/game/FETCH_GAMES_REQUEST",
+  },
+  Object {
+    "games": Array [
+      Object {
+        "_id": "listening",
+        "category": "listening",
+        "games": Array [
+          Object {
+            "_id": "game:xyz1",
+            "category": "listening",
+            "name": "Xyz1",
+          },
+          Object {
+            "_id": "game:xyz2",
+            "category": "listening",
+            "name": "Xyz2",
+          },
+          Object {
+            "_id": "game:xyz3",
+            "category": "listening",
+            "name": "Xyz3",
+          },
+          Object {
+            "_id": "game:xyz4",
+            "category": "listening",
+            "name": "Xyz4",
+          },
+        ],
+      },
+      Object {
+        "_id": "writing",
+        "category": "writing",
+        "games": Array [
+          Object {
+            "_id": "game:xyz5",
+            "category": "writing",
+            "name": "Xyz5",
+          },
+          Object {
+            "_id": "game:xyz6",
+            "category": "writing",
+            "name": "Xyz6",
+          },
+          Object {
+            "_id": "game:xyz7",
+            "category": "writing",
+            "name": "Xyz7",
+          },
+          Object {
+            "_id": "game:xyz8",
+            "category": "writing",
+            "name": "Xyz8",
+          },
+        ],
+      },
+      Object {
+        "_id": "reading",
+        "category": "reading",
+        "games": Array [
+          Object {
+            "_id": "game:alphamon",
+            "category": "reading",
+            "name": "Alphamon",
+          },
+          Object {
+            "_id": "game:alphamon1",
+            "category": "reading",
+            "name": "Alphamon1",
+          },
+          Object {
+            "_id": "game:alphamon2",
+            "category": "reading",
+            "name": "Alphamon2",
+          },
+          Object {
+            "_id": "game:alphamon3",
+            "category": "reading",
+            "name": "Alphamon3",
+          },
+        ],
+      },
+      Object {
+        "_id": "maths",
+        "category": "maths",
+        "games": Array [
+          Object {
+            "_id": "game:connect-the-dots",
+            "category": "maths",
+            "name": "Connect The Dots",
+          },
+          Object {
+            "_id": "game:connect-the-dot1",
+            "category": "maths",
+            "name": "Connect The Dots1",
+          },
+          Object {
+            "_id": "game:grocery-store",
+            "category": "maths",
+            "name": "Grocery Store",
+          },
+          Object {
+            "_id": "game:grocery-store2",
+            "category": "maths",
+            "name": "Grocery Store2",
+          },
+        ],
+      },
+    ],
+    "type": "Fiji/game/FETCH_GAMES_SUCCESS",
+  },
+]
+`;
+
+exports[`returns the same state on an unhandled action 1`] = `
+Object {
+  "games": Array [],
+  "isFetching": false,
+}
+`;

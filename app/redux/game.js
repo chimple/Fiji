@@ -43,25 +43,27 @@ export const fetchGamesFailure = () => ({
   type: FETCH_GAMES_FAILURE
 })
 
-export const fetchGames = () => {
-  return function(dispatch, getState) {
+export const fetchGames = () => async(dispatch, getState) => {
+  try {
     dispatch(fetchGamesRequest())
-    contentDB.allDocs({startkey: 'game:', endkey: 'game:'+'\ufff0', include_docs: true}).then(function (result) {
-      console.log('fetchGames')
-      console.log(result)
-      let categories = result.rows.reduce(function(grouped, item) { 
-        let key = item.doc['category']
-        grouped[key] = grouped[key] || []
-        grouped[key].push(item.doc)
-        return grouped
-      }, {})
-      let categoryList = []
-      for ( category in categories ) {
-        categoryList.push({_id: category, category: category, games: categories[category]})
-      }
-      dispatch(fetchGamesSuccess(categoryList))
-    }).catch(function (err) {
+    const result = await contentDB.allDocs({
+      startkey: 'game:', 
+      endkey: 'game:'+'\ufff0', 
+      include_docs: true})
+    console.log(result)
+    let categories = result.rows.reduce(function(grouped, item) { 
+      let key = item.doc['category']
+      grouped[key] = grouped[key] || []
+      grouped[key].push(item.doc)
+      return grouped
+    }, {})
+    let categoryList = []
+    for ( category in categories ) {
+      categoryList.push({_id: category, category: category, games: categories[category]})
+    }
+    dispatch(fetchGamesSuccess(categoryList))
+  } catch(error) {
       console.log('fetchGames: ' + err)
-    })
+      dispatch(fetchGamesFailure())
   }
 }

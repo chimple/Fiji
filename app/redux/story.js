@@ -16,33 +16,39 @@ const initialState = {
 export default reducer = (state = initialState, action) => {
   switch(action.type) {
     case FETCH_TITLES_REQUEST:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: true
-      })
+      }
     case FETCH_TITLES_SUCCESS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: false,
         titles: action.titles
-      })
+      }
     case FETCH_TITLES_FAILURE:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: false,
         titles: []
-      })
+      }
     case FETCH_STORY_REQUEST:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: true
-      })
+      }
     case FETCH_STORY_SUCCESS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: false,
         story: action.story
-      })
+      }
     case FETCH_STORY_FAILURE:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: false,
         story: {}
-      })
+      }
     default:
       return state
   }
@@ -74,37 +80,37 @@ export const fetchStoryFailure = () => ({
   type: FETCH_STORY_FAILURE
 })
 
-export const fetchTitles = () => {
-  return function(dispatch, getState) {
+export const fetchTitles = () => async(dispatch, getState) => {
     dispatch(fetchTitlesRequest())
-    contentDB.replicate.from(remoteContentDB).then(function (result) {
-      contentDB.allDocs({startkey: 'storytitle:', endkey: 'storytitle:'+'\ufff0', include_docs: true}).then(function (result) {
-        console.log('fetchTitles')
-        console.log(result)
-          dispatch(fetchTitlesSuccess(result.rows.map(function(row) { return row.doc})))
-        }).catch(function (err) {
-            console.log('fetchTitles: ' + err)
-        })
-      }).catch(function (err) {
-        contentDB.allDocs({startkey: 'storytitle:', endkey: 'storytitle:'+'\ufff0', include_docs: true}).then(function (result) {
-          console.log(result)
-            dispatch(fetchTitlesSuccess(result.rows.map(function(row) { return row.doc})))
-          }).catch(function (err) {
-              console.log('fetchTitles: ' + err)
-          })
+    try {
+      const replResult = await contentDB.replicate.from(remoteContentDB)
+    } catch (error) {
+      console.log('fetchTitles.replication: ' + error)
+    }
+    try {
+      const result = await contentDB.allDocs({
+        startkey: 'storytitle:', 
+        endkey: 'storytitle:'+'\ufff0', 
+        include_docs: true
       })
-  }
+      console.log('fetchTitles')
+      console.log(result)
+      dispatch(fetchTitlesSuccess(result.rows.map(function(row) { return row.doc})))
+    } catch(error) {
+      console.log('fetchTitles: ' + error)
+      dispatch(fetchTitlesFailure())
+    }
 }
 
-export const fetchStory = ( title ) => {
-  return function(dispatch, getState) {
-    dispatch(fetchStoryRequest())
+export const fetchStory = ( title ) => async(dispatch, getState) => {
+  dispatch(fetchStoryRequest())
+  try {
     // story._id is storytitle:xyz, so strip out storytitle:
-    contentDB.get( 'story:' + title._id.substring(11)).then(function (doc) {
-      console.log(doc)
-        dispatch(fetchStorySuccess(doc))
-      }).catch(function (err) {
-          console.log('fetchStory: ' + err)
-      })
+    const doc = await contentDB.get( 'story:' + title._id.substring(11))
+    console.log(doc)
+    dispatch(fetchStorySuccess(doc))
+  } catch(error) {
+      console.log('fetchStory: ' + error)
+      dispatch(fetchStoryFailure())
   }
 }

@@ -67,6 +67,6 @@ it('handles addUser action', async () => {
     image: usersData[0].image
   }
     
-  await store.dispatch(addUser(userToAdd));
-  expect(store.getActions()).toMatchSnapshot();
+  await store.dispatch(addUser(userToAdd))
+  expect(store.getActions()).toMatchSnapshot()
 })

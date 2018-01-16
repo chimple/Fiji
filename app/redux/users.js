@@ -44,8 +44,8 @@ export const fetchUsersFailure = () => ({
 })
 
 export const fetchUsers = () => async(dispatch) => {
+  dispatch(fetchUsersRequest())
   try {
-    dispatch(fetchUsersRequest())
     const syncResult = await usersDB.sync(remoteUsersDB)
     console.log(syncResult)
     const result = await usersDB.allDocs({include_docs: true})
