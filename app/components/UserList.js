@@ -37,7 +37,7 @@ UserList.propTypes = {
 
 const styles = StyleSheet.create({
   UserListStyle:{flex:1,
-  backgroundColor:'#c9b57c', 
+  backgroundColor:'white', 
   paddingTop:'8%', 
   paddingLeft:'6%', 
   paddingRight:'4%'}

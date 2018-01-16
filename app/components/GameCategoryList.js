@@ -22,7 +22,7 @@ export default class GameCategoryList extends PureComponent {
         keyExtractor={this._keyExtractor}
         renderItem={({item}) => (
           <TouchableOpacity style={styles.EachGameButtonStyle}>
-            <Text style={styles.TextStyle}>{item.name}</Text>
+            <View style={{borderColor:'black',  borderWidth:2,borderRadius:40, height:70, width:70}}/>
           </TouchableOpacity>
         )}
         />
@@ -53,14 +53,15 @@ GameCategoryList.propTypes = {
 const styles = StyleSheet.create({
   GameCategoryListStyle:{
     flex:1,
-    backgroundColor:'#c9b57c',
+    backgroundColor:'white',
     alignItems:'center'
   },
   CategoryCardViewStyle:{
     flex:1, 
-    height:140, 
-    width:320, 
-    marginTop:'5%'
+    height:180, 
+    width:330, 
+    marginTop:'17%',
+    marginBottom:'8%'
   },
   CategoryHeaderViewStyle:{
     flex:2 ,
@@ -86,7 +87,9 @@ const styles = StyleSheet.create({
   },
   EachGameButtonStyle:{ 
     justifyContent:'center',
-    //alignItems:'center'
+    //alignItems:'center',
+    //alignContent:"space-around",
+    //marginHorizontal:'2%'
    },
   TextStyle:{
     fontSize:20,
@@ -94,3 +97,10 @@ const styles = StyleSheet.create({
     color:'black',
   }
 });
+
+
+/*
+<TouchableOpacity style={styles.EachGameButtonStyle}>
+            <Text style={styles.TextStyle}>{item.name}</Text>
+          </TouchableOpacity>
+*/
