@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react'
 import { StyleSheet, TouchableOpacity, View, Text, FlatList, Image } from 'react-native'
 import PropTypes from 'prop-types'
 import { Buffer } from 'buffer'
-import SvgUri from 'react-native-svg-uri'
+//import SvgUri from 'react-native-svg-uri'
 
 export default class User extends PureComponent {
   _onPress = () => {
@@ -53,11 +53,11 @@ const styles = StyleSheet.create({
     padding:'4%'
   },
   ImageStyle:{
-    width: '80%',
+    width: '100%',
     height: '100%',
     //resizeMode: Image.resizeMode.contain,
     borderRadius:60,
-    borderColor:'black',
+    //borderColor:'black',
     borderWidth:2
   },
   TextViewStyle:{

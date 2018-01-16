@@ -10,7 +10,6 @@ export default class StoryList extends PureComponent {
 
   _renderItem = ({item}) => (
     <View>
-    <Text>Hello</Text>
     <StoryTitle
       title = { item }
       onPressItem = { this.props.onPressItem }
