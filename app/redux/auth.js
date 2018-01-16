@@ -26,7 +26,7 @@ export const syncUserBegin = (user) => ({
 export const syncUser = (user) => {
   return function(dispatch) {
     dispatch(syncUserBegin(user))
-    var sync = PouchDB.sync('user_' + user._id, 'http://localhost:5984/' + 'user_' + user._id, {
+    var sync = PouchDB.sync('user_' + user._id, 'http://192.168.0.200:5984/' + 'user_' + user._id, {
       live: true,
       retry: true
     }).on('change', function (info) { // handle change

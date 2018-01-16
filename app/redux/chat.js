@@ -101,7 +101,7 @@ export const sendMessage = (friend, message) => {
         text: message
       }  
       friendDB.put(friendMsg).then(function (resp) {
-        friendDB.replicate.to('http://localhost:5984/' + 'user_' + friend._id).then(function (result) {
+        friendDB.replicate.to('http://192.168.0.200:5984/' + 'user_' + friend._id).then(function (result) {
           console.log(result)
         }).catch(function (err) {
           console.log(err)
