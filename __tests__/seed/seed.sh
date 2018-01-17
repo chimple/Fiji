@@ -1,6 +1,7 @@
 # Delete all your local databases from pouch except those starting with _ like _users _replicator
 
 curl -X DELETE http://127.0.0.1:5984/users
+
 curl -X PUT http://127.0.0.1:5984/users
 curl -X POST http://127.0.0.1:5984/users/_bulk_docs -H "Content-Type: application/json" --data "@__tests__/seed/users.json"
 

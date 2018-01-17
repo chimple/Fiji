@@ -38,7 +38,7 @@ export default reducer = (state = initialState, action) => {
     case ADD_MESSAGE:
       return { 
         ...state,
-        messages: [...state.messages, action.message]
+        messages: [action.message, ...state.messages]
       }
     default:
       return state
@@ -81,23 +81,31 @@ export const startChat = (friend) => {
   }
 }
 
-export const sendMessage = (friend, message) => {
+export const sendMessage = (friend, message) => { 
+  console.log("this is chat send ");
+  console.log(friend, message);
   return function(dispatch, getState) {
     let userDB = new PouchDB('user_' + getState().auth.user._id)
+    let now = (new Date()).toJSON()
     let msg = {
-      _id: 'chat:'+friend._id+ (new Date()).toJSON(),
+      _id: 'chat:' + friend._id + ':' + now,
       sender: getState().auth.user._id,
       text: message
     }
-    addMessage(msg)
+    dispatch(addMessage(msg))
     userDB.put(msg).then(function (response) {
       let friendDB = new PouchDB('user_' + friend._id)
-      friendDB.put(msg).then(function (resp) {
-        friendDB.replicate.to('http://localhost:5984/' + 'user_' + friend._id).then(function (result) {
+      let friendMsg = {
+        _id: 'chat:' + getState().auth.user._id + ':' + now,
+        sender: getState().auth.user._id,
+        text: message
+      }  
+      friendDB.put(friendMsg).then(function (resp) {
+        friendDB.replicate.to('http://192.168.0.200:5984/' + 'user_' + friend._id).then(function (result) {
           console.log(result)
         }).catch(function (err) {
           console.log(err)
-        })
+        }) 
       })
     })
   }

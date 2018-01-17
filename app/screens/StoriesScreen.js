@@ -44,5 +44,6 @@ StoriesScreen.propTypes = {
 
 export default connect(state => ({
   titles: state.story.titles,
+  
   isFetching: state.story.isFetching,
 }))(StoriesScreen)
