@@ -6,18 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 
 export default class GameCategoryList extends PureComponent {
 
- /* _scrollToForwardIndex = () => (
 
-  )
-
-  _scrollToBackwardIndex = () => (
-
-  )*/
-
-  myscrollToIndex = () => {
-    this.setState({index: ++this.state.index});
-    this.flatListRef.scrollToIndex({animated: true,index: this.state.index});
-  };
 
   _keyExtractor = (item, index) => item._id
 
@@ -36,7 +25,6 @@ export default class GameCategoryList extends PureComponent {
           <View style={{flex:12, }}>               
           <FlatList
           showsHorizontalScrollIndicator={false}
-          ref={(ref) => { this.flatListRef = ref; }}
           horizontal={true}
           data={item.games}
           keyExtractor={this._keyExtractor}
