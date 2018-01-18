@@ -32,7 +32,7 @@ export default class MessageList extends PureComponent {
    
   )
   clearText =()=>{
-    if(this.state.message !== '' ){
+    if(this.state.message.trim() !== ''){
     this._textInput.clear();
     this.props.onPress(this.state.message);
     this.setState({ message: '' });
