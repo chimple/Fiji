@@ -38,10 +38,14 @@ class ChatScreen extends Component {
                 onPress= { this._onPress }
               />
             :
-              <View>
-                <Text>No messages found</Text>
-              </View>
-    )
+            <MessageList
+                messages = { this.props.messages }
+                navigation={ this.props.navigation }
+                user={this.props.user}
+                friend={this.props.navigation.state.params.friend}
+                onPress= { this._onPress }
+              />
+    ) 
   }
 }
 

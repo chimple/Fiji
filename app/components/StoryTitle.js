@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     padding:'4%'
   },
   ImageStyle:{
-    width: '80%',
+    width: '100%',
     height: '100%',
     //resizeMode: Image.resizeMode.contain,
     borderRadius:60,
@@ -46,12 +46,13 @@ const styles = StyleSheet.create({
   TextViewStyle:{
     flex:2,
     padding:'1%',
-    //flexDirection:'row',
-    justifyContent:'center',
-    alignItems:'center',
-    backgroundColor:'#d80463',
+    flexDirection:'row',
+    flexWrap:'wrap',
+    justifyContent:'flex-start',
+    //alignItems:'center',
+    backgroundColor:'#19a4f2',
     borderTopLeftRadius:30,
-    borderTopRightRadius:30
+    borderTopRightRadius:30,
   },
   TextStyle:{
     fontWeight:'bold', 
@@ -62,13 +63,14 @@ const styles = StyleSheet.create({
   TouchableStyle:{
     flex:1,
     height:140, 
-    width:170, 
+    width:105, 
     borderColor:'black',
     borderWidth:2, 
     //marginBottom:'18%',
     //marginTop:'17%',
     //marginRight:'1%',
     margin:'2%',
+    marginBottom:'30%',
     borderTopLeftRadius:30,
     borderTopRightRadius:30,
     borderBottomLeftRadius:30,
