@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Image, KeyboardAvoidingView, ListView, TextInput } from 'react-native';
 import PropTypes from 'prop-types'
-import SvgUri from 'react-native-svg-uri'
+//import SvgUri from 'react-native-svg-uri'
 import { sendMessage, startChat } from '../redux/chat';
 
 

@@ -1,5 +1,8 @@
+import { fetchUsersFailure } from '../../app/redux/users';
+
 const contentJson = require('../../__tests__/seed/content.json')
 const usersJson = require('../../__tests__/seed/users.json')
+const userAliceJson = require('../../__tests__/seed/user_alice.json')
 
 
 export const titles = contentJson['docs'].filter(function (doc) {
@@ -19,3 +22,7 @@ export const story_alice_in_wonderland = contentJson['docs'].filter(function (do
 })[0]
 
 export const users = usersJson['docs']
+
+export const messages = userAliceJson['docs'].filter(function(doc) {
+  return doc._id.startsWith('chat:mad-hatter:')
+})

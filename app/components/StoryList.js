@@ -21,7 +21,10 @@ export default class StoryList extends PureComponent {
       <View style={styles.StoryListStyle}>
         <FlatList
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap' }}
+
+         // contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap' }}
+          numColumns={3}
+
           data={this.props.titles}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
@@ -37,11 +40,21 @@ StoryList.propTypes = {
 }
 
 const styles = StyleSheet.create({
+<<<<<<< HEAD
   StoryListStyle: {
     flex: 1,
     backgroundColor: 'white',
     paddingTop: '8%',
     paddingLeft: '7%',
     paddingRight: '4%'
+=======
+  StoryListStyle:{
+    //flex:1,
+    backgroundColor:'white', 
+    alignSelf:'stretch'
+    //paddingTop:'8%', 
+    //paddingLeft:'7%', 
+    //paddingRight:'4%'
+>>>>>>> refs/remotes/origin/master
   }
 });
