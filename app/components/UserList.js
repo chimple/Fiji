@@ -20,7 +20,8 @@ class UserList extends PureComponent {
       <View style={styles.UserListStyle}>
       <FlatList
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{flexDirection:'row', flexWrap:'wrap'}}
+        numColumns={3}
+        //contentContainerStyle={{flexDirection:'row', flexWrap:'wrap'}}
         data={this.props.users}
         keyExtractor={this._keyExtractor}
         renderItem={this._renderItem}
@@ -38,9 +39,10 @@ UserList.propTypes = {
 const styles = StyleSheet.create({
   UserListStyle:{flex:1,
   backgroundColor:'white', 
-  paddingTop:'8%', 
-  paddingLeft:'6%', 
-  paddingRight:'4%'}
+  //paddingTop:'8%', 
+  //paddingLeft:'6%', 
+  //paddingRight:'4%'
+  }
 });
 
 export default UserList

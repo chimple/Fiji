@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     width:120, 
     //borderColor:'black',
     //borderWidth:2, 
-    marginBottom:'18%',
-    marginTop:'17%'
+    marginBottom:'5%',
+    marginTop:'8%'
   }
 });
