@@ -66,14 +66,14 @@ const styles = StyleSheet.create({
   GameCategoryListStyle:{
     flex:1,
     backgroundColor:'white',
-    alignItems:'center'
   },
   CategoryCardViewStyle:{
-    flex:1, 
+    flex:0.5, 
     height:180, 
     width:330, 
-    marginTop:'17%',
-    marginBottom:'8%'
+    marginTop:'12%',
+    marginBottom:'7%',
+    alignSelf:'center'
   },
   CategoryHeaderViewStyle:{
     flex:2 ,
