@@ -40,21 +40,11 @@ StoryList.propTypes = {
 }
 
 const styles = StyleSheet.create({
-<<<<<<< HEAD
   StoryListStyle: {
     flex: 1,
     backgroundColor: 'white',
     paddingTop: '8%',
     paddingLeft: '7%',
     paddingRight: '4%'
-=======
-  StoryListStyle:{
-    //flex:1,
-    backgroundColor:'white', 
-    alignSelf:'stretch'
-    //paddingTop:'8%', 
-    //paddingLeft:'7%', 
-    //paddingRight:'4%'
->>>>>>> refs/remotes/origin/master
   }
 });
