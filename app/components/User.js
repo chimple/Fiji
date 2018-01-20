@@ -46,11 +46,11 @@ User.propTypes = {
 }
 
 const styles = StyleSheet.create({
-  ImageViewStyle:{
-    //backgroundColor:'white', 
+  ImageViewStyle:{ 
     flex:3, 
-    alignItems:'center', 
-    padding:'4%'
+    alignContent:'center', 
+    justifyContent:'center',
+    padding:'4%',
   },
   ImageStyle:{
     width: '100%',
@@ -58,13 +58,12 @@ const styles = StyleSheet.create({
     //resizeMode: Image.resizeMode.contain,
     borderRadius:60,
     //borderColor:'black',
-    borderWidth:2
+    borderWidth:2,
   },
   TextViewStyle:{
     flex:1,
     alignItems:'center',
-    justifyContent:'center', 
-    //backgroundColor:'grey'
+    justifyContent:'center',
   },
   TextStyle:{
     fontWeight:'bold', 
@@ -78,6 +77,6 @@ const styles = StyleSheet.create({
     //borderColor:'black',
     //borderWidth:2, 
     marginBottom:'5%',
-    marginTop:'8%'
+    marginTop:'10%'
   }
 });
