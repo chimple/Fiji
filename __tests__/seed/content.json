@@ -170,12 +170,190 @@
       },
       "pages": [
       {
+        "bg": "https://pre00.deviantart.net/5011/th/pre/i/2010/338/f/2/comic_book_cover_green_girl_by_ooofaba-d347g08.jpg",
+        "dialog": [
+        {
+          "text": "Look inside here",
+          "speaker": "Alice"
+        },
+        {
+          "text": "Whats there",
+          "speaker": "White Rabbit"
+        },
+         
+        {
+          "text": "there is sweet inside the box",
+          "speaker": "Alice"
+        },
+         
+        {
+          "text": "wowww....! sweeet",
+          "speaker": "White Rabbit"
+        },
+          
+        {
+          "text": "yeahhh sweets ",
+          "speaker": "Alice"
+        },
+         
+        {
+          "text": "thank you",
+          "speaker": "White Rabbit"
+        },
+        {
+          "text": "Look inside here",
+          "speaker": "Alice"
+        },
+         
+        {
+          "text": "Whats there",
+          "speaker": "White Rabbit"
+        },
+         
+        {
+          "text": "there is sweet inside the box",
+          "speaker": "Alice"
+        },
+         
+        {
+          "text": "wowww....! sweeet",
+          "speaker": "White Rabbit"
+        },
+          
+        {
+          "text": "yeahhh sweets ",
+          "speaker": "Alice"
+        },
+         
+        {
+          "text": "thank you",
+          "speaker": "White Rabbit"
+        },
+        {
+          "text": "Look inside here",
+          "speaker": "Alice"
+        },
+         
+        {
+          "text": "Whats there",
+          "speaker": "White Rabbit"
+        },
+         
+        {
+          "text": "there is sweet inside the box",
+          "speaker": "Alice"
+        },
+         
+        {
+          "text": "wowww....! sweeet",
+          "speaker": "White Rabbit"
+        },
+          
+        {
+          "text": "yeahhh sweets ",
+          "speaker": "Alice"
+        },
+         
+        {
+          "text": "thank you",
+          "speaker": "White Rabbit"
+        },
+        {
+          "text": "Look inside here",
+          "speaker": "Alice"
+        },
+         
+        {
+          "text": "Whats there",
+          "speaker": "White Rabbit"
+        },
+         
+        {
+          "text": "there is sweet inside the box",
+          "speaker": "Alice"
+        },
+         
+        {
+          "text": "wowww....! sweeet",
+          "speaker": "White Rabbit"
+        },
+          
+        {
+          "text": "yeahhh sweets ",
+          "speaker": "Alice"
+        },
+         
+        {
+          "text": "thank you",
+          "speaker": "White Rabbit"
+        },
+        {
+          "text": "Look inside here",
+          "speaker": "Alice"
+        },
+         
+        {
+          "text": "Whats there",
+          "speaker": "White Rabbit"
+        },
+         
+        {
+          "text": "there is sweet inside the box",
+          "speaker": "Alice"
+        },
+         
+        {
+          "text": "wowww....! sweeet",
+          "speaker": "White Rabbit"
+        },
+          
+        {
+          "text": "yeahhh sweets ",
+          "speaker": "Alice"
+        },
+         
+        {
+          "text": "thank you",
+          "speaker": "White Rabbit"
+        }
+        
+        ]
+      },
+      {
         "bg": "https://cdn.pixabay.com/photo/2017/09/16/16/09/sea-2755908_960_720.jpg",
         "dialog": [
         {
           "text": "Look inside here",
           "speaker": "Alice"
         },
+        {
+          "text": "Whats there",
+          "speaker": "White Rabbit"
+        },
+         
+        {
+          "text": "there is sweet inside the box",
+          "speaker": "Alice"
+        },
+         
+        {
+          "text": "wowww....! sweeet",
+          "speaker": "White Rabbit"
+        },
+          
+        {
+          "text": "yeahhh sweets ",
+          "speaker": "Alice"
+        },
+         
+        {
+          "text": "thank you",
+          "speaker": "White Rabbit"
+        },
+        {
+          "text": "Look inside here",
+          "speaker": "Alice"
+        },
          
         {
           "text": "Whats there",
@@ -200,12 +378,65 @@
         {
           "text": "thank you",
           "speaker": "White Rabbit"
-        }
-        ]
-      },
-      {
-        "bg": "http://hmdiary.com/wp-content/uploads/2017/11/extraordinary-page-background-color-html-free-printable-1292-sheets-coloring-pages-671x503.jpg",
-        "dialog": [
+        },
+        {
+          "text": "Look inside here",
+          "speaker": "Alice"
+        },
+         
+        {
+          "text": "Whats there",
+          "speaker": "White Rabbit"
+        },
+         
+        {
+          "text": "there is sweet inside the box",
+          "speaker": "Alice"
+        },
+         
+        {
+          "text": "wowww....! sweeet",
+          "speaker": "White Rabbit"
+        },
+          
+        {
+          "text": "yeahhh sweets ",
+          "speaker": "Alice"
+        },
+         
+        {
+          "text": "thank you",
+          "speaker": "White Rabbit"
+        },
+        {
+          "text": "Look inside here",
+          "speaker": "Alice"
+        },
+         
+        {
+          "text": "Whats there",
+          "speaker": "White Rabbit"
+        },
+         
+        {
+          "text": "there is sweet inside the box",
+          "speaker": "Alice"
+        },
+         
+        {
+          "text": "wowww....! sweeet",
+          "speaker": "White Rabbit"
+        },
+          
+        {
+          "text": "yeahhh sweets ",
+          "speaker": "Alice"
+        },
+         
+        {
+          "text": "thank you",
+          "speaker": "White Rabbit"
+        },
         {
           "text": "Look inside here",
           "speaker": "Alice"
@@ -235,8 +466,10 @@
           "text": "thank you",
           "speaker": "White Rabbit"
         }
+        
         ]
       }
+     
       ]
     }
   ]

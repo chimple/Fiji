@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
-import { View, Text, ActivityIndicator, Image, ImageBackground, ScrollView, TouchableOpacity, FlatList } from 'react-native'
+import {
+  View, Text, ActivityIndicator,
+  Image, ImageBackground, ScrollView,
+  TouchableOpacity, FlatList
+} from 'react-native'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -12,12 +16,26 @@ import StorySection from '../components/StorySection'
 class StoryScreen extends Component {
   constructor(props) {
     super(props)
-    this.state = { count: 1, page: 1 };
+    this.state = { count: 1, page: 0 };
   }
   _renderState() {
-    var dialog = this.props.story.pages[0].dialog;
+    // var page = this.getState;
+    var dialog = this.props.story.pages[this.state.page].dialog;
+    console.log("dialog" + dialog.length);
     if (this.state.count < dialog.length) {
-      this.setState({ count: this.state.count + 1 })
+      this.setState({ count: this.state.count + 1 });
+      console.log("counter value is : " , this.state.count);
+    }
+    else {
+      //console.log("else part is trigger ....")
+      console.log("page length data : ", this.props.story.pages.length)
+      console.log("this.state.page : ", this.state.page)
+      if (this.props.story.pages.length - 1 > this.state.page) {
+        this.setState({ count: 0, page: this.state.page + 1 })
+      } else {
+        this.setState({ count: 0, page: 0 })
+        console.log(" Thank you , you already gone throw all pages ....")
+      }
     }
   }
 
@@ -26,8 +44,8 @@ class StoryScreen extends Component {
   }
 
   render() {
-    console.log("shantuuu");
     console.log(this.state.count);
+    console.log("the page data is : ", this.props.story.pages)
     return (
       this.props.isFetching
         ?
@@ -49,12 +67,16 @@ class StoryScreen extends Component {
             </View>
             <View style={{ flex: 1 }}>
               <ImageBackground style={styles.backgroundImageStyle}
-                source={{ uri: "https://cdn.pixabay.com/photo/2017/09/16/16/09/sea-2755908_960_720.jpg" }}>
+                source={{ uri: this.props.story.pages[this.state.page].bg }}>
                 {/* {this.props.story.pages[0].bg} */}
-                <ScrollView>
-                  <View>
-                    <StorySection count={this.state.count} />
-                    {/* {this._storyview()} */}
+                <ScrollView ref="scrollView"
+                  onContentSizeChange={(width, height) => this.refs.scrollView.scrollTo({ y: height })}>
+                  <View  >
+                    <StorySection
+                      page={this.state.page}
+                      count={this.state.count}
+
+                    />
                   </View>
                 </ScrollView>
               </ImageBackground>
