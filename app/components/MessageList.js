@@ -43,7 +43,7 @@ export default class MessageList extends PureComponent {
     console.log("sendMessage");
     console.log(this.props.friend,this.state.message);
 
-    if(this.props.messages.length !== 0){
+    if(this.props.messages.length !== ''){
         return (
       <View >
         <View style={{backgroundColor:"#ffffff",height:"100%"}}>
@@ -60,7 +60,7 @@ export default class MessageList extends PureComponent {
        <View style={styles.input}>
       <TextInput
                 ref={component => this._textInput = component}
-                placeholder="please type here"
+                placeholder="Start typing...."
                 style={{ flex: 1 }}
                 value={this.state.message}
                 clearButtonMode='while-editing'
@@ -88,7 +88,7 @@ export default class MessageList extends PureComponent {
       <View style={styles.input}>
       <TextInput  
                 ref={component => this._textInput = component}
-                placeholder="please type here"
+                placeholder="Start typing...."
                 style={{ flex: 1 }}
                 value={this.state.message}
                 clearButtonMode='while-editing'
@@ -97,7 +97,7 @@ export default class MessageList extends PureComponent {
                 onSubmitEditing={this.clearText}
                 onChangeText={(message) => this.setState({ message })}
                           />
-        <Icon name="send" size={40} color="#900" />       
+        <Icon name="send" size={40} color="#900" onPress={this.clearText}/>       
         
 </View>
 </View>
@@ -123,7 +123,7 @@ input: {
   justifyContent:"flex-end",
   alignItems:"flex-end",
   // padding: 10,
-  // height: 60,
+   height: 40,
   width: "100%",
   backgroundColor: '#e3d0ca',
   // margin: 10,

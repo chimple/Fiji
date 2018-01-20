@@ -29,7 +29,7 @@ const ChatNavigator = StackNavigator({
     screen: ChatScreen,
     navigationOptions: {
       headerTitle: 'Chat',
-      headerStyle:{backgroundColor: '#19a4f2'}
+      headerStyle:{backgroundColor: '#e24076'}
     }
   }  
 },{headerMode:'none'})
@@ -70,8 +70,8 @@ const MainNavigator = TabNavigator({
 }, {
   tabBarPosition:"bottom",
   tabBarOptions:{
-    labelStyle:{fontSize: 15, fontWeight:'bold', color:'black'},
-    style:{backgroundColor:'#19a4f2'},
+    labelStyle:{fontSize: 15, fontWeight:'bold', color:'white'},
+    style:{backgroundColor:'#e24076'},
     indicatorStyle:{backgroundColor:'white'}
   }
 })
