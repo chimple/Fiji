@@ -22,16 +22,15 @@ export default class GameCategoryList extends PureComponent {
           <View style={styles.IconViewStyle}> 
             <Icon name="keyboard-arrow-left" color="white" size={35} style={styles.IconStyle} onPress={this._scrollToForwardIndex} />
           </View>
-          <View style={{flex:12, }}>               
+          <View style={{ flex:12 }}>               
           <FlatList
           showsHorizontalScrollIndicator={false}
           horizontal={true}
           data={item.games}
           keyExtractor={this._keyExtractor}
           renderItem={({item, index}) => (
-            <View style={{   paddingHorizontal:'0.5%' }}>
               <TouchableOpacity style={styles.EachGameViewStyle}/>
-            </View>
+            
           )}
           />
           </View>
@@ -45,14 +44,15 @@ export default class GameCategoryList extends PureComponent {
 
   render() {
     return (
-    <View style={styles.GameCategoryListStyle}>
+      <View style={styles.GameCategoryListStyle}>
       <FlatList
+        //contentContainerStyle={{flex:1}}
         showsVerticalScrollIndicator={false}
         data={this.props.games}
         keyExtractor={this._keyExtractor}
         renderItem={this._renderItem}
       />
-    </View> 
+      </View>
     )
   }
 }
@@ -68,12 +68,13 @@ const styles = StyleSheet.create({
     backgroundColor:'white',
   },
   CategoryCardViewStyle:{
-    flex:0.5, 
-    height:180, 
-    width:330, 
-    marginTop:'12%',
-    marginBottom:'7%',
-    alignSelf:'center'
+    flex:1, 
+    height:150, 
+    //width:330, 
+    marginTop:'8%',
+    marginBottom:'8%',
+    //alignSelf:'center',
+    marginHorizontal:'4%',
   },
   CategoryHeaderViewStyle:{
     flex:2 ,
@@ -89,15 +90,16 @@ const styles = StyleSheet.create({
     color:'#19a4f2'
   },
   CategoryGamesViewStyle:{
-    flex:3.5 ,
+    flex:4 ,
     //padding:'4%',
-    paddingTop:'7%',
-    paddingBottom:'7%',
+    //paddingTop:'7%',
+    //paddingBottom:'7%',
     //paddingBottom:'4%',
     backgroundColor:'#eaefef',
     flexDirection:'row',
-    //justifyContent:'center', 
-    //alignContent:"center", 
+    //backgroundColor:'red',
+    //justifyContent:'space-around', 
+    alignContent:"center", 
     borderBottomLeftRadius:20, 
     borderBottomRightRadius:20
   },
@@ -120,7 +122,10 @@ const styles = StyleSheet.create({
     height:85, 
     width:85,
     backgroundColor:'black',
-    borderWidth:2,
+    //borderWidth:2,
+    marginTop:'8%',
+    marginBottom:'8%',
+    //paddingLeft:"4%"
   },
   /*TextStyle:{
     fontSize:20,
@@ -130,11 +135,12 @@ const styles = StyleSheet.create({
   IconViewStyle:{
     flex:1,
     justifyContent:"center",
+    //backgroundColor:'black',
     //alignItems:"center",
     paddingRight:'3%',
     //backgroundColor:'black',
-    marginBottom:'5%',
-    marginTop:'5%'
+    //marginBottom:'5%',
+    //marginTop:'5%'
   },
   IconStyle:{
     color:'#19a4f2'
