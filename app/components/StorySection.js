@@ -14,10 +14,12 @@ class StorySection extends Component {
     render(props) {
         const stories = [];
 
-        var dialog = this.props.story.pages[0].dialog;
+        console.log("the page number is :", this.props.page)
+
+        var dialog = this.props.story.pages[this.props.page].dialog;
         for (let i = 0; i < this.props.count; i++) {
-            for (let j = 0; j <=dialog.length ; j++) {
-                
+            for (let j = 0; j <= dialog.length; j++) {
+
                 if (i % 2 === 0) {
                     console.log("this is alice");
                     stories.push(
@@ -29,7 +31,7 @@ class StorySection extends Component {
                                 }} />
                             <View style={styles.textContainer}>
                                 <Text style={styles.dialogStyle}>
-                                    {this.props.story.pages[0].dialog[i].text}
+                                    {this.props.story.pages[this.props.page].dialog[i].text}
                                 </Text>
                             </View>
                         </View>
@@ -42,7 +44,7 @@ class StorySection extends Component {
                         <View style={styles.storyContainer2}>
                             <View style={styles.textContainer}>
                                 <Text style={styles.dialogStyle}>
-                                    {this.props.story.pages[0].dialog[i].text}
+                                    {this.props.story.pages[this.props.page].dialog[i].text}
                                 </Text>
                             </View>
                             <Image style={styles.characterImageStyle}
@@ -54,16 +56,14 @@ class StorySection extends Component {
                     );
                     break;
                 }
-               
-            }
-            
-        }
-           // return stories;
-            // console.log("comingg");
-            //console.log(this.props.story.characters);
-            return stories;
 
+            }
         }
+
+        //console.log(this.props.story.characters);
+        return stories;
+
+    }
 }
 StorySection.propTypes = {
     story: PropTypes.object,
