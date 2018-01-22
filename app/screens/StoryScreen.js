@@ -1,67 +1,51 @@
 import React, { Component } from 'react'
-import { View, Text, ActivityIndicator, Image, ImageBackground, ScrollView, TouchableOpacity, FlatList } from 'react-native'
+import {
+  View, Text, ActivityIndicator,
+  Image, ImageBackground, ScrollView,
+  TouchableOpacity, FlatList
+} from 'react-native'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Icon } from 'react-native-elements'
 import { fetchStory } from '../redux/story'
 //import SvgUri from 'react-native-svg-uri'
+import StorySection from '../components/StorySection'
 
 
 class StoryScreen extends Component {
- 
- componentDidMount() {
+  constructor(props) {
+    super(props)
+    this.state = { count: 1, page: 0 };
+  }
+  _renderState() {
+    // var page = this.getState;
+    var dialog = this.props.story.pages[this.state.page].dialog;
+    console.log("dialog" + dialog.length);
+    if (this.state.count < dialog.length) {
+      this.setState({ count: this.state.count + 1 });
+      console.log("counter value is : " , this.state.count);
+    }
+    else {
+      //console.log("else part is trigger ....")
+      console.log("page length data : ", this.props.story.pages.length)
+      console.log("this.state.page : ", this.state.page)
+      if (this.props.story.pages.length - 1 > this.state.page) {
+        this.setState({ count: 0, page: this.state.page + 1 })
+      } else {
+        this.setState({ count: 0, page: 0 })
+        console.log(" Thank you , you already gone throw all pages ....")
+      }
+    }
+  }
+
+  componentDidMount() {
     this.props.dispatch(fetchStory(this.props.navigation.state.params.title))
   }
-   _storyview = () => {
-     const stories=[];
-     const temp=null;
-       for(let i=0; i<6; i++)
-       {
-      if (this.props.story.characters['Alice'] === this.props.story.pages[0].dialog[i].speaker){ 
-        console.log("this is alice");
-        stories.push(
-      <View style={styles.storyContainer}>
-        <Image style={styles.characterImageStyle}
-          source={{
-            uri:
-              'data:image/png;base64,' + this.props.story.pages[0].dialog[i].image,
-          }} />
-        <View style={styles.textContainer}>
-          <Text style={styles.dialogStyle}>
-            {this.props.story.pages[0].dialog[i].text}
-          </Text>
-        </View>
-      </View>
-      );
-    }
-      else {
-        console.log("this is white ra vmnkjafj");
-        stories.push(
-      <View style={styles.storyContainer2}>
-        <View style={styles.textContainer}>
-          <Text style={styles.dialogStyle}>
-            {this.props.story.pages[0].dialog[i].text}
-          </Text>
-        </View>
-        <Image style={styles.characterImageStyle}
-          source={{
-            uri:
-              'data:image/png;base64,' + this.props.story.pages[0].dialog[i].image,
-          }} />
-      </View>
-    );
-  }
-    }
-    return stories;
-    console.log("comingggggggggggggg");
-    console.log(stories);
-    // return storys;
-  }
-    
 
-render() {
-
+  render() {
+    console.log(this.state.count);
+    console.log("the page data is : ", this.props.story.pages)
     return (
       this.props.isFetching
         ?
@@ -83,16 +67,21 @@ render() {
             </View>
             <View style={{ flex: 1 }}>
               <ImageBackground style={styles.backgroundImageStyle}
-                source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaBVHZKXKvVZepsZRShbLhp-QwShGWlRn6OkMCddQBBsD73ujE' }}>
+                source={{ uri: this.props.story.pages[this.state.page].bg }}>
                 {/* {this.props.story.pages[0].bg} */}
-              <ScrollView>
-                <View>
-              {this._storyview()}
-              </View>
-            </ScrollView>
+                <ScrollView ref="scrollView"
+                  onContentSizeChange={(width, height) => this.refs.scrollView.scrollTo({ y: height })}>
+                  <View  >
+                    <StorySection
+                      page={this.state.page}
+                      count={this.state.count}
+
+                    />
+                  </View>
+                </ScrollView>
               </ImageBackground>
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => this._renderState()} >
               <View style={styles.nextButtonStyle}>
                 <Icon name='keyboard-arrow-down' color='black' />
               </View>
@@ -133,48 +122,8 @@ const styles = {
     color: 'black'
   },
   backgroundImageStyle: {
-    flex: 1
-
-  },
-  storyContainer: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    margin: 5,
-    flexWrap: 'wrap'
-
-  },
-  textContainer: {
-    width: 220,
-    borderRadius: 5,
-    backgroundColor: '#ffffff',
-    padding: 10,
-    shadowColor: '#3d3d3d',
-    shadowRadius: 2,
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      height: 1,
-    },
-
-  },
-  characterImageStyle: {
-    height: 50,
-    width: 50,
-    margin: 5,
-    borderRadius: 20,
-    backgroundColor: 'white'
-  },
-
-  dialogStyle: {
-    fontSize: 15,
-    color: '#555',
-    fontWeight: '600',
-  },
-  storyContainer2: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    margin: 5,
-    alignSelf: 'flex-end',
-
+    flex: 1,
+    backgroundColor: 'pink'
   },
   nextButtonStyle: {
     flexDirection: 'column',
@@ -198,35 +147,4 @@ export default connect(state => ({
 
 
 
-//_renderDialogLeft() {
-  //   if (this.props.story.characters['Alice'] === this.props.story.pages[0].dialog[0].speaker) {
-  //     <View style={styles.storyContainer}>
-  //       <Image style={styles.characterImageStyle}
-  //         source={{
-  //           uri:
-  //             'data:image/png;base64,' + this.props.story.pages[0].dialog[0].image,
-  //         }} />
-  //       <View style={styles.textContainer}>
-  //         <Text style={styles.dialogStyle}>
-  //           {this.props.story.pages[0].dialog[0].text}
-  //         </Text>
-  //       </View>
-  //     </View>
-  //   }
-  // }
-  // _renderDialogRight() {
-  //   return (
-  //     <View style={styles.storyContainer2}>
-  //       <View style={styles.textContainer}>
-  //         <Text style={styles.dialogStyle}>
-  //           {this.props.story.pages[0].dialog[1].text}
-  //         </Text>
-  //       </View>
-  //       <Image style={styles.characterImageStyle}
-  //         source={{
-  //           uri:
-  //             'data:image/png;base64,' + this.props.story.pages[0].dialog[1].image,
-  //         }} />
-  //     </View>
-  //   )
-  // }
+

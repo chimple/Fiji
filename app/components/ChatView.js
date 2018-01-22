@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Image, KeyboardAvoidingView, ListView, TextInput } from 'react-native';
 import PropTypes from 'prop-types'
-import SvgUri from 'react-native-svg-uri'
+//import SvgUri from 'react-native-svg-uri'
 import { sendMessage, startChat } from '../redux/chat';
 
 
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   msgBlock: {
     width: 220,
     borderRadius: 5,
-    backgroundColor: '#edeeef',
+    backgroundColor: '#f2f2f2',
     padding: 10,
     shadowColor: '#adef12',
     shadowRadius: 2,
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   rightBlock: {
     width: 220,
     borderRadius: 5,
-    backgroundColor:"#19a4f2",
+    backgroundColor:"#f45180",
     padding: 10,
     shadowColor: '#3d3d3d',
     shadowRadius: 2,
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
   },
   rightTxt: {
     fontSize: 15,
-    color: '#202020',
+    color: '#ffffff',
     fontWeight: '600',
   },
 });

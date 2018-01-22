@@ -60,8 +60,7 @@ const styles = StyleSheet.create({
   TextViewStyle:{
     flex:1,
     alignItems:'center',
-    justifyContent:'center', 
-    //backgroundColor:'grey'
+    justifyContent:'center',
   },
   TextStyle:{
     fontWeight:'bold', 

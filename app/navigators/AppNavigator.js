@@ -26,13 +26,13 @@ const ChatNavigator = StackNavigator({
       headerStyle:{backgroundColor: '#19a4f2'}
     },
   },
-  ChatWith: {
+  /*ChatWith: {
     screen: ChatScreen,
     navigationOptions: {
       headerTitle: 'Chat',
-      headerStyle:{backgroundColor: '#19a4f2'}
+      headerStyle:{backgroundColor: '#e24076'}
     }
-  }  
+  }*/  
 },{headerMode:'none'})
 
 const StoryNavigator = StackNavigator({
@@ -43,13 +43,13 @@ const StoryNavigator = StackNavigator({
       headerStyle:{backgroundColor:'#19a4f2'}
     },
   },
-  Story: {
+  /*Story: {
     screen: StoryScreen,
     navigationOptions: {
       headerTitle: 'Story',
       headerStyle:{backgroundColor:'#19a4f2'}
     }
-  }  
+  }*/  
 },{
   headerMode:'none'
 })
@@ -71,8 +71,8 @@ const MainNavigator = TabNavigator({
 }, {
   tabBarPosition:"bottom",
   tabBarOptions:{
-    labelStyle:{fontSize: 15, fontWeight:'bold', color:'black'},
-    style:{backgroundColor:'#19a4f2'},
+    labelStyle:{fontSize: 15, fontWeight:'bold', color:'white'},
+    style:{backgroundColor:'#e24076'},
     indicatorStyle:{backgroundColor:'white'}
   }
 })
@@ -93,6 +93,20 @@ export const AppNavigator = StackNavigator({
   },
   Main: {
     screen: MainNavigator
+  },
+  Story: {
+    screen: StoryScreen,
+    navigationOptions: {
+      headerTitle: 'Story',
+      headerStyle:{backgroundColor:'#19a4f2'}
+    }
+  },
+  ChatWith: {
+    screen: ChatScreen,
+    navigationOptions: {
+      headerTitle: 'Chat',
+      headerStyle:{backgroundColor: '#e24076'}
+    }
   }
 })
 
