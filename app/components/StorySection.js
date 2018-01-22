@@ -1,129 +1,128 @@
-import React, { Component } from 'react'
-import { View, Text, ActivityIndicator, Image, ImageBackground, ScrollView } from 'react-native'
+import React, { Component } from 'react';
+import { View, Text, Image, ImageBackground } from 'react-native';
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-
+import { Icon } from 'react-native-elements'
 import { fetchStory } from '../redux/story'
-import SvgUri from 'react-native-svg-uri'
 
-export class StorySection extends Component {
-    render() {
-      console.log("item");
-      console.log(this.props.item);
-      const Storymsg = (props) => {
-    if (this.props.story.characters['Alice'] === this.props.story.pages[0].dialog[0].speaker) 
-      return(
-      <View style={styles.storyContainer}>
-        <Image style={styles.characterImageStyle}
-          source={{
-            uri:
-              'data:image/png;base64,' + this.props.story.pages[0].dialog[0].image,
-          }} />
-        <View style={styles.textContainer}>
-          <Text style={styles.dialogStyle}>
-            {this.props.story.pages[0].dialog[0].text}
-          </Text>
-        </View>
-      </View>
-      );
-  
-      return (
-      <View style={styles.storyContainer2}>
-        <View style={styles.textContainer}>
-          <Text style={styles.dialogStyle}>
-            {this.props.story.pages[0].dialog[1].text}
-          </Text>
-        </View>
-        <Image style={styles.characterImageStyle}
-          source={{
-            uri:
-              'data:image/png;base64,' + this.props.story.pages[0].dialog[1].image,
-          }} />
-      </View>
-    );
-  }
-      return (
-        <View>
-          <Storymsg />
-          </View>
-      );
 
+class StorySection extends Component {
+    constructor(props) {
+        super(props)
+    }
+    render(props) {
+        const stories = [];
+
+        console.log("the page number is :", this.props.page)
+
+        var dialog = this.props.story.pages[this.props.page].dialog;
+        for (let i = 0; i < this.props.count; i++) {
+            for (let j = 0; j <= dialog.length; j++) {
+
+                if (i % 2 === 0) {
+                    console.log("this is alice");
+                    stories.push(
+                        <View style={styles.storyContainer}>
+                            <Image style={styles.characterImageStyle}
+                                source={{
+                                    uri:
+                                        'data:image/png;base64,' + this.props.story.characters['Alice'],
+                                }} />
+                            <View style={styles.textContainer}>
+                                <Text style={styles.dialogStyle}>
+                                    {this.props.story.pages[this.props.page].dialog[i].text}
+                                </Text>
+                            </View>
+                        </View>
+                    );
+                    break;
+                }
+                else {
+                    console.log("this is white rabbit");
+                    stories.push(
+                        <View style={styles.storyContainer2}>
+                            <View style={styles.textContainer}>
+                                <Text style={styles.dialogStyle}>
+                                    {this.props.story.pages[this.props.page].dialog[i].text}
+                                </Text>
+                            </View>
+                            <Image style={styles.characterImageStyle}
+                                source={{
+                                    uri:
+                                        'data:image/png;base64,' + this.props.story.characters['White Rabbit'],
+                                }} />
+                        </View>
+                    );
+                    break;
+                }
+
+            }
+        }
+
+        //console.log(this.props.story.characters);
+        return stories;
 
     }
 }
-    StorySection.propTypes = {
-        titles: PropTypes.array,
-        story:PropTypes.object,
-        pages:PropTypes.array,
-        dialog:PropTypes.array,
-        image:PropTypes.array,
-        speaker:PropTypes.array,
-        navigation: PropTypes.shape({
-            state: PropTypes.shape({
-              params: PropTypes.shape({
-                title: PropTypes.object.isRequired
-              })
-            })
-          })
-      }
-      const styles = {
-        headerViewStyle: {
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-          alignItems: 'center',
-          backgroundColor: 'skyblue',
-          height: 60,
-          shadowColor: '#000',
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.9,
-          position: 'relative'
-        },
-        HeaderTextStyle: {
-          fontSize: 25,
-          color: 'black'
-        },
-        backgroundImageStyle: {
-          flex: 1
-      
-        },
-        storyContainer: {
-          flexDirection: 'row',
-          alignItems: 'flex-end',
-          margin: 5,
-      
-        },
-        textContainer: {
-          width: 220,
-          borderRadius: 5,
-          backgroundColor: '#ffffff',
-          padding: 10,
-          shadowColor: '#3d3d3d',
-          shadowRadius: 2,
-          shadowOpacity: 0.5,
-          shadowOffset: {
+StorySection.propTypes = {
+    story: PropTypes.object,
+
+}
+const styles = {
+    storyContainer: {
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        margin: 5
+
+    },
+    textContainer: {
+        width: 220,
+        borderRadius: 20,
+        backgroundColor: '#ffffff',
+        padding: 10,
+        shadowColor: '#3d3d3d',
+        shadowRadius: 2,
+        shadowOpacity: 0.5,
+        shadowOffset: {
             height: 1,
-          },
-      
         },
-        characterImageStyle: {
-          height: 50,
-          width: 50,
-          margin: 5,
-          borderRadius: 20,
-          backgroundColor: 'white'
-        },
-      
-        dialogStyle: {
-          fontSize: 15,
-          color: '#555',
-          fontWeight: '600',
-        },
-        storyContainer2: {
-          flexDirection: 'row',
-          alignItems: 'flex-end',
-          margin: 5,
-          alignSelf: 'flex-end',
-      
-        },
-      }
+
+    },
+    characterImageStyle: {
+        height: 50,
+        width: 50,
+        margin: 5,
+        borderRadius: 20
+    },
+
+    dialogStyle: {
+        fontSize: 18,
+        color: '#555',
+        fontWeight: '600',
+    },
+    storyContainer2: {
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        margin: 5,
+        alignSelf: 'flex-end',
+
+    },
+    nextButtonStyle: {
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        backgroundColor: '#9999ff',
+        height: 30,
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.9,
+        position: 'relative',
+        opacity: 1
+    }
+}
+
+export default connect(state => ({
+    story: state.story.story,
+    isFetching: state.story.isFetching,
+}))(StorySection)
