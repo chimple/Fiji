@@ -55,7 +55,7 @@ class FlashCard extends Component {
 
 FlashCard.defaultProps = {
   title: 'Test',
-  audio: '../assets/audio/jua.mp3',
+  audio: '../assets/audio/xyzjua.mp3',
   image: '../assets/img/starImg.png'
 };
 
