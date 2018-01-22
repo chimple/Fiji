@@ -5,40 +5,109 @@
  */
 
 import React from 'react'
-import { addNavigationHelpers, TabNavigator } from 'react-navigation'
+import { addNavigationHelpers, TabNavigator, StackNavigator } from 'react-navigation'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import FriendsScreen from '../screens/FriendsScreen'
 import GamesScreen from '../screens/GamesScreen'
 import StoriesScreen from '../screens/StoriesScreen'
+import StoryScreen from '../screens/StoryScreen'
 import HomeScreen from '../screens/HomeScreen'
+import LoginScreen from '../screens/LoginScreen'
+import ChatScreen from '../screens/ChatScreen'
+import CamPage from '../components/CamPage'
 
-export const AppNavigator = TabNavigator({
-  Home: {
-    screen: HomeScreen,
-    navigationOptions: {
-      headerTitle: 'Homez',
-    },
-  },
+const ChatNavigator = StackNavigator({
   Friends: {
     screen: FriendsScreen,
     navigationOptions: {
       headerTitle: 'Friends',
+      headerStyle:{backgroundColor: '#19a4f2'}
     },
   },
-  Stories: {
+  /*ChatWith: {
+    screen: ChatScreen,
+    navigationOptions: {
+      headerTitle: 'Chat',
+      headerStyle:{backgroundColor: '#e24076'}
+    }
+  }*/  
+},{headerMode:'none'})
+
+const StoryNavigator = StackNavigator({
+  Titles: {
     screen: StoriesScreen,
     navigationOptions: {
-      headerTitle: 'Stories'
+      headerTitle: 'Stories',
+      headerStyle:{backgroundColor:'#19a4f2'}
+    },
+  },
+  /*Story: {
+    screen: StoryScreen,
+    navigationOptions: {
+      headerTitle: 'Story',
+      headerStyle:{backgroundColor:'#19a4f2'}
     }
+  }*/  
+},{
+  headerMode:'none'
+})
+
+const MainNavigator = TabNavigator({
+  Chat: {
+    screen: ChatNavigator
   },
   Games: {
     screen: GamesScreen,
     navigationOptions: {
-      headerTitle: 'Games'
+      headerTitle: 'Games',
+      headerStyle:{backgroundColor:'#19a4f2'}
     }
   },
+  Stories: {
+    screen: StoryNavigator
+  }
+}, {
+  tabBarPosition:"bottom",
+  tabBarOptions:{
+    labelStyle:{fontSize: 15, fontWeight:'bold', color:'white'},
+    style:{backgroundColor:'#e24076'},
+    indicatorStyle:{backgroundColor:'white'}
+  }
+})
+
+export const AppNavigator = StackNavigator({
+  Home: {
+    screen: LoginScreen,
+    navigationOptions: {
+      headerTitle: 'Homez',
+      headerStyle:{backgroundColor:'#19a4f2'}
+    }
+  },
+  CamPage: {
+    screen: CamPage,
+    navigationOptions: {
+      headerMode: 'none'
+    }
+  },
+  Main: {
+    screen: MainNavigator
+  },
+  Story: {
+    screen: StoryScreen,
+    navigationOptions: {
+      headerTitle: 'Story',
+      headerStyle:{backgroundColor:'#19a4f2'}
+    }
+  },
+  ChatWith: {
+    screen: ChatScreen,
+    navigationOptions: {
+      headerTitle: 'Chat',
+      headerStyle:{backgroundColor: '#e24076'}
+    }
+  }
 })
 
 const AppWithNavigationState = ({ dispatch, nav }) => (

@@ -7,13 +7,19 @@
     "test": "jest"
   },
   "dependencies": {
+    "buffer": "^5.0.8",
     "cuid": "^2.0.1",
+    "jest-cli": "^22.0.6",
     "lottie-react-native": "^2.3.1",
     "pouchdb-react-native": "^6.4.0",
     "react": "16.0.0",
     "react-native": "0.51.0",
+    "react-native-camera": "^0.13.0",
     "react-native-elements": "^0.18.5",
+    "react-native-fs": "^2.9.7",
     "react-native-sound": "^0.10.4",
+    "react-native-svg": "^6.0.1-rc.1",
+    "react-native-svg-uri": "^1.2.3",
     "react-native-vector-icons": "^4.4.3",
     "react-navigation": "^1.0.0-beta.22",
     "react-redux": "^5.0.6",
@@ -24,10 +30,20 @@
   "devDependencies": {
     "babel-jest": "22.0.4",
     "babel-preset-react-native": "4.0.0",
-    "jest": "22.0.4",
-    "react-test-renderer": "16.0.0"
+    "jest": "^22.0.6",
+    "react-test-renderer": "16.0.0",
+    "redux-mock-store": "^1.4.0"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "globals": {
+      "__DEV__": true
+    },
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-native|react-navigation)/"
+    ]
   }
 }

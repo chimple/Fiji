@@ -1,18 +1,52 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, ActivityIndicator } from 'react-native'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
-class FriendsScreen extends Component {
+import UserList from '../components/UserList'
+import { fetchUsers } from '../redux/users'
+
+class LoginScreen extends Component {
+  componentDidMount() {
+    this.props.dispatch(fetchUsers())
+  }
+
   render() {
     return (
-      <View style={{
-        flex: 1, 
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}>
-        <Text>Friends</Text>
-      </View>
+      this.props.isFetching
+        ?
+          <ActivityIndicator size="large" style={{ marginTop: 100 }}/>
+        :
+          this.props.users.length
+            ?
+              <UserList
+                users={ this.props.users.filter((user) => user._id != this.props.user._id) }
+                navigation={ this.props.navigation }
+                onPressItem = { this._handleChat }
+              />
+            :
+              <View>
+                <Text>No users found</Text>
+              </View>
     )
+  }
+
+  _handleChat = (friend) => {
+    this.props.navigation.navigate('ChatWith', { friend })
   }
 }
 
-export default FriendsScreen
+LoginScreen.propTypes = {
+  users: PropTypes.arrayOf(PropTypes.shape({
+    _id: PropTypes.string,
+    name: PropTypes.string
+  })),
+  user: PropTypes.object
+}
+
+export default connect(state => ({
+  users: state.users.list,
+  isFetching: state.users.isFetching,
+  user: state.auth.user
+}))(LoginScreen)
