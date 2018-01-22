@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
   StoryListStyle: {
     flex: 1,
     backgroundColor: 'white',
-    paddingTop: '8%',
-    paddingLeft: '7%',
-    paddingRight: '4%'
+    //paddingTop: '8%',
+    //paddingLeft: '7%',
+    //paddingRight: '4%'
   }
 });
