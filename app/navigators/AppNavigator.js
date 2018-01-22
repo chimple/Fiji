@@ -16,6 +16,7 @@ import StoryScreen from '../screens/StoryScreen'
 import HomeScreen from '../screens/HomeScreen'
 import LoginScreen from '../screens/LoginScreen'
 import ChatScreen from '../screens/ChatScreen'
+import CamPage from '../components/CamPage'
 
 const ChatNavigator = StackNavigator({
   Friends: {
@@ -82,6 +83,12 @@ export const AppNavigator = StackNavigator({
     navigationOptions: {
       headerTitle: 'Homez',
       headerStyle:{backgroundColor:'#19a4f2'}
+    }
+  },
+  CamPage: {
+    screen: CamPage,
+    navigationOptions: {
+      headerMode: 'none'
     }
   },
   Main: {
