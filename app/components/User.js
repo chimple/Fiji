@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 
-import { StyleSheet, TouchableOpacity, View, Text, FlatList, Image } from 'react-native'
+import { StyleSheet, TouchableOpacity,Dimensions, View, Text, FlatList, Image } from 'react-native'
 import PropTypes from 'prop-types'
 import { Buffer } from 'buffer'
 //import SvgUri from 'react-native-svg-uri'
@@ -12,7 +12,7 @@ export default class User extends PureComponent {
 
   render() {
     // let svg = Buffer.from(this.props.user.svg, 'base64').toString('utf8')
-    // console.log(svg)
+    // console.log(this.props.user)
     return (
       <TouchableOpacity onPress={ this._onPress } style={styles.TouchableStyle}>
         <View style={styles.ImageViewStyle}>
@@ -24,12 +24,6 @@ export default class User extends PureComponent {
             }}
           />
         </View>
-          {/*<SvgUri
-            width="200"
-            height="200"
-            // source={{ uri:'http://thenewcode.com/assets/images/thumbnails/homer-simpson.svg' }}
-            svgXmlData= { svg }
-          /> */}
         <View style={styles.TextViewStyle}>
           <Text style={styles.TextStyle}>
             {this.props.user.name}
@@ -47,37 +41,40 @@ User.propTypes = {
 
 const styles = StyleSheet.create({
   ImageViewStyle:{
-    //backgroundColor:'white', 
+    // flex:1,
+    // backgroundColor:'red',
+    // width: Dimensions.get('window').width * 0.24,
+    // height: Dimensions.get('window').width * 0.24, 
     flex:3, 
     alignItems:'center', 
-    padding:'4%'
+    // padding:'4%'
   },
   ImageStyle:{
-    width: '100%',
-    height: '100%',
-    //resizeMode: Image.resizeMode.contain,
-    borderRadius:60,
-    //borderColor:'black',
-    borderWidth:2
+    // flex:1,
+    width: Dimensions.get('window').width * 0.24,
+    height: Dimensions.get('window').width * 0.24,
+    borderRadius: Dimensions.get('window').width * 0.12,
+    // marginTop: Dimensions.get('window').width * 0.02,
+    // marginLeft: Dimensions.get('window').width * 0.04
   },
   TextViewStyle:{
     flex:1,
     alignItems:'center',
-    justifyContent:'center', 
-    //backgroundColor:'grey'
+    justifyContent:'center',
   },
   TextStyle:{
     fontWeight:'bold', 
-    fontSize:20, 
+    fontSize:15, 
     color:'black'
   },
   TouchableStyle:{
     flex:1,
-    height:140, 
-    width:120, 
-    //borderColor:'black',
-    //borderWidth:2, 
-    marginBottom:'5%',
-    marginTop:'8%'
+    // height:Dimensions.get('window').width * 0.3,
+    // width: Dimensions.get('window').width * 0.3,
+    // justifyContent: 'center',
+    // borderColor:'black',
+    // borderWidth:2, 
+    marginLeft:'7%',
+    marginTop:'10%'
   }
 });
