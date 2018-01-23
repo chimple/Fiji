@@ -3,12 +3,26 @@ import React, { PureComponent } from 'react'
 import { FlatList, View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import PropTypes from 'prop-types'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import GameTitle from './GameTitle'
 
 export default class GameCategoryList extends PureComponent {
 
 
 
   _keyExtractor = (item, index) => item._id
+
+  _renderItem1 = ({item}) => (
+    /* <TouchableOpacity style={styles.EachGameViewStyle}>
+    </TouchableOpacity>
+    */
+    
+      <GameTitle
+      title={item}
+      onPressItem={this.props.onPressItem}
+      />
+    
+     
+  )
 
   _renderItem = ({item}) => (
     /*<Text>
@@ -23,16 +37,13 @@ export default class GameCategoryList extends PureComponent {
             <Icon name="keyboard-arrow-left" color="white" size={35} style={styles.IconStyle} onPress={this._scrollToForwardIndex} />
           </View>
           <View style={{ flex:12 }}>               
-          <FlatList
-          showsHorizontalScrollIndicator={false}
-          horizontal={true}
-          data={item.games}
-          keyExtractor={this._keyExtractor}
-          renderItem={({item, index}) => (
-              <TouchableOpacity style={styles.EachGameViewStyle}/>
-            
-          )}
-          />
+            <FlatList
+            showsHorizontalScrollIndicator={false}
+            horizontal={true}
+            data={item.games}
+            keyExtractor={this._keyExtractor}
+            renderItem={ this._renderItem1 }
+            />
           </View>
           <View style={styles.IconViewStyle}>
             <Icon name="keyboard-arrow-right" color="white" size={35} style={styles.IconStyle} onPress={this._scrollToBackwardIndex} />
@@ -46,7 +57,6 @@ export default class GameCategoryList extends PureComponent {
     return (
       <View style={styles.GameCategoryListStyle}>
       <FlatList
-        //contentContainerStyle={{flex:1}}
         showsVerticalScrollIndicator={false}
         data={this.props.games}
         keyExtractor={this._keyExtractor}
@@ -114,7 +124,7 @@ const styles = StyleSheet.create({
     paddingRight:'2%',
     paddingLeft:'2%'
    },*/
-  EachGameViewStyle:{
+  /*EachGameViewStyle:{
     //borderColor:'black',  
     //borderWidth:1,
     //justifyContent:'center',
@@ -126,7 +136,7 @@ const styles = StyleSheet.create({
     marginTop:'8%',
     marginBottom:'8%',
     //paddingLeft:"4%"
-  },
+  },*/
   /*TextStyle:{
     fontSize:20,
     fontWeight:'bold',
