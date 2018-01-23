@@ -1,7 +1,7 @@
 import PouchDB from 'pouchdb-react-native';
 
 // these settings let us use cuids
-// see: https://gith  ub.com/ericelliott/cuid/issues/54
+// see: https://github.com/ericelliott/cuid/issues/54
 // global.navigator.mimeTypes = '';
 // global.navigator.userAgent = 'reactnative';    
 
@@ -26,10 +26,8 @@ import PouchDB from 'pouchdb-react-native';
 //   console.log(err);
 // })
 
- //localhost:5984 to run in local server
-// const remoteURL = 'http://localhost:5984/'
-const remoteURL = 'http://192.168.0.200:5984/'
-
+// const remoteURL = 'http://192.168.0.200:5984/'
+const remoteURL = 'http://localhost:5984/'
 const usersDB = new PouchDB('users')
 const remoteUsersDB = new PouchDB(remoteURL + 'users')
 const contentDB = new PouchDB('content')
