@@ -16,6 +16,8 @@ import StoryScreen from '../screens/StoryScreen'
 import HomeScreen from '../screens/HomeScreen'
 import LoginScreen from '../screens/LoginScreen'
 import ChatScreen from '../screens/ChatScreen'
+import GameFrontScreen from '../screens/GameFrontScreen'
+
 import CamPage from '../components/CamPage'
 
 const ChatNavigator = StackNavigator({
@@ -71,8 +73,8 @@ const MainNavigator = TabNavigator({
 }, {
   tabBarPosition:"bottom",
   tabBarOptions:{
-    labelStyle:{fontSize: 15, fontWeight:'bold', color:'white'},
-    style:{backgroundColor:'#e24076'},
+    labelStyle:{fontSize: 15, fontWeight:'bold', color:'black'},
+    style:{backgroundColor:'#19a4f2'},
     indicatorStyle:{backgroundColor:'white'}
   }
 })
@@ -105,7 +107,14 @@ export const AppNavigator = StackNavigator({
     screen: ChatScreen,
     navigationOptions: {
       headerTitle: 'Chat',
-      headerStyle:{backgroundColor: '#e24076'}
+      headerStyle:{backgroundColor: '#19a4f2'}
+    }
+  },
+  Game: {
+    screen: GameFrontScreen,
+    navigationOptions:{
+      headerTitle:'Game',
+      headerStyle:{backgroundColor: '#19a4f2'}
     }
   }
 })
