@@ -16,6 +16,7 @@ import StoryScreen from '../screens/StoryScreen'
 import HomeScreen from '../screens/HomeScreen'
 import LoginScreen from '../screens/LoginScreen'
 import ChatScreen from '../screens/ChatScreen'
+import CamPage from '../components/CamPage'
 
 const ChatNavigator = StackNavigator({
   Friends: {
@@ -25,13 +26,13 @@ const ChatNavigator = StackNavigator({
       headerStyle:{backgroundColor: '#19a4f2'}
     },
   },
-  ChatWith: {
+  /*ChatWith: {
     screen: ChatScreen,
     navigationOptions: {
       headerTitle: 'Chat',
       headerStyle:{backgroundColor: '#e24076'}
     }
-  }  
+  }*/  
 },{headerMode:'none'})
 
 const StoryNavigator = StackNavigator({
@@ -42,13 +43,13 @@ const StoryNavigator = StackNavigator({
       headerStyle:{backgroundColor:'#19a4f2'}
     },
   },
-  Story: {
+  /*Story: {
     screen: StoryScreen,
     navigationOptions: {
       headerTitle: 'Story',
       headerStyle:{backgroundColor:'#19a4f2'}
     }
-  }  
+  }*/  
 },{
   headerMode:'none'
 })
@@ -84,8 +85,28 @@ export const AppNavigator = StackNavigator({
       headerStyle:{backgroundColor:'#19a4f2'}
     }
   },
+  CamPage: {
+    screen: CamPage,
+    navigationOptions: {
+      headerMode: 'none'
+    }
+  },
   Main: {
     screen: MainNavigator
+  },
+  Story: {
+    screen: StoryScreen,
+    navigationOptions: {
+      headerTitle: 'Story',
+      headerStyle:{backgroundColor:'#19a4f2'}
+    }
+  },
+  ChatWith: {
+    screen: ChatScreen,
+    navigationOptions: {
+      headerTitle: 'Chat',
+      headerStyle:{backgroundColor: '#e24076'}
+    }
   }
 })
 
