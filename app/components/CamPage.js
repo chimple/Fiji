@@ -21,7 +21,7 @@ class CamPage extends Component {
 
     state = {
             name: 'kkkk',
-            image: 'this ta suhas'
+            image: ''
     }
 
     onBarCodeRead(e) {
@@ -32,7 +32,11 @@ class CamPage extends Component {
     }
 
     sendData(data){
-        this.props.dispatch(addUser(data))
+        this.setState({ image: data })
+        if(this.state.image !== ''){
+            console.log('this is image value'+data)
+            this.props.dispatch(addUser(this.state))
+       }
     }
 
     // takePicture() {
@@ -49,15 +53,13 @@ class CamPage extends Component {
           .then((data) => {
             let base64Img = data.path;
             RNFS.readFile(Platform.OS === 'android'? base64Img.substring(7): base64Img, "base64")  //substring(7) -> to remove the file://
-             .then(res => this.setState({ image: res }))
-             .then(this.sendData(this.state))
+             .then(res =>  this.sendData(res))
              .catch(err => console.error(err))
-             
            })
      }
 
     render() {
-        console.log("camera is working"+this.state.uri);
+        // console.log("camera is working"+this.state.uri);
         return (
             <View style={{ flex: 1, justifyContent: 'space-around' }}>
                 <View style={styles.container}>
