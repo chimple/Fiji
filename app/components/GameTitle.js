@@ -12,11 +12,7 @@ export default class GameTitle extends PureComponent{
     render(){
         return(
         <TouchableOpacity onPress={this._onPress}  >
-            <SvgUri
-            width={85}  
-            height={85}
-            source={require('../../Image/Tap_next.svg')}
-            />
+            <Text>{this.props.title.name}</Text>
         </TouchableOpacity>
         )
     }
