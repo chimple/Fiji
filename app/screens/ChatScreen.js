@@ -16,7 +16,7 @@ class ChatScreen extends Component {
   }
 
   _onPress = (message) => {
-    if(message !== null)
+    // if(message !== null)
     this.props.dispatch(sendMessage(this.props.navigation.state.params.friend, message))
   }
 
