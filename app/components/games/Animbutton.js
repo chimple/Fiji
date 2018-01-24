@@ -12,6 +12,8 @@ class Animbutton extends Component {
        status: false
      };
    }
+
+   
    funcOnPress() {
      this.props.funcOnPress(!this.state.status);
      this.setState({ status: !this.state.status });
