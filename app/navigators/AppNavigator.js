@@ -17,6 +17,8 @@ import HomeScreen from '../screens/HomeScreen'
 import LoginScreen from '../screens/LoginScreen'
 import ChatScreen from '../screens/ChatScreen'
 import GameFrontScreen from '../screens/GameFrontScreen'
+import multipleChoiceHome from '../screens/multipleChoiceHome';
+import singlePlay from '../screens/singlePlay';
 import ReflexScreen from '../screens/ReflexScreen'
 import MemoryMatchingScreen from '../screens/MemoryMatchingScreen'
 import TapHomeScreen from '../screens/TapHomeScreen'
@@ -34,7 +36,7 @@ const CamNavigator = StackNavigator({
     }
   }
 }, {headerMode:'none'}) 
-
+  //
 const ChatNavigator = StackNavigator({
   Friends: {
     screen: FriendsScreen,
@@ -143,6 +145,15 @@ export const AppNavigator = StackNavigator({
     screen: WordScreen
   },
 })
+
+export const multipleChoice = StackNavigator({
+  multipleChoiceHome: { screen: multipleChoiceHome },
+  singlePlay: { screen: singlePlay },
+},
+{
+  headerMode: 'none'
+});
+
 
 const AppWithNavigationState = ({ dispatch, nav }) => (
   <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />
