@@ -6,7 +6,6 @@ export default class TapHome extends Component {
   
   constructor(){
     super();
-    let i = 10;
     this.state={
     // This is our Default number value
     numberHolder : 4,
@@ -35,13 +34,13 @@ export default class TapHome extends Component {
 
  render() {
     const { container, circle, text, subText} = styles;
-    const {count} = this.state
+    const {count, numberHolder} = this.state
 
     return (
       <View style={container} >
         <View style={circle}>
           <View>
-            <Text style={text}>{i}</Text>
+            <Text style={text}>{numberHolder}</Text>
           </View>
         </View> 
         <Text style={subText} onPress={this.GenerateRandomNumber}>{count}</Text>

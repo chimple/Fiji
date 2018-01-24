@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Animated
 } from 'react-native';
-import ButtonFlip from '../../components/games/ButtonFlip';
+import ButtonFlip from '../components/games/ButtonFlip';
 
 export default class MemoryMatchingScreen extends Component {
   _renderMatrix() {
@@ -15,7 +15,7 @@ export default class MemoryMatchingScreen extends Component {
     for(let i=0; i<4; i++)
     { let inputRow = [];
       for(let j=0; j<3; j++){
-        inputRow.push(<View><Animatedbasic/></View>);
+        inputRow.push(<View><ButtonFlip/></View>);
       }
     array.push(<View style={styles.matrixContainer}>{inputRow}</View>)
     }
