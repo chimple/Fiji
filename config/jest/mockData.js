@@ -17,6 +17,18 @@ export const games = contentJson['docs'].filter(function (doc) {
   return doc._id.startsWith('game:')
 })
 
+export const gameThemeData = contentJson['docs'].filter(function (doc) {
+  return doc._id.startsWith('gametheme:')
+})
+
+export const stickersData = contentJson['docs'].filter(function (doc) {
+  return doc._id.startsWith('sticker:caterpillar:')
+})
+
+export const stickerPacksData = contentJson['docs'].filter(function (doc) {
+  return doc._id.startsWith('sticker-pack:')
+})
+
 export const story_alice_in_wonderland = contentJson['docs'].filter(function (doc) {
   return doc._id == 'story:alice-in-wonderland'
 })[0]
