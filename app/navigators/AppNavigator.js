@@ -17,13 +17,14 @@ import HomeScreen from '../screens/HomeScreen'
 import LoginScreen from '../screens/LoginScreen'
 import ChatScreen from '../screens/ChatScreen'
 import GameFrontScreen from '../screens/GameFrontScreen'
-import multipleChoiceHome from '../screens/multipleChoiceHome';
-import singlePlay from '../screens/singlePlay';
+import multipleChoiceHome from '../screens/multipleChoiceHome'
+import SinglePlay from '../screens/SinglePlay'
 import ReflexScreen from '../screens/ReflexScreen'
 import MemoryMatchingScreen from '../screens/MemoryMatchingScreen'
 import TapHomeScreen from '../screens/TapHomeScreen'
 import TapWrongScreen from '../screens/TapWrongScreen'
 import WordScreen from '../screens/WordScreen' 
+import ConnectDotsScreen from '../screens/ConnectDotsScreen'
 
 import CamPage from '../components/CamPage'
 
@@ -140,19 +141,21 @@ export const AppNavigator = StackNavigator({
   Game3: {
     screen: TapWrongScreen
   },
-  
   Game4: {
     screen: WordScreen
   },
+  Game5: {
+    screen: ConnectDotsScreen
+  },
+  Game6: {
+    screen: multipleChoiceHome
+  },
+  Game7:{
+    screen: SinglePlay
+  }
 })
 
-export const multipleChoice = StackNavigator({
-  multipleChoiceHome: { screen: multipleChoiceHome },
-  singlePlay: { screen: singlePlay },
-},
-{
-  headerMode: 'none'
-});
+
 
 
 const AppWithNavigationState = ({ dispatch, nav }) => (
