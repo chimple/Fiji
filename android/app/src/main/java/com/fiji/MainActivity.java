@@ -1,4 +1,5 @@
 package com.fiji;
+import com.rnfs.RNFSPackage;
 
 import com.facebook.react.ReactActivity;
 

@@ -16,6 +16,19 @@ import StoryScreen from '../screens/StoryScreen'
 import HomeScreen from '../screens/HomeScreen'
 import LoginScreen from '../screens/LoginScreen'
 import ChatScreen from '../screens/ChatScreen'
+import GameFrontScreen from '../screens/GameFrontScreen'
+
+import CamPage from '../components/CamPage'
+
+const CamNavigator = StackNavigator({
+  Cam: {
+    screen: CamPage,
+    navigationOptions:{
+      headerTitle: 'Take photo',
+      headerStyle:{ backgroundColor:'red'}
+    }
+  }
+}, {headerMode:'none'}) 
 
 const ChatNavigator = StackNavigator({
   Friends: {
@@ -25,13 +38,13 @@ const ChatNavigator = StackNavigator({
       headerStyle:{backgroundColor: '#19a4f2'}
     },
   },
-  ChatWith: {
+  /*ChatWith: {
     screen: ChatScreen,
     navigationOptions: {
       headerTitle: 'Chat',
-      headerStyle:{backgroundColor: '#19a4f2'}
+      headerStyle:{backgroundColor: '#e24076'}
     }
-  }  
+  }*/  
 },{headerMode:'none'})
 
 const StoryNavigator = StackNavigator({
@@ -42,13 +55,13 @@ const StoryNavigator = StackNavigator({
       headerStyle:{backgroundColor:'#19a4f2'}
     },
   },
-  Story: {
+  /*Story: {
     screen: StoryScreen,
     navigationOptions: {
       headerTitle: 'Story',
       headerStyle:{backgroundColor:'#19a4f2'}
     }
-  }  
+  }*/  
 },{
   headerMode:'none'
 })
@@ -84,9 +97,48 @@ export const AppNavigator = StackNavigator({
       headerStyle:{backgroundColor:'#19a4f2'}
     }
   },
+  CamPage: {
+    screen: CamNavigator
+  },
   Main: {
     screen: MainNavigator
-  }
+  },
+  Story: {
+    screen: StoryScreen,
+    navigationOptions: {
+      headerTitle: 'Story',
+      headerStyle:{backgroundColor:'#19a4f2'}
+    }
+  },
+  ChatWith: {
+    screen: ChatScreen,
+    navigationOptions: {
+      headerTitle: 'Chat',
+      headerStyle:{backgroundColor: '#19a4f2'}
+    }
+  },
+  Game: {
+    screen: GameFrontScreen,
+    navigationOptions:{
+      headerTitle:'Game',
+      headerStyle:{backgroundColor: '#19a4f2'}
+    }
+  },
+  /*Game1: {
+    screen: Game1
+  },
+  Game2: {
+    screen: Game2
+  },
+  Game3: {
+    screen: Game3
+  },
+  Game4: {
+    screen: Game4
+  },
+  Game5: {
+    screen: Game5
+  },*/
 })
 
 const AppWithNavigationState = ({ dispatch, nav }) => (
