@@ -31,7 +31,7 @@ const CamNavigator = StackNavigator({
     }
   }
 }, {headerMode:'none'}) 
-
+  //
 const ChatNavigator = StackNavigator({
   Friends: {
     screen: FriendsScreen,

@@ -7,6 +7,8 @@ import { Icon } from 'react-native-elements';
 const HeaderMCQ = (props) => {
   const { viewStyle, leftStyle, centerStyle, rightStyle } = styles;
 
+
+  
   return (
     <View style={viewStyle}>
       
