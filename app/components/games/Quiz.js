@@ -5,7 +5,7 @@ import {
     ScrollView,
     Dimensions
     } from 'react-native';
-import Animbutton from './animbutton';
+import Animbutton from './Animbutton';
 
 const { width } = Dimensions.get('window');
   let arrnew = [];

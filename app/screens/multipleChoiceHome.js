@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { HeaderMCQ } from '../components';
+import { HeaderMCQ } from '../components/games/';
 
 class multpleChoiceHome extends Component {
     render() {       
