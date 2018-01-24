@@ -21,6 +21,7 @@ import ReflexScreen from '../screens/ReflexScreen'
 import MemoryMatchingScreen from '../screens/MemoryMatchingScreen'
 import TapHomeScreen from '../screens/TapHomeScreen'
 import TapWrongScreen from '../screens/TapWrongScreen'
+import WordScreen from '../screens/WordScreen' 
 
 import CamPage from '../components/CamPage'
 
@@ -137,10 +138,10 @@ export const AppNavigator = StackNavigator({
   Game3: {
     screen: TapWrongScreen
   },
-  /*
+  
   Game4: {
-    screen: Game4
-  },*/
+    screen: WordScreen
+  },
 })
 
 const AppWithNavigationState = ({ dispatch, nav }) => (
