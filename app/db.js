@@ -26,15 +26,10 @@ import PouchDB from 'pouchdb-react-native';
 //   console.log(err);
 // })
 
-<<<<<<< HEAD
-// const remoteURL = 'http://192.168.0.200:5984/'
-const remoteURL = 'http://localhost:5984/'
-=======
  //localhost:5984 to run in local server
-//const remoteURL = 'http://localhost:5984/'
-const remoteURL = 'http://192.168.0.200:5984/'
+const remoteURL = 'http://localhost:5984/'
+//const remoteURL = 'http://192.168.0.200:5984/'
 
->>>>>>> master
 const usersDB = new PouchDB('users')
 const remoteUsersDB = new PouchDB(remoteURL + 'users')
 const contentDB = new PouchDB('content')

@@ -17,6 +17,8 @@ import HomeScreen from '../screens/HomeScreen'
 import LoginScreen from '../screens/LoginScreen'
 import ChatScreen from '../screens/ChatScreen'
 import GameFrontScreen from '../screens/GameFrontScreen'
+import multipleChoiceHome from '../screens/multipleChoiceHome';
+import singlePlay from '../screens/singlePlay';
 
 import CamPage from '../components/CamPage'
 
@@ -118,6 +120,15 @@ export const AppNavigator = StackNavigator({
     }
   }
 })
+
+export const multipleChoice = StackNavigator({
+  multipleChoiceHome: { screen: multipleChoiceHome },
+  singlePlay: { screen: singlePlay },
+},
+{
+  headerMode: 'none'
+});
+
 
 const AppWithNavigationState = ({ dispatch, nav }) => (
   <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />
