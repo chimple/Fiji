@@ -5,7 +5,6 @@ import android.app.Application;
 import com.facebook.react.ReactApplication;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.rnfs.RNFSPackage;
-import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.horcrux.svg.SvgPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.zmxv.RNSound.RNSoundPackage;
