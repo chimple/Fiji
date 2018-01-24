@@ -3,6 +3,11 @@ package com.fiji;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+<<<<<<< HEAD
+=======
+import com.lwansbrough.RCTCamera.RCTCameraPackage;
+import com.rnfs.RNFSPackage;
+>>>>>>> master
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.rnfs.RNFSPackage;
 import com.horcrux.svg.SvgPackage;
@@ -31,6 +36,10 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new RCTCameraPackage(),
             new RNFSPackage(),
+<<<<<<< HEAD
+=======
+            //new RCTCameraPackage(),
+>>>>>>> master
             new SvgPackage(),
            new VectorIconsPackage(),          
             new RNSoundPackage(),

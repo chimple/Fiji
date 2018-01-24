@@ -22,6 +22,16 @@ import singlePlay from '../screens/singlePlay';
 
 import CamPage from '../components/CamPage'
 
+const CamNavigator = StackNavigator({
+  Cam: {
+    screen: CamPage,
+    navigationOptions:{
+      headerTitle: 'Take photo',
+      headerStyle:{ backgroundColor:'red'}
+    }
+  }
+}, {headerMode:'none'}) 
+
 const ChatNavigator = StackNavigator({
   Friends: {
     screen: FriendsScreen,
@@ -90,10 +100,7 @@ export const AppNavigator = StackNavigator({
     }
   },
   CamPage: {
-    screen: CamPage,
-    navigationOptions: {
-      headerMode: 'none'
-    }
+    screen: CamNavigator
   },
   Main: {
     screen: MainNavigator
@@ -118,7 +125,22 @@ export const AppNavigator = StackNavigator({
       headerTitle:'Game',
       headerStyle:{backgroundColor: '#19a4f2'}
     }
-  }
+  },
+  /*Game1: {
+    screen: Game1
+  },
+  Game2: {
+    screen: Game2
+  },
+  Game3: {
+    screen: Game3
+  },
+  Game4: {
+    screen: Game4
+  },
+  Game5: {
+    screen: Game5
+  },*/
 })
 
 export const multipleChoice = StackNavigator({
