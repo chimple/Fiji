@@ -6,6 +6,7 @@ import auth from './auth'
 import chat from './chat'
 import story from './story'
 import game from './game'
+import user from './user'
 
 const rootReducer = combineReducers({
     users,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
     auth,
     chat,
     story,
-    game
+    game,
+    user
 })
 
 export default rootReducer
