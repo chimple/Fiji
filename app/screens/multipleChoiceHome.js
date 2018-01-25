@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { HeaderMCQ } from '../components/games/';
 
 class multpleChoiceHome extends Component {
     render() {       
         return (
             <View style={{ backgroundColor: '#483d8b', flex: 1 }}>
-            <HeaderMCQ 
-            lefticon="add-circle-outline" 
-            centericon="favorite-border" 
-            righticon="volume-up" 
-            />
 
             <View>
                 <Text style={styles.midTextStyle}>Welcome</Text>

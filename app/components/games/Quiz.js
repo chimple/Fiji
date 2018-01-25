@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import {
-    Text,
-    View,
-    ScrollView,
-    Dimensions
-    } from 'react-native';
+  Text,
+  View,
+  Dimensions,
+  ScrollView,
+} from 'react-native';
 import Animbutton from './Animbutton';
 
 const { width } = Dimensions.get('window');
-  let arrnew = [];
 
+let arrnew = [];
 
-  const jsonData = { quiz: {
+const jsonData = { quiz: {
     quiz1: {
       question1: {
         correctoption: 'option1',
@@ -46,7 +46,7 @@ const { width } = Dimensions.get('window');
         question: 'Q'
       },
       question5: {
-        correctoption: 'option3',
+        correctoption: 'option2',
         options: {
             option1: 'H',
             option2: 'S'
@@ -56,8 +56,8 @@ const { width } = Dimensions.get('window');
     }
   }
   };
-
-class Quiz extends Component {
+  
+  export default class Quiz extends Component {
     constructor(props) {
       super(props);
       this.qno = 0;
@@ -70,7 +70,16 @@ class Quiz extends Component {
         options: arrnew[this.qno].options,
         correctoption: arrnew[this.qno].correctoption,
         countCheck: 0
-      };   
+      };
+    }
+
+    prev() {
+      if (this.qno > 0) {
+        this.qno--;
+        this.setState({ question: arrnew[this.qno].question, 
+          options: arrnew[this.qno].options, 
+          correctoption: arrnew[this.qno].correctoption });
+      }
     }
 
     next() {
@@ -78,16 +87,15 @@ class Quiz extends Component {
         this.qno++;
    
         this.setState({ countCheck: 0, 
-            question: arrnew[this.qno].question, 
-            options: arrnew[this.qno].options, 
-            correctoption: arrnew[this.qno].correctoption
-        });
-      } else {        
+          question: arrnew[this.qno].question, 
+          options: arrnew[this.qno].options, 
+          correctoption: arrnew[this.qno].correctoption });
+      } else {
         this.props.quizFinish(this.score * 20);
        }
     }
-    
-    funcanswer(status, ans) {   
+
+    _answer(status, ans) {
       if (status === true) {
           const count = this.state.countCheck + 1;
           this.setState({ countCheck: count });
@@ -101,27 +109,23 @@ class Quiz extends Component {
           if (this.state.countCheck < 1 || ans === this.state.correctoption) {
           this.score -= 1;
          }
-        }   
+        }
     }
-
+    
     render() {
-      const dangthis = this;
+      const _this = this;
       const currentOptions = this.state.options;
       const options = Object.keys(currentOptions).map((k) => {
-        return (
-            <View 
-            key={k} 
-            style={{ padding: 10 }}
-            >
+        return (<View key={k} style={{ margin: 10 }}>
    
           <Animbutton 
-          countCheck={dangthis.state.countCheck} 
-          onColor={'#483d8b'} 
-          effect={'tada'} 
-          funcOnPress={(status) => dangthis.funcanswer(status, k)} 
+          countCheck={_this.state.countCheck} 
+          onColor={'green'} 
+          effect={k === this.state.correctoption ? 'tada' : 'shake'} 
+          _onPress={(status) => _this._answer(status, k)} 
           text={currentOptions[k]} 
           />
-
+   
         </View>);
       });
    
@@ -131,10 +135,9 @@ class Quiz extends Component {
    
         <View 
         style={{ flex: 1, 
-            flexDirection: 'column', 
-            justifyContent: 'space-between', 
-            alignItems: 'center', 
-            }}
+        flexDirection: 'column', 
+        justifyContent: 'space-between', 
+        alignItems: 'center', }}
         >
    
         <View style={styles.oval} >
@@ -142,11 +145,10 @@ class Quiz extends Component {
             {this.state.question}
           </Text>
        </View>
-
-          <View style={{ padding: 10, flexDirection: 'row' }}>
+          <View style={{ flexDirection: 'row' }}>
           { options }
           </View>
-
+          
           </View>
         </View>
         </ScrollView>
@@ -158,22 +160,17 @@ class Quiz extends Component {
    
     oval: {
     width: width * 0.5,
-    padding: 20,
     borderRadius: 20,
-    backgroundColor: '#483d8b',
-    justifyContent: 'center',
-    alignItems: 'center'
+    backgroundColor: '#483d8b'
     },
     container: {
       flex: 1,
-      alignItems: 'center',
-      padding: 120
+      alignItems: 'center'
     },
     welcome: {
-      fontSize: 65,
+      fontSize: 20,
       margin: 15,
-      color: '#fff'
-    },
+      color: 'white'
+    }
   };
 
-  export default Quiz;
