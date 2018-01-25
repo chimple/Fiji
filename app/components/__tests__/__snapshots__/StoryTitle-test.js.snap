@@ -28,9 +28,11 @@ exports[`renders correctly 1`] = `
       "borderWidth": 2,
       "flex": 1,
       "height": 140,
-      "margin": "2%",
+      "marginBottom": "12%",
+      "marginHorizontal": "5%",
+      "marginTop": "20%",
       "opacity": 1,
-      "width": 170,
+      "width": 105,
     }
   }
   testID={undefined}
@@ -39,12 +41,13 @@ exports[`renders correctly 1`] = `
   <View
     style={
       Object {
-        "alignItems": "center",
-        "backgroundColor": "#d80463",
+        "backgroundColor": "#19a4f2",
         "borderTopLeftRadius": 30,
         "borderTopRightRadius": 30,
         "flex": 2,
-        "justifyContent": "center",
+        "flexDirection": "row",
+        "flexWrap": "wrap",
+        "justifyContent": "flex-start",
         "padding": "1%",
       }
     }
@@ -81,7 +84,7 @@ exports[`renders correctly 1`] = `
           "borderRadius": 60,
           "borderWidth": 2,
           "height": "100%",
-          "width": "80%",
+          "width": "100%",
         }
       }
     />

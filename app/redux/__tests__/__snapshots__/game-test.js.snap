@@ -15,7 +15,7 @@ Object {
 exports[`creates a FETCH_GAME_THEME_SUCCESS action 1`] = `
 Object {
   "theme": Object {
-    "_id": "gametheme:xyz1",
+    "_id": "gametheme:memory-matching",
     "sets": Array [
       Object {
         "_id": "set:letters",
@@ -54,14 +54,14 @@ exports[`creates a FETCH_GAMES_SUCCESS action 1`] = `
 Object {
   "games": Array [
     Object {
-      "_id": "game:xyz1",
-      "category": "listening",
-      "name": "Xyz1",
+      "_id": "game:memory-matching",
+      "category": "Read",
+      "name": "Memory Matching",
     },
     Object {
-      "_id": "game:xyz2",
-      "category": "listening",
-      "name": "Xyz2",
+      "_id": "game:tap-home",
+      "category": "Read",
+      "name": "Tap Home",
     },
     Object {
       "_id": "game:xyz3",
@@ -140,6 +140,7 @@ Object {
 
 exports[`handles FETCH_GAME_THEME_FAILURE action 1`] = `
 Object {
+  "data": Array [],
   "games": Array [],
   "isFetching": false,
   "theme": Object {},
@@ -148,6 +149,7 @@ Object {
 
 exports[`handles FETCH_GAME_THEME_REQUEST action 1`] = `
 Object {
+  "data": Array [],
   "games": Array [],
   "isFetching": true,
   "theme": Object {},
@@ -156,10 +158,11 @@ Object {
 
 exports[`handles FETCH_GAME_THEME_SUCCESS action 1`] = `
 Object {
+  "data": Array [],
   "games": Array [],
   "isFetching": false,
   "theme": Object {
-    "_id": "gametheme:xyz1",
+    "_id": "gametheme:memory-matching",
     "sets": Array [
       Object {
         "_id": "set:letters",
@@ -183,6 +186,7 @@ Object {
 
 exports[`handles FETCH_GAMES_FAILURE action 1`] = `
 Object {
+  "data": Array [],
   "games": Array [],
   "isFetching": false,
   "theme": Object {},
@@ -191,6 +195,7 @@ Object {
 
 exports[`handles FETCH_GAMES_REQUEST action 1`] = `
 Object {
+  "data": Array [],
   "games": Array [],
   "isFetching": true,
   "theme": Object {},
@@ -199,16 +204,17 @@ Object {
 
 exports[`handles FETCH_GAMES_SUCCESS action 1`] = `
 Object {
+  "data": Array [],
   "games": Array [
     Object {
-      "_id": "game:xyz1",
-      "category": "listening",
-      "name": "Xyz1",
+      "_id": "game:memory-matching",
+      "category": "Read",
+      "name": "Memory Matching",
     },
     Object {
-      "_id": "game:xyz2",
-      "category": "listening",
-      "name": "Xyz2",
+      "_id": "game:tap-home",
+      "category": "Read",
+      "name": "Tap Home",
     },
     Object {
       "_id": "game:xyz3",
@@ -293,7 +299,7 @@ Array [
   },
   Object {
     "theme": Object {
-      "_id": "gametheme:xyz1",
+      "_id": "gametheme:memory-matching",
       "sets": Array [
         Object {
           "_id": "set:letters",
@@ -325,19 +331,25 @@ Array [
   Object {
     "games": Array [
       Object {
+        "_id": "Read",
+        "category": "Read",
+        "games": Array [
+          Object {
+            "_id": "game:memory-matching",
+            "category": "Read",
+            "name": "Memory Matching",
+          },
+          Object {
+            "_id": "game:tap-home",
+            "category": "Read",
+            "name": "Tap Home",
+          },
+        ],
+      },
+      Object {
         "_id": "listening",
         "category": "listening",
         "games": Array [
-          Object {
-            "_id": "game:xyz1",
-            "category": "listening",
-            "name": "Xyz1",
-          },
-          Object {
-            "_id": "game:xyz2",
-            "category": "listening",
-            "name": "Xyz2",
-          },
           Object {
             "_id": "game:xyz3",
             "category": "listening",
@@ -436,6 +448,7 @@ Array [
 
 exports[`returns the same state on an unhandled action 1`] = `
 Object {
+  "data": Array [],
   "games": Array [],
   "isFetching": false,
   "theme": Object {},

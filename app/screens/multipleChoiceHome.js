@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
-class multpleChoiceHome extends Component {
+class multipleChoiceHome extends Component {
     render() {       
         return (
             <View style={{ backgroundColor: '#483d8b', flex: 1 }}>
@@ -20,7 +20,7 @@ class multpleChoiceHome extends Component {
             </View>
             
             <TouchableOpacity 
-            onPress={() => this.props.navigation.navigate('singlePlay')} 
+            onPress={() => this.props.navigation.navigate('Game7')} 
             >
             <Text style={styles.endButtonStyle}>Single player</Text>
             </TouchableOpacity>

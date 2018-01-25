@@ -8,7 +8,7 @@ import {
 import { Icon } from 'react-native-elements';
 import Quiz from './Quiz';
 
-export default class singlePlay extends Component {
+export default class SinglePlay extends Component {
   constructor(props) {
     super(props);
     this.state = {
