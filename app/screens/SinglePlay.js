@@ -9,7 +9,7 @@ import {
   import { Icon } from 'react-native-elements';
   import Quiz from '../components/games/Quiz';
 
-class singlePlay extends Component {
+class SinglePlay extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -124,4 +124,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default singlePlay;
+export default SinglePlay;

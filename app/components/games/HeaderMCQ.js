@@ -49,4 +49,4 @@ const styles = {
   }
 };
 // Make the component available to other parts of the App
-export { HeaderMCQ };
+export default HeaderMCQ ;
