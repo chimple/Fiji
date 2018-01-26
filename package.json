@@ -7,6 +7,9 @@
     "test": "jest"
   },
   "dependencies": {
+    "appcenter": "^1.1.0",
+    "appcenter-analytics": "^1.1.0",
+    "appcenter-crashes": "^1.1.0",
     "buffer": "^5.0.8",
     "cuid": "^2.0.1",
     "jest-cli": "^22.0.6",
