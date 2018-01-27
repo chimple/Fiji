@@ -1,5 +1,6 @@
 import PouchDB from 'pouchdb-react-native';
 import { receiveMessage } from './chat';
+import { remoteURL } from '../db';
 
 const SYNC_USER_BEGIN = 'Fiji/auth/SYNC_USER_BEGIN'
 
@@ -27,7 +28,7 @@ export const syncUserBegin = (user) => ({
 export const syncUser = (user) => {
   return function(dispatch) {
     dispatch(syncUserBegin(user))
-    var sync = PouchDB.sync('user_' + user._id, 'http://192.168.0.200:5984/' + 'user_' + user._id, {
+    var sync = PouchDB.sync('user_' + user._id, remoteURL + 'user_' + user._id, {
       live: true,
       retry: true
     }).on('change', function (info) { // handle change

@@ -1,4 +1,5 @@
 import PouchDB from 'pouchdb-react-native';
+import { remoteURL } from '../db';
 
 const START_CHAT_REQUEST = 'Fiji/chat/START_CHAT_REQUEST'
 const START_CHAT_SUCCESS = 'Fiji/chat/START_CHAT_SUCCESS'
@@ -101,7 +102,7 @@ export const sendMessage = (friend, message) => {
         text: message
       }  
       friendDB.put(friendMsg).then(function (resp) {
-        friendDB.replicate.to('http://192.168.0.200:5984/' + 'user_' + friend._id).then(function (result) {
+        friendDB.replicate.to(remoteURL + 'user_' + friend._id).then(function (result) {
           console.log(result)
         }).catch(function (err) {
           console.log(err)
