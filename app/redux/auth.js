@@ -8,7 +8,7 @@ const initialState = {
   user: {}
 }
 
-export default reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch(action.type) {
     case SYNC_USER_BEGIN:
       return {
@@ -56,3 +56,5 @@ export const syncUser = (user) => {
     //sync.cancel(); //TODO: when user logs out
   }
 }
+
+export default reducer

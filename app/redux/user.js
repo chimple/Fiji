@@ -10,7 +10,7 @@ export const initialState = {
   error: ''
 }
 
-export default reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch(action.type) {
     case ADD_USER_REQUEST:
       return {
@@ -68,3 +68,5 @@ export const addUser = (user) => async(dispatch) => {
     dispatch(addUserFailure(error))
   }
 }
+
+export default reducer

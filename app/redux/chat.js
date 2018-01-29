@@ -13,7 +13,7 @@ const initialState = {
   friend: {}
 }
 
-export default reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch(action.type) {
     case START_CHAT_REQUEST:
       return Object.assign({}, state, {
@@ -119,3 +119,5 @@ export const receiveMessage = (message) => {
     }
   }
 }
+
+export default reducer
