@@ -74,7 +74,7 @@ export default class SinglePlay extends Component {
            </View>
  
        </View> : <Quiz quizFinish={(score) => this._quizFinish(score)} /> }
- 
+
       </View>
     );
   }

@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import Animbutton from './Animbutton';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 let arrnew = [];
 
@@ -116,11 +116,11 @@ const jsonData = { quiz: {
       const _this = this;
       const currentOptions = this.state.options;
       const options = Object.keys(currentOptions).map((k) => {
-        return (<View key={k} style={{ margin: 10 }}>
+        return (<View key={k} style={{ alignItems: 'center', justifyContent: 'center', margin: 10 }}>
    
           <Animbutton 
           countCheck={_this.state.countCheck} 
-          onColor={'green'} 
+          onColor={'#483d8b'} 
           effect={k === this.state.correctoption ? 'tada' : 'shake'} 
           _onPress={(status) => _this._answer(status, k)} 
           text={currentOptions[k]} 
@@ -131,24 +131,26 @@ const jsonData = { quiz: {
    
       return (
         <ScrollView style={{ backgroundColor: '#F5FCFF', paddingTop: 10 }}>
+
         <View style={styles.container}>
-   
+        <View style={{ height: height * 0.15 }}  />
+        
         <View 
         style={{ flex: 1, 
         flexDirection: 'column', 
-        justifyContent: 'space-between', 
+        justifyContent: 'center', 
         alignItems: 'center', }}
         >
-   
-        <View style={styles.oval} >
+        
+        <View style={styles.oval}>
           <Text style={styles.welcome}>
             {this.state.question}
           </Text>
        </View>
-          <View style={{ flexDirection: 'row' }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
           { options }
           </View>
-          
+           
           </View>
         </View>
         </ScrollView>
@@ -159,16 +161,19 @@ const jsonData = { quiz: {
   const styles = {
    
     oval: {
+    justifyContent: 'center',
+    alignItems: 'center',
     width: width * 0.5,
     borderRadius: 20,
     backgroundColor: '#483d8b'
     },
     container: {
       flex: 1,
-      alignItems: 'center'
+      alignContent: 'space-between'
     },
     welcome: {
-      fontSize: 20,
+      fontSize: 56,
+      fontWeight: 'bold',
       margin: 15,
       color: 'white'
     }
