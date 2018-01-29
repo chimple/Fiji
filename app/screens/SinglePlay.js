@@ -9,7 +9,11 @@ import { Icon } from 'react-native-elements';
 import Quiz from './Quiz';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 export default class singlePlay extends Component {
+=======
+export default class SinglePlay extends Component {
+>>>>>>> origin/Karan-Fiji
   constructor(props) {
     super(props);
     this.state = {
@@ -52,6 +56,7 @@ export default class singlePlay extends Component {
                   <Text style={styles.score}>You are the master</Text>
                   <Text style={styles.score}>Congrats you scored {score}% </Text>
                 </View>);
+<<<<<<< HEAD
 =======
 class SinglePlay extends Component {
     constructor(props) {
@@ -61,6 +66,8 @@ class SinglePlay extends Component {
             score: 0
         };
 >>>>>>> refs/remotes/origin/master
+=======
+>>>>>>> origin/Karan-Fiji
     }
   }
   render() {
@@ -133,9 +140,13 @@ const styles = {
         flex: 1
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 =======
 });
 
 export default SinglePlay;
 >>>>>>> refs/remotes/origin/master
+=======
+};
+>>>>>>> origin/Karan-Fiji
