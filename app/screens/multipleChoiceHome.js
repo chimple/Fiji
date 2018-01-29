@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-import HeaderMCQ  from '../components/games/HeaderMCQ';
->>>>>>> refs/remotes/origin/master
-=======
->>>>>>> origin/Karan-Fiji
 
 class multipleChoiceHome extends Component {
     render() {       
