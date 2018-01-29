@@ -9,7 +9,7 @@ import {
   Alert
 } from 'react-native';
 import Board from '../components/games/Board';
-import Board from '../components/games/Card';
+import Card from '../components/games/Card';
 
 export default class MemoryMatchingScreen extends Component {
   constructor(props) {
