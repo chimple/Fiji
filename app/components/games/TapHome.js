@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import Confirm from './Confirm';
 
 export default class TapHome extends Component {
-  
   
   constructor(){
     super();
@@ -10,11 +10,14 @@ export default class TapHome extends Component {
       // This is our Default number value
       numberHolder : 4, 
       counter : 0,
-      count :'',
+      count : '',
+      showModal: false
     }
   }
 
   componentDidMount() {
+
+    //This will start timer and will update text value
     setInterval(() => {
       let temp = this.state.count - this.state.numberHolder
       if((this.state.count - this.state.numberHolder) > 2){
@@ -28,9 +31,10 @@ export default class TapHome extends Component {
       else{
         this.setState({count: this.state.count + 1})
       }
-    }, 1000)
+    }, 2000)
   }
  
+  //This will generate random number and will check on tap condition
   GenerateRandomNumber=()=>
   {
     if( this.state.numberHolder == this.state.count ) {
@@ -45,12 +49,12 @@ export default class TapHome extends Component {
       if( RandomNumber == 1 ){
         this.setState({
           count: 0
-          })
+        })
       }
       if( RandomNumber == 2 ){
         this.setState({
           count: 0
-          })
+        })
       }
       this.setState({
       numberHolder : RandomNumber,
@@ -58,15 +62,25 @@ export default class TapHome extends Component {
     }
     else {
       this.setState({
-        numberHolder : 54,
-        count: 50
-        })
+       showModal: !this.state.showModal 
+      })
     }
+  }
+
+  onAccept() {
+
+  }
+
+  onDecline() {
+   this.setState({ showModal: false });
+   this.props.navigate('Game2');
   }
 
  render() {
     const { container, circle, text, subText} = styles;
     const {count, numberHolder} = this.state
+
+   // const {goBack} = this.props.navigation;
 
     return (
       <View style={container} >
@@ -76,10 +90,17 @@ export default class TapHome extends Component {
           </View>
         </View> 
         <Text style={subText} onPress={this.GenerateRandomNumber}>{count}</Text>
+        <Confirm
+          visible={this.state.showModal}
+          onAccept={this.onAccept.bind(this)}
+          onDecline={this.onDecline.bind(this)}
+        >
+          OPS! TOO LATE
+        </Confirm>
       </View>
     );
   }
-}
+}//End of class component
 
 const styles = {
   container: {
@@ -111,4 +132,4 @@ const styles = {
     alignSelf: 'center',
     marginTop:'10%'
   },
-};
+};//End of styles

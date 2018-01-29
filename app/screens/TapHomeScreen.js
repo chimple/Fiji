@@ -4,8 +4,9 @@ import TapHome from '../components/games/TapHome';
 
 export default class TapHomeScreen extends Component {
  render() {
+  const { navigate } = this.props.navigation;
     return (
-        <TapHome />
+        <TapHome navigate={navigate} />
     );
   }
 }//End of class component
