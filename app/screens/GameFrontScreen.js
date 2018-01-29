@@ -16,14 +16,14 @@ export default class GameFrontScreen extends PureComponent{
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Game3')} style={{backgroundColor:'yellow', flex:1, justifyContent:'center', alignItems:'center'}}>
                     <Text style={{color:'black', fontSize:40 , fontWeight:'bold'}}>TapWrongGame</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{backgroundColor:'orange', flex:1, justifyContent:'center', alignItems:'center'}}>
-                    <Text style={{color:'black', fontSize:40 , fontWeight:'bold'}}>none1</Text>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Game4')} style={{backgroundColor:'orange', flex:1, justifyContent:'center', alignItems:'center'}}>
+                    <Text style={{color:'black', fontSize:40 , fontWeight:'bold'}}>WordGame</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{backgroundColor:'green', flex:1, justifyContent:'center', alignItems:'center'}}>
-                    <Text style={{color:'black', fontSize:40 , fontWeight:'bold'}}>none2</Text>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Game5')} style={{backgroundColor:'green', flex:1, justifyContent:'center', alignItems:'center'}}>
+                    <Text style={{color:'black', fontSize:40 , fontWeight:'bold'}}>ConectdotsGame</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{backgroundColor:'skyblue', flex:1, justifyContent:'center', alignItems:'center'}}>
-                    <Text style={{color:'black', fontSize:40 , fontWeight:'bold'}}>none3</Text>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Game6')}  style={{backgroundColor:'skyblue', flex:1, justifyContent:'center', alignItems:'center'}}>
+                    <Text style={{color:'black', fontSize:40 , fontWeight:'bold'}}>MultipleChoiceGame</Text>
                 </TouchableOpacity>
             </View>
         )

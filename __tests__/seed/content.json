@@ -1,12 +1,12 @@
 {
   "docs": [
     {
-      "_id": "game:xyz1",
-      "name": "Xyz1",
-      "category": "listening"
+      "_id": "game:memory-matching",
+      "name": "Memory Matching",
+      "category": "Read"
     },
     {
-      "_id": "gametheme:xyz1",
+      "_id": "gametheme:memory-matching",
       "sets": [
         {
           "_id": "set:letters",
@@ -26,9 +26,9 @@
       ]
     },
     {
-      "_id": "game:xyz2",
-      "name": "Xyz2",
-      "category": "listening"
+      "_id": "game:tap-home",
+      "name": "Tap Home",
+      "category": "Read"
     },
     {
       "_id": "game:xyz3",

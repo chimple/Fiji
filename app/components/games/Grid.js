@@ -5,7 +5,6 @@ import {
   TouchableHighlight,
   TouchableWithoutFeedback
 } from 'react-native';
-import WordScreen from '../screens/WordScreen';
 
 export default class Grid extends Component {
     state = { show: false };

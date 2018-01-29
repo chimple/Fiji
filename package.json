@@ -7,6 +7,9 @@
     "test": "jest"
   },
   "dependencies": {
+    "appcenter": "^1.1.0",
+    "appcenter-analytics": "^1.1.0",
+    "appcenter-crashes": "^1.1.0",
     "buffer": "^5.0.8",
     "cuid": "^2.0.1",
     "jest-cli": "^22.0.6",
@@ -14,6 +17,7 @@
     "pouchdb-react-native": "^6.4.0",
     "react": "16.0.0",
     "react-native": "0.51.0",
+    "react-native-animatable": "^1.2.4",
     "react-native-camera": "^0.13.0",
     "react-native-elements": "^0.18.5",
     "react-native-fs": "^2.9.7",
