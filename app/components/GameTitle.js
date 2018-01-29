@@ -7,6 +7,7 @@ import PropTypes from 'prop-types'
 export default class GameTitle extends PureComponent{
     _onPress = () => {
         this.props.onPressItem(this.props.title)
+        //this.props.navigation.navigate('Game3', {title: this.props.title})
     }
 
     render(){

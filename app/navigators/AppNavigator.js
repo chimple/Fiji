@@ -17,9 +17,25 @@ import HomeScreen from '../screens/HomeScreen'
 import LoginScreen from '../screens/LoginScreen'
 import ChatScreen from '../screens/ChatScreen'
 import GameFrontScreen from '../screens/GameFrontScreen'
+import multipleChoiceHome from '../screens/multipleChoiceHome';
+import singlePlay from '../screens/singlePlay';
+import ReflexScreen from '../screens/ReflexScreen'
+import MemoryMatchingScreen from '../screens/MemoryMatchingScreen'
+import TapHomeScreen from '../screens/TapHomeScreen'
+import TapWrongScreen from '../screens/TapWrongScreen'
 
 import CamPage from '../components/CamPage'
 
+const CamNavigator = StackNavigator({
+  Cam: {
+    screen: CamPage,
+    navigationOptions:{
+      headerTitle: 'Take photo',
+      headerStyle:{ backgroundColor:'red'}
+    }
+  }
+}, {headerMode:'none'}) 
+  //
 const ChatNavigator = StackNavigator({
   Friends: {
     screen: FriendsScreen,
@@ -88,10 +104,7 @@ export const AppNavigator = StackNavigator({
     }
   },
   CamPage: {
-    screen: CamPage,
-    navigationOptions: {
-      headerMode: 'none'
-    }
+    screen: CamNavigator
   },
   Main: {
     screen: MainNavigator
@@ -116,8 +129,30 @@ export const AppNavigator = StackNavigator({
       headerTitle:'Game',
       headerStyle:{backgroundColor: '#19a4f2'}
     }
-  }
+  },
+  Game1: {
+    screen: MemoryMatchingScreen
+  },
+  Game2: {
+    screen: TapHomeScreen
+  },
+  Game3: {
+    screen: TapWrongScreen
+  },
+  /*
+  Game4: {
+    screen: Game4
+  },*/
 })
+
+export const multipleChoice = StackNavigator({
+  multipleChoiceHome: { screen: multipleChoiceHome },
+  singlePlay: { screen: singlePlay },
+},
+{
+  headerMode: 'none'
+});
+
 
 const AppWithNavigationState = ({ dispatch, nav }) => (
   <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />
