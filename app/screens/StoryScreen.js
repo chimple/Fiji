@@ -32,9 +32,9 @@ class StoryScreen extends Component {
       console.log("page length data : ", this.props.story.pages.length)
       console.log("this.state.page : ", this.state.page)
       if (this.props.story.pages.length - 1 > this.state.page) {
-        this.setState({ count: 0, page: this.state.page + 1 })
+        this.setState({ count: 1, page: this.state.page + 1 })
       } else {
-        this.setState({ count: 0, page: 0 })
+        this.setState({ count: 1, page: 0 })
         console.log(" Thank you , you already gone throw all pages ....")
       }
     }
@@ -147,7 +147,7 @@ const styles = {
     justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: '#9999ff',
-    height: 30,
+    height: 50,
     shadowColor: 'black',
     shadowOpacity: 0.9,
     position: 'relative',
@@ -165,9 +165,3 @@ export default connect(state => ({
   story: state.story.story,
   isFetching: state.story.isFetching,
 }))(StoryScreen)
-
-
-
-
-
-{/* //source={{ uri: this.props.story.pages[this.state.page].bg } */ }
