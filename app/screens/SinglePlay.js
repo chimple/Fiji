@@ -8,6 +8,7 @@ import {
 import { Icon } from 'react-native-elements';
 import Quiz from './Quiz';
 
+<<<<<<< HEAD
 export default class singlePlay extends Component {
   constructor(props) {
     super(props);
@@ -51,6 +52,15 @@ export default class singlePlay extends Component {
                   <Text style={styles.score}>You are the master</Text>
                   <Text style={styles.score}>Congrats you scored {score}% </Text>
                 </View>);
+=======
+class SinglePlay extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            quizFinish: false,
+            score: 0
+        };
+>>>>>>> refs/remotes/origin/master
     }
   }
   render() {
@@ -122,4 +132,10 @@ const styles = {
         fontWeight: 'bold',
         flex: 1
     }
+<<<<<<< HEAD
 };
+=======
+});
+
+export default SinglePlay;
+>>>>>>> refs/remotes/origin/master
