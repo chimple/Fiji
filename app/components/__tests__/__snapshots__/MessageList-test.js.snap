@@ -112,7 +112,7 @@ exports[`renders correctly 1`] = `
                 <View
                   style={
                     Object {
-                      "backgroundColor": "#edeeef",
+                      "backgroundColor": "#f2f2f2",
                       "borderRadius": 5,
                       "padding": 10,
                       "shadowColor": "#adef12",
@@ -173,7 +173,7 @@ exports[`renders correctly 1`] = `
                 <View
                   style={
                     Object {
-                      "backgroundColor": "#19a4f2",
+                      "backgroundColor": "#f45180",
                       "borderRadius": 5,
                       "padding": 10,
                       "shadowColor": "#3d3d3d",
@@ -192,7 +192,7 @@ exports[`renders correctly 1`] = `
                     ellipsizeMode="tail"
                     style={
                       Object {
-                        "color": "#202020",
+                        "color": "#ffffff",
                         "fontSize": 15,
                         "fontWeight": "600",
                       }
@@ -263,7 +263,7 @@ exports[`renders correctly 1`] = `
                 <View
                   style={
                     Object {
-                      "backgroundColor": "#edeeef",
+                      "backgroundColor": "#f2f2f2",
                       "borderRadius": 5,
                       "padding": 10,
                       "shadowColor": "#adef12",
@@ -324,7 +324,7 @@ exports[`renders correctly 1`] = `
                 <View
                   style={
                     Object {
-                      "backgroundColor": "#19a4f2",
+                      "backgroundColor": "#f45180",
                       "borderRadius": 5,
                       "padding": 10,
                       "shadowColor": "#3d3d3d",
@@ -343,7 +343,7 @@ exports[`renders correctly 1`] = `
                     ellipsizeMode="tail"
                     style={
                       Object {
-                        "color": "#202020",
+                        "color": "#ffffff",
                         "fontSize": 15,
                         "fontWeight": "600",
                       }
@@ -377,19 +377,17 @@ exports[`renders correctly 1`] = `
       style={
         Object {
           "alignItems": "flex-end",
-          "backgroundColor": "#fffa12",
-          "borderRadius": 30,
+          "backgroundColor": "#e3d0ca",
           "flexDirection": "row",
+          "height": 40,
           "justifyContent": "flex-end",
-          "margin": 10,
-          "padding": 10,
           "shadowColor": "#3d3d3d",
           "shadowOffset": Object {
             "height": 1,
           },
           "shadowOpacity": 0.5,
           "shadowRadius": 2,
-          "width": "90%",
+          "width": "100%",
         }
       }
     >
@@ -399,9 +397,8 @@ exports[`renders correctly 1`] = `
         clearButtonMode="while-editing"
         clearTextOnFocus={true}
         onChangeText={[Function]}
-        onEndEditing={[Function]}
         onSubmitEditing={[Function]}
-        placeholder="please type here"
+        placeholder="Start typing...."
         style={
           Object {
             "flex": 1,
@@ -434,20 +431,50 @@ exports[`renders correctly 1`] = `
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
-          onPress={[Function]}
-          source={
-            Object {
-              "uri": "https://d30y9cdsu7xlg0.cloudfront.net/png/1054386-200.png",
-            }
-          }
+        <View
+          onPress={undefined}
           style={
-            Object {
-              "height": 40,
-              "width": 40,
-            }
+            Array [
+              false,
+              false,
+              false,
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              },
+              undefined,
+            ]
           }
-        />
+          underlayColor="white"
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={false}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "color": "#900",
+                  "fontSize": 40,
+                },
+                Array [
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                  undefined,
+                ],
+                Object {
+                  "fontFamily": "Material Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+              ]
+            }
+          >
+            
+          </Text>
+        </View>
       </View>
     </View>
   </View>
@@ -461,27 +488,60 @@ exports[`renders no messages correctly 1`] = `
       Object {
         "backgroundColor": "#ffffff",
         "height": "100%",
-        "justifyContent": "flex-end",
       }
     }
   >
+    <RCTScrollView
+      data={Array []}
+      disableVirtualization={false}
+      getItem={[Function]}
+      getItemCount={[Function]}
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onContentSizeChange={[Function]}
+      onEndReachedThreshold={2}
+      onLayout={[Function]}
+      onMomentumScrollEnd={[Function]}
+      onScroll={[Function]}
+      onScrollBeginDrag={[Function]}
+      onScrollEndDrag={[Function]}
+      renderItem={[Function]}
+      scrollEnabled={true}
+      scrollEventThrottle={50}
+      stickyHeaderIndices={Array []}
+      style={
+        Object {
+          "transform": Array [
+            Object {
+              "scaleY": -1,
+            },
+          ],
+        }
+      }
+      updateCellsBatchingPeriod={50}
+      viewabilityConfigCallbackPairs={Array []}
+      windowSize={21}
+    >
+      <View />
+    </RCTScrollView>
     <View
       style={
         Object {
           "alignItems": "flex-end",
-          "backgroundColor": "#fffa12",
-          "borderRadius": 30,
+          "backgroundColor": "#e3d0ca",
           "flexDirection": "row",
+          "height": 40,
           "justifyContent": "flex-end",
-          "margin": 10,
-          "padding": 10,
           "shadowColor": "#3d3d3d",
           "shadowOffset": Object {
             "height": 1,
           },
           "shadowOpacity": 0.5,
           "shadowRadius": 2,
-          "width": "90%",
+          "width": "100%",
         }
       }
     >
@@ -489,8 +549,10 @@ exports[`renders no messages correctly 1`] = `
         allowFontScaling={true}
         blurOnSubmit={true}
         clearButtonMode="while-editing"
+        clearTextOnFocus={true}
         onChangeText={[Function]}
-        placeholder="please type here"
+        onSubmitEditing={[Function]}
+        placeholder="Start typing...."
         style={
           Object {
             "flex": 1,
@@ -523,20 +585,50 @@ exports[`renders no messages correctly 1`] = `
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
-          onPress={[Function]}
-          source={
-            Object {
-              "uri": "https://d30y9cdsu7xlg0.cloudfront.net/png/1054386-200.png",
-            }
-          }
+        <View
+          onPress={undefined}
           style={
-            Object {
-              "height": 40,
-              "width": 40,
-            }
+            Array [
+              false,
+              false,
+              false,
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              },
+              undefined,
+            ]
           }
-        />
+          underlayColor="white"
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={false}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "color": "#900",
+                  "fontSize": 40,
+                },
+                Array [
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                  undefined,
+                ],
+                Object {
+                  "fontFamily": "Material Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+              ]
+            }
+          >
+            
+          </Text>
+        </View>
       </View>
     </View>
   </View>

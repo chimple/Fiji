@@ -35,6 +35,8 @@
   "devDependencies": {
     "babel-jest": "22.0.4",
     "babel-preset-react-native": "4.0.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^22.0.6",
     "react-test-renderer": "16.0.0",
     "redux-mock-store": "^1.4.0"
@@ -49,6 +51,9 @@
     },
     "transformIgnorePatterns": [
       "node_modules/(?!react-native|react-navigation)/"
-    ]
+    ],
+    "moduleNameMapper": {
+      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "identity-obj-proxy"
+    }
   }
 }
