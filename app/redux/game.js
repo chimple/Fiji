@@ -142,7 +142,7 @@ export const fetchGames = () => async(dispatch, getState) => {
 export const fetchGameTheme = ( game_id ) => async(dispatch, getState) => {
   try {
     dispatch(fetchGameThemeRequest())
-    const theme = await contentDB.get('game_theme:' + game_id.substring(11))
+    const theme = await contentDB.get('gametheme:' + game_id.substring(5))
     console.log(theme)
     dispatch(fetchGameThemeSuccess(theme))
   } catch(error) {
