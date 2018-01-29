@@ -25,6 +25,9 @@ export default class GameFrontScreen extends PureComponent{
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Game6')}  style={{backgroundColor:'skyblue', flex:1, justifyContent:'center', alignItems:'center'}}>
                     <Text style={{color:'black', fontSize:40 , fontWeight:'bold'}}>MultipleChoiceGame</Text>
                 </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Reflex')}  style={{backgroundColor:'skyblue', flex:1, justifyContent:'center', alignItems:'center'}}>
+                    <Text style={{color:'black', fontSize:40 , fontWeight:'bold'}}>Reflex</Text>
+                </TouchableOpacity>
             </View>
         )
     }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Animated, Easing } from 'react-native';
+import { Text, View, StyleSheet, Animated, Easing, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types'
+import * as Animatable from 'react-native-animatable'
+import Tile from './Tile'
 
 const { width, height } = require('Dimensions').get('window')
 const SIZE = 4 // four-by-four grid
@@ -17,8 +19,13 @@ export default class ReflexBoard extends Component {
     for (let i = 0; i < tilt.length; i++) {
       tilt[i] = new Animated.Value(0);
     }
+    let letters = new Array(SIZE * SIZE)
+    for (let i = 0; i < letters.length; i++) {
+      letters[i] = props.data[i];
+    }
     this.state = {
-      tilt
+      tilt,
+      letters
     }
   }
 
@@ -35,16 +42,16 @@ export default class ReflexBoard extends Component {
     for (let row = 0; row < SIZE; row++) {
       for (let col = 0; col < SIZE; col++) {
         let id = row * SIZE + col
-        let letter = this.props.data[id]
+        let letter = this.state.letters[id]
         let tilt = this.state.tilt[id].interpolate({
           inputRange: [0, 1],
-          outputRange: ['0deg', '-30deg']
+          outputRange: [col * CELL_SIZE + CELL_PADDING, col * CELL_SIZE]
         })
         let style = {
-          left: col * CELL_SIZE + CELL_PADDING,
+          left: tilt,
           top: row * CELL_SIZE + CELL_PADDING,
-          transform: [{ perspective: CELL_SIZE * 8 },
-          { rotateX: tilt }]
+          // transform: [{ perspective: CELL_SIZE * 8 },
+          // { rotateX: tilt }]
         };
         result.push(this._renderTile(id, style, letter))
       }
@@ -53,20 +60,43 @@ export default class ReflexBoard extends Component {
   }
 
   _renderTile = (id, style, letter) => {
-    return <Animated.View key={id} style={[styles.tile, style]}
-      onStartShouldSetResponder={() => this._clickTile(id)}>
-      <Text style={styles.letter}>{letter}</Text>
-    </Animated.View>
+    return <Tile
+      key={id}
+      onPress={(status, view) => this._clickTile(id, status, view)}
+      trueTileColor="#333"
+      falseTileColor="#BEE1D2"
+      trueColor="#BEE1D2"
+      falseColor="#333"
+      text={letter}
+      tileStyle={[styles.tile, style]}
+      textStyle={[styles.letter]}
+    />
+    // return <Animated.View key={id} style={styles.tile}
+    //   onStartShouldSetResponder={() => this._clickTile(id)}>
+    //   <Text style={styles.letter}>{letter}</Text>
+    // </Animated.View>
   }
 
-  _clickTile = (id) => {
+  _clickTile = (id, status, view) => {
     let tilt = this.state.tilt[id]
     tilt.setValue(1) // mapped to -30 degrees
-    Animated.timing(tilt, {
+    Animated.spring(tilt, {
       toValue: 0, // mapped to 0 degrees (no tilt)
       duration: 250, // milliseconds
       easing: Easing.quad // quadratic easing function: (t) => t * t
     }).start()
+    this.setState((prevState, props) => {
+      console.log(prevState)
+      const newLetters = prevState.letters.map((value, index) => {
+        return index == id ? "1" : value
+      })
+      console.log(newLetters)
+      return {
+        tilt: prevState.tilt,
+        letters: newLetters
+      }
+    })
+    // view.rotate(800)
   }
 }
 
