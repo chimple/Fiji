@@ -34,7 +34,7 @@ const CamNavigator = StackNavigator({
     screen: CamPage,
     navigationOptions:{
       headerTitle: 'Take photo',
-      headerStyle:{ backgroundColor:'red'}
+      headerStyle:{ backgroundColor:'#19a4f2'}
     }
   }
 }, {headerMode:'none'}) 
