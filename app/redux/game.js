@@ -17,7 +17,7 @@ const initialState = {
   data: []
 }
 
-export default reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch(action.type) {
     case FETCH_GAMES_REQUEST:
       return {
@@ -123,15 +123,15 @@ export const fetchGames = () => async(dispatch, getState) => {
       include_docs: true})
     console.log(result)
     let categories = result.rows.reduce(function(grouped, item) { 
+      console.log(item.doc.category)
       let key = item.doc['category']
       grouped[key] = grouped[key] || []
       grouped[key].push(item.doc)
       return grouped
     }, {})
-    let categoryList = []
-    for ( category in categories ) {
-      categoryList.push({_id: category, category: category, games: categories[category]})
-    }
+    const categoryList = Object.keys(categories).map((category) => {
+      return {_id: category, category: category, games: categories[category]}
+    })
     dispatch(fetchGamesSuccess(categoryList))
   } catch(error) {
       console.log('fetchGames: ' + error)
@@ -142,7 +142,7 @@ export const fetchGames = () => async(dispatch, getState) => {
 export const fetchGameTheme = ( game_id ) => async(dispatch, getState) => {
   try {
     dispatch(fetchGameThemeRequest())
-    const theme = await contentDB.get('game_theme:' + game_id.substring(11))
+    const theme = await contentDB.get('gametheme:' + game_id.substring(5))
     console.log(theme)
     dispatch(fetchGameThemeSuccess(theme))
   } catch(error) {
@@ -164,3 +164,5 @@ export const fetchGameData = () => async(dispatch, getState) => {
       dispatch(fetchGameDataFailure())
   }
 }
+
+export default reducer
