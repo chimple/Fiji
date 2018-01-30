@@ -10,16 +10,20 @@ import {
   Image
 } from 'react-native';
 
-
-
 export default class Card extends Component {
   constructor(properties) {
         super(properties);
         this.state = {
             paired: false,
-            visible: false
+            visible: true
         };
     }
+
+  componentDidMount() {
+    setTimeout( () => {
+     this.setState({paired: false , visible: false});
+   },1500);
+ }
 
   componentWillReceiveProps (nextProps) {
       if (nextProps.cardCfg.hidden === true) {
@@ -87,7 +91,6 @@ export default class Card extends Component {
         this.props.onHide;
     }
 
-
   render() {
 
     const frontAnimatedStyle = {
@@ -111,10 +114,7 @@ export default class Card extends Component {
       }
 
     return (
-      <TouchableHighlight
-            onPress={this.onPress.bind(this)}
-            underlayColor="transparent"
-            activeOpacity={0.5}>
+      <TouchableHighlight onPress={this.onPress.bind(this)} underlayColor="transparent" activeOpacity={0.5}>
             <Animated.View style={[frontAnimatedStyle, cardStyles]}>
               <Image style={imageStyles} ref="image" source={{uri: this.props.img}} />
             </Animated.View>
@@ -155,5 +155,8 @@ const styles = StyleSheet.create({
   },
   cardVisible: {
     backgroundColor: '#fff'
+  },
+  cardText: {
+    fontSize: 36,
   }
 });
