@@ -27,6 +27,7 @@ import WordScreen from '../screens/WordScreen'
 import ConnectDotsScreen from '../screens/ConnectDotsScreen'
 
 import CamPage from '../components/CamPage'
+import GameScreen from '../screens/GameScreen';
 
 const CamNavigator = StackNavigator({
   Cam: {
@@ -152,6 +153,9 @@ export const AppNavigator = StackNavigator({
   },
   Game7:{
     screen: SinglePlay
+  },
+  Reflex:{
+    screen: GameScreen
   }
 })
 

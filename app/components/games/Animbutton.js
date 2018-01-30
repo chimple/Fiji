@@ -1,80 +1,81 @@
 import React, { Component } from 'react';
 import {
   Text,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Dimensions
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
-class Animbutton extends Component {
+const { width } = Dimensions.get('window');
+
+export default class Animbutton extends Component {
   constructor(props) {
      super(props);
      this.state = {
        status: false
      };
    }
-
-   
-   funcOnPress() {
-     this.props.funcOnPress(!this.state.status);
-     this.setState({ status: !this.state.status });
+   _onPress() {
+     this.props._onPress(!this.state.status);
+     this.setState({ status: this.state.status });
      switch (this.props.effect) {
        case 'bounce':
-         this.refs.view.bounce(800);
+         this.refs.view.bounce(100);
          break;
        case 'flash':
-         this.refs.view.flash(800);
+         this.refs.view.flash(100);
          break;
        case 'jello':
-         this.refs.view.jello(800);
+         this.refs.view.jello(100);
          break;
        case 'pulse':
-         this.refs.view.pulse(800);
+         this.refs.view.pulse(100);
          break;
        case 'rotate':
-         this.refs.view.rotate(800);
+         this.refs.view.rotate(100);
          break;
        case 'rubberBand':
-         this.refs.view.rubberBand(800);
+         this.refs.view.rubberBand(100);
          break;
        case 'shake':
-         this.refs.view.shake(800);
+         this.refs.view.shake(100);
          break;
        case 'swing':
-         this.refs.view.swing(800);
+         this.refs.view.swing(100);
          break;
        case 'tada':
-         this.refs.view.tada(800);
+         this.refs.view.tada(100);
          break;
        case 'wobble':
-         this.refs.view.wobble(800);
+         this.refs.view.wobble(100);
          break;
-       default: break;
      }
    }
   render() {
     return (
-      <TouchableWithoutFeedback onPress={() => this.funcOnPress()}>
+      <TouchableWithoutFeedback onPress={() => this._onPress()}>
         <Animatable.View 
         ref="view" 
-        style={{ paddingTop: 10, 
+        style={{ margin: 10, 
+        paddingTop: 10, 
         paddingBottom: 10, 
         paddingRight: 20, 
         paddingLeft: 20, 
         backgroundColor: this.state.status ? this.props.onColor : '#bdbdbd', 
-        borderRadius: 20, 
-        flexDirection: 'row'
-    }}
+        borderRadius: 20,
+        width: width * 0.4 }}
         >
           <Text 
-          style={{ 
-              fontSize: 40,
-              color: this.state.status ? 'white' : '#696969', 
-              fontWeight: 'bold' }}
-          >{this.props.text}</Text>
+          style={{ color: this.state.status ? 'white' : '#696969',
+          fontSize: 56,
+          fontWeight: 'bold',
+          alignSelf: 'center',
+          justifyContent: 'center' }}
+          >
+          {this.props.text}
+          </Text>
         </Animatable.View>
       </TouchableWithoutFeedback>
     );
   }
 }
-
-export default Animbutton;
