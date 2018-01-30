@@ -9,7 +9,7 @@ export const initialState = {
   list: []
 }
 
-export default reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch(action.type) {
     case FETCH_USERS_REQUEST:
       return Object.assign({}, state, {
@@ -56,3 +56,5 @@ export const fetchUsers = () => async(dispatch) => {
   }
 
 }
+
+export default reducer

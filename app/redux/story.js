@@ -13,7 +13,7 @@ const initialState = {
   story: {}
 }
 
-export default reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch(action.type) {
     case FETCH_TITLES_REQUEST:
       return {
@@ -114,3 +114,5 @@ export const fetchStory = ( title ) => async(dispatch, getState) => {
       dispatch(fetchStoryFailure())
   }
 }
+
+export default reducer
