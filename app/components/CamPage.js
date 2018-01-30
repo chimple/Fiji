@@ -19,10 +19,10 @@ import { addUser } from '../redux/user'
 
 class CamPage extends Component {
 
-    state = {
-            name: 'kkkk',
-            image: ''
-    }
+    // state = {
+    //         name: 'kkkk',
+    //         image: ''
+    // }
 
     onBarCodeRead(e) {
         console.log(
@@ -31,13 +31,13 @@ class CamPage extends Component {
         );
     }
 
-    sendData(data){
-        this.setState({ image: data })
-        if(this.state.image !== ''){
-            console.log('this is image value'+data)
-            this.props.dispatch(addUser(this.state))
-       }
-    }
+    // sendData(data){
+    //     this.setState({ image: data })
+    //     if(this.state.image !== ''){
+    //         console.log('this is image value'+data)
+    //         this.props.dispatch(addUser(this.state))
+    //    }
+    // }
 
     // takePicture() {
     //     const options = {};
@@ -53,7 +53,7 @@ class CamPage extends Component {
           .then((data) => {
             let base64Img = data.path;
             RNFS.readFile(Platform.OS === 'android'? base64Img.substring(7): base64Img, "base64")  //substring(7) -> to remove the file://
-             .then(res =>  this.sendData(res))
+             .then(res =>  this.props.dispatch(addUser({name:'',image:res})))
              .catch(err => console.error(err))
            })
      }

@@ -6,7 +6,6 @@ import PropTypes from 'prop-types'
 import { Icon } from 'react-native-elements'
 import { fetchStory } from '../redux/story'
 
-
 class StorySection extends Component {
     constructor(props) {
         super(props)
@@ -15,16 +14,34 @@ class StorySection extends Component {
         const stories = [];
         console.log("the page number is :", this.props.page)
         var dialog = this.props.story.pages[this.props.page].dialog;
+
+        var characterData = [];
+        console.log("How many character is there : ", Object.keys(this.props.story.characters).length)
+
+        for(var i = 0 ; i < Object.keys(this.props.story.characters).length; i++)
+            characterData.push(""+Object.keys(this.props.story.characters)[i])
+
+        console.log(characterData)
+  
         for (let i = 0; i < this.props.count; i++) {
             for (let j = 0; j <= dialog.length; j++) {
 
-                if (i % 2 === 0) {
-                    console.log("this is alice");
+                var speaker = this.props.story.pages[this.props.page].dialog[i].speaker;
+                var speakerIndex = 0;
+                for(let k = 0 ; k < characterData.length; k++){
+                    if(characterData[k] == speaker){
+                        speakerIndex = k;
+                    } else {
+
+                    }
+                }
+
+                if (speakerIndex%2 == 0) {
                     stories.push(
                         <View style={styles.storyContainer}>
                             <Image style={styles.characterImageStyle}
                                 source={{
-                                    uri: 'data:image/png;base64,' + this.props.story.characters['Alice'],
+                                    uri: 'data:image/png;base64,' + this.props.story.characters[characterData[speakerIndex]],
                                 }} />
                             <View style={styles.textContainer}>
                                 <Text style={styles.dialogStyle}>
@@ -36,7 +53,6 @@ class StorySection extends Component {
                     break;
                 }
                 else {
-                    console.log("this is white rabbit");
                     stories.push(
                         <View style={styles.storyContainer2}>
                             <View style={styles.textContainer2}>
@@ -46,7 +62,7 @@ class StorySection extends Component {
                             </View>
                             <Image style={styles.characterImageStyle}
                                 source={{
-                                    uri: 'data:image/png;base64,' + this.props.story.characters['White Rabbit'],
+                                    uri: 'data:image/png;base64,' + this.props.story.characters[characterData[speakerIndex]],
                                 }} />
                         </View>
                     );
@@ -54,7 +70,6 @@ class StorySection extends Component {
                 }
             }
         }
-        //console.log(this.props.story.characters);
         return stories;
     }
 }
