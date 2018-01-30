@@ -4,6 +4,8 @@ import {
   View,
   Dimensions,
   ScrollView,
+  ListView,
+  FlatList
 } from 'react-native';
 import Animbutton from './Animbutton';
 
@@ -52,6 +54,36 @@ const jsonData = { quiz: {
             option2: 'S'
           },
         question: 'S'
+      },
+      question6: {
+        correctoption: 'option4',
+        options: {
+            option1: 'H',
+            option2: 'S',
+            option3: 'D',
+            option4: 'K'
+          },
+        question: 'K'
+      },
+      question7: {
+        correctoption: 'option3',
+        options: {
+            option1: 'E',
+            option2: 'R',
+            option3: 'F',
+            option4: 'N'
+          },
+        question: 'F'
+      },
+      question8: {
+        correctoption: 'option4',
+        options: {
+            option1: 'W',
+            option2: 'C',
+            option3: 'G',
+            option4: 'L'
+          },
+        question: 'L'
       }
     }
   }
@@ -73,14 +105,6 @@ const jsonData = { quiz: {
       };
     }
 
-    prev() {
-      if (this.qno > 0) {
-        this.qno--;
-        this.setState({ question: arrnew[this.qno].question, 
-          options: arrnew[this.qno].options, 
-          correctoption: arrnew[this.qno].correctoption });
-      }
-    }
 
     next() {
       if (this.qno < arrnew.length - 1) {
@@ -128,6 +152,21 @@ const jsonData = { quiz: {
    
         </View>);
       });
+
+      // const elem = [];
+      // for(var i=0; i < currentOptions.length; i++){
+      //   elem.push(
+      //     <View key={i} style={{ flexDirection: 'row' }}>
+      //       <Animbutton 
+      //       countCheck={_this.state.countCheck} 
+      //       onColor={'#483d8b'} 
+      //       effect={i === this.state.correctoption ? 'tada' : 'shake'} 
+      //       _onPress={(status) => _this._answer(status, k)} 
+      //       text={currentOptions[i]} 
+      //       />
+      //     </View>
+      //   )
+      // }
    
       return (
         <ScrollView style={{ backgroundColor: '#F5FCFF', paddingTop: 10 }}>
@@ -136,8 +175,7 @@ const jsonData = { quiz: {
         <View style={{ height: height * 0.15 }}  />
         
         <View 
-        style={{ flex: 1, 
-        flexDirection: 'column', 
+        style={{ flex: 1,
         justifyContent: 'center', 
         alignItems: 'center', }}
         >
@@ -147,10 +185,28 @@ const jsonData = { quiz: {
             {this.state.question}
           </Text>
        </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+          {options.length === 2 ? <View style={{ flexDirection: 'row', alignItems: 'center', width: width  }}>
           { options }
-          </View>
-           
+          </View> : <View>
+            {options}
+            </View>
+          
+          
+          // <FlatList 
+          //   data={options}
+          //   renderItem={({rowData}) => 
+          //   <Animbutton 
+          // countCheck={_this.state.countCheck} 
+          // onColor={'#483d8b'} 
+          // effect={rowData === this.state.correctoption ? 'tada' : 'shake'} 
+          // _onPress={(status) => _this._answer(status, rowData)} 
+          // text={this.state.options[rowData]} 
+          // />}
+          // numColumns={2}
+          // />
+        
+          
+          }
           </View>
         </View>
         </ScrollView>
@@ -159,7 +215,7 @@ const jsonData = { quiz: {
   }
    
   const styles = {
-   
+    
     oval: {
     justifyContent: 'center',
     alignItems: 'center',
