@@ -27,13 +27,14 @@ import WordScreen from '../screens/WordScreen'
 import ConnectDotsScreen from '../screens/ConnectDotsScreen'
 
 import CamPage from '../components/CamPage'
+import GameScreen from '../screens/GameScreen';
 
 const CamNavigator = StackNavigator({
   Cam: {
     screen: CamPage,
     navigationOptions:{
       headerTitle: 'Take photo',
-      headerStyle:{ backgroundColor:'red'}
+      headerStyle:{ backgroundColor:'#19a4f2'}
     }
   }
 }, {headerMode:'none'}) 
@@ -152,6 +153,9 @@ export const AppNavigator = StackNavigator({
   },
   Game7:{
     screen: SinglePlay
+  },
+  Reflex:{
+    screen: GameScreen
   }
 })
 

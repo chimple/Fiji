@@ -27,8 +27,8 @@ import PouchDB from 'pouchdb-react-native';
 // })
 
  //localhost:5984 to run in local server
-//const remoteURL = 'http://localhost:5984/'
-const remoteURL = 'http://192.168.0.200:5984/'
+const remoteURL = 'https://057d4c76-09e0-4f8d-b78d-7d61021e406c-bluemix:c497d04cafd1d098f244dcec455c1468cdf324a223da49e1f9f34a16f7d235f5@057d4c76-09e0-4f8d-b78d-7d61021e406c-bluemix.cloudant.com/'
+// const remoteURL = 'http://192.168.0.200:5984/'
 
 const usersDB = new PouchDB('users')
 const remoteUsersDB = new PouchDB(remoteURL + 'users')
@@ -43,4 +43,4 @@ contentDB.replicate.from(remoteContentDB).then(function (result) {
   console.log(err)
 }) 
 
-export { usersDB, remoteUsersDB, contentDB, remoteContentDB }
+export { usersDB, remoteUsersDB, contentDB, remoteContentDB, remoteURL }

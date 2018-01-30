@@ -17,7 +17,7 @@ const initialState = {
   sticker: {}
 }
 
-export default reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch(action.type) {
     case FETCH_STICKER_PACKS_REQUEST:
       return {
@@ -156,3 +156,5 @@ export const fetchStickerPacks = () => async(dispatch, getState) => {
       dispatch(fetchStickerPacksFailure())
   }
 }
+
+export default reducer
