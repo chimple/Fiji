@@ -4,7 +4,6 @@ import {
   View,
   Dimensions,
   ScrollView,
-  ListView,
   FlatList
 } from 'react-native';
 import Animbutton from './Animbutton';
