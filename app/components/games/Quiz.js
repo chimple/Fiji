@@ -154,21 +154,6 @@ const jsonData = { quiz: {
    
         </View>);
       });
-
-      // const elem = [];
-      // for(var i=0; i < currentOptions.length; i++){
-      //   elem.push(
-      //     <View key={i} style={{ flexDirection: 'row' }}>
-      //       <Animbutton 
-      //       countCheck={_this.state.countCheck} 
-      //       onColor={'#483d8b'} 
-      //       effect={i === this.state.correctoption ? 'tada' : 'shake'} 
-      //       _onPress={(status) => _this._answer(status, k)} 
-      //       text={currentOptions[i]} 
-      //       />
-      //     </View>
-      //   )
-      // }
    
       return (
         <ScrollView style={{ backgroundColor: '#F5FCFF', paddingTop: 10 }}>
@@ -195,17 +180,8 @@ const jsonData = { quiz: {
           { options }
           </View> : <FlatList 
             data={options}
-            renderItem={({ item }) => 
-            
-            <Animbutton 
-          countCheck={_this.state.countCheck} 
-          onColor={'#483d8b'} 
-          effect={item === this.state.correctoption ? 'tada' : 'shake'} 
-          _onPress={(status) => _this._answer(status, item)} 
-          text={jsonData.quiz.quiz1[item].options[item]}
-            />
-          }
-          numColumns={2}
+            numColumns={2}
+            renderItem={({ item }) => <View>{item}</View>}
           />
         
           
