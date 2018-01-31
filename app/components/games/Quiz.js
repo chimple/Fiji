@@ -139,7 +139,10 @@ const jsonData = { quiz: {
       const _this = this;
       const currentOptions = this.state.options;
       const options = Object.keys(currentOptions).map((k) => {
-        return (<View key={k} style={{ alignItems: 'center', justifyContent: 'center', margin: 10 }}>
+        return (<View 
+        key={k} 
+        style={{ alignItems: 'center', justifyContent: 'center', margin: 10 }}
+        >
    
           <Animbutton 
           countCheck={_this.state.countCheck} 
@@ -151,27 +154,12 @@ const jsonData = { quiz: {
    
         </View>);
       });
-
-      // const elem = [];
-      // for(var i=0; i < currentOptions.length; i++){
-      //   elem.push(
-      //     <View key={i} style={{ flexDirection: 'row' }}>
-      //       <Animbutton 
-      //       countCheck={_this.state.countCheck} 
-      //       onColor={'#483d8b'} 
-      //       effect={i === this.state.correctoption ? 'tada' : 'shake'} 
-      //       _onPress={(status) => _this._answer(status, k)} 
-      //       text={currentOptions[i]} 
-      //       />
-      //     </View>
-      //   )
-      // }
    
       return (
         <ScrollView style={{ backgroundColor: '#F5FCFF', paddingTop: 10 }}>
 
         <View style={styles.container}>
-        <View style={{ height: height * 0.15 }}  />
+        <View style={{ height: height * 0.15 }} />
         
         <View 
         style={{ flex: 1,
@@ -184,25 +172,17 @@ const jsonData = { quiz: {
             {this.state.question}
           </Text>
        </View>
-          {options.length === 2 ? <View style={{ flexDirection: 'row', alignItems: 'center', width: width  }}>
+          {options.length === 2 ? <View 
+          style={{ flexDirection: 'row', 
+          alignItems: 'center', 
+          width }}
+          >
           { options }
-          </View> : <View>
-            {options}
-            </View>
-          
-          
-          // <FlatList 
-          //   data={options}
-          //   renderItem={({rowData}) => 
-          //   <Animbutton 
-          // countCheck={_this.state.countCheck} 
-          // onColor={'#483d8b'} 
-          // effect={rowData === this.state.correctoption ? 'tada' : 'shake'} 
-          // _onPress={(status) => _this._answer(status, rowData)} 
-          // text={this.state.options[rowData]} 
-          // />}
-          // numColumns={2}
-          // />
+          </View> : <FlatList 
+            data={options}
+            numColumns={2}
+            renderItem={({ item }) => <View>{item}</View>}
+          />
         
           
           }
