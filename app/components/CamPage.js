@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import RNFS from 'react-native-fs';
 import Camera, { constants } from 'react-native-camera';
+import Orientation from 'react-native-orientation';
 import PropTypes from 'prop-types'
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux'
@@ -17,13 +18,19 @@ import { addUser } from '../redux/user'
 
 
 
+
 class CamPage extends Component {
 
-    // state = {
-    //         name: 'kkkk',
-    //         image: ''
-    // }
+    componentDidMount() {
+        // this locks the view to Portrait Mode
+        Orientation.lockToPortrait();
+    }    
 
+    componentWillUnmount() {
+        // this locks the view to Portrait Mode
+        Orientation.unlockAllOrientations();
+    } 
+     
     onBarCodeRead(e) {
         console.log(
             'Barcode Found!',
@@ -37,15 +44,6 @@ class CamPage extends Component {
     //         console.log('this is image value'+data)
     //         this.props.dispatch(addUser(this.state))
     //    }
-    // }
-
-    // takePicture() {
-    //     const options = {};
-    //     //options.location = ...
-    //     this.camera.capture({ metadata: options })
-    //         .then((data) =>  this.setState({ image: data.path }))
-    //         .catch(err => console.error(err));
-    //     this.sendData(this.state)
     // }
 
     takePicture() {
