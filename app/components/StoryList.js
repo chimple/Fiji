@@ -21,10 +21,7 @@ export default class StoryList extends PureComponent {
       <View style={styles.StoryListStyle}>
         <FlatList
           showsVerticalScrollIndicator={false}
-
-         // contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap' }}
           numColumns={3}
-
           data={this.props.titles}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
