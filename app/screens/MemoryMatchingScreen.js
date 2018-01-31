@@ -8,6 +8,7 @@ import {
   Animated,
   Alert
 } from 'react-native';
+import { react-native-orientation } from 'react-native-orientation';
 import Board from '../components/games/Board';
 import Card from '../components/games/Card';
 
@@ -15,6 +16,14 @@ export default class MemoryMatchingScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {board: new Board(4 , 4), players: 1}
+  }
+
+  componentDidMount() {
+    Orientation.lockToPortrait();
+  }
+
+  componentWillUnmount() {
+    Orientation.unlockAllOrientations();
   }
 
   onRestartPress() {
