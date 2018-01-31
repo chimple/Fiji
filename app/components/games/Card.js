@@ -22,7 +22,8 @@ export default class Card extends Component {
   componentDidMount() {
     setTimeout( () => {
      this.setState({paired: false , visible: false});
-   },1500);
+     this.flipCard();
+   },2000);
  }
 
   componentWillReceiveProps (nextProps) {
