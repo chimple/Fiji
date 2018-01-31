@@ -158,6 +158,7 @@ dependencies {
     // compile ('com.google.android.gms:play-services-vision:11.6.0') {
     //    force = true;
     // }
+    compile project(':react-native-orientation')
     compile project(':react-native-svg')
     compile project(':react-native-sound')
     compile project(':lottie-react-native')
