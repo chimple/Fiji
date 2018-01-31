@@ -8,7 +8,7 @@ import {
   Animated,
   Alert
 } from 'react-native';
-import { react-native-orientation } from 'react-native-orientation';
+import Orientation from 'react-native-orientation';
 import Board from '../components/games/Board';
 import Card from '../components/games/Card';
 
