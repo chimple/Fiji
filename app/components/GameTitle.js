@@ -7,12 +7,11 @@ import PropTypes from 'prop-types'
 export default class GameTitle extends PureComponent{
     _onPress = () => {
         this.props.onPressItem(this.props.title)
-        //this.props.navigation.navigate('Game3', {title: this.props.title})
     }
 
     render(){
         return(
-        <TouchableOpacity onPress={this._onPress}  >
+        <TouchableOpacity onPress={this._onPress} >
             <Text>{this.props.title.name}</Text>
         </TouchableOpacity>
         )
