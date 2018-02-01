@@ -101,13 +101,9 @@ const jsonData = { quiz: {
         question: arrnew[this.qno].question,
         options: arrnew[this.qno].options,
         correctoption: arrnew[this.qno].correctoption,
-        countCheck: 0,
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height,
+        countCheck: 0
       };
-      Dimensions.addEventListener('change', (e) => {
-        this.setState(e.window);
-    });
+      
     }
 
 
@@ -162,27 +158,28 @@ const jsonData = { quiz: {
    
         </View>);
       });
-   
+      
       return (
-        <ScrollView style={{ flex: 1, backgroundColor: '#F5FCFF', paddingTop: 10 }}>
+        <ScrollView style={{ backgroundColor: '#F5FCFF', paddingTop: 10 }}>
 
         <View style={styles.container}>
                  
         <View 
-        style={{ flex: 2,
+        style={{ flex: 1,
         justifyContent: 'center', 
         alignItems: 'center',
-        paddingTop: height * 0.1,
         paddingBottom: height * 0.1 }}
         >
-        
+
         <Animatable.View ref="questionView" style={styles.oval}>
           <Text style={styles.welcome}>
             {this.state.question}
           </Text>
-       </Animatable.View>
+       </Animatable.View> 
+
           {options.length === 2 ? <View 
-          style={{ flex: 1, flexDirection: 'row', 
+          style={{ flexDirection: 'row', 
+          justifyContent: 'center',
           alignItems: 'center', 
           width }}
           >
@@ -191,7 +188,7 @@ const jsonData = { quiz: {
           <FlatList 
             data={options}
             numColumns={2}
-            renderItem={({ item }) => <View style={{ flex: 1 }} key={item}>{item}</View>}
+            renderItem={({ item }) => <View key={item}>{item}</View>}
           />
         
           
@@ -200,11 +197,11 @@ const jsonData = { quiz: {
         </View>
         </ScrollView>
       );
+    
     }
   }
    
-  const styles = {
-    
+  const styles = {    
     oval: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -221,7 +218,7 @@ const jsonData = { quiz: {
       fontSize: 48,
       fontWeight: 'bold',
       margin: 15,
-      color: 'white'
+      color: 'white',
     }
   };
 
