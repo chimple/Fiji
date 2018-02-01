@@ -10,16 +10,21 @@ import {
   Image
 } from 'react-native';
 
-
-
 export default class Card extends Component {
   constructor(properties) {
         super(properties);
         this.state = {
             paired: false,
-            visible: false
+            visible: true
         };
     }
+
+  componentDidMount() {
+    setTimeout( () => {
+     this.setState({paired: false , visible: false});
+     this.flipCard();
+   },2000);
+ }
 
   componentWillReceiveProps (nextProps) {
       if (nextProps.cardCfg.hidden === true) {
@@ -82,11 +87,11 @@ export default class Card extends Component {
     }
 
     hide() {
+        this.flipCard();
         this.setState({visible: false});
         this.props.cardCfg.hidden = true;
         this.props.onHide;
     }
-
 
   render() {
 
@@ -111,10 +116,7 @@ export default class Card extends Component {
       }
 
     return (
-      <TouchableHighlight
-            onPress={this.onPress.bind(this)}
-            underlayColor="transparent"
-            activeOpacity={0.5}>
+      <TouchableHighlight onPress={this.onPress.bind(this)} underlayColor="transparent" activeOpacity={0.5}>
             <Animated.View style={[frontAnimatedStyle, cardStyles]}>
               <Image style={imageStyles} ref="image" source={{uri: this.props.img}} />
             </Animated.View>
@@ -144,16 +146,17 @@ const styles = StyleSheet.create({
   cardImageVisible: {
     opacity: 1
   },
-
   cardImagePaired: {
     opacity: 0.5
   },
-
   cardPaired: {
     backgroundColor: '#F4F9CB',
     borderColor: '#89E0B9'
   },
   cardVisible: {
     backgroundColor: '#fff'
+  },
+  cardText: {
+    fontSize: 36,
   }
 });

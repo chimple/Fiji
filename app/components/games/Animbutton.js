@@ -61,7 +61,7 @@ export default class Animbutton extends Component {
         paddingBottom: 10, 
         paddingRight: 20, 
         paddingLeft: 20, 
-        backgroundColor: this.state.status ? this.props.onColor : '#bdbdbd', 
+        backgroundColor: '#bdbdbd', 
         borderRadius: 20,
         width: width * 0.4 }}
         >

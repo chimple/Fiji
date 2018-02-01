@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import {
   StatusBar,
-  TouchableOpacity,
   View,
   Text
 } from 'react-native';
 import { Icon } from 'react-native-elements';
-import Quiz from '../components/games/Quiz';
+import Quiz from './Quiz';
 
 export default class SinglePlay extends Component {
   constructor(props) {
@@ -16,10 +15,7 @@ export default class SinglePlay extends Component {
       score: 0
     };
   }
-  _onPressBack() {
-    const { goBack } = this.props.navigation;
-      goBack();
-  }
+  
   _quizFinish(score) {    
     this.setState({ quizFinish: true, score });
   }
@@ -30,7 +26,7 @@ export default class SinglePlay extends Component {
                   <Icon name="sentiment-very-dissatisfied" size={30} color="white" />
                 </View>
                 <Text style={styles.score}>You need to work hard</Text>
-                <Text style={styles.score}>You scored {score}%</Text>
+                <Text style={styles.score}>You scored {score}</Text>
               </View>);
     } else if (score > 30 && score < 60) {
       return (<View style={styles.innerContainer} >
@@ -39,7 +35,7 @@ export default class SinglePlay extends Component {
                     <Icon name="sentiment-satisfied" size={30} color="white" />
                   </View>
                   <Text style={styles.score}>You are good</Text>
-                  <Text style={styles.score}>Congrats you scored {score}% </Text>
+                  <Text style={styles.score}>Congrats you scored {score} </Text>
                 </View>);
     } else if (score >= 60) {
       return (<View style={styles.innerContainer}>
@@ -49,7 +45,7 @@ export default class SinglePlay extends Component {
                      <Icon name="whatshot" size={30} color="white" />
                   </View>
                   <Text style={styles.score}>You are the master</Text>
-                  <Text style={styles.score}>Congrats you scored {score}% </Text>
+                  <Text style={styles.score}>Congrats you scored {score} </Text>
                 </View>);
     }
   }
@@ -58,16 +54,10 @@ export default class SinglePlay extends Component {
       <View style={{ flex: 1 }}>
       <StatusBar barStyle="light-content" />
       <View style={styles.toolbar}>
-                    <TouchableOpacity 
-                    onPress={() => this._onPressBack()}
-                    >
-                    <Text style={styles.toolbarButton}>Back</Text>
-                    </TouchableOpacity>
                     <Text style={styles.toolbarTitle}>Current Score - {this.state.score}</Text>
-                    <Text style={styles.toolbarButton} />
       </View>
  
-       { this.state.quizFinish ? <View style={styles.container}>
+       { this.state.quizFinish ? <View ref="ScoreView" style={styles.container}>
            <View style={styles.circle}>
  
              { this._scoreMessage(this.state.score) }
@@ -89,6 +79,7 @@ const styles = {
   circle: {
     justifyContent: 'center',
     alignItems: 'center',
+    alignSelf: 'center',
     width: scoreCircleSize,
     height: scoreCircleSize,
     borderRadius: scoreCircleSize / 2,
@@ -101,9 +92,9 @@ const styles = {
   },
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   toolbar: {
         backgroundColor: '#483d8b',
@@ -111,13 +102,9 @@ const styles = {
         paddingBottom: 10,
         flexDirection: 'row'
     },
-    toolbarButton: {
-        width: 55,
-        color: '#fff',
-        textAlign: 'center'
-    },
     toolbarTitle: {
         color: '#fff',
+        justifyContent: 'center',
         textAlign: 'center',
         fontWeight: 'bold',
         flex: 1

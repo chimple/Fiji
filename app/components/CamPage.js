@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import RNFS from 'react-native-fs';
 import Camera, { constants } from 'react-native-camera';
+import Orientation from 'react-native-orientation';
 import PropTypes from 'prop-types'
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux'
@@ -17,13 +18,19 @@ import { addUser } from '../redux/user'
 
 
 
+
 class CamPage extends Component {
 
-    state = {
-            name: 'kkkk',
-            image: ''
-    }
+    componentDidMount() {
+        // this locks the view to Portrait Mode
+        Orientation.lockToPortrait();
+    }    
 
+    componentWillUnmount() {
+        // this locks the view to Portrait Mode
+        Orientation.unlockAllOrientations();
+    } 
+     
     onBarCodeRead(e) {
         console.log(
             'Barcode Found!',
@@ -31,21 +38,12 @@ class CamPage extends Component {
         );
     }
 
-    sendData(data){
-        this.setState({ image: data })
-        if(this.state.image !== ''){
-            console.log('this is image value'+data)
-            this.props.dispatch(addUser(this.state))
-       }
-    }
-
-    // takePicture() {
-    //     const options = {};
-    //     //options.location = ...
-    //     this.camera.capture({ metadata: options })
-    //         .then((data) =>  this.setState({ image: data.path }))
-    //         .catch(err => console.error(err));
-    //     this.sendData(this.state)
+    // sendData(data){
+    //     this.setState({ image: data })
+    //     if(this.state.image !== ''){
+    //         console.log('this is image value'+data)
+    //         this.props.dispatch(addUser(this.state))
+    //    }
     // }
 
     takePicture() {
@@ -53,7 +51,7 @@ class CamPage extends Component {
           .then((data) => {
             let base64Img = data.path;
             RNFS.readFile(Platform.OS === 'android'? base64Img.substring(7): base64Img, "base64")  //substring(7) -> to remove the file://
-             .then(res =>  this.sendData(res))
+             .then(res =>  this.props.dispatch(addUser({name:'',image:res})))
              .catch(err => console.error(err))
            })
      }

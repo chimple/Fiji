@@ -4,7 +4,9 @@ import {
   View,
   Dimensions,
   ScrollView,
+  FlatList
 } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import Animbutton from './Animbutton';
 
 const { width, height } = Dimensions.get('window');
@@ -52,6 +54,36 @@ const jsonData = { quiz: {
             option2: 'S'
           },
         question: 'S'
+      },
+      question6: {
+        correctoption: 'option4',
+        options: {
+            option1: 'B',
+            option2: 'S',
+            option3: 'D',
+            option4: 'K'
+          },
+        question: 'K'
+      },
+      question7: {
+        correctoption: 'option3',
+        options: {
+            option1: 'E',
+            option2: 'R',
+            option3: 'F',
+            option4: 'N'
+          },
+        question: 'F'
+      },
+      question8: {
+        correctoption: 'option4',
+        options: {
+            option1: 'W',
+            option2: 'C',
+            option3: 'G',
+            option4: 'L'
+          },
+        question: 'L'
       }
     }
   }
@@ -69,18 +101,15 @@ const jsonData = { quiz: {
         question: arrnew[this.qno].question,
         options: arrnew[this.qno].options,
         correctoption: arrnew[this.qno].correctoption,
-        countCheck: 0
+        countCheck: 0,
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
       };
+      Dimensions.addEventListener('change', (e) => {
+        this.setState(e.window);
+    });
     }
 
-    prev() {
-      if (this.qno > 0) {
-        this.qno--;
-        this.setState({ question: arrnew[this.qno].question, 
-          options: arrnew[this.qno].options, 
-          correctoption: arrnew[this.qno].correctoption });
-      }
-    }
 
     next() {
       if (this.qno < arrnew.length - 1) {
@@ -102,6 +131,7 @@ const jsonData = { quiz: {
           if (ans === this.state.correctoption) {
             this.score += 1;
             this.next();
+            this.refs.questionView.zoomIn(800);
           }
         } else {
           const count = this.state.countCheck - 1;
@@ -111,12 +141,16 @@ const jsonData = { quiz: {
          }
         }
     }
-    
+
+       
     render() {
       const _this = this;
       const currentOptions = this.state.options;
       const options = Object.keys(currentOptions).map((k) => {
-        return (<View key={k} style={{ alignItems: 'center', justifyContent: 'center', margin: 10 }}>
+        return (<View
+        key={k}
+        style={{ alignItems: 'center', justifyContent: 'center', margin: 10 }}
+        >
    
           <Animbutton 
           countCheck={_this.state.countCheck} 
@@ -133,24 +167,34 @@ const jsonData = { quiz: {
         <ScrollView style={{ backgroundColor: '#F5FCFF', paddingTop: 10 }}>
 
         <View style={styles.container}>
-        <View style={{ height: height * 0.15 }}  />
+          {height > width ? <View style={{ height: height * 0.18 }} /> : <View /> }
         
         <View 
-        style={{ flex: 1, 
-        flexDirection: 'column', 
+        style={{ flex: 1,
         justifyContent: 'center', 
         alignItems: 'center', }}
         >
         
-        <View style={styles.oval}>
+        <Animatable.View ref="questionView" style={styles.oval}>
           <Text style={styles.welcome}>
             {this.state.question}
           </Text>
-       </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+       </Animatable.View>
+          {options.length === 2 ? <View 
+          style={{ flexDirection: 'row', 
+          alignItems: 'center', 
+          width }}
+          >
           { options }
-          </View>
-           
+          </View> : 
+          <FlatList 
+            data={options}
+            numColumns={2}
+            renderItem={({ item }) => <View key={item}>{item}</View>}
+          />
+        
+          
+          }
           </View>
         </View>
         </ScrollView>
@@ -159,20 +203,21 @@ const jsonData = { quiz: {
   }
    
   const styles = {
-   
+    
     oval: {
     justifyContent: 'center',
     alignItems: 'center',
     width: width * 0.5,
     borderRadius: 20,
-    backgroundColor: '#483d8b'
+    backgroundColor: '#483d8b',
+    margin: 15
     },
     container: {
       flex: 1,
       alignContent: 'space-between'
     },
     welcome: {
-      fontSize: 56,
+      fontSize: 48,
       fontWeight: 'bold',
       margin: 15,
       color: 'white'

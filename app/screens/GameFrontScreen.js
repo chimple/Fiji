@@ -15,7 +15,7 @@ class GameFrontScreen extends PureComponent{
     _keyExtractor = (item, index) => item._id
 
     _renderItem = ({item}) => (
-        <TouchableOpacity onPress={()=> this.props.navigation.navigate('Game1', {item} ) } style={{flexDirection:'row', borderColor:'black', borderWidth:2}}>
+        <TouchableOpacity onPress={()=> this.props.navigation.navigate( this.props.navigation.state.params.title.screen , {item} ) } style={{flexDirection:'row', borderColor:'black', borderWidth:2}}>
             <SvgUri 
             width='50'
             height='50'
@@ -26,7 +26,9 @@ class GameFrontScreen extends PureComponent{
     )
 
     render(){
-        
+
+        //const Screen = this.props.navigation.state.params.title.screen
+
         return(
             this.props.isFetching 
                 ? 
