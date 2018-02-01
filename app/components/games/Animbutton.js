@@ -67,7 +67,7 @@ export default class Animbutton extends Component {
         >
           <Text 
           style={{ color: this.state.status ? 'white' : '#696969',
-          fontSize: 56,
+          fontSize: 42,
           fontWeight: 'bold',
           alignSelf: 'center',
           justifyContent: 'center' }}
