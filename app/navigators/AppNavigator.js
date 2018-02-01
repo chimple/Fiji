@@ -17,9 +17,28 @@ import HomeScreen from '../screens/HomeScreen'
 import LoginScreen from '../screens/LoginScreen'
 import ChatScreen from '../screens/ChatScreen'
 import GameFrontScreen from '../screens/GameFrontScreen'
-
+import multipleChoiceHome from '../screens/multipleChoiceHome'
+import SinglePlay from '../screens/SinglePlay'
+import ReflexScreen from '../screens/ReflexScreen'
+import MemoryMatchingScreen from '../screens/MemoryMatchingScreen'
+import TapHomeScreen from '../screens/TapHomeScreen'
+import TapWrongScreen from '../screens/TapWrongScreen'
+import WordScreen from '../screens/WordScreen' 
+import ConnectDotsScreen from '../screens/ConnectDotsScreen'
+import ScoreScreen from '../screens/ScoreScreen'
 import CamPage from '../components/CamPage'
+import GameScreen from '../screens/GameScreen';
 
+const CamNavigator = StackNavigator({
+  Cam: {
+    screen: CamPage,
+    navigationOptions:{
+      headerTitle: 'Take photo',
+      headerStyle:{ backgroundColor:'#19a4f2'}
+    }
+  }
+}, {headerMode:'none'}) 
+  //
 const ChatNavigator = StackNavigator({
   Friends: {
     screen: FriendsScreen,
@@ -88,10 +107,7 @@ export const AppNavigator = StackNavigator({
     }
   },
   CamPage: {
-    screen: CamPage,
-    navigationOptions: {
-      headerMode: 'none'
-    }
+    screen: CamNavigator
   },
   Main: {
     screen: MainNavigator
@@ -116,8 +132,42 @@ export const AppNavigator = StackNavigator({
       headerTitle:'Game',
       headerStyle:{backgroundColor: '#19a4f2'}
     }
+  },
+  Game1: {
+    screen: MemoryMatchingScreen
+  },
+  Game2: {
+    screen: TapHomeScreen
+  },
+  Game3: {
+    screen: TapWrongScreen
+  },
+  Game4: {
+    screen: WordScreen
+  },
+  Game5: {
+    screen: ConnectDotsScreen
+  },
+  Game6: {
+    screen: multipleChoiceHome
+  },
+  Game7:{
+    screen: SinglePlay
+  },
+  Reflex:{
+    screen: GameScreen
+  },
+  Score:{
+    screen: ScoreScreen,
+    navigationOptions: {
+      headerTitle: 'Score',
+      headerStyle:{backgroundColor: '#19a4f2'}
+    },
   }
 })
+
+
+
 
 const AppWithNavigationState = ({ dispatch, nav }) => (
   <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />

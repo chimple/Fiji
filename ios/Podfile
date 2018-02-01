@@ -1,0 +1,35 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'Fiji' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for Fiji
+  pod 'AppCenter/Crashes', '~> 1.1.0'
+  pod 'AppCenter/Analytics', '~> 1.1.0'
+  pod 'AppCenterReactNativeShared', '~> 1.1.0'
+
+  
+
+  pod 'react-native-orientation', :path => '../node_modules/react-native-orientation'
+
+  target 'FijiTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
+
+target 'Fiji-tvOS' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for Fiji-tvOS
+
+  target 'Fiji-tvOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end

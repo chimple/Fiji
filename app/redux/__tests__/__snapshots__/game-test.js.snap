@@ -15,7 +15,7 @@ Object {
 exports[`creates a FETCH_GAME_THEME_SUCCESS action 1`] = `
 Object {
   "theme": Object {
-    "_id": "gametheme:xyz1",
+    "_id": "gametheme:memory-matching",
     "sets": Array [
       Object {
         "_id": "set:letters",
@@ -54,84 +54,46 @@ exports[`creates a FETCH_GAMES_SUCCESS action 1`] = `
 Object {
   "games": Array [
     Object {
-      "_id": "game:xyz1",
+      "_id": "game:memory-matching",
+      "category": "Read",
+      "name": "Memory Matching",
+      "screen": "Game1",
+    },
+    Object {
+      "_id": "game:tap-home",
+      "category": "Read",
+      "name": "Tap Home",
+      "screen": "Game2",
+    },
+    Object {
+      "_id": "game:reflex",
       "category": "listening",
-      "name": "Xyz1",
+      "name": "Reflex",
+      "screen": "Reflex",
     },
     Object {
-      "_id": "game:xyz2",
+      "_id": "game:tap-wrong",
       "category": "listening",
-      "name": "Xyz2",
+      "name": "Tap-wrong",
+      "screen": "Game3",
     },
     Object {
-      "_id": "game:xyz3",
-      "category": "listening",
-      "name": "Xyz3",
-    },
-    Object {
-      "_id": "game:xyz4",
-      "category": "listening",
-      "name": "Xyz4",
-    },
-    Object {
-      "_id": "game:xyz5",
+      "_id": "game:word",
       "category": "writing",
-      "name": "Xyz5",
+      "name": "Word",
+      "screen": "Game4",
     },
     Object {
-      "_id": "game:xyz6",
+      "_id": "game:multiple-choice",
       "category": "writing",
-      "name": "Xyz6",
+      "name": "Multiple-choice",
+      "screen": "Game6",
     },
     Object {
-      "_id": "game:xyz7",
-      "category": "writing",
-      "name": "Xyz7",
-    },
-    Object {
-      "_id": "game:xyz8",
-      "category": "writing",
-      "name": "Xyz8",
-    },
-    Object {
-      "_id": "game:alphamon",
+      "_id": "game:connect-dots",
       "category": "reading",
-      "name": "Alphamon",
-    },
-    Object {
-      "_id": "game:alphamon1",
-      "category": "reading",
-      "name": "Alphamon1",
-    },
-    Object {
-      "_id": "game:alphamon2",
-      "category": "reading",
-      "name": "Alphamon2",
-    },
-    Object {
-      "_id": "game:alphamon3",
-      "category": "reading",
-      "name": "Alphamon3",
-    },
-    Object {
-      "_id": "game:connect-the-dots",
-      "category": "maths",
-      "name": "Connect The Dots",
-    },
-    Object {
-      "_id": "game:connect-the-dot1",
-      "category": "maths",
-      "name": "Connect The Dots1",
-    },
-    Object {
-      "_id": "game:grocery-store",
-      "category": "maths",
-      "name": "Grocery Store",
-    },
-    Object {
-      "_id": "game:grocery-store2",
-      "category": "maths",
-      "name": "Grocery Store2",
+      "name": "Connect-dots",
+      "screen": "Game5",
     },
   ],
   "type": "Fiji/game/FETCH_GAMES_SUCCESS",
@@ -140,6 +102,7 @@ Object {
 
 exports[`handles FETCH_GAME_THEME_FAILURE action 1`] = `
 Object {
+  "data": Array [],
   "games": Array [],
   "isFetching": false,
   "theme": Object {},
@@ -148,6 +111,7 @@ Object {
 
 exports[`handles FETCH_GAME_THEME_REQUEST action 1`] = `
 Object {
+  "data": Array [],
   "games": Array [],
   "isFetching": true,
   "theme": Object {},
@@ -156,10 +120,11 @@ Object {
 
 exports[`handles FETCH_GAME_THEME_SUCCESS action 1`] = `
 Object {
+  "data": Array [],
   "games": Array [],
   "isFetching": false,
   "theme": Object {
-    "_id": "gametheme:xyz1",
+    "_id": "gametheme:memory-matching",
     "sets": Array [
       Object {
         "_id": "set:letters",
@@ -183,6 +148,7 @@ Object {
 
 exports[`handles FETCH_GAMES_FAILURE action 1`] = `
 Object {
+  "data": Array [],
   "games": Array [],
   "isFetching": false,
   "theme": Object {},
@@ -191,6 +157,7 @@ Object {
 
 exports[`handles FETCH_GAMES_REQUEST action 1`] = `
 Object {
+  "data": Array [],
   "games": Array [],
   "isFetching": true,
   "theme": Object {},
@@ -199,86 +166,49 @@ Object {
 
 exports[`handles FETCH_GAMES_SUCCESS action 1`] = `
 Object {
+  "data": Array [],
   "games": Array [
     Object {
-      "_id": "game:xyz1",
+      "_id": "game:memory-matching",
+      "category": "Read",
+      "name": "Memory Matching",
+      "screen": "Game1",
+    },
+    Object {
+      "_id": "game:tap-home",
+      "category": "Read",
+      "name": "Tap Home",
+      "screen": "Game2",
+    },
+    Object {
+      "_id": "game:reflex",
       "category": "listening",
-      "name": "Xyz1",
+      "name": "Reflex",
+      "screen": "Reflex",
     },
     Object {
-      "_id": "game:xyz2",
+      "_id": "game:tap-wrong",
       "category": "listening",
-      "name": "Xyz2",
+      "name": "Tap-wrong",
+      "screen": "Game3",
     },
     Object {
-      "_id": "game:xyz3",
-      "category": "listening",
-      "name": "Xyz3",
-    },
-    Object {
-      "_id": "game:xyz4",
-      "category": "listening",
-      "name": "Xyz4",
-    },
-    Object {
-      "_id": "game:xyz5",
+      "_id": "game:word",
       "category": "writing",
-      "name": "Xyz5",
+      "name": "Word",
+      "screen": "Game4",
     },
     Object {
-      "_id": "game:xyz6",
+      "_id": "game:multiple-choice",
       "category": "writing",
-      "name": "Xyz6",
+      "name": "Multiple-choice",
+      "screen": "Game6",
     },
     Object {
-      "_id": "game:xyz7",
-      "category": "writing",
-      "name": "Xyz7",
-    },
-    Object {
-      "_id": "game:xyz8",
-      "category": "writing",
-      "name": "Xyz8",
-    },
-    Object {
-      "_id": "game:alphamon",
+      "_id": "game:connect-dots",
       "category": "reading",
-      "name": "Alphamon",
-    },
-    Object {
-      "_id": "game:alphamon1",
-      "category": "reading",
-      "name": "Alphamon1",
-    },
-    Object {
-      "_id": "game:alphamon2",
-      "category": "reading",
-      "name": "Alphamon2",
-    },
-    Object {
-      "_id": "game:alphamon3",
-      "category": "reading",
-      "name": "Alphamon3",
-    },
-    Object {
-      "_id": "game:connect-the-dots",
-      "category": "maths",
-      "name": "Connect The Dots",
-    },
-    Object {
-      "_id": "game:connect-the-dot1",
-      "category": "maths",
-      "name": "Connect The Dots1",
-    },
-    Object {
-      "_id": "game:grocery-store",
-      "category": "maths",
-      "name": "Grocery Store",
-    },
-    Object {
-      "_id": "game:grocery-store2",
-      "category": "maths",
-      "name": "Grocery Store2",
+      "name": "Connect-dots",
+      "screen": "Game5",
     },
   ],
   "isFetching": false,
@@ -293,7 +223,7 @@ Array [
   },
   Object {
     "theme": Object {
-      "_id": "gametheme:xyz1",
+      "_id": "gametheme:memory-matching",
       "sets": Array [
         Object {
           "_id": "set:letters",
@@ -325,28 +255,38 @@ Array [
   Object {
     "games": Array [
       Object {
+        "_id": "Read",
+        "category": "Read",
+        "games": Array [
+          Object {
+            "_id": "game:memory-matching",
+            "category": "Read",
+            "name": "Memory Matching",
+            "screen": "Game1",
+          },
+          Object {
+            "_id": "game:tap-home",
+            "category": "Read",
+            "name": "Tap Home",
+            "screen": "Game2",
+          },
+        ],
+      },
+      Object {
         "_id": "listening",
         "category": "listening",
         "games": Array [
           Object {
-            "_id": "game:xyz1",
+            "_id": "game:reflex",
             "category": "listening",
-            "name": "Xyz1",
+            "name": "Reflex",
+            "screen": "Reflex",
           },
           Object {
-            "_id": "game:xyz2",
+            "_id": "game:tap-wrong",
             "category": "listening",
-            "name": "Xyz2",
-          },
-          Object {
-            "_id": "game:xyz3",
-            "category": "listening",
-            "name": "Xyz3",
-          },
-          Object {
-            "_id": "game:xyz4",
-            "category": "listening",
-            "name": "Xyz4",
+            "name": "Tap-wrong",
+            "screen": "Game3",
           },
         ],
       },
@@ -355,24 +295,16 @@ Array [
         "category": "writing",
         "games": Array [
           Object {
-            "_id": "game:xyz5",
+            "_id": "game:word",
             "category": "writing",
-            "name": "Xyz5",
+            "name": "Word",
+            "screen": "Game4",
           },
           Object {
-            "_id": "game:xyz6",
+            "_id": "game:multiple-choice",
             "category": "writing",
-            "name": "Xyz6",
-          },
-          Object {
-            "_id": "game:xyz7",
-            "category": "writing",
-            "name": "Xyz7",
-          },
-          Object {
-            "_id": "game:xyz8",
-            "category": "writing",
-            "name": "Xyz8",
+            "name": "Multiple-choice",
+            "screen": "Game6",
           },
         ],
       },
@@ -381,50 +313,10 @@ Array [
         "category": "reading",
         "games": Array [
           Object {
-            "_id": "game:alphamon",
+            "_id": "game:connect-dots",
             "category": "reading",
-            "name": "Alphamon",
-          },
-          Object {
-            "_id": "game:alphamon1",
-            "category": "reading",
-            "name": "Alphamon1",
-          },
-          Object {
-            "_id": "game:alphamon2",
-            "category": "reading",
-            "name": "Alphamon2",
-          },
-          Object {
-            "_id": "game:alphamon3",
-            "category": "reading",
-            "name": "Alphamon3",
-          },
-        ],
-      },
-      Object {
-        "_id": "maths",
-        "category": "maths",
-        "games": Array [
-          Object {
-            "_id": "game:connect-the-dots",
-            "category": "maths",
-            "name": "Connect The Dots",
-          },
-          Object {
-            "_id": "game:connect-the-dot1",
-            "category": "maths",
-            "name": "Connect The Dots1",
-          },
-          Object {
-            "_id": "game:grocery-store",
-            "category": "maths",
-            "name": "Grocery Store",
-          },
-          Object {
-            "_id": "game:grocery-store2",
-            "category": "maths",
-            "name": "Grocery Store2",
+            "name": "Connect-dots",
+            "screen": "Game5",
           },
         ],
       },
@@ -436,6 +328,7 @@ Array [
 
 exports[`returns the same state on an unhandled action 1`] = `
 Object {
+  "data": Array [],
   "games": Array [],
   "isFetching": false,
   "theme": Object {},

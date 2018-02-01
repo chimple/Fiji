@@ -11,7 +11,7 @@ export default class GameTitle extends PureComponent{
 
     render(){
         return(
-        <TouchableOpacity onPress={this._onPress}  >
+        <TouchableOpacity onPress={this._onPress} >
             <Text>{this.props.title.name}</Text>
         </TouchableOpacity>
         )
