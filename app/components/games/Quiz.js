@@ -167,12 +167,13 @@ const jsonData = { quiz: {
         <ScrollView style={{ backgroundColor: '#F5FCFF', paddingTop: 10 }}>
 
         <View style={styles.container}>
-          {height > width ? <View style={{ height: height * 0.18 }} /> : <View /> }
-        
+                 
         <View 
         style={{ flex: 1,
         justifyContent: 'center', 
-        alignItems: 'center', }}
+        alignItems: 'center',
+        paddingTop: height * 0.1,
+        paddingBottom: height * 0.1 }}
         >
         
         <Animatable.View ref="questionView" style={styles.oval}>
