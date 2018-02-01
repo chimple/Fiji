@@ -19,8 +19,8 @@ const Confirm = ({ children, visible, onAccept, onDecline }) => {
         </View>
 
         <View style={styles.containerStyle1}>
-          <Button onPress={onAccept}>Yes</Button>
-          <Button onPress={onDecline}>NO</Button>
+          <Button onPress={onAccept}>Resume</Button>
+          <Button onPress={onDecline}>exit</Button>
         </View>
       </View>
     </Modal>
@@ -43,7 +43,7 @@ const styles = {
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
     position: 'relative',
     flex: 1,
-    marginTop: '45%'
+    marginTop: '60%'
   },
   containerStyle1: {
     borderBottomWidth: 1,

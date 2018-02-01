@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`creates a FETCH_GAME_HIGH_SCORES_FAILURE action 1`] = `
+Object {
+  "type": "Fiji/game/FETCH_GAME_HIGH_SCORES_FAILURE",
+}
+`;
+
+exports[`creates a FETCH_GAME_HIGH_SCORES_REQUEST action 1`] = `
+Object {
+  "type": "Fiji/game/FETCH_GAME_HIGH_SCORES_REQUEST",
+}
+`;
+
+exports[`creates a FETCH_GAME_HIGH_SCORES_SUCCESS action 1`] = `
+Object {
+  "gameHighScores": Array [
+    Object {
+      "_id": "high-score:game:memory-matching:mad-hatter",
+      "score": 20,
+      "user_id": "mad-hatter",
+    },
+    Object {
+      "_id": "high-score:game:memory-matching:white-rabbit",
+      "score": 30,
+      "user_id": "white-rabbit",
+    },
+    Object {
+      "_id": "high-score:game:memory-matching:alice",
+      "score": 10,
+      "user_id": "alice",
+    },
+  ],
+  "type": "Fiji/game/FETCH_GAME_HIGH_SCORES_SUCCESS",
+}
+`;
+
+exports[`handles FETCH_GAME_HIGH_SCORES_FAILURE action 1`] = `
+Object {
+  "gameHighScores": Array [],
+  "isFetching": false,
+  "score": 0,
+}
+`;
+
+exports[`handles FETCH_GAME_HIGH_SCORES_REQUEST action 1`] = `
+Object {
+  "gameHighScores": Array [],
+  "isFetching": true,
+  "score": 0,
+}
+`;
+
+exports[`handles FETCH_GAME_HIGH_SCORES_SUCCESS action 1`] = `
+Object {
+  "gameHighScores": Array [
+    Object {
+      "_id": "high-score:game:memory-matching:mad-hatter",
+      "score": 20,
+      "user_id": "mad-hatter",
+    },
+    Object {
+      "_id": "high-score:game:memory-matching:white-rabbit",
+      "score": 30,
+      "user_id": "white-rabbit",
+    },
+    Object {
+      "_id": "high-score:game:memory-matching:alice",
+      "score": 10,
+      "user_id": "alice",
+    },
+  ],
+  "isFetching": false,
+  "score": 0,
+}
+`;
+
+exports[`handles fetchGameHighScores action 1`] = `
+Array [
+  Object {
+    "type": "Fiji/game/FETCH_GAME_HIGH_SCORES_REQUEST",
+  },
+  Object {
+    "gameHighScores": Array [
+      Object {
+        "_id": "high-score:game:memory-matching:white-rabbit",
+        "score": 30,
+        "user_id": "white-rabbit",
+      },
+      Object {
+        "_id": "high-score:game:memory-matching:mad-hatter",
+        "score": 20,
+        "user_id": "mad-hatter",
+      },
+      Object {
+        "_id": "high-score:game:memory-matching:alice",
+        "score": 10,
+        "user_id": "alice",
+      },
+    ],
+    "type": "Fiji/game/FETCH_GAME_HIGH_SCORES_SUCCESS",
+  },
+]
+`;
+
+exports[`returns the same state on an unhandled action 1`] = `
+Object {
+  "gameHighScores": Array [],
+  "isFetching": false,
+  "score": 0,
+}
+`;

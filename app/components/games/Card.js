@@ -22,7 +22,8 @@ export default class Card extends Component {
   componentDidMount() {
     setTimeout( () => {
      this.setState({paired: false , visible: false});
-   },1500);
+     this.flipCard();
+   },2000);
  }
 
   componentWillReceiveProps (nextProps) {
@@ -86,6 +87,7 @@ export default class Card extends Component {
     }
 
     hide() {
+        this.flipCard();
         this.setState({visible: false});
         this.props.cardCfg.hidden = true;
         this.props.onHide;
@@ -144,11 +146,9 @@ const styles = StyleSheet.create({
   cardImageVisible: {
     opacity: 1
   },
-
   cardImagePaired: {
     opacity: 0.5
   },
-
   cardPaired: {
     backgroundColor: '#F4F9CB',
     borderColor: '#89E0B9'
