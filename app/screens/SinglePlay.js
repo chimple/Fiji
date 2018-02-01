@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   StatusBar,
-  TouchableOpacity,
   View,
   Text
 } from 'react-native';
@@ -58,7 +57,7 @@ export default class SinglePlay extends Component {
                     <Text style={styles.toolbarTitle}>Current Score - {this.state.score}</Text>
       </View>
  
-       { this.state.quizFinish ? <View style={styles.container}>
+       { this.state.quizFinish ? <View ref="ScoreView" style={styles.container}>
            <View style={styles.circle}>
  
              { this._scoreMessage(this.state.score) }
@@ -80,6 +79,7 @@ const styles = {
   circle: {
     justifyContent: 'center',
     alignItems: 'center',
+    alignSelf: 'center',
     width: scoreCircleSize,
     height: scoreCircleSize,
     borderRadius: scoreCircleSize / 2,
@@ -92,9 +92,9 @@ const styles = {
   },
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   toolbar: {
         backgroundColor: '#483d8b',

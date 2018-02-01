@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import RNFS from 'react-native-fs';
 import Camera, { constants } from 'react-native-camera';
+import Orientation from 'react-native-orientation';
 import PropTypes from 'prop-types'
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux'
@@ -17,12 +18,18 @@ import { addUser } from '../redux/user'
 
 
 
+
 class CamPage extends Component {
 
-    // state = {
-    //         name: 'kkkk',
-    //         image: ''
-    // }
+    componentDidMount() {
+        // this locks the view to Portrait Mode
+        Orientation.lockToPortrait();
+    }
+
+    componentWillUnmount() {
+        // this locks the view to Portrait Mode
+        Orientation.unlockAllOrientations();
+    }
 
     onBarCodeRead(e) {
         console.log(
@@ -39,27 +46,22 @@ class CamPage extends Component {
     //    }
     // }
 
-    // takePicture() {
-    //     const options = {};
-    //     //options.location = ...
-    //     this.camera.capture({ metadata: options })
-    //         .then((data) =>  this.setState({ image: data.path }))
-    //         .catch(err => console.error(err));
-    //     this.sendData(this.state)
-    // }
-
     takePicture() {
         this.camera.capture()
-          .then((data) => {
-            let base64Img = data.path;
-            RNFS.readFile(Platform.OS === 'android'? base64Img.substring(7): base64Img, "base64")  //substring(7) -> to remove the file://
-             .then(res =>  this.props.dispatch(addUser({name:'',image:res})))
-             .catch(err => console.error(err))
-           })
-     }
+            .then((data) => {
+                let base64Img = data.path;
+                RNFS.readFile(Platform.OS === 'android' ? base64Img.substring(7) : base64Img, "base64")  //substring(7) -> to remove the file://
+                    .then(res => {
+                        this.props.dispatch(addUser({ name: 'me', image: res }));
+                        this.props.navigation.navigate('Friends');
+                        console.log('this is the id in camPage')
+                    })
+                    .catch(err => console.error(err))
+            })
+    }
 
     render() {
-        // console.log("camera is working"+this.state.uri);
+        console.log("camera is working"+this.props);
         return (
             <View style={{ flex: 1, justifyContent: 'space-around' }}>
                 <View style={styles.container}>
@@ -70,7 +72,7 @@ class CamPage extends Component {
                         type={'front'}
                         onBarCodeRead={this.onBarCodeRead.bind(this)}
                         style={styles.preview}
-                        // aspect={constants.Aspect.fill}
+                    // aspect={constants.Aspect.fill}
                     />
                 </View>
                 <View style={{ alignItems: 'flex-end' }}>
@@ -118,12 +120,12 @@ const styles = StyleSheet.create({
 
 CamPage.propTypes = {
     user: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string,
-      image: PropTypes.string
+        name: PropTypes.string,
+        image: PropTypes.string
     }))
-  }
+}
 // export default CamPage;
 
 export default connect(state => ({
     addUser: state.user.addUser
-  }))(CamPage)
+}))(CamPage)
