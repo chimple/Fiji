@@ -18,25 +18,45 @@ class StorySection extends Component {
         var characterData = [];
         console.log("How many character is there : ", Object.keys(this.props.story.characters).length)
 
-        for(var i = 0 ; i < Object.keys(this.props.story.characters).length; i++)
-            characterData.push(""+Object.keys(this.props.story.characters)[i])
+        for (var i = 0; i < Object.keys(this.props.story.characters).length; i++)
+            characterData.push("" + Object.keys(this.props.story.characters)[i])
 
         console.log(characterData)
-  
+
         for (let i = 0; i < this.props.count; i++) {
             for (let j = 0; j <= dialog.length; j++) {
 
                 var speaker = this.props.story.pages[this.props.page].dialog[i].speaker;
                 var speakerIndex = 0;
-                for(let k = 0 ; k < characterData.length; k++){
-                    if(characterData[k] == speaker){
+                for (let k = 0; k < characterData.length; k++) {
+                    if (characterData[k] == speaker) {
                         speakerIndex = k;
-                    } else {
-
                     }
                 }
+                //var chapter = this.props.story.pages[this.props.page].dialog[i].chapter;
+                if (!this.props.story.pages[this.props.page].dialog[i].speaker) {
 
-                if (speakerIndex%2 == 0) {
+                    
+                    console.log("checkinggg non dialog", this.props.story.pages[this.props.page].dialog[i].text);
+                     
+                    stories.push(
+                        <View style={styles.chapterContainer}>
+                         <Image style={{width:200, height:100, position: 'absolute'}}
+                                source={{
+                                    uri: 'data:image/png;base64,' + this.props.story.pages[this.props.page].dialog[i].img ,
+                                }} />
+                    <Text style={styles.chapterTextStyle}>
+                        {this.props.story.pages[this.props.page].dialog[i].text}
+                    </Text>
+                    </View>
+                    );
+                    break;
+                     
+
+                }
+                else {
+                    var speaker = this.props.story.pages[this.props.page].dialog[i].speaker;
+                if (speakerIndex % 2 == 0) {
                     stories.push(
                         <View style={styles.storyContainer}>
                             <Image style={styles.characterImageStyle}
@@ -68,8 +88,10 @@ class StorySection extends Component {
                     );
                     break;
                 }
+
             }
         }
+    }
         return stories;
     }
 }
@@ -97,18 +119,18 @@ const styles = {
             height: 1,
         },
     },
-        textContainer2: {
-            width: 220,
-            borderRadius: 20,
-            backgroundColor: '#f48ded',
-            padding: 10,
-            shadowColor: '#3d3d3d',
-            shadowRadius: 2,
-            shadowOpacity: 0.5,
-            shadowOffset: {
-                height: 1,
-            }
-    
+    textContainer2: {
+        width: 220,
+        borderRadius: 20,
+        backgroundColor: '#f48ded',
+        padding: 10,
+        shadowColor: '#3d3d3d',
+        shadowRadius: 2,
+        shadowOpacity: 0.5,
+        shadowOffset: {
+            height: 1,
+        }
+
     },
     characterImageStyle: {
         height: 50,
@@ -140,7 +162,20 @@ const styles = {
         shadowOpacity: 0.9,
         position: 'relative',
         opacity: 1
+    },
+    chapterContainer: {
+        flex: 1,
+        height: 70,
+        backgroundColor: '#09c3f2',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    chapterTextStyle: {
+        fontSize: 25,
+        color: 'red',
+        fontWeight: '600',
     }
+
 }
 
 export default connect(state => ({

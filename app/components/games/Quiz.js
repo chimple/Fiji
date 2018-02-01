@@ -6,6 +6,7 @@ import {
   ScrollView,
   FlatList
 } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import Animbutton from './Animbutton';
 
 const { width, height } = Dimensions.get('window');
@@ -57,7 +58,7 @@ const jsonData = { quiz: {
       question6: {
         correctoption: 'option4',
         options: {
-            option1: 'H',
+            option1: 'B',
             option2: 'S',
             option3: 'D',
             option4: 'K'
@@ -100,8 +101,13 @@ const jsonData = { quiz: {
         question: arrnew[this.qno].question,
         options: arrnew[this.qno].options,
         correctoption: arrnew[this.qno].correctoption,
-        countCheck: 0
+        countCheck: 0,
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
       };
+      Dimensions.addEventListener('change', (e) => {
+        this.setState(e.window);
+    });
     }
 
 
@@ -125,6 +131,7 @@ const jsonData = { quiz: {
           if (ans === this.state.correctoption) {
             this.score += 1;
             this.next();
+            this.refs.questionView.zoomIn(800);
           }
         } else {
           const count = this.state.countCheck - 1;
@@ -134,13 +141,14 @@ const jsonData = { quiz: {
          }
         }
     }
-    
+
+       
     render() {
       const _this = this;
       const currentOptions = this.state.options;
       const options = Object.keys(currentOptions).map((k) => {
-        return (<View 
-        key={k} 
+        return (<View
+        key={k}
         style={{ alignItems: 'center', justifyContent: 'center', margin: 10 }}
         >
    
@@ -154,27 +162,12 @@ const jsonData = { quiz: {
    
         </View>);
       });
-
-      // const elem = [];
-      // for(var i=0; i < currentOptions.length; i++){
-      //   elem.push(
-      //     <View key={i} style={{ flexDirection: 'row' }}>
-      //       <Animbutton 
-      //       countCheck={_this.state.countCheck} 
-      //       onColor={'#483d8b'} 
-      //       effect={i === this.state.correctoption ? 'tada' : 'shake'} 
-      //       _onPress={(status) => _this._answer(status, k)} 
-      //       text={currentOptions[i]} 
-      //       />
-      //     </View>
-      //   )
-      // }
    
       return (
         <ScrollView style={{ backgroundColor: '#F5FCFF', paddingTop: 10 }}>
 
         <View style={styles.container}>
-        <View style={{ height: height * 0.15 }} />
+          {height > width ? <View style={{ height: height * 0.18 }} /> : <View /> }
         
         <View 
         style={{ flex: 1,
@@ -182,30 +175,22 @@ const jsonData = { quiz: {
         alignItems: 'center', }}
         >
         
-        <View style={styles.oval}>
+        <Animatable.View ref="questionView" style={styles.oval}>
           <Text style={styles.welcome}>
             {this.state.question}
           </Text>
-       </View>
+       </Animatable.View>
           {options.length === 2 ? <View 
           style={{ flexDirection: 'row', 
           alignItems: 'center', 
           width }}
           >
           { options }
-          </View> : <FlatList 
+          </View> : 
+          <FlatList 
             data={options}
-            renderItem={({ item }) => 
-            
-            <Animbutton 
-          countCheck={_this.state.countCheck} 
-          onColor={'#483d8b'} 
-          effect={item === this.state.correctoption ? 'tada' : 'shake'} 
-          _onPress={(status) => _this._answer(status, item)} 
-          text={jsonData.quiz.quiz1[item].options[item]}
-            />
-          }
-          numColumns={2}
+            numColumns={2}
+            renderItem={({ item }) => <View key={item}>{item}</View>}
           />
         
           
@@ -224,14 +209,15 @@ const jsonData = { quiz: {
     alignItems: 'center',
     width: width * 0.5,
     borderRadius: 20,
-    backgroundColor: '#483d8b'
+    backgroundColor: '#483d8b',
+    margin: 15
     },
     container: {
       flex: 1,
       alignContent: 'space-between'
     },
     welcome: {
-      fontSize: 56,
+      fontSize: 48,
       fontWeight: 'bold',
       margin: 15,
       color: 'white'
