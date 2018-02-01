@@ -12,6 +12,8 @@ target 'Fiji' do
 
   
 
+  pod 'react-native-orientation', :path => '../node_modules/react-native-orientation'
+
   target 'FijiTests' do
     inherit! :search_paths
     # Pods for testing
