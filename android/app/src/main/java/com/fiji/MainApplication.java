@@ -3,6 +3,7 @@ package com.fiji;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.github.yamill.orientation.OrientationPackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.microsoft.appcenter.reactnative.crashes.AppCenterReactNativeCrashesPackage;
 import com.microsoft.appcenter.reactnative.analytics.AppCenterReactNativeAnalyticsPackage;
@@ -33,6 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new OrientationPackage(),
             new RCTCameraPackage(),
             new AppCenterReactNativeCrashesPackage(MainApplication.this, getResources().getString(R.string.appcenterCrashes_whenToSendCrashes)),
             new AppCenterReactNativeAnalyticsPackage(MainApplication.this, getResources().getString(R.string.appcenterAnalytics_whenToEnableAnalytics)),

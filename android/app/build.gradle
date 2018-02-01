@@ -138,6 +138,7 @@ android {
 }
 
 dependencies {
+     compile project(':react-native-orientation')
     compile project(':react-native-camera')
     compile project(':appcenter-crashes')
     compile project(':appcenter-analytics')
