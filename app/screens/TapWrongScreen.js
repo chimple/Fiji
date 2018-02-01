@@ -16,16 +16,6 @@ class TapWrongScreen extends Component {
                     object1: {
                         arr1: ['D','O','G'],
                         arr2: ['O']
-                    },
-                    obeject2: {
-                        arr1: [2, 3, 4, 5, 6],
-                        arr2: [5, 7, 8, 9," ", " "," "]
-
-                    },
-                    obeject2: {
-                        arr1: [5,6, 7, 8, 9],
-                        arr2: [8, 3, 4, 5, " ", " ", " "]
-
                     }
 
                 }
