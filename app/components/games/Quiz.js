@@ -206,9 +206,9 @@ const jsonData = { quiz: {
     justifyContent: 'center',
     alignItems: 'center',
     width: width * 0.5,
-    borderRadius: 20,
+    borderRadius: width * 0.08,
     backgroundColor: '#483d8b',
-    margin: 15
+    margin: width * 0.02
     },
     container: {
       flex: 1,
