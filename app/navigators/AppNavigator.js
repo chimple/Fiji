@@ -25,7 +25,7 @@ import TapHomeScreen from '../screens/TapHomeScreen'
 import TapWrongScreen from '../screens/TapWrongScreen'
 import WordScreen from '../screens/WordScreen' 
 import ConnectDotsScreen from '../screens/ConnectDotsScreen'
-
+import ScoreScreen from '../screens/ScoreScreen'
 import CamPage from '../components/CamPage'
 import GameScreen from '../screens/GameScreen';
 
@@ -90,7 +90,7 @@ const MainNavigator = TabNavigator({
     screen: StoryNavigator
   }
 }, {
-  tabBarPosition:"bottom",
+  tabBarPosition:"top",
   tabBarOptions:{
     labelStyle:{fontSize: 15, fontWeight:'bold', color:'black'},
     style:{backgroundColor:'#19a4f2'},
@@ -156,6 +156,13 @@ export const AppNavigator = StackNavigator({
   },
   Reflex:{
     screen: GameScreen
+  },
+  Score:{
+    screen: ScoreScreen,
+    navigationOptions: {
+      headerTitle: 'Score',
+      headerStyle:{backgroundColor: '#19a4f2'}
+    },
   }
 })
 

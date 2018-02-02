@@ -5,7 +5,7 @@ import {
   Text
 } from 'react-native';
 import { Icon } from 'react-native-elements';
-import Quiz from './Quiz';
+import Quiz from '../components/games/Quiz';
 
 export default class SinglePlay extends Component {
   constructor(props) {
