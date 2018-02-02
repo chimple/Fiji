@@ -17,7 +17,7 @@ export const isPortrait = () => {
 /**
  * Returns true of the screen is in landscape mode
  */
-const isLandscape = () => {
+export const isLandscape = () => {
     const dim = Dimensions.get('screen');
     return dim.width >= dim.height;
 };
