@@ -8,13 +8,23 @@ import {
   Animated,
   Alert
 } from 'react-native';
+import Orientation from 'react-native-orientation';
 import Board from '../components/games/Board';
 import Card from '../components/games/Card';
+import ScoreBoard from '../components/games/ScoreBoard';
 
 export default class MemoryMatchingScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {board: new Board(4 , 4), players: 1}
+  }
+
+  componentDidMount() {
+    Orientation.lockToPortrait();
+  }
+
+  componentWillUnmount() {
+    Orientation.unlockAllOrientations();
   }
 
   onRestartPress() {
@@ -24,6 +34,41 @@ export default class MemoryMatchingScreen extends Component {
   makeSinglePlayer() {
     alert("makeSinglePlayer!!!");
   }
+
+  isGameOver() {
+    var board = this.state.board,
+        totalScore = board.score[0] + board.score[1],
+        maxScore = board.maxScore,
+        msg;
+
+    if (totalScore < maxScore) {
+        return false;
+    }
+
+    if (this.state.players === 1) {
+        msg = 'Hey!! You\'ve done it!';
+      }
+
+    Alert.alert(
+        'Game Over',
+        msg,
+        [
+          {text: 'Alright!'},
+          {text: 'Start new'}
+      ]
+    );
+
+    return true;
+  }
+
+  getScoreboard() {
+      var board = this.state.board;
+
+      if (this.state.players === 1) {
+        return <ScoreBoard board={board}/>;
+      }
+  }
+
 
   getPlayerToggleButtons() {
   return (
@@ -105,6 +150,8 @@ onCardHide() {
         <View style={styles.board}>
           {rows}
         </View>
+
+        {this.getScoreboard()}
 
         <TouchableHighlight
             onPress={this.onRestartPress}

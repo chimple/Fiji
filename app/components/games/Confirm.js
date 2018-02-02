@@ -3,7 +3,7 @@ import { Text, View, Modal } from 'react-native';
 import  Button  from './Button';
 
 const Confirm = ({ children, visible, onAccept, onDecline }) => {
-  const { containerStyle, textStyle, cardSectionStyle } = styles;
+  const { containerStyle, textStyle } = styles;
   return (
     <Modal
       visible={visible}
@@ -28,10 +28,6 @@ const Confirm = ({ children, visible, onAccept, onDecline }) => {
 };
 
 const styles = {
-  cardSectionStyle: {
-    justifyContent: 'center',
-    marginTop: 10
-  },
   textStyle: {
     flex: 1,
     fontSize: 25,
@@ -43,7 +39,7 @@ const styles = {
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
     position: 'relative',
     flex: 1,
-    marginTop: '60%'
+    marginTop: '10%'
   },
   containerStyle1: {
     borderBottomWidth: 1,
