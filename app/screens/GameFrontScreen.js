@@ -65,7 +65,8 @@ GameFrontScreen.propTypes = {
     navigation: PropTypes.shape({
         state: PropTypes.shape({
           params: PropTypes.shape({
-            title: PropTypes.object.isRequired
+            title: PropTypes.object.isRequired,
+            user: PropTypes.object.isRequired
           })
         })
       })
