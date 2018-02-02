@@ -16,34 +16,6 @@ class FriendList extends PureComponent {
     />
   )
 
-
-  _imageSave = (userImage) =>{
-    this.props.dispatch(addUser(userImage))
-  }
-  _addItem = () => (
-      <TouchableOpacity onPress={() => this.props.navigation.navigate('Cam')} >
-        <View style={styles.ImageViewStyle}>
-        <Image
-          style={styles.ImageStyle}
-          source={{ uri: 'https://cdn.pixabay.com/photo/2017/01/10/23/01/icon-1970474_960_720.png' }}
-        />
-        </View>
-          {/*<SvgUri
-            width="200"
-            height="200"
-            // source={{ uri:'http://thenewcode.com/assets/images/thumbnails/homer-simpson.svg' }}
-            svgXmlData= { svg }
-          /> */}
-        <View style={styles.TextViewStyle}>
-          <Text style={styles.TextStyle}>
-            ADD USER
-          </Text>
-        </View>
-      </TouchableOpacity>
-    )
-
-  // merge = _renderItem + 
-
   render() {
     // console.log('thisdfdfgdfgdfgdfgdfgd'+item._id);
     // const add = this._renderItem;
@@ -51,8 +23,11 @@ class FriendList extends PureComponent {
     return (
       <View style={styles.FriendListStyle}>
         <FlatList
+          horizontal={false}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap' }}
+          // contentContainerStyle={{ justifyContent: 'flex-start', flexDirection: 'column' }}
+          // refreshing={true}
+          numColumns={3}
           data={this.props.users}
           // extraData={this._addItem()}
           keyExtractor={this._keyExtractor}

@@ -8,6 +8,7 @@ import story from './story'
 import game from './game'
 import user from './user'
 import score from './score'
+import data from './data'
 
 const rootReducer = combineReducers({
     users,
