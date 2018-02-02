@@ -105,12 +105,17 @@ const jsonData = { quiz: {
         height,
         width
       };
-      
+
+      Dimensions.addEventListener('change', () => {
+        width = Dimensions.get('window').width;
+        height = Dimensions.get('window').height;
+      });     
     }
 
+    state = Dimensions.get("window");
     handler = dims => this.setState(dims);
 
-    componentWillMount() {
+    componentDidMount() {
         Dimensions.addEventListener("change", this.handler);
     }
 
@@ -181,7 +186,7 @@ const jsonData = { quiz: {
         style={{ flex: 1,
         justifyContent: 'center', 
         alignItems: 'center',
-        paddingBottom: height * 0.1 }}
+        paddingBottom: height * 0.01 }}
         >
 
         <Animatable.View ref="questionView" style={styles.oval}>
@@ -201,6 +206,7 @@ const jsonData = { quiz: {
           <FlatList 
             data={options}
             numColumns={2}
+            style={{ flexGrow: 1 }}
             renderItem={({ item }) => <View key={item}>{item}</View>}
           />
         
@@ -228,9 +234,9 @@ const jsonData = { quiz: {
       alignContent: 'space-between'
     },
     welcome: {
-      fontSize: height * 0.002,
+      fontSize: height * 0.1,
       fontWeight: 'bold',
-      margin: height * 0.0008,
+      margin: height * 0.002,
       color: 'white',
     }
   };
