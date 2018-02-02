@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import User from './User'
 
 
-class UserList extends PureComponent {
+class FriendList extends PureComponent {
   _keyExtractor = (item, index) => item._id
 
   _renderItem = ({ item }) => (
@@ -49,7 +49,7 @@ class UserList extends PureComponent {
     // const add = this._renderItem;
     // add.push(this._addItem); 
     return (
-      <View style={styles.UserListStyle}>
+      <View style={styles.FriendListStyle}>
         <FlatList
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap' }}
@@ -57,20 +57,19 @@ class UserList extends PureComponent {
           // extraData={this._addItem()}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
-          ListFooterComponent={this._addItem}
         />
       </View>
     )
   }
 }
 
-UserList.propTypes = {
+FriendList.propTypes = {
   users: PropTypes.array,
   onPressItem: PropTypes.func
 }
 
 const styles = StyleSheet.create({
-  UserListStyle: {
+  FriendListStyle: {
     flex: 1,
     backgroundColor: 'white',
     paddingTop: '4%',
@@ -113,4 +112,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default UserList
+export default FriendList

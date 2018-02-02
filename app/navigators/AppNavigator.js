@@ -5,6 +5,7 @@
  */
 
 import React from 'react'
+import {Icon} from 'react-native-elements'
 import { addNavigationHelpers, TabNavigator, StackNavigator } from 'react-navigation'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -43,8 +44,9 @@ const ChatNavigator = StackNavigator({
   Friends: {
     screen: FriendsScreen,
     navigationOptions: {
+      headerLeft: null,
       headerTitle: 'Friends',
-      headerStyle:{backgroundColor: '#19a4f2'}
+      headerStyle:{backgroundColor: '#19a4f2'},
     },
   },
   /*ChatWith: {
@@ -90,7 +92,7 @@ const MainNavigator = TabNavigator({
     screen: StoryNavigator
   }
 }, {
-  tabBarPosition:"bottom",
+  tabBarPosition:"top",
   tabBarOptions:{
     labelStyle:{fontSize: 15, fontWeight:'bold', color:'black'},
     style:{backgroundColor:'#19a4f2'},

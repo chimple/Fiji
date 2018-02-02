@@ -102,12 +102,26 @@ const jsonData = { quiz: {
         options: arrnew[this.qno].options,
         correctoption: arrnew[this.qno].correctoption,
         countCheck: 0,
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height,
+        height,
+        width
       };
-      Dimensions.addEventListener('change', (e) => {
-        this.setState(e.window);
-    });
+
+      Dimensions.addEventListener('change', () => {
+        width = Dimensions.get('window').width;
+        height = Dimensions.get('window').height;
+      });     
+    }
+
+    state = Dimensions.get("window");
+    handler = dims => this.setState(dims);
+
+    componentDidMount() {
+        Dimensions.addEventListener("change", this.handler);
+    }
+
+    componentWillUnmount() {
+      // Important to stop updating state after unmount
+      Dimensions.removeEventListener("change", this.handler);
     }
 
 
@@ -162,7 +176,7 @@ const jsonData = { quiz: {
    
         </View>);
       });
-   
+      
       return (
         <ScrollView style={{ backgroundColor: '#F5FCFF', paddingTop: 10 }}>
 
@@ -172,17 +186,18 @@ const jsonData = { quiz: {
         style={{ flex: 1,
         justifyContent: 'center', 
         alignItems: 'center',
-        paddingTop: height * 0.1,
-        paddingBottom: height * 0.1 }}
+        paddingBottom: height * 0.01 }}
         >
-        
+
         <Animatable.View ref="questionView" style={styles.oval}>
           <Text style={styles.welcome}>
             {this.state.question}
           </Text>
-       </Animatable.View>
+       </Animatable.View> 
+
           {options.length === 2 ? <View 
           style={{ flexDirection: 'row', 
+          justifyContent: 'center',
           alignItems: 'center', 
           width }}
           >
@@ -191,6 +206,7 @@ const jsonData = { quiz: {
           <FlatList 
             data={options}
             numColumns={2}
+            style={{ flexGrow: 1 }}
             renderItem={({ item }) => <View key={item}>{item}</View>}
           />
         
@@ -200,11 +216,11 @@ const jsonData = { quiz: {
         </View>
         </ScrollView>
       );
+    
     }
   }
    
-  const styles = {
-    
+  const styles = {    
     oval: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -218,10 +234,10 @@ const jsonData = { quiz: {
       alignContent: 'space-between'
     },
     welcome: {
-      fontSize: 48,
+      fontSize: height * 0.1,
       fontWeight: 'bold',
-      margin: 15,
-      color: 'white'
+      margin: height * 0.002,
+      color: 'white',
     }
   };
 
