@@ -1,4 +1,5 @@
 import { usersDB, remoteUsersDB } from '../db'
+import { syncUser } from './auth'
 
 const ADD_USER_REQUEST = 'Fiji/user/ADD_USER_REQUEST'
 const ADD_USER_SUCCESS = 'Fiji/user/ADD_USER_SUCCESS'
@@ -62,7 +63,8 @@ export const addUser = (user) => async(dispatch) => {
     const addedUser = await usersDB.get(response.id)
     dispatch(addUserSuccess(addedUser))
     const syncResult = await usersDB.sync(remoteUsersDB)
-    console.log(syncResult)
+    console.log('this is syncResult',syncResult)
+    dispatch(syncUser(addedUser))
   } catch(error) {
     console.log('_getAllUser: ' + error)
     dispatch(addUserFailure(error))
