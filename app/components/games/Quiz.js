@@ -92,6 +92,21 @@ const jsonData = { quiz: {
   export default class Quiz extends Component {
     constructor(props) {
       super(props);
+      this.state = {
+        height,
+        width
+      }
+
+        console.log(width);
+        console.log(height);
+
+      Dimensions.addEventListener('change', () => {
+        width = Dimensions.get('window').width;
+        height = Dimensions.get('window').height;
+        console.log(width);
+        console.log(height);
+      }); 
+
       this.qno = 0;
       this.score = 0;
    
@@ -101,15 +116,9 @@ const jsonData = { quiz: {
         question: arrnew[this.qno].question,
         options: arrnew[this.qno].options,
         correctoption: arrnew[this.qno].correctoption,
-        countCheck: 0,
-        height,
-        width
+        countCheck: 0
       };
-
-      Dimensions.addEventListener('change', () => {
-        width = Dimensions.get('window').width;
-        height = Dimensions.get('window').height;
-      });     
+    
     }
 
     state = Dimensions.get("window");
@@ -158,6 +167,7 @@ const jsonData = { quiz: {
 
        
     render() {
+
       const _this = this;
       const currentOptions = this.state.options;
       const options = Object.keys(currentOptions).map((k) => {
@@ -178,7 +188,7 @@ const jsonData = { quiz: {
       });
       
       return (
-        <ScrollView style={{ backgroundColor: '#F5FCFF', paddingTop: 10 }}>
+        <ScrollView style={{ backgroundColor: '#F5FCFF', paddingTop: 5 }}>
 
         <View style={styles.container}>
                  
@@ -224,7 +234,7 @@ const jsonData = { quiz: {
     oval: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: width * 0.5,
+    width: width * 0.35,
     borderRadius: 20,
     backgroundColor: '#483d8b',
     margin: 15
@@ -234,7 +244,7 @@ const jsonData = { quiz: {
       alignContent: 'space-between'
     },
     welcome: {
-      fontSize: height * 0.1,
+      fontSize: height * 0.08,
       fontWeight: 'bold',
       margin: height * 0.002,
       color: 'white',
