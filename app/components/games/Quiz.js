@@ -101,9 +101,22 @@ const jsonData = { quiz: {
         question: arrnew[this.qno].question,
         options: arrnew[this.qno].options,
         correctoption: arrnew[this.qno].correctoption,
-        countCheck: 0
+        countCheck: 0,
+        height,
+        width
       };
       
+    }
+
+    handler = dims => this.setState(dims);
+
+    componentWillMount() {
+        Dimensions.addEventListener("change", this.handler);
+    }
+
+    componentWillUnmount() {
+      // Important to stop updating state after unmount
+      Dimensions.removeEventListener("change", this.handler);
     }
 
 
@@ -215,9 +228,9 @@ const jsonData = { quiz: {
       alignContent: 'space-between'
     },
     welcome: {
-      fontSize: 48,
+      fontSize: height * 0.002,
       fontWeight: 'bold',
-      margin: 15,
+      margin: height * 0.0008,
       color: 'white',
     }
   };
