@@ -90,7 +90,7 @@ const MainNavigator = TabNavigator({
     screen: StoryNavigator
   }
 }, {
-  tabBarPosition:"bottom",
+  tabBarPosition:"top",
   tabBarOptions:{
     labelStyle:{fontSize: 15, fontWeight:'bold', color:'black'},
     style:{backgroundColor:'#19a4f2'},

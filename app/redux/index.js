@@ -15,7 +15,8 @@ const rootReducer = combineReducers({
     chat,
     story,
     game,
-    user
+    user,
+    data
 })
 
 export default rootReducer
