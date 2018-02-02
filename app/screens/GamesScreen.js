@@ -10,6 +10,7 @@ import { fetchGames } from '../redux/game'
 class GamesScreen extends Component {
   componentDidMount() {
     this.props.dispatch(fetchGames())
+    console.log(this.props.navigation.state.params.user.name)
   }
 
   render() {
@@ -33,7 +34,7 @@ class GamesScreen extends Component {
   }
 
   _handlePress = ( title ) => {
-    this.props.navigation.navigate('Game', { title })
+    this.props.navigation.navigate('Game', { title, user: this.props.navigation.state.params.user })
   }
 
 }

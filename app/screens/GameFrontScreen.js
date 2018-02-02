@@ -10,12 +10,17 @@ import { fetchGameTheme } from '../redux/game'
 class GameFrontScreen extends PureComponent{
     componentDidMount() {
         this.props.dispatch(fetchGameTheme(this.props.navigation.state.params.title._id))
+        console.log(this.props.navigation.state.params.user.name)
     }
 
     _keyExtractor = (item, index) => item._id
 
     _renderItem = ({item}) => (
-        <TouchableOpacity onPress={()=> this.props.navigation.navigate( this.props.navigation.state.params.title.screen , {item} ) } style={{flexDirection:'row', borderColor:'black', borderWidth:2}}>
+        <TouchableOpacity onPress={()=> this.props.navigation.navigate( this.props.navigation.state.params.title.screen , 
+                                                                        {item, 
+                                                                        title: this.props.navigation.state.params.title, 
+                                                                        user: this.props.navigation.state.params.user} 
+                                                                        ) } style={{flexDirection:'row', borderColor:'black', borderWidth:2}}>
             <SvgUri 
             width='50'
             height='50'
@@ -45,7 +50,7 @@ class GameFrontScreen extends PureComponent{
                                 keyExtractor={this._keyExtractor}
                                 />
                             </View> 
-                            <TouchableOpacity onPress={()=> this.props.navigation.navigate('Score')} ><Text>take me to score screen</Text></TouchableOpacity>
+                            <TouchableOpacity onPress={()=> this.props.navigation.navigate('Score', {game:this.props.navigation.state.params.title, user: this.props.navigation.state.params.user})} ><Text>take me to score screen</Text></TouchableOpacity>
                             </View>
                         :
                             <View><Text>No Themes Found.</Text></View>
