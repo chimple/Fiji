@@ -4,7 +4,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import UserList from '../components/UserList'
+import FriendList from '../components/FriendList'
 import { fetchUsers } from '../redux/users'
 
 class LoginScreen extends Component {
@@ -20,7 +20,7 @@ class LoginScreen extends Component {
         :
           this.props.users.length
             ?
-              <UserList
+              <FriendList
                 users={ this.props.users.filter((user) => user._id != this.props.user._id) }
                 navigation={ this.props.navigation }
                 onPressItem = { this._handleChat }
