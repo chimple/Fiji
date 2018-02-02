@@ -5,7 +5,6 @@ import {
   Dimensions
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import Platform from './Platform';
 
 const { width } = Dimensions.get('window');
 
@@ -54,7 +53,6 @@ export default class Animbutton extends Component {
      }
    }
   render() {
-  if(Platform.isPortrait && Platform.isPhone){
     return (
       <TouchableWithoutFeedback onPress={() => this._onPress()}>
         <Animatable.View 
@@ -79,32 +77,6 @@ export default class Animbutton extends Component {
           </Text>
         </Animatable.View>
       </TouchableWithoutFeedback>
-    );} else if(Platform.isLandscape && Platform.isPhone){
-      return (
-        <TouchableWithoutFeedback onPress={() => this._onPress()}>
-          <Animatable.View 
-          ref="view" 
-          style={{ margin: 10, 
-          paddingTop: 10, 
-          paddingBottom: 10, 
-          paddingRight: 20, 
-          paddingLeft: 20, 
-          backgroundColor: '#bdbdbd', 
-          borderRadius: 20,
-          width: width * 0.4 }}
-          >
-            <Text 
-            style={{ color: this.state.status ? 'white' : '#696969',
-            fontSize: 36,
-            fontWeight: 'bold',
-            alignSelf: 'center',
-            justifyContent: 'center' }}
-            >
-            {this.props.text}
-            </Text>
-          </Animatable.View>
-        </TouchableWithoutFeedback>
-      );
-    }
+    );
   }
 }
