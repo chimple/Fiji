@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import RNFS from 'react-native-fs';
 import Camera, { constants } from 'react-native-camera';
+import ImageResizer from 'react-native-image-resizer';
 import Orientation from 'react-native-orientation';
 import PropTypes from 'prop-types'
 import { Icon } from 'react-native-elements';
@@ -24,13 +25,13 @@ class CamPage extends Component {
     componentDidMount() {
         // this locks the view to Portrait Mode
         Orientation.lockToPortrait();
-    }    
+    }
 
     componentWillUnmount() {
         // this locks the view to Portrait Mode
         Orientation.unlockAllOrientations();
-    } 
-     
+    }
+
     onBarCodeRead(e) {
         console.log(
             'Barcode Found!',
@@ -38,26 +39,43 @@ class CamPage extends Component {
         );
     }
 
-    // sendData(data){
-    //     this.setState({ image: data })
-    //     if(this.state.image !== ''){
-    //         console.log('this is image value'+data)
-    //         this.props.dispatch(addUser(this.state))
-    //    }
-    // }
+    // resize(img) {
+    //     console.log('this is resize');
+    //     ImageResizer.createResizedImage(img, 800, 600, 'JPEG', 80)
+    //     .then(({uri}) => {
+    //         console.log('this is url converted',uri);
+    //         return uri;
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //       return Alert.alert('Unable to resize the photo',
+    //         'Check the console for full the error message');
+    //     });
+    //   }
 
     takePicture() {
         this.camera.capture()
-          .then((data) => {
-            let base64Img = data.path;
-            RNFS.readFile(Platform.OS === 'android'? base64Img.substring(7): base64Img, "base64")  //substring(7) -> to remove the file://
-             .then(res =>  this.props.dispatch(addUser({name:'',image:res})))
-             .catch(err => console.error(err))
-           })
-     }
+            .then((data) => {
+                ImageResizer.createResizedImage(data.path, 128, 128, 'JPEG', 80)
+                    .then(({ uri }) => {
+                        RNFS.readFile(Platform.OS === 'android' ? uri.substring(7) : uri, "base64")  //substring(7) -> to remove the file://
+                            .then(res => {
+                                this.props.navigation.navigate('Friends');
+                                this.props.dispatch(addUser({ name: '', image: res }));
+                                console.log('this is the id in camPage')
+                            })
+                            .catch(err => console.error(err))
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        return Alert.alert('Unable to resize the photo',
+                            'Check the console for full the error message');
+                    });
+            })
+    }
 
     render() {
-        // console.log("camera is working"+this.state.uri);
+        console.log("camera is working" + this.props);
         return (
             <View style={{ flex: 1, justifyContent: 'space-around' }}>
                 <View style={styles.container}>
@@ -65,10 +83,11 @@ class CamPage extends Component {
                         ref={(cam) => {
                             this.camera = cam;
                         }}
+                        captureQuality={"480p"}
                         type={'front'}
                         onBarCodeRead={this.onBarCodeRead.bind(this)}
                         style={styles.preview}
-                        // aspect={constants.Aspect.fill}
+                    // aspect={constants.Aspect.fill}
                     />
                 </View>
                 <View style={{ alignItems: 'flex-end' }}>
@@ -116,12 +135,13 @@ const styles = StyleSheet.create({
 
 CamPage.propTypes = {
     user: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string,
-      image: PropTypes.string
+        name: PropTypes.string,
+        image: PropTypes.string
     }))
-  }
+}
 // export default CamPage;
 
 export default connect(state => ({
     addUser: state.user.addUser
-  }))(CamPage)
+}))(CamPage)
+

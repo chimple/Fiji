@@ -6,15 +6,35 @@ import {
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 export default class Animbutton extends Component {
   constructor(props) {
      super(props);
      this.state = {
-       status: false
+       status: false,
+       height,
+       width
      };
+     Dimensions.addEventListener('change', () => {
+      width = Dimensions.get('window').width;
+      height = Dimensions.get('window').height;
+    });
+
    }
+
+   state = Dimensions.get("window");
+    handler = dims => this.setState(dims);
+
+    componentDidMount() {
+        Dimensions.addEventListener("change", this.handler);
+    }
+
+    componentWillUnmount() {
+      // Important to stop updating state after unmount
+      Dimensions.removeEventListener("change", this.handler);
+    }
+
    _onPress() {
      this.props._onPress(!this.state.status);
      this.setState({ status: this.state.status });
@@ -51,23 +71,24 @@ export default class Animbutton extends Component {
          break;
      }
    }
+
+
   render() {
     return (
       <TouchableWithoutFeedback onPress={() => this._onPress()}>
         <Animatable.View 
         ref="view" 
         style={{ margin: 10, 
-        paddingTop: 10, 
-        paddingBottom: 10, 
+        paddingTop: height * 0.01,
         paddingRight: 20, 
         paddingLeft: 20, 
-        backgroundColor: this.state.status ? this.props.onColor : '#bdbdbd', 
+        backgroundColor: '#bdbdbd', 
         borderRadius: 20,
-        width: width * 0.4 }}
+        width: width * 0.35 }}
         >
           <Text 
           style={{ color: this.state.status ? 'white' : '#696969',
-          fontSize: 56,
+          fontSize: height * 0.08,
           fontWeight: 'bold',
           alignSelf: 'center',
           justifyContent: 'center' }}

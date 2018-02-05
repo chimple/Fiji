@@ -6,6 +6,7 @@ import {
   ScrollView,
   FlatList
 } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import Animbutton from './Animbutton';
 
 const { width, height } = Dimensions.get('window');
@@ -57,7 +58,7 @@ const jsonData = { quiz: {
       question6: {
         correctoption: 'option4',
         options: {
-            option1: 'H',
+            option1: 'B',
             option2: 'S',
             option3: 'D',
             option4: 'K'
@@ -100,8 +101,27 @@ const jsonData = { quiz: {
         question: arrnew[this.qno].question,
         options: arrnew[this.qno].options,
         correctoption: arrnew[this.qno].correctoption,
-        countCheck: 0
+        countCheck: 0,
+        height,
+        width
       };
+
+      Dimensions.addEventListener('change', () => {
+        width = Dimensions.get('window').width;
+        height = Dimensions.get('window').height;
+      });     
+    }
+
+    state = Dimensions.get("window");
+    handler = dims => this.setState(dims);
+
+    componentDidMount() {
+        Dimensions.addEventListener("change", this.handler);
+    }
+
+    componentWillUnmount() {
+      // Important to stop updating state after unmount
+      Dimensions.removeEventListener("change", this.handler);
     }
 
 
@@ -125,6 +145,7 @@ const jsonData = { quiz: {
           if (ans === this.state.correctoption) {
             this.score += 1;
             this.next();
+            this.refs.questionView.zoomIn(800);
           }
         } else {
           const count = this.state.countCheck - 1;
@@ -134,13 +155,14 @@ const jsonData = { quiz: {
          }
         }
     }
-    
+
+       
     render() {
       const _this = this;
       const currentOptions = this.state.options;
       const options = Object.keys(currentOptions).map((k) => {
-        return (<View 
-        key={k} 
+        return (<View
+        key={k}
         style={{ alignItems: 'center', justifyContent: 'center', margin: 10 }}
         >
    
@@ -154,34 +176,38 @@ const jsonData = { quiz: {
    
         </View>);
       });
-   
+      
       return (
         <ScrollView style={{ backgroundColor: '#F5FCFF', paddingTop: 10 }}>
 
         <View style={styles.container}>
-        <View style={{ height: height * 0.15 }} />
-        
+                 
         <View 
         style={{ flex: 1,
         justifyContent: 'center', 
-        alignItems: 'center', }}
+        alignItems: 'center',
+        paddingBottom: height * 0.01 }}
         >
-        
-        <View style={styles.oval}>
+
+        <Animatable.View ref="questionView" style={styles.oval}>
           <Text style={styles.welcome}>
             {this.state.question}
           </Text>
-       </View>
+       </Animatable.View> 
+
           {options.length === 2 ? <View 
           style={{ flexDirection: 'row', 
+          justifyContent: 'center',
           alignItems: 'center', 
           width }}
           >
           { options }
-          </View> : <FlatList 
+          </View> : 
+          <FlatList 
             data={options}
             numColumns={2}
-            renderItem={({ item }) => <View>{item}</View>}
+            style={{ flexGrow: 1 }}
+            renderItem={({ item }) => <View key={item}>{item}</View>}
           />
         
           
@@ -190,27 +216,28 @@ const jsonData = { quiz: {
         </View>
         </ScrollView>
       );
+    
     }
   }
    
-  const styles = {
-    
+  const styles = {    
     oval: {
     justifyContent: 'center',
     alignItems: 'center',
     width: width * 0.5,
     borderRadius: 20,
-    backgroundColor: '#483d8b'
+    backgroundColor: '#483d8b',
+    margin: 15
     },
     container: {
       flex: 1,
       alignContent: 'space-between'
     },
     welcome: {
-      fontSize: 56,
+      fontSize: height * 0.1,
       fontWeight: 'bold',
-      margin: 15,
-      color: 'white'
+      margin: height * 0.002,
+      color: 'white',
     }
   };
 

@@ -74,7 +74,17 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     // borderColor:'black',
     // borderWidth:2, 
-    marginLeft:'7%',
-    marginTop:'10%'
+    marginLeft:'2%',
+    marginTop:'5%'
   }
+  // TouchableStyle:{
+  //   flex:1,
+  //   // height:Dimensions.get('window').width * 0.3,
+  //   // width: Dimensions.get('window').width * 0.3,
+  //   // justifyContent: 'center',
+  //   // borderColor:'black',
+  //   // borderWidth:2, 
+  //   marginLeft:'7%',
+  //   marginTop:'10%'
+  // }
 });
