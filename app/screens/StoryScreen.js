@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {
   View, Text, ActivityIndicator,
   Image, ImageBackground, ScrollView,
-  TouchableOpacity, FlatList, Dimensions
+  TouchableOpacity, FlatList, Dimensions, Animated
 } from 'react-native'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
@@ -35,7 +35,7 @@ class StoryScreen extends Component {
         this.setState({ count: 1, page: this.state.page + 1 })
       } else {
         this.setState({ count: 1, page: 0 })
-        console.log(" Thank you , you already gone throw all pages ....")
+        console.log("Thank you , you already gone throw all pages .... ")
       }
     }
   }

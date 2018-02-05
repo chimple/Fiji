@@ -4,7 +4,8 @@ import * as Animatable from 'react-native-animatable';
 import Confirm from './Confirm';
 import { isPortrait, isLandscape, isPhone, isTablet } from './Platform';
 
-let timerId, width, height;
+let timerId; 
+let width;
 
 export default class TapHome extends Component {
 
@@ -20,8 +21,12 @@ export default class TapHome extends Component {
     };
 
     Dimensions.addEventListener('change', () => {
-
+      width = Dimensions.get('window').height * 0.225;
+      console.log(width);
     });
+
+    width = Dimensions.get('window').height * 0.225;
+    console.log(width);
 
   }
 
@@ -83,17 +88,19 @@ export default class TapHome extends Component {
       }
       else if (this.state.score > 9 && this.state.score <= 13) {
         clearInterval(timerId);
-        timerId = setInterval(this.timer, 700);
+        timerId = setInterval(this.timer, 600);
       }
       else if (this.state.score > 13) {
         clearInterval(timerId);
-        timerId = setInterval(this.timer, 600);
+        timerId = setInterval(this.timer, 500);
       }
     }
     else {
+      this.refs.view.shake(500).then((endState) => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
       this.setState({
-        showModal: !this.state.showModal
-      })
+        count : this.state.numberHolder - 3
+      });
+
     }
   }
 
@@ -115,26 +122,24 @@ export default class TapHome extends Component {
 
   render() {
 
-    if ( isLandscape() && isTablet() ) {
+    if ( isLandscape() ) {
       const { container, SubContainer, circle, text, subText, scoreText } = stylesLandscape;
       const { count, numberHolder, score } = this.state;
 
-      width =  Dimensions.get('window').height * 0.225;
-      height =  Dimensions.get('screen').height * 0.225; 
-
+      if(this.state.showModal == false ) {
       return (
         <View style={{ flex: 1, backgroundColor: '#27ae60'}}>
-         <Text style={scoreText}>score: {score}</Text>
+         <Text style={[scoreText, { fontSize: fontSizer(width) - 20}]}>score: {score}</Text>
         <View style={container} >
-          <View style={circle}>
+          <View style={[circle, {width: width + 40, height: width + 40, borderRadius: width + 40 / 2 }]}>
             <View>
               <Animatable.View ref="view">
-                <Text style={text}>{numberHolder}</Text>
+                <Text style={[text, {fontSize: fontSizer(width)}]}>{numberHolder}</Text>
               </Animatable.View>
             </View>
           </View>
           <TouchableOpacity onPress={this.GenerateRandomNumber}>
-            <Text style={subText}>{count}</Text>
+            <Text style={[subText, {fontSize: fontSizer(width) + 30 }]}>{count}</Text>
           </TouchableOpacity>
          
           <Confirm
@@ -142,49 +147,76 @@ export default class TapHome extends Component {
             onAccept={this.onAccept.bind(this)}
             onDecline={this.onDecline.bind(this)}
           >
-            OPS! TOO LATE
+            Try Again
           </Confirm>
           </View>
         </View>
       );
+      }
+      else {
+        return (
+          <Confirm
+          visible={this.state.showModal}
+          onAccept={this.onAccept.bind(this)}
+          onDecline={this.onDecline.bind(this)}
+          >
+          Try Again
+        </Confirm>
+        );
+      }
+
     }
 
     else {
       const { container, circle, text, subText, scoreText } = stylesPotrait;
       const { count, numberHolder, score } = this.state;
 
-      width =  Dimensions.get('window').height * 0.2;
-      height =  Dimensions.get('screen').height * 0.2;
-
+      if(this.state.showModal == false ) {
       return (
         <View style={{ flex: 1, backgroundColor: '#27ae60'}}>
-         <Text style={scoreText}>score: {score}</Text>
+         <Text style={[scoreText, { fontSize: fontSizer(width) - 30}]}>score: {score}</Text>
         <View style={container} >
-          <View style={circle}>
+          <View style={[circle, {width: width, height: width, borderRadius: width / 2}]}>
             <View>
               <Animatable.View ref="view">
-                <Text style={text}>{numberHolder}</Text>
+              <Text style={[text, {fontSize: fontSizer(width) }]}>{numberHolder}</Text>
               </Animatable.View>
             </View>
           </View>
           <TouchableOpacity onPress={this.GenerateRandomNumber}>
-            <Text style={subText}>{count}</Text>
+          <Text style={[subText, {fontSize: fontSizer(width) + 20 }]}>{count}</Text>
           </TouchableOpacity>
-          <Confirm
-            visible={this.state.showModal}
-            onAccept={this.onAccept.bind(this)}
-            onDecline={this.onDecline.bind(this)}
-          >
-            Try Again
-          </Confirm>
+         
         </View>
         </View>
       );
-
+      }
+      else {
+        return (
+          <Confirm
+          visible={this.state.showModal}
+          onAccept={this.onAccept.bind(this)}
+          onDecline={this.onDecline.bind(this)}
+          >
+          Try Again
+        </Confirm>
+        );
+      }
     }
   }
 }//End of class component
 
+function fontSizer (screenWidth) {
+  if(screenWidth > 100 && screenWidth < 150){
+    return 50;
+  }else if(screenWidth < 100){
+    return 40;
+  }else if(screenWidth < 200 && screenWidth > 150 ){
+    return 70
+  }else if(screenWidth < 300 && screenWidth > 200 ){ 
+    return 90;
+  }
+}
 const stylesPotrait = {
 
   container: {
@@ -193,17 +225,15 @@ const stylesPotrait = {
     alignItems: 'center'
   },
   circle: {
-    width:  120,
-    height: 120,
-    borderRadius: 120 / 2,
+  
     borderWidth: 5,
     borderColor: 'white',
     justifyContent: 'center',
     alignSelf: 'center'
   },
   text: {
+    fontSize: 90,
     fontFamily: 'Cochin',
-    fontSize: 60,
     color: 'white',
     justifyContent: 'center',
     alignSelf: 'center',
@@ -233,9 +263,7 @@ const stylesLandscape = {
   },
  
   circle: {
-    width: Dimensions.get('window').height * 0.3,
-    height: Dimensions.get('window').height * 0.3,
-    borderRadius: Dimensions.get('window').height * 0.3 / 2,
+   
     borderWidth: 5,
     borderColor: 'white',
     justifyContent: 'center',
