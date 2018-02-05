@@ -3,6 +3,7 @@ import { View, Text, Dimensions, TouchableOpacity } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Confirm from './Confirm';
 import { isPortrait, isLandscape, isPhone, isTablet } from './Platform';
+import ScoreScreen from '../../screens/ScoreScreen'
 
 let timerId; 
 let width;
@@ -98,7 +99,7 @@ export default class TapHome extends Component {
     else {
       this.refs.view.shake(500).then((endState) => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
       this.setState({
-        count : this.state.numberHolder - 3
+        showModal: true
       });
 
     }
@@ -155,13 +156,7 @@ export default class TapHome extends Component {
       }
       else {
         return (
-          <Confirm
-          visible={this.state.showModal}
-          onAccept={this.onAccept.bind(this)}
-          onDecline={this.onDecline.bind(this)}
-          >
-          Try Again
-        </Confirm>
+          <ScoreScreen item={this.props.item} game={this.props.game} user={this.props.user} />
         );
       }
 
@@ -193,13 +188,7 @@ export default class TapHome extends Component {
       }
       else {
         return (
-          <Confirm
-          visible={this.state.showModal}
-          onAccept={this.onAccept.bind(this)}
-          onDecline={this.onDecline.bind(this)}
-          >
-          Try Again
-        </Confirm>
+          <ScoreScreen item={this.props.item} game={this.props.game} user={this.props.user} />
         );
       }
     }
