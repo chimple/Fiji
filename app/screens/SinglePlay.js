@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 import Quiz from '../components/games/Quiz';
+import ScoreScreen from '../screens/ScoreScreen'
 
 export default class SinglePlay extends Component {
   constructor(props) {
@@ -50,20 +51,13 @@ export default class SinglePlay extends Component {
     }
   }
   render() {
+    console.log(this.props.navigation.state.params.item.name)
+    console.log(this.props.navigation.state.params.game.name)
+    console.log(this.props.navigation.state.params.user.name)
     return (
       <View style={{ flex: 1 }}>
-      <StatusBar barStyle="light-content" />
-      <View style={styles.toolbar}>
-                    <Text style={styles.toolbarTitle}>Current Score - {this.state.score}</Text>
-      </View>
  
-       { this.state.quizFinish ? <View ref="ScoreView" style={styles.container}>
-           <View style={styles.circle}>
- 
-             { this._scoreMessage(this.state.score) }
-           </View>
- 
-       </View> : <Quiz quizFinish={(score) => this._quizFinish(score)} /> }
+       { this.state.quizFinish ? <ScoreScreen item={this.props.navigation.state.params.item} game={this.props.navigation.state.params.game} user={this.props.navigation.state.params.user}/> : <Quiz quizFinish={(score) => this._quizFinish(score)} /> }
 
       </View>
     );
