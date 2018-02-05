@@ -2,69 +2,76 @@ import React, { PureComponent } from 'react';
 import {
   Text,
   TouchableWithoutFeedback,
-  StyleSheet
+  StyleSheet,
+  View
 } from 'react-native';
 import PropTypes from 'prop-types'
 import * as Animatable from 'react-native-animatable';
 
 export default class Tile extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.state = {
-      status: false
-    }
-  }
-
-  _onPress = () => {
-    //TODO: play the sound
-    // this.refs.view.transitionTo({opacity: 0.2})
-    this.setState({ status: this.props.onPress(this.state.status, this.refs.view) })
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log("componentWillReceiveProps")
-    console.log(this.props)
-    console.log(nextProps)
+  _onPressIn = () => {
+    this.props.onPress(this.props.id, this.refs.view)
   }
 
   render() {
-    console.log("render")
     return (
-      <TouchableWithoutFeedback onPress={() => this._onPress()}>
-        <Animatable.View
-          ref="view"
-          style={[
-            this.props.tileStyle,
-            {backgroundColor: this.state.status ? this.props.trueTileColor : this.props.falseTileColor}
-          ]}
+      <Animatable.View
+        ref="view"
+        useNativeDriver={true}
+        style={[
+          this.props.style,
+          {
+            alignItems: 'flex-start',
+            alignSelf: 'center',
+          }
+        ]}
+      >
+        {/* <View style={{
+          height: this.props.tileHeight,
+          width: this.props.tileWidth,
+          backgroundColor: this.state.selected ? this.props.pressedEdgeColor : this.props.edgeColor,
+          borderRadius: 8,
+          position: 'absolute',
+          top: -this.props.tileHeight / 2 + 5,
+          left: -this.props.tileWidth / 2
+        }} /> */}
+        <TouchableWithoutFeedback
+          onPressIn={() => this._onPressIn()}
         >
-          <Text
-            style={[
-              this.props.textStyle,
-              {color: this.state.status ? this.props.trueColor : this.props.falseColor}
-            ]}
-          >
-            {this.props.text}
-          </Text>
-        </Animatable.View>
-      </TouchableWithoutFeedback>
+          <View
+            style={{
+              height: this.props.style.height,
+              width: this.props.style.width,
+              backgroundColor: this.props.pressed ? this.props.pressedTileColor : this.props.tileColor,
+              borderRadius: 8,
+              position: 'absolute',
+              // top: this.state.pressed ? 5 : 0,
+              justifyContent: 'center',
+              alignItems: 'center',
+              shadowRadius: 8,
+              shadowColor: 'grey',
+              shadowOpacity: 1,
+              elevation: 8
+            }} >
+            <Text style={{
+              color: this.props.textColor,
+              backgroundColor: 'transparent'
+            }}>
+              {this.props.text}
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
+      </Animatable.View>
     )
   }
 }
 
 Tile.propTypes = {
+  id: PropTypes.number,
   onPress: PropTypes.func,
-  trueTileColor: PropTypes.string,
-  falseTileColor: PropTypes.string,
-  trueColor: PropTypes.string,
-  falseColor: PropTypes.string,
+  tileColor: PropTypes.string,
+  pressedTileColor: PropTypes.string,
+  edgeColor: PropTypes.string,
+  pressedEdgeColor: PropTypes.string,
   text: PropTypes.string,
-  tileStyle: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.object
-  ]),
-  textStyle: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.object
-  ]),
 }

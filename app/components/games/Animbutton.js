@@ -5,17 +5,35 @@ import {
   Dimensions
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import Platform from './Platform';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 export default class Animbutton extends Component {
   constructor(props) {
      super(props);
      this.state = {
-       status: false
+       status: false,
+       height,
+       width
      };
+     Dimensions.addEventListener('change', () => {
+      width = Dimensions.get('window').width;
+      height = Dimensions.get('window').height;
+    });
+
    }
+
+   state = Dimensions.get("window");
+    handler = dims => this.setState(dims);
+
+    componentDidMount() {
+        Dimensions.addEventListener("change", this.handler);
+    }
+
+    componentWillUnmount() {
+      // Important to stop updating state after unmount
+      Dimensions.removeEventListener("change", this.handler);
+    }
 
    _onPress() {
      this.props._onPress(!this.state.status);
@@ -53,15 +71,15 @@ export default class Animbutton extends Component {
          break;
      }
    }
+
+
   render() {
-  if(Platform.isPortrait && Platform.isPhone){
     return (
       <TouchableWithoutFeedback onPress={() => this._onPress()}>
         <Animatable.View 
         ref="view" 
         style={{ margin: 10, 
-        paddingTop: 10, 
-        paddingBottom: 10, 
+        paddingTop: height * 0.01,
         paddingRight: 20, 
         paddingLeft: 20, 
         backgroundColor: '#bdbdbd', 
@@ -70,7 +88,7 @@ export default class Animbutton extends Component {
         >
           <Text 
           style={{ color: this.state.status ? 'white' : '#696969',
-          fontSize: 36,
+          fontSize: height * 0.08,
           fontWeight: 'bold',
           alignSelf: 'center',
           justifyContent: 'center' }}
@@ -79,32 +97,6 @@ export default class Animbutton extends Component {
           </Text>
         </Animatable.View>
       </TouchableWithoutFeedback>
-    );} else if(Platform.isLandscape && Platform.isPhone){
-      return (
-        <TouchableWithoutFeedback onPress={() => this._onPress()}>
-          <Animatable.View 
-          ref="view" 
-          style={{ margin: 10, 
-          paddingTop: 10, 
-          paddingBottom: 10, 
-          paddingRight: 20, 
-          paddingLeft: 20, 
-          backgroundColor: '#bdbdbd', 
-          borderRadius: 20,
-          width: width * 0.4 }}
-          >
-            <Text 
-            style={{ color: this.state.status ? 'white' : '#696969',
-            fontSize: 36,
-            fontWeight: 'bold',
-            alignSelf: 'center',
-            justifyContent: 'center' }}
-            >
-            {this.props.text}
-            </Text>
-          </Animatable.View>
-        </TouchableWithoutFeedback>
-      );
-    }
+    );
   }
 }
