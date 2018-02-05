@@ -11,6 +11,7 @@ class ScoreScreen extends PureComponent{
     componentDidMount(){
         this.props.dispatch(fetchGameHighScores(this.props.navigation.state.params.game._id))
         console.log(this.props.navigation.state.params.user.name)
+        console.log(this.props.navigation.state.params.game.name)
     }
 
     _keyExtractor = (item, index) => item._id
@@ -40,6 +41,11 @@ class ScoreScreen extends PureComponent{
                                 <ImageBackground style={[styles.PlayerScoreStyle, {width:20, height:100, alignSelf:'center'}]} source={{uri:'data:image/png;base64,' + this.props.navigation.state.params.user.image }} ><Text style={{fontWeight:'bold', fontSize:20,}}>{UserScore}</Text></ImageBackground>
                                 <View style={styles.CharacterStyle}></View>
                                 <View style={styles.PlayerScoreStyle}><Text style={{fontWeight:'bold', fontSize:50,}}>B</Text></View>
+                            </View>
+                            <View style={styles.OptionStyle}>
+                                <View style={[styles.EachOptionStyle, {backgroundColor:'#bac2d1'}]}><Text style={{fontSize:20,fontWeight:'bold', color:'black'}}>Home</Text></View>
+                                <View style={[styles.EachOptionStyle, {backgroundColor:'grey'}]}><Text style={{fontSize:20,fontWeight:'bold', color:'black'}}>Exit</Text></View>
+                                <View style={[styles.EachOptionStyle, {backgroundColor:'#91b587'}]}><Text style={{fontSize:20,fontWeight:'bold', color:'black'}}>Next</Text></View>
                             </View>
                             <View style={styles.RankingViewStyle}>
                                 <FlatList
@@ -75,12 +81,12 @@ const styles = StyleSheet.create({
        flex:1 
     },
     PlayerScoreViewStyle:{
-        flex:1,
+        flex:3,
         backgroundColor:'#edca2f',
         flexDirection:'row'
     },
     RankingViewStyle:{
-        flex:1,
+        flex:3,
         backgroundColor:'#59c6c3'
     },
     PlayerScoreStyle:{
@@ -99,6 +105,17 @@ const styles = StyleSheet.create({
         borderRadius:30,
         marginTop:'5%',
         marginBottom:'5%'
+    },
+    OptionStyle:{
+        flexDirection:'row',
+        flex:1
+    },
+    EachOptionStyle:{
+        borderColor:'black',
+        borderWidth:1,
+        flex:1,
+        justifyContent:'center',
+        alignItems:'center'
     }
 });
 

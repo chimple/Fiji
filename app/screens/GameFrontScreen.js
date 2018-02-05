@@ -18,7 +18,7 @@ class GameFrontScreen extends PureComponent{
     _renderItem = ({item}) => (
         <TouchableOpacity onPress={()=> this.props.navigation.navigate( this.props.navigation.state.params.title.screen , 
                                                                         {item, 
-                                                                        title: this.props.navigation.state.params.title, 
+                                                                        game: this.props.navigation.state.params.title, 
                                                                         user: this.props.navigation.state.params.user} 
                                                                         ) } style={{flexDirection:'row', borderColor:'black', borderWidth:2}}>
             <SvgUri 
