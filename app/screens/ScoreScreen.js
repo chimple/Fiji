@@ -9,9 +9,10 @@ import { fetchGameHighScores } from '../redux/score'
 
 class ScoreScreen extends PureComponent{
     componentDidMount(){
-        this.props.dispatch(fetchGameHighScores(this.props.navigation.state.params.game._id))
-        console.log(this.props.navigation.state.params.user.name)
-        console.log(this.props.navigation.state.params.game.name)
+        this.props.dispatch(fetchGameHighScores(this.props.game._id))
+        console.log(this.props.user.name)
+        console.log(this.props.game.name)
+        console.log(this.props.item.name)
     }
 
     _keyExtractor = (item, index) => item._id
@@ -23,7 +24,7 @@ class ScoreScreen extends PureComponent{
         var UserScore
         if(this.props.gameScore.length)
             for( i=0; i<this.props.gameScore.length ; i++ ){
-                if(this.props.gameScore[i].user_id==this.props.navigation.state.params.user._id){
+                if(this.props.gameScore[i].user_id==this.props.user._id){
                     UserScore = this.props.gameScore[i].score
                     break
                 }
@@ -38,7 +39,7 @@ class ScoreScreen extends PureComponent{
                 
                         <View style={styles.ScoreCardStyle}>
                             <View style={styles.PlayerScoreViewStyle}>
-                                <ImageBackground style={[styles.PlayerScoreStyle, {width:20, height:100, alignSelf:'center'}]} source={{uri:'data:image/png;base64,' + this.props.navigation.state.params.user.image }} ><Text style={{fontWeight:'bold', fontSize:20,}}>{UserScore}</Text></ImageBackground>
+                                <ImageBackground style={[styles.PlayerScoreStyle, {width:20, height:100, alignSelf:'center'}]} source={{uri:'data:image/png;base64,' + this.props.user.image }} ><Text style={{fontWeight:'bold', fontSize:20,}}>{UserScore}</Text></ImageBackground>
                                 <View style={styles.CharacterStyle}></View>
                                 <View style={styles.PlayerScoreStyle}><Text style={{fontWeight:'bold', fontSize:50,}}>B</Text></View>
                             </View>
