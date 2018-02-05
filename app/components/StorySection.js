@@ -1,15 +1,58 @@
 import React, { Component } from 'react';
-import { View, Text, Image, ImageBackground } from 'react-native';
+import { View, Text, Image, ImageBackground, Animated, TouchableOpacity } from 'react-native';
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Icon } from 'react-native-elements'
 import { fetchStory } from '../redux/story'
+import LottieView from 'lottie-react-native';
+import { Buffer } from 'buffer'
+
+class AnimationView extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            progress: new Animated.Value(0),
+        };
+    }
+    componentDidMount() {
+        Animated.timing(this.state.progress, {
+            toValue: 1,
+            duration: 5000,
+        }).start();
+    }
+    render() {
+        // var speaker = this.props.story.pages[this.props.page].dialog[i].speaker;
+        // let animation = Buffer.from(this.props.story.characters[characterData[speakerIndex]], 'base64').toString('utf8')
+        // let x = JSON.parse(animation);
+        console.log(" the style data is : " , this.props.styles)
+        console.log(" the animationcharacter data is : " , this.props.animationCharacter)
+        
+        return (
+            <LottieView style={this.props.styles}
+                source={this.props.animationCharacter}
+                progress={this.state.progress} />
+
+        )
+    }
+}
+
 
 class StorySection extends Component {
     constructor(props) {
         super(props)
+        // this.state = {
+        //     progress: new Animated.Value(0),
+        // };
     }
+    componentDidMount() {
+    //     Animated.timing(this.state.progress, {
+    //         toValue: 1,
+    //         duration: 5000,
+    //     }).start();
+    }
+
+    // this.animation.play();
     render(props) {
         const stories = [];
         console.log("the page number is :", this.props.page)
@@ -36,65 +79,98 @@ class StorySection extends Component {
                 //var chapter = this.props.story.pages[this.props.page].dialog[i].chapter;
                 if (!this.props.story.pages[this.props.page].dialog[i].speaker) {
 
-                    
+
                     console.log("checkinggg non dialog", this.props.story.pages[this.props.page].dialog[i].text);
-                     
+
                     stories.push(
                         <View style={styles.chapterContainer}>
-                         <Image style={{width:200, height:100, position: 'absolute'}}
+                            <Image style={{ width: 200, height: 100, position: 'absolute' }}
                                 source={{
-                                    uri: 'data:image/png;base64,' + this.props.story.pages[this.props.page].dialog[i].img ,
+                                    uri: 'data:image/png;base64,' + this.props.story.pages[this.props.page].dialog[i].img,
                                 }} />
-                    <Text style={styles.chapterTextStyle}>
-                        {this.props.story.pages[this.props.page].dialog[i].text}
-                    </Text>
-                    </View>
+                            <Text style={styles.chapterTextStyle}>
+                                {this.props.story.pages[this.props.page].dialog[i].text}
+                            </Text>
+                        </View>
                     );
-                    break;
-                     
+                    break
 
                 }
                 else {
                     var speaker = this.props.story.pages[this.props.page].dialog[i].speaker;
-                if (speakerIndex % 2 == 0) {
-                    stories.push(
-                        <View style={styles.storyContainer}>
-                            <Image style={styles.characterImageStyle}
-                                source={{
-                                    uri: 'data:image/png;base64,' + this.props.story.characters[characterData[speakerIndex]],
-                                }} />
-                            <View style={styles.textContainer}>
-                                <Text style={styles.dialogStyle}>
-                                    {this.props.story.pages[this.props.page].dialog[i].text}
-                                </Text>
-                            </View>
-                        </View>
-                    );
-                    break;
-                }
-                else {
-                    stories.push(
-                        <View style={styles.storyContainer2}>
-                            <View style={styles.textContainer2}>
-                                <Text style={styles.dialogStyle}>
-                                    {this.props.story.pages[this.props.page].dialog[i].text}
-                                </Text>
-                            </View>
-                            <Image style={styles.characterImageStyle}
-                                source={{
-                                    uri: 'data:image/png;base64,' + this.props.story.characters[characterData[speakerIndex]],
-                                }} />
-                        </View>
-                    );
-                    break;
-                }
+                    let animation = Buffer.from(this.props.story.characters[characterData[speakerIndex]], 'base64').toString('utf8')
+                    let x = JSON.parse(animation);
 
+                    if (speakerIndex % 2 == 0) {
+                        // console.log("animation", this.props.story.characters[characterData[speakerIndex]]);
+                        stories.push(
+
+                            <View style={styles.storyContainer}>
+
+                                <AnimationView 
+                                
+                                    styles = {styles.characterImageStyle}
+                                    animationCharacter = {x}
+                                
+                                />
+
+
+
+
+                                {/* <LottieView style={styles.characterImageStyle}
+                                    source={x}
+                                    progress={this.state.progress} /> */}
+
+
+                                {/* <Animation style={styles.characterImageStyle}
+                                    ref={animation => { this.animation = animation; }}
+                                    source={x} /> */}
+
+                                {/* <LottieView style={styles.characterImageStyle}
+                                source={require('../assets/lottie/Chicken 1.json')} progress={this.state.progress} /> */}
+
+
+                                <View style={styles.textContainer}>
+                                    <Text style={styles.dialogStyle}>
+                                        {this.props.story.pages[this.props.page].dialog[i].text}
+                                    </Text>
+                                </View>
+                            </View>
+
+                        );
+                        break;
+                    }
+                    else {
+                        stories.push(
+                            <View style={styles.storyContainer2}>
+                                <View style={styles.textContainer2}>
+                                    <Text style={styles.dialogStyle}>
+                                        {this.props.story.pages[this.props.page].dialog[i].text}
+                                    </Text>
+                                </View>
+                                {/* <LottieView style={styles.characterImageStyle}
+                                    source={x}
+                                    progress={this.state.progress} /> */}
+                                     <AnimationView 
+                                
+                                    styles = {styles.characterImageStyle}
+                                    animationCharacter = {x}
+                                
+                                />
+                            </View>
+                        );
+                        break;
+                    }
+
+                }
             }
         }
-    }
+
         return stories;
     }
+
 }
+
 
 StorySection.propTypes = {
     story: PropTypes.object,
@@ -104,7 +180,7 @@ const styles = {
     storyContainer: {
         flexDirection: 'row',
         alignItems: 'flex-end',
-        margin: 5
+        margin: 10
 
     },
     textContainer: {
@@ -112,6 +188,7 @@ const styles = {
         borderRadius: 20,
         backgroundColor: '#70ef9b',
         padding: 10,
+        margin: 10,
         shadowColor: '#3d3d3d',
         shadowRadius: 2,
         shadowOpacity: 0.5,
@@ -133,9 +210,9 @@ const styles = {
 
     },
     characterImageStyle: {
-        height: 50,
-        width: 50,
-        margin: 5,
+        height: 80,
+        width: 80,
+        margin: 10,
         borderRadius: 20
     },
 
