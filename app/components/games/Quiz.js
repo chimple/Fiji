@@ -97,9 +97,6 @@ const jsonData = { quiz: {
         width
       }
 
-        console.log(width);
-        console.log(height);
-
       Dimensions.addEventListener('change', () => {
         width = Dimensions.get('window').width;
         height = Dimensions.get('window').height;
@@ -191,6 +188,7 @@ const jsonData = { quiz: {
         <ScrollView style={{ backgroundColor: '#F5FCFF', paddingTop: 5 }}>
 
         <View style={styles.container}>
+         {height > width ? <View style= {{ paddingTop: height * 0.2 }} /> : <View /> }
                  
         <View 
         style={{ flex: 1,

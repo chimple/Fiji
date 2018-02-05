@@ -52,10 +52,6 @@ export default class SinglePlay extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-      <StatusBar barStyle="light-content" />
-      <View style={styles.toolbar}>
-                    <Text style={styles.toolbarTitle}>Current Score - {this.state.score}</Text>
-      </View>
  
        { this.state.quizFinish ? <View ref="ScoreView" style={styles.container}>
            <View style={styles.circle}>
