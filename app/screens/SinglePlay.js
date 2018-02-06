@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import { fetchMultipleChoiceData } from '../redux/data'
 import Quiz from '../components/games/Quiz';
+import ScoreScreen from '../screens/ScoreScreen'
 
 
 class SinglePlay extends Component {
@@ -55,18 +56,13 @@ class SinglePlay extends Component {
     }
   }
   render() {
-    
+    console.log(this.props.navigation.state.params.item.name)
+    console.log(this.props.navigation.state.params.game.name)
+    console.log(this.props.navigation.state.params.user.name)
     return (
-       <View style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
  
-       { this.state.quizFinish ? <View ref="ScoreView" style={styles.container}>
-           <View style={styles.circle}>
- 
-             { this._scoreMessage(this.state.score) }
-           </View>
- 
-       </View> :  <Quiz
-             quizFinish={(score) => this._quizFinish(score)} />}
+       { this.state.quizFinish ? <ScoreScreen item={this.props.navigation.state.params.item} game={this.props.navigation.state.params.game} user={this.props.navigation.state.params.user}/> : <Quiz quizFinish={(score) => this._quizFinish(score)} /> }
 
       </View>
     );
