@@ -89,11 +89,6 @@ const styles = {
         alignSelf: 'center',
         paddingTop: 10
     },
-    landscapeMidTextStyle: {
-        fontSize: width * 0.09, 
-        color: '#fff', 
-        alignSelf: 'center'
-    },
     landscapeEndButtonStyle: {
         fontSize: 24, 
         color: '#fff', 
