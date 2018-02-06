@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 
 import { fetchMultipleChoiceData } from '../redux/data'
 import Quiz from '../components/games/Quiz';
+import ScoreScreen from '../screens/ScoreScreen'
 
 
 class SinglePlay extends Component {
@@ -17,56 +17,26 @@ class SinglePlay extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(fetchMultipleChoiceData(0, 2, 1));
-    console.log(this.props.gameData[0]);
+    this.props.dispatch(fetchMultipleChoiceData(5, 2, 1));
+    console.log(this.props.gameData);
   }
   
   _quizFinish(score) {    
     this.setState({ quizFinish: true, score });
   }
-  _scoreMessage(score) {
-    if (score <= 30) {
-      return (<View style={styles.innerContainer} >
-                <View style={{ flexDirection: 'row' }} >
-                  <Icon name="sentiment-very-dissatisfied" size={30} color="white" />
-                </View>
-                <Text style={styles.score}>You need to work hard</Text>
-                <Text style={styles.score}>You scored {score}</Text>
-              </View>);
-    } else if (score > 30 && score < 60) {
-      return (<View style={styles.innerContainer} >
-                  <View style={{ flexDirection: 'row' }} >
-                    <Icon name="sentiment-satisfied" size={30} color="white" />
-                    <Icon name="sentiment-satisfied" size={30} color="white" />
-                  </View>
-                  <Text style={styles.score}>You are good</Text>
-                  <Text style={styles.score}>Congrats you scored {score} </Text>
-                </View>);
-    } else if (score >= 60) {
-      return (<View style={styles.innerContainer}>
-                 <View style={{ flexDirection: 'row' }} >
-                     <Icon name="whatshot" size={30} color="white" />
-                     <Icon name="whatshot" size={30} color="white" />
-                     <Icon name="whatshot" size={30} color="white" />
-                  </View>
-                  <Text style={styles.score}>You are the master</Text>
-                  <Text style={styles.score}>Congrats you scored {score} </Text>
-                </View>);
-    }
-  }
+  
   render() {
-    
+    console.log(this.props.navigation.state.params.item.name)
+    console.log(this.props.navigation.state.params.game.name)
+    console.log(this.props.navigation.state.params.user.name)
+    console.log(this.props.gameData)
+    console.log(this.props.gameData.answerIndex)
+    console.log(this.props.gameData.choices)
+    console.log(this.props.gameData.question)
     return (
-       <View style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
  
-       { this.state.quizFinish ? <View ref="ScoreView" style={styles.container}>
-           <View style={styles.circle}>
- 
-             { this._scoreMessage(this.state.score) }
-           </View>
- 
-       </View> :  <Quiz
-             quizFinish={(score) => this._quizFinish(score)} />}
+       { this.state.quizFinish ? <ScoreScreen item={this.props.navigation.state.params.item} game={this.props.navigation.state.params.game} user={this.props.navigation.state.params.user}/> : <Quiz quizFinish={(score) => this._quizFinish(score)} /> }
 
       </View>
     );

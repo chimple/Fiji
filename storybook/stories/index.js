@@ -31,22 +31,6 @@ storiesOf('Button', module)
 storiesOf('Tile', module)
   .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
   .add('with text', () => (
-    <View style={{
-    }}>
-    <Tile
-      onPress={action('clicked-text')}
-      tileColor='skyblue'
-      edgeColor='deepskyblue'
-      pressedTileColor='goldenrod'
-      pressedEdgeColor='darkgoldenrod'
-      textColor='purple'
-      text='A'
-      style={{
-        height:100,
-        width:100
-      }}
-      toggle={false}
-    />
     <Tile
     onPress={action('clicked-text')}
     tileColor='skyblue'
@@ -59,9 +43,8 @@ storiesOf('Tile', module)
       height:100,
       width:100
     }}
-  toggle={true}
+    toggle={true}
   />
-  </View>
   ));
 
   storiesOf('TileGrid', module)
@@ -80,10 +63,8 @@ storiesOf('Tile', module)
         width: 300,
         height: 400
       }}
-      onPress={(ref)=>{
+      onPress={(id, ref)=>{
         ref.zoomIn(250)
-        console.log(ref)
-        ref.props.tileColor='goldenrod'
       }}
     />
   ));

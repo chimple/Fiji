@@ -40,7 +40,14 @@ class GamesScreen extends Component {
 }
 
 GamesScreen.propTypes = {
-  games: PropTypes.array
+  games: PropTypes.array,
+  navigation: PropTypes.shape({
+    state: PropTypes.shape({
+      params: PropTypes.shape({
+        user: PropTypes.object.isRequired
+      })
+    })
+  })
 }
 
 export default connect(state => ({
