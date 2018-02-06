@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Dimensions, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
 import * as Animatable from 'react-native-animatable';
 import Confirm from './Confirm';
 import { isPortrait, isLandscape, isPhone, isTablet } from './Platform';
@@ -7,6 +8,7 @@ import ScoreScreen from '../../screens/ScoreScreen'
 
 let timerId; 
 let width;
+let iterate = 0;
 
 export default class TapHome extends Component {
 
@@ -18,7 +20,7 @@ export default class TapHome extends Component {
       numberHolder: 4,
       score: 0,
       count: 2,
-      showModal: false
+      showModal: false,
     };
 
     Dimensions.addEventListener('change', () => {
@@ -27,7 +29,7 @@ export default class TapHome extends Component {
     });
 
     width = Dimensions.get('window').height * 0.225;
-    console.log(width);
+    console.log();
 
   }
 
@@ -50,6 +52,7 @@ export default class TapHome extends Component {
 
     //This will start timer and will update text value
     timerId = setInterval(this.timer, 1700)
+
   }
 
   //This will generate random number and will check on tap condition
@@ -98,9 +101,14 @@ export default class TapHome extends Component {
     }
     else {
       this.refs.view.shake(500).then((endState) => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
-      this.setState({
-        showModal: true
-      });
+      iterate = iterate + 1;
+      this.setState({ count: this.state.numberHolder - 3 })
+      if(iterate > 5 ) {
+        this.setState({
+          showModal: true,
+        });
+        iterate = 0;
+      }
 
     }
   }
@@ -118,41 +126,33 @@ export default class TapHome extends Component {
 
   onDecline() {
     this.setState({ showModal: false });
-    this.props.navigate('Game');
   }
 
   render() {
+
 
     if ( isLandscape() ) {
       const { container, SubContainer, circle, text, subText, scoreText } = stylesLandscape;
       const { count, numberHolder, score } = this.state;
 
-      if(this.state.showModal == false ) {
-      return (
-        <View style={{ flex: 1, backgroundColor: '#27ae60'}}>
-         <Text style={[scoreText, { fontSize: fontSizer(width) - 20}]}>score: {score}</Text>
-        <View style={container} >
-          <View style={[circle, {width: width + 40, height: width + 40, borderRadius: width + 40 / 2 }]}>
-            <View>
-              <Animatable.View ref="view">
-                <Text style={[text, {fontSize: fontSizer(width)}]}>{numberHolder}</Text>
-              </Animatable.View>
+      if (this.state.showModal == false) {
+        return (
+          <View style={{ flex: 1, backgroundColor: '#27ae60' }}>
+            <Text style={[scoreText, { fontSize: fontSizer(width) - 20 }]}>score: {score}</Text>
+            <View style={container} >
+              <View style={[circle, { width: width + 40, height: width + 40, borderRadius: width + 40 / 2 }]}>
+                <View>
+                  <Animatable.View ref="view">
+                    <Text style={[text, { fontSize: fontSizer(width) }]}>{numberHolder}</Text>
+                  </Animatable.View>
+                </View>
+              </View>
+              <TouchableOpacity onPress={this.GenerateRandomNumber}>
+                <Text style={[subText, { fontSize: fontSizer(width) + 30 }]}>{count}</Text>
+              </TouchableOpacity>
             </View>
           </View>
-          <TouchableOpacity onPress={this.GenerateRandomNumber}>
-            <Text style={[subText, {fontSize: fontSizer(width) + 30 }]}>{count}</Text>
-          </TouchableOpacity>
-         
-          <Confirm
-            visible={this.state.showModal}
-            onAccept={this.onAccept.bind(this)}
-            onDecline={this.onDecline.bind(this)}
-          >
-            Try Again
-          </Confirm>
-          </View>
-        </View>
-      );
+        );
       }
       else {
         return (
@@ -166,25 +166,24 @@ export default class TapHome extends Component {
       const { container, circle, text, subText, scoreText } = stylesPotrait;
       const { count, numberHolder, score } = this.state;
 
-      if(this.state.showModal == false ) {
-      return (
-        <View style={{ flex: 1, backgroundColor: '#27ae60'}}>
-         <Text style={[scoreText, { fontSize: fontSizer(width) - 30}]}>score: {score}</Text>
-        <View style={container} >
-          <View style={[circle, {width: width, height: width, borderRadius: width / 2}]}>
-            <View>
-              <Animatable.View ref="view">
-              <Text style={[text, {fontSize: fontSizer(width) }]}>{numberHolder}</Text>
-              </Animatable.View>
+      if (this.state.showModal == false) {
+        return (
+          <View style={{ flex: 1, backgroundColor: '#27ae60' }}>
+            <Text style={[scoreText, { fontSize: fontSizer(width) - 30 }]}>score: {score}</Text>
+            <View style={container} >
+              <View style={[circle, { width: width, height: width, borderRadius: width / 2 }]}>
+                <View>
+                  <Animatable.View ref="view">
+                    <Text style={[text, { fontSize: fontSizer(width) }]}>{numberHolder}</Text>
+                  </Animatable.View>
+                </View>
+              </View>
+              <TouchableOpacity onPress={this.GenerateRandomNumber}>
+                <Text style={[subText, { fontSize: fontSizer(width) + 20 }]}>{count}</Text>
+              </TouchableOpacity>
             </View>
           </View>
-          <TouchableOpacity onPress={this.GenerateRandomNumber}>
-          <Text style={[subText, {fontSize: fontSizer(width) + 20 }]}>{count}</Text>
-          </TouchableOpacity>
-         
-        </View>
-        </View>
-      );
+        );
       }
       else {
         return (
