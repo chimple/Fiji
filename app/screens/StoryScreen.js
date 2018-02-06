@@ -2,15 +2,16 @@ import React, { Component } from 'react'
 import {
   View, Text, ActivityIndicator,
   Image, ImageBackground, ScrollView,
-  TouchableOpacity, FlatList
+  TouchableOpacity, FlatList, Dimensions, Animated
 } from 'react-native'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Icon } from 'react-native-elements'
 import { fetchStory } from '../redux/story'
-//import SvgUri from 'react-native-svg-uri'
+import SvgUri from 'react-native-svg-uri'
 import StorySection from '../components/StorySection'
+import { Buffer } from 'buffer'
 
 
 class StoryScreen extends Component {
@@ -24,17 +25,17 @@ class StoryScreen extends Component {
     console.log("dialog" + dialog.length);
     if (this.state.count < dialog.length) {
       this.setState({ count: this.state.count + 1 });
-      console.log("counter value is : " , this.state.count);
+      console.log("counter value is : ", this.state.count);
     }
     else {
       //console.log("else part is trigger ....")
       console.log("page length data : ", this.props.story.pages.length)
       console.log("this.state.page : ", this.state.page)
       if (this.props.story.pages.length - 1 > this.state.page) {
-        this.setState({ count: 0, page: this.state.page + 1 })
+        this.setState({ count: 1, page: this.state.page + 1 })
       } else {
-        this.setState({ count: 0, page: 0 })
-        console.log(" Thank you , you already gone throw all pages ....")
+        this.setState({ count: 1, page: 0 })
+        console.log("Thank you , you already gone throw all pages .... ")
       }
     }
   }
@@ -44,42 +45,54 @@ class StoryScreen extends Component {
   }
 
   render() {
-    console.log(this.state.count);
-    console.log("the page data is : ", this.props.story.pages)
-    return (
-      this.props.isFetching
-        ?
+    if (this.props.isFetching) {
+      return (
         <ActivityIndicator size="large" style={{ marginTop: 100 }} />
-        :
-        this.props.story._id
-          ?
+      )
+    } else {
+      if (this.props.story._id) {
+        let svg = Buffer.from(this.props.story.pages[this.state.page].bg, 'base64').toString('utf8')
+        const h = Dimensions.get("window").height
+        const w = Dimensions.get("window").width
+        const length = h > w ? h : w
+        
+        return (
           <View style={{ flex: 1 }}>
             <View style={styles.headerViewStyle}>
               <Text style={styles.HeaderTextStyle}>
                 {this.props.navigation.state.params.title.title}
               </Text>
               <Image
-                style={styles.characterImageStyle}
+                style={styles.storyImageStyle}
                 source={{
                   uri:
-                    'data:image/png;base64,' + this.props.navigation.state.params.title.image,
+                    'data:image/png;base64,' + this.props.navigation.state.params.title.image
                 }} />
             </View>
             <View style={{ flex: 1 }}>
-              <ImageBackground style={styles.backgroundImageStyle}
-                source={{ uri: this.props.story.pages[this.state.page].bg }}>
-                {/* {this.props.story.pages[0].bg} */}
-                <ScrollView ref="scrollView"
-                  onContentSizeChange={(width, height) => this.refs.scrollView.scrollTo({ y: height })}>
-                  <View  >
-                    <StorySection
-                      page={this.state.page}
-                      count={this.state.count}
+              {/* <ImageBackground style={styles.backgroundImageStyle}
+               source={{ uri: 'data:image/svg+xml;base64,' + this.props.story.pages[this.state.page].bg, }}
+              > */}
+              <SvgUri
+                style={{ flex: 1, position: 'absolute' }}
+                width={ length }
+                height={ length }
+                //source={{ uri:'data:image/svg+xml;base64,' + this.props.story.pages[this.state.page].bg }}
+                svgXmlData={svg}
+              >
+              </SvgUri>
 
-                    />
-                  </View>
-                </ScrollView>
-              </ImageBackground>
+              <ScrollView ref="scrollView"
+                onContentSizeChange={(width, height) => this.refs.scrollView.scrollTo({ y: height })}>
+                <View >
+                  <StorySection
+                    page={this.state.page}
+                    count={this.state.count}
+
+                  />
+                </View>
+              </ScrollView>
+
             </View>
             <TouchableOpacity onPress={() => this._renderState()} >
               <View style={styles.nextButtonStyle}>
@@ -87,11 +100,15 @@ class StoryScreen extends Component {
               </View>
             </TouchableOpacity>
           </View>
-          :
+        )
+      } else {
+        return (
           <View>
             <Text>No story found</Text>
           </View>
-    )
+        )
+      }
+    }
   }
 }
 
@@ -123,19 +140,24 @@ const styles = {
   },
   backgroundImageStyle: {
     flex: 1,
-    backgroundColor: 'pink'
+    //backgroundColor: 'pink'
   },
   nextButtonStyle: {
     flexDirection: 'column',
     justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: '#9999ff',
-    height: 30,
+    height: 50,
     shadowColor: 'black',
-    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.9,
     position: 'relative',
     opacity: 1
+  },
+  storyImageStyle: {
+    height: 50,
+    width: 50,
+    margin: 5,
+    borderRadius: 20
   }
 }
 
@@ -143,8 +165,3 @@ export default connect(state => ({
   story: state.story.story,
   isFetching: state.story.isFetching,
 }))(StoryScreen)
-
-
-
-
-

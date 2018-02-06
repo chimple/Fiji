@@ -29,6 +29,10 @@ export const stickerPacksData = contentJson['docs'].filter(function (doc) {
   return doc._id.startsWith('sticker-pack:')
 })
 
+export const highScoresData = contentJson['docs'].filter(function (doc) {
+  return doc._id.startsWith('high-score:')
+})
+
 export const story_alice_in_wonderland = contentJson['docs'].filter(function (doc) {
   return doc._id == 'story:alice-in-wonderland'
 })[0]

@@ -35,7 +35,7 @@ class LoginScreen extends Component {
 
   _handleLogin = (user) => {
     this.props.dispatch(syncUser(user))
-    this.props.navigation.navigate('Main')
+    this.props.navigation.navigate('Main', {user})
   }
 }
 

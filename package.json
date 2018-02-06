@@ -4,9 +4,14 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "storybook": "storybook start -p 7007"
   },
   "dependencies": {
+    "@storybook/cli": "^3.3.12",
+    "appcenter": "^1.1.0",
+    "appcenter-analytics": "^1.1.0",
+    "appcenter-crashes": "^1.1.0",
     "buffer": "^5.0.8",
     "cuid": "^2.0.1",
     "jest-cli": "^22.0.6",
@@ -14,10 +19,14 @@
     "pouchdb-react-native": "^6.4.0",
     "react": "16.0.0",
     "react-native": "0.51.0",
+    "react-native-animatable": "^1.2.4",
     "react-native-camera": "^0.13.0",
     "react-native-elements": "^0.18.5",
     "react-native-fs": "^2.9.7",
+    "react-native-image-resizer": "^1.0.0",
+    "react-native-orientation": "^3.1.3",
     "react-native-sound": "^0.10.4",
+    "react-native-super-grid": "^2.0.2",
     "react-native-svg": "^6.0.1-rc.1",
     "react-native-svg-uri": "^1.2.3",
     "react-native-vector-icons": "^4.4.3",
@@ -29,10 +38,20 @@
   },
   "devDependencies": {
     "babel-jest": "22.0.4",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react-native": "4.0.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^22.0.6",
     "react-test-renderer": "16.0.0",
-    "redux-mock-store": "^1.4.0"
+    "redux-mock-store": "^1.4.0",
+    "@storybook/react-native": "^3.3.12",
+    "@storybook/addon-actions": "^3.3.12",
+    "@storybook/addon-links": "^3.3.12",
+    "@storybook/addons": "^3.3.12",
+    "babel-core": "^6.26.0",
+    "react-dom": "16.0.0",
+    "prop-types": "^15.6.0"
   },
   "jest": {
     "preset": "react-native",
@@ -44,6 +63,9 @@
     },
     "transformIgnorePatterns": [
       "node_modules/(?!react-native|react-navigation)/"
-    ]
+    ],
+    "moduleNameMapper": {
+      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "identity-obj-proxy"
+    }
   }
 }
