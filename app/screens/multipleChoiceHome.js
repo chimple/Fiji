@@ -1,10 +1,38 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text, TouchableOpacity, Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
 
 class multipleChoiceHome extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+          height,
+          width
+        }
+  
+        Dimensions.addEventListener('change', () => {
+          width = Dimensions.get('window').width;
+          height = Dimensions.get('window').height;
+        }); 
+    }
+
+    state = Dimensions.get("window");
+    handler = dims => this.setState(dims);
+
+    componentDidMount() {
+        Dimensions.addEventListener("change", this.handler);
+    }
+
+    componentWillUnmount() {
+      // Important to stop updating state after unmount
+      Dimensions.removeEventListener("change", this.handler);
+    }
+
     render() {       
         return (
-            <View style={{ backgroundColor: '#483d8b', flex: 1 }}>
+            <ScrollView style={{ backgroundColor: '#483d8b', flex: 1 }}>
 
             <View>
                 <Text style={styles.midTextStyle}>Welcome</Text>
@@ -18,10 +46,10 @@ class multipleChoiceHome extends Component {
             <View>
                 <Text style={styles.midTextStyle}>Multiple Choice Game</Text>
             </View>
-            
+            {height > width ? <View>
             <TouchableOpacity 
             onPress={() => this.props.navigation.navigate('Game7')} 
-            >
+            style={{ paddingTop: height * 0.1 }}>
             <Text style={styles.endButtonStyle}>Single player</Text>
             </TouchableOpacity>
             <TouchableOpacity>
@@ -29,10 +57,22 @@ class multipleChoiceHome extends Component {
             </TouchableOpacity>
             <TouchableOpacity>
             <Text style={styles.endButtonStyle}>Multi player</Text>           
+            </TouchableOpacity></View> : <View style={{ flexDirection: 'row' }}>
+            <TouchableOpacity 
+            onPress={() => this.props.navigation.navigate('Game7')} 
+            style={{ margin: height * 0.1 }}>
+            <Text style={styles.landscapeEndButtonStyle}>Single player</Text>
             </TouchableOpacity>
+            <TouchableOpacity style={{ margin: height * 0.1 }}>
+            <Text style={styles.landscapeEndButtonStyle}>Timed Mode</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{ margin: height * 0.1 }}>
+            <Text style={styles.landscapeEndButtonStyle}>Multi player</Text>           
+            </TouchableOpacity>
+                 </View> }
            
 
-            </View>
+            </ScrollView>
         );
     }
 }
@@ -44,7 +84,18 @@ const styles = {
         alignSelf: 'center'
     },
     endButtonStyle: {
-        fontSize: 36, 
+        fontSize: 30, 
+        color: '#fff', 
+        alignSelf: 'center',
+        paddingTop: 10
+    },
+    landscapeMidTextStyle: {
+        fontSize: width * 0.09, 
+        color: '#fff', 
+        alignSelf: 'center'
+    },
+    landscapeEndButtonStyle: {
+        fontSize: 24, 
         color: '#fff', 
         alignSelf: 'center',
         paddingTop: 10
