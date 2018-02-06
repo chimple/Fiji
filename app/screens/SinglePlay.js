@@ -6,6 +6,11 @@ import { fetchMultipleChoiceData } from '../redux/data'
 import Quiz from '../components/games/Quiz';
 import ScoreScreen from '../screens/ScoreScreen'
 
+let count = 0;
+let j = 0;
+let arrques = [];
+let arrans = [];
+let arrchoice = [];
 
 class SinglePlay extends Component {
   constructor(props) {
@@ -17,8 +22,8 @@ class SinglePlay extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(fetchMultipleChoiceData(5, 2, 1));
-    console.log(this.props.gameData);
+    this.props.dispatch(fetchMultipleChoiceData(0, 2, 1));
+    console.log(count);
   }
   
   _quizFinish(score) {    
@@ -29,10 +34,20 @@ class SinglePlay extends Component {
     console.log(this.props.navigation.state.params.item.name)
     console.log(this.props.navigation.state.params.game.name)
     console.log(this.props.navigation.state.params.user.name)
-    console.log(this.props.gameData)
-    console.log(this.props.gameData.answerIndex)
-    console.log(this.props.gameData.choices)
-    console.log(this.props.gameData.question)
+    data = this.props.gameData.map(function(temp, index){
+      arrques[j] = temp.question;
+      arrans[j] = temp.answerIndex;
+      arrchoice[j] = temp.choices;
+      console.log(arrques[j]);
+      console.log(arrans[j]);
+      console.log(arrchoice[j]);
+      j++;
+    });
+    console.log(j);
+    console.log(arrques);
+    console.log(arrans);
+    console.log(arrchoice);
+    console.log(this.props.gameData);
     return (
       <View style={{ flex: 1 }}>
  
