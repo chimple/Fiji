@@ -52,7 +52,7 @@ class CamPage extends Component {
                 let base64Img = data.path;
                 RNFS.readFile(Platform.OS === 'android' ? base64Img.substring(7) : base64Img, "base64")  //substring(7) -> to remove the file://
                     .then(res => {
-                        this.props.dispatch(addUser({ name: 'me', image: res }));
+                        this.props.dispatch(addUser({ name: '', image: res }));
                         this.props.navigation.navigate('Friends');
                         console.log('this is the id in camPage')
                     })
@@ -69,6 +69,7 @@ class CamPage extends Component {
                         ref={(cam) => {
                             this.camera = cam;
                         }}
+                        captureQuality={"480p"}
                         type={'front'}
                         onBarCodeRead={this.onBarCodeRead.bind(this)}
                         style={styles.preview}
