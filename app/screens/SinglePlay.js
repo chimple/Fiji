@@ -1,20 +1,25 @@
 import React, { Component } from 'react';
-import {
-  StatusBar,
-  View,
-  Text
-} from 'react-native';
+import { View, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { connect } from 'react-redux';
+
+import { fetchMultipleChoiceData } from '../redux/data'
 import Quiz from '../components/games/Quiz';
 import ScoreScreen from '../screens/ScoreScreen'
 
-export default class SinglePlay extends Component {
+
+class SinglePlay extends Component {
   constructor(props) {
     super(props);
     this.state = {
       quizFinish: false,
       score: 0
     };
+  }
+
+  componentDidMount() {
+    this.props.dispatch(fetchMultipleChoiceData(0, 2, 1));
+    console.log(this.props.gameData[0]);
   }
   
   _quizFinish(score) {    
@@ -62,7 +67,10 @@ export default class SinglePlay extends Component {
       </View>
     );
   }
+
 }
+
+
 const scoreCircleSize = 300;
 const styles = {
   score: {
@@ -89,18 +97,10 @@ const styles = {
     backgroundColor: '#F5FCFF',
     justifyContent: 'center',
     alignItems: 'center'
-  },
-  toolbar: {
-        backgroundColor: '#483d8b',
-        paddingTop: 30,
-        paddingBottom: 10,
-        flexDirection: 'row'
-    },
-    toolbarTitle: {
-        color: '#fff',
-        justifyContent: 'center',
-        textAlign: 'center',
-        fontWeight: 'bold',
-        flex: 1
-    }
+  }
 };
+
+export default connect(state => ({
+  gameData: state.data.gameData,
+  isFetching: state.data.isFetching,
+}))(SinglePlay)
