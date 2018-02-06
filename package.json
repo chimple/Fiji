@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "storybook": "storybook start -p 7007"
   },
   "dependencies": {
+    "@storybook/cli": "^3.3.12",
     "appcenter": "^1.1.0",
     "appcenter-analytics": "^1.1.0",
     "appcenter-crashes": "^1.1.0",
@@ -42,7 +44,14 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^22.0.6",
     "react-test-renderer": "16.0.0",
-    "redux-mock-store": "^1.4.0"
+    "redux-mock-store": "^1.4.0",
+    "@storybook/react-native": "^3.3.12",
+    "@storybook/addon-actions": "^3.3.12",
+    "@storybook/addon-links": "^3.3.12",
+    "@storybook/addons": "^3.3.12",
+    "babel-core": "^6.26.0",
+    "react-dom": "16.0.0",
+    "prop-types": "^15.6.0"
   },
   "jest": {
     "preset": "react-native",
