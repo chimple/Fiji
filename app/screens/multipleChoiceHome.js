@@ -20,6 +20,12 @@ class multipleChoiceHome extends Component {
         Dimensions.addEventListener("change", this.handler);
     }
 
+    componentWillMount() {
+        Dimensions.addEventListener("change", this.handler);
+        width = Dimensions.get('window').width;
+        height = Dimensions.get('window').height;
+    }
+
     componentWillUnmount() {
         // Important to stop updating state after unmount
         Dimensions.removeEventListener("change", this.handler);
