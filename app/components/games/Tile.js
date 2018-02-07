@@ -55,7 +55,8 @@ export default class Tile extends PureComponent {
             }} >
             <Text style={{
               color: this.props.textColor,
-              backgroundColor: 'transparent'
+              backgroundColor: 'transparent',
+              fontSize: this.props.style.height-30
             }}>
               {this.props.text}
             </Text>
