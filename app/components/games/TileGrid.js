@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
+import React, { PureComponent, Component } from 'react';
 import { Text, View, StyleSheet, Animated, Easing, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types'
 import * as Animatable from 'react-native-animatable'
 import Tile from './Tile'
 
-export default class TileGrid extends Component {
+export default class TileGrid extends PureComponent {
   constructor(props) {
     super(props)
   }
 
   render() {
+    console.log('TileGrid.render')
     const cellSize = Math.min(
       Math.floor(this.props.style.width / (this.props.numCols)),
       Math.floor(this.props.style.height / (this.props.numRows))
