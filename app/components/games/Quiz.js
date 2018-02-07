@@ -101,8 +101,6 @@ const jsonData = { quiz: {
       Dimensions.addEventListener('change', () => {
         width = Dimensions.get('window').width;
         height = Dimensions.get('window').height;
-        console.log(width);
-        console.log(height);
       }); 
 
       this.qno = 0;
