@@ -4,6 +4,7 @@ const FETCH_GAME_HIGH_SCORES_REQUEST = 'Fiji/game/FETCH_GAME_HIGH_SCORES_REQUEST
 const FETCH_GAME_HIGH_SCORES_SUCCESS = 'Fiji/game/FETCH_GAME_HIGH_SCORES_SUCCESS'
 const FETCH_GAME_HIGH_SCORES_FAILURE = 'Fiji/game/FETCH_GAME_HIGH_SCORES_FAILURE'
 const ADD_SCORE = 'Fiji/game/ADD_SCORE'
+const RESET_SCORE = 'Fiji/game/RESET_SCORE'
 
 export const initialState = {
   isFetching: false,
@@ -35,6 +36,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         myScore: state.myScore + action.myScore
       }
+    case RESET_SCORE:
+      return {
+        ...state,
+        myScore: 0
+      }
     default:
       return state
   }
@@ -58,6 +64,10 @@ export const addMyScore = (myScore) => ({
   myScore
 })
 
+export const resetScore = () => ({
+  type: RESET_SCORE
+})
+
 export const fetchGameHighScores = (game_id) => async (dispatch, getState) => {
   try {
     dispatch(fetchGameHighScoresRequest())
@@ -69,8 +79,8 @@ export const fetchGameHighScores = (game_id) => async (dispatch, getState) => {
     const highScores = result.rows
       .map(function (row) { return row.doc })
       .sort((a, b) => {
-      return b.score - a.score
-    })
+        return b.score - a.score
+      })
     dispatch(fetchGameHighScoresSuccess(highScores))
   } catch (error) {
     console.log('fetchGameHighScores: ' + error)
