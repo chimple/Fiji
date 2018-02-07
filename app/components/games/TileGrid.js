@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import * as Animatable from 'react-native-animatable'
 import Tile from './Tile'
 
-export default class TileBoard extends Component {
+export default class TileGrid extends Component {
   constructor(props) {
     super(props)
   }
@@ -54,7 +54,7 @@ export default class TileBoard extends Component {
   }
 }
 
-TileBoard.propTypes = {
+TileGrid.propTypes = {
   onPress: PropTypes.func,
   numRows: PropTypes.number,
   numCols: PropTypes.number,
