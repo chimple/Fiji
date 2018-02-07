@@ -17,6 +17,9 @@ class GameScreen extends Component {
   }
 
   render() {
+    console.log(this.props.navigation.state.params.item.name)
+    console.log(this.props.navigation.state.params.game.name)
+    console.log(this.props.navigation.state.params.user.name)
     const GameComponent = GameComponents['ReflexBoard']
     return (
       this.props.isFetching
@@ -36,9 +39,6 @@ class GameScreen extends Component {
     )
   }
 
-  _handlePress = (title) => {
-    this.props.navigation.navigate('Game', { title })
-  }
 
 }
 
