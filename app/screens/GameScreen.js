@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { fetchGameData } from '../redux/game'
 import { addMyScore, finalizeScore } from '../redux/score'
+import ProgressBar from '../components/ProgressBar'
 import ReflexBoard from '../components/games/ReflexBoard'
 import ScoreScreen from '../../app/screens/ScoreScreen'
 import TapHome from '../components/games/TapHome';
@@ -101,6 +102,12 @@ class GameScreen extends Component {
 
                 </Text>
               </View>
+              <ProgressBar
+                fillStyle={{}}
+                backgroundStyle={{backgroundColor: '#cccccc', borderRadius: 2}}
+                style={{width: this.state.window.width}}
+                initialProgress={0.5}
+              />              
               <GameComponent
                 data={this.props.gameData[0]}
                 onScore={this._onScore}
