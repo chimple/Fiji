@@ -389,6 +389,81 @@
       "_id": "high-score:game:memory-matching:alice",
       "user_id": "alice",
       "score": 10
+    },
+    {
+      "_id": "high-score:game:reflex:mad-hatter",
+      "user_id": "mad-hatter",
+      "score": 20
+    },
+    {
+      "_id": "high-score:game:reflex:white-rabbit",
+      "user_id": "white-rabbit",
+      "score": 30
+    },
+    {
+      "_id": "high-score:game:reflex:alice",
+      "user_id": "alice",
+      "score": 10
+    },
+    {
+      "_id": "high-score:game:tap-wrong:mad-hatter",
+      "user_id": "mad-hatter",
+      "score": 20
+    },
+    {
+      "_id": "high-score:game:tap-wrong:white-rabbit",
+      "user_id": "white-rabbit",
+      "score": 30
+    },
+    {
+      "_id": "high-score:game:tap-wrong:alice",
+      "user_id": "alice",
+      "score": 10
+    },
+    {
+      "_id": "high-score:game:word:mad-hatter",
+      "user_id": "mad-hatter",
+      "score": 20
+    },
+    {
+      "_id": "high-score:game:word:white-rabbit",
+      "user_id": "white-rabbit",
+      "score": 30
+    },
+    {
+      "_id": "high-score:game:word:alice",
+      "user_id": "alice",
+      "score": 10
+    },
+    {
+      "_id": "high-score:game:multiple-choice:mad-hatter",
+      "user_id": "mad-hatter",
+      "score": 20
+    },
+    {
+      "_id": "high-score:game:multiple-choice:white-rabbit",
+      "user_id": "white-rabbit",
+      "score": 30
+    },
+    {
+      "_id": "high-score:game:multiple-choice:alice",
+      "user_id": "alice",
+      "score": 10
+    },
+    {
+      "_id": "high-score:game:tap-home:mad-hatter",
+      "user_id": "mad-hatter",
+      "score": 20
+    },
+    {
+      "_id": "high-score:game:tap-home:white-rabbit",
+      "user_id": "white-rabbit",
+      "score": 30
+    },
+    {
+      "_id": "high-score:game:tap-home:alice",
+      "user_id": "alice",
+      "score": 10
     }
   ]
 }

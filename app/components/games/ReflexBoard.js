@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import TileGrid from './TileGrid'
 
-const { width, height } = require('Dimensions').get('window')
 const SIZE = 4
 
 export default class ReflexBoard extends Component {
@@ -31,14 +30,14 @@ export default class ReflexBoard extends Component {
         numRows={SIZE}
         numCols={SIZE}
         data={this.state.letters}
-        tileColor='skyblue'
+        tileColor='#24B2EA'
         edgeColor='deepskyblue'
         pressedTileColor='goldenrod'
         pressedEdgeColor='darkgoldenrod'
-        textColor='purple'
+        textColor='#FFFFFF'
         style={{
-          width: width,
-          height: height
+          width: this.props.style.width,
+          height: this.props.style.height
         }}
         onPress={this._clickTile}
       />
@@ -48,6 +47,7 @@ export default class ReflexBoard extends Component {
   _clickTile = (id, view) => {
     if (this.state.letters[id] == this.props.data[this.state.currentIndex]) {
       view.zoomOut(250).then((endState)=>{
+        this.props.onScore(1)
         this.setState((prevState, props) => {
           console.log(prevState)
           const newLetters = prevState.letters.map((value, index) => {
@@ -69,5 +69,6 @@ export default class ReflexBoard extends Component {
 }
 
 ReflexBoard.propTypes = {
-  data: PropTypes.array
+  data: PropTypes.array,
+  onScore: PropTypes.func
 }
