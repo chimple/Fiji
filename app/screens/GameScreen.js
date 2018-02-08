@@ -12,7 +12,7 @@ import TapWrongGridComponent from '../components/games/TapWrongGridComponent';
 import WordGrid from '../components/games/WordGrid';
 import Quiz from '../components/games/Quiz';
 import ConnectDots from '../components/games/ConnectDots';
-import MemoryMatchingScreen from './MemoryMatchingScreen';
+import MemoryMatching from '../components/games/MemoryMatching';
 import { fetchMultipleChoiceData, fetchSerialData, fetchWordData, fetchConsecutiveData, fetchMatchData } from '../redux/data';
 
 const TOP_HEIGHT = 100
@@ -25,7 +25,7 @@ const GameComponents = {
   'game:word': WordGrid,
   'game:multiple-choice': Quiz,
   'game:connect-dots': ConnectDots,
-  'game:memory-matching': MemoryMatchingScreen
+  'game:memory-matching': MemoryMatching
 }
 
 class GameScreen extends Component {
@@ -52,7 +52,7 @@ class GameScreen extends Component {
 
   componentDidMount() {
     if(this.props.navigation.state.params.game._id == 'game:reflex') {
-      this.props.dispatch(fetchGameData())
+      this.props.dispatch(fetchConsecutiveData('set:letters', 20, 0, 1))
     } else if(this.props.navigation.state.params.game._id == 'game:multiple-choice') {
       this.props.dispatch(fetchMultipleChoiceData('set:letters', 4, 2))
     } else if(this.props.navigation.state.params.game._id == 'game:tap-home') {
@@ -101,7 +101,7 @@ class GameScreen extends Component {
                 </Text>
               </View>
               <GameComponent
-                data={this.props.gameData}
+                data={this.props.gameData[0]}
                 onScore={this._onScore}
                 onEnd={this._onEnd}
                 style={{
