@@ -46,21 +46,25 @@ export default class ReflexBoard extends Component {
 
   _clickTile = (id, view) => {
     if (this.state.letters[id] == this.props.data[this.state.currentIndex]) {
-      view.zoomOut(250).then((endState)=>{
-        this.props.onScore(1)
-        this.setState((prevState, props) => {
-          console.log(prevState)
-          const newLetters = prevState.letters.map((value, index) => {
-            return index == id ? prevState.shuffledData[prevState.currentIndex+SIZE*SIZE] : value
+      view.zoomOut(250).then((endState) => {
+        this.props.onScore(2)
+        if (this.state.currentIndex + 1 >= this.props.data.length) {
+          this.props.onEnd()
+        } else {
+          this.setState((prevState, props) => {
+            console.log(prevState)
+            const newLetters = prevState.letters.map((value, index) => {
+              return index == id ? prevState.shuffledData[prevState.currentIndex + SIZE * SIZE] : value
+            })
+            console.log(newLetters)
+            return {
+              letters: newLetters,
+              shuffledData: prevState.shuffledData,
+              currentIndex: prevState.currentIndex + 1
+            }
           })
-          console.log(newLetters)
-          return {
-            letters: newLetters,
-            shuffledData: prevState.shuffledData,
-            currentIndex: prevState.currentIndex+1
-          }
-        })
-        this.state.currentIndex+SIZE*SIZE<=this.state.shuffledData.length && view.zoomIn(250)
+          this.state.currentIndex + SIZE * SIZE <= this.state.shuffledData.length && view.zoomIn(250)
+        }
       })
     } else {
       view.shake(250)
@@ -70,5 +74,6 @@ export default class ReflexBoard extends Component {
 
 ReflexBoard.propTypes = {
   data: PropTypes.array,
-  onScore: PropTypes.func
+  onScore: PropTypes.func,
+  onEnd: PropTypes.func
 }
