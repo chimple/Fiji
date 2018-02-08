@@ -10,6 +10,9 @@ let timerId;
 let width;
 let iterate = 0;
 let len = 0;
+let j = 0, i = 0;
+let ans = [];
+let options = [[]];
 
 export default class TapHome extends Component {
 
@@ -34,7 +37,7 @@ export default class TapHome extends Component {
   }
 
   timer = () => {
-    if( this.state.count  == len ){
+    if( this.state.count  == options[this.state.numberHolder].length ){
       this.setState({count: 0})
     }else
       this.setState({ count: this.state.count + 1 })
@@ -50,7 +53,7 @@ export default class TapHome extends Component {
   //This will generate random number and will check on tap condition
   GenerateRandomNumber = () => {
     
-    if (this.props.data[this.state.numberHolder] == this.props.data1[this.state.numberHolder] [this.state.count]) {
+    if (ans[this.state.numberHolder] == options[this.state.numberHolder] [this.state.count]) {
       this.refs.view.zoomIn(500).then((endState) => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
      
       if(this.state.score == 9 )
@@ -120,8 +123,22 @@ export default class TapHome extends Component {
   // }
 
   render() {
+
+    ans = [];
+    options = [[]];
+    j = 0;
+    data = this.props.data.map( function (temp, index ){
+      let arr = [];
+      i = 0;
+      ans[j] = temp.answer; 
+      doubled = temp.serial.map( function (number, index ) {
+        arr[i] = number;
+        i++;
+      });
+      options[j] = arr;
+      j++;
+    });
  
-    len = this.props.data1[this.state.numberHolder].length;
     const { count, numberHolder, score } = this.state;    
     if ( isLandscape() ) {
       const { container, SubContainer, circle, text, subText, scoreText } = stylesLandscape;
@@ -134,23 +151,17 @@ export default class TapHome extends Component {
               <View style={[circle, { width: width + 50, height: width + 50, borderRadius: width + 50 / 2 }]}>
                 <View>
                   <Animatable.View ref="view">
-                    <Text style={[text, { fontSize: fontSizer(width) }]}>{this.props.data[numberHolder]}</Text>
+                    <Text style={[text, { fontSize: fontSizer(width) }]}>{ans[numberHolder]}</Text>
                   </Animatable.View>
                 </View>
               </View>
               <TouchableOpacity onPress={this.GenerateRandomNumber}>
-                <Text style={[subText, { fontSize: fontSizer(width) + 30 }]}>{this.props.data1[numberHolder][count]}</Text>
+                <Text style={[subText, { fontSize: fontSizer(width) + 30 }]}>{options[numberHolder][count]}</Text>
               </TouchableOpacity>
             </View>
           </View>
         );
-      }
-      else if(score){
-        return (
-          <ScoreScreen item={this.props.item} game={this.props.game} user={this.props.user} />
-        );
-      }
-
+      }  
     }
 
     else {
@@ -164,20 +175,15 @@ export default class TapHome extends Component {
               <View style={[circle, { width: width, height: width, borderRadius: width / 2 }]}>
                 <View>
                   <Animatable.View ref="view">
-                    <Text style={[text, { fontSize: fontSizer(width) }]}>{this.props.data[numberHolder]}</Text>
+                    <Text style={[text, { fontSize: fontSizer(width) }]}>{ans[numberHolder]}</Text>
                   </Animatable.View>
                 </View>
               </View>
               <TouchableOpacity onPress={this.GenerateRandomNumber}>
-                <Text style={[subText, { fontSize: fontSizer(width) + 20 }]}>{this.props.data1[numberHolder][count]}</Text>
+                <Text style={[subText, { fontSize: fontSizer(width) + 20 }]}>{options[numberHolder][count]}</Text>
               </TouchableOpacity>
             </View>
           </View>
-        );
-      }
-      else {
-        return (
-          <ScoreScreen item={this.props.item} game={this.props.game} user={this.props.user} />
         );
       }
     }
@@ -200,7 +206,7 @@ const stylesPotrait = {
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignSelf: 'center'
   },
   circle: {
   
