@@ -1,8 +1,18 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types'
 import ConnectDots from '../components/games/ConnectDots';
+//import Connectdatascreen from './ConnectDatascreen';
 
-export default class ConnectDot extends Component {
+import { fetchConsecutiveData} from '../redux/data';
+var j=0;
+var k=0;
+var arr1 = [];
+var arr2 = [];
+
+ class ConnectDot extends Component {
+
     constructor(props) {
         super(props);
      
@@ -30,42 +40,80 @@ export default class ConnectDot extends Component {
             }
         }
     }
-    render() {
+    componentDidMount() {
+        this.props.dispatch(fetchConsecutiveData(1, 6, 3, 1))
+      }
+    render() 
+    
+    {arr1=[];
+        j=0;
+        arr2=[];
+        k=0;
         const data1 = this.state.jsonData.object.object1.arr1;
         const data2 = this.state.jsonData.object.object1.arr2;
         console.log("data", data1);
-        
-        return (
-            <View style={{
-                flex: 1,
-                flexWrap: 'wrap',
-                
-               backgroundColor: 'gray',
-                alignItems: 'flex-start',
-                justifyContent: 'space-around',
-                flexDirection: 'row',
-                width: '100%',
-                height: '100%'
-            }}>
+        const data=this.props.gamedata.map( function (item, i){
+            console.log("data is serial 111222", item.serial)
+           
+            item.serial.map(function(element, i) {
+                arr1[j]=element;
+                j++;
+                console.log(element);
+              });
+              
+              console.log(" asbbsjdbjhbjbd", arr1);
 
+              item.others.map(function(element, i) {
+                 arr2[k]=element;
+                 k++;
+
+                console.log(element);
+              });
+            console.log("data is serial 111222", item.serial[0])
+           
+            console.log("data is others2222", item.others)
+
+        }
+    )
+    console.log(" value stored from series to array1 ", arr1);
+    console.log(" value stored from others  to array2 ", arr2);
      
-                {data1.map((element, i) => (
+        console.log("this datagame props ", this.props.gamedata)
+
+
+        return (
+            
+            <View style={{flex: 1,alignItems:'center',  backgroundColor: 'gray'}}>
+          
+              <View style={{flex: .1,  backgroundColor: 'gray'}} />
+            <View style={{flex:6,flexWrap: 'wrap',width:400,paddingLeft:38,flexDirection:'row', }} >
+                {arr1.map((element, i) => (
    
-                    <ConnectDots value={element}
-                    key={element.value} array1={data1} array2={data2}/>))}
+                    <ConnectDots value={element} navigation={this.props.navigation}
+                    key={element.value} array1={arr1} array2={arr2}/>))}
 
 
-                {data2.map((element, key) => (
+                {arr2.map((element, key) => (
 
                     <ConnectDots
-                        value={element} key={element.value} array1={data1} array2={data2} />)) }
+                        value={element} key={element.value} array1={arr1} array2={arr2}navigation={this.props.navigation} />)) }
 
 
-
-
+               </View>
+               
             </View>
+           
 
         );
     }
 
 }
+ConnectDot.propTypes = {
+    serial: PropTypes.array,
+    others: PropTypes.array,
+}
+
+export default connect(state => ({
+    gamedata: state.data.gameData,
+    isFetching: state.data.isFetching
+  }))(ConnectDot)
