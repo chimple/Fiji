@@ -11,9 +11,9 @@ import TapHome from '../components/games/TapHome';
 import TapWrongGridComponent from '../components/games/TapWrongGridComponent';
 import WordGrid from '../components/games/WordGrid';
 import Quiz from '../components/games/Quiz';
-import ConnectDots from '../components/games/ConnectDots';
 import MemoryMatchingScreen from './MemoryMatchingScreen';
 import { fetchMultipleChoiceData, fetchSerialData, fetchWordData, fetchConsecutiveData, fetchMatchData } from '../redux/data';
+import ConnectDotsScreen from './ConnectDotsScreen';
 
 const TOP_HEIGHT = 100
 const BOTTOM_PADDING = 20
@@ -24,7 +24,7 @@ const GameComponents = {
   'game:tap-wrong': TapWrongGridComponent,
   'game:word': WordGrid,
   'game:multiple-choice': Quiz,
-  'game:connect-dots': ConnectDots,
+  'game:connect-dots': ConnectDotsScreen,
   'game:memory-matching': MemoryMatchingScreen
 }
 
