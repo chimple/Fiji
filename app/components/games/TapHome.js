@@ -3,12 +3,13 @@ import { View, Text, Dimensions, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import * as Animatable from 'react-native-animatable';
 import Confirm from './Confirm';
-import { isPortrait, isLandscape, isPhone, isTablet } from './Platform';
+import { isPortrait, isLandscape, isTablet } from './Platform';
 import ScoreScreen from '../../screens/ScoreScreen'
 
 let timerId; 
 let width;
 let iterate = 0;
+let len = 0;
 
 export default class TapHome extends Component {
 
@@ -17,9 +18,9 @@ export default class TapHome extends Component {
     super();
     this.state = {
       // This is our Default number value
-      numberHolder: 4,
+      numberHolder: 0,
       score: 0,
-      count: 2,
+      count: 0,
       showModal: false,
     };
 
@@ -29,53 +30,43 @@ export default class TapHome extends Component {
     });
 
     width = Dimensions.get('window').height * 0.225;
-    console.log();
 
   }
 
   timer = () => {
-
-    if ((this.state.count - this.state.numberHolder) > 2) {
-      this.setState({ count: this.state.numberHolder - 3 })
-    }
-
-    if ((this.state.numberHolder - this.state.count) > 2) {
-      this.setState({ count: this.state.numberHolder - 2 })
-    }
-
-    else {
+    if( this.state.count  == len ){
+      this.setState({count: 0})
+    }else
       this.setState({ count: this.state.count + 1 })
-    }
   }
 
   componentDidMount() {
 
     //This will start timer and will update text value
-    timerId = setInterval(this.timer, 1700)
+    timerId = setInterval(this.timer, 1400)
 
   }
 
   //This will generate random number and will check on tap condition
   GenerateRandomNumber = () => {
-    if (this.state.numberHolder == this.state.count) {
+    
+    if (this.props.data[this.state.numberHolder] == this.props.data1[this.state.numberHolder] [this.state.count]) {
       this.refs.view.zoomIn(500).then((endState) => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
-      var RandomNumber = Math.floor(Math.random() * 100) + 1;
-      if (RandomNumber > 9) {
-        RandomNumber = RandomNumber % 10;
+     
+      if(this.state.score == 9 )
+      {
+        this.setState({
+          numberHolder: this.state.numberHolder,
+          showModal: true,
+        })
       }
-
-      if (RandomNumber == 0 || RandomNumber == 1) {
-        RandomNumber = RandomNumber + 7;
+      else{
+        this.setState({
+          numberHolder: this.state.numberHolder + 1,
+          count: 0,
+          score: this.state.score + 1,
+        })
       }
-
-      else if (RandomNumber == 2) {
-        RandomNumber = RandomNumber + 4;
-      }
-      this.setState({
-        numberHolder: RandomNumber,
-        count: RandomNumber - 3,
-        score: this.state.score + 1,
-      })
 
       //condition for increasing speed
       if (this.state.score > 1 && this.state.score <= 3) {
@@ -102,7 +93,7 @@ export default class TapHome extends Component {
     else {
       this.refs.view.shake(500).then((endState) => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
       iterate = iterate + 1;
-      this.setState({ count: this.state.numberHolder - 3 })
+      this.setState({ count: 0 })
       if(iterate > 5 ) {
         this.setState({
           showModal: true,
@@ -111,50 +102,50 @@ export default class TapHome extends Component {
       }
 
     }
-  }
+  }//end of generateRandomNumber function
 
-  onAccept() {
-    this.setState({
-      numberHolder: 4,
-      score: 0,
-      count: 2,
-      showModal: false,
-    });
-    clearInterval(timerId);
-    timerId = setInterval(this.timer, 2000);
-  }
+  // onAccept() {
+  //   this.setState({
+  //     numberHolder: 4,
+  //     score: 0,
+  //     count: 2,
+  //     showModal: false,
+  //   });
+  //   clearInterval(timerId);
+  //   timerId = setInterval(this.timer, 2000);
+  // }
 
-  onDecline() {
-    this.setState({ showModal: false });
-  }
+  // onDecline() {
+  //   this.setState({ showModal: false });
+  // }
 
   render() {
-
-
+ 
+    len = this.props.data1[this.state.numberHolder].length;
+    const { count, numberHolder, score } = this.state;    
     if ( isLandscape() ) {
       const { container, SubContainer, circle, text, subText, scoreText } = stylesLandscape;
-      const { count, numberHolder, score } = this.state;
-
+      
       if (this.state.showModal == false) {
         return (
           <View style={{ flex: 1, backgroundColor: '#27ae60' }}>
             <Text style={[scoreText, { fontSize: fontSizer(width) - 20 }]}>score: {score}</Text>
             <View style={container} >
-              <View style={[circle, { width: width + 40, height: width + 40, borderRadius: width + 40 / 2 }]}>
+              <View style={[circle, { width: width + 50, height: width + 50, borderRadius: width + 50 / 2 }]}>
                 <View>
                   <Animatable.View ref="view">
-                    <Text style={[text, { fontSize: fontSizer(width) }]}>{numberHolder}</Text>
+                    <Text style={[text, { fontSize: fontSizer(width) }]}>{this.props.data[numberHolder]}</Text>
                   </Animatable.View>
                 </View>
               </View>
               <TouchableOpacity onPress={this.GenerateRandomNumber}>
-                <Text style={[subText, { fontSize: fontSizer(width) + 30 }]}>{count}</Text>
+                <Text style={[subText, { fontSize: fontSizer(width) + 30 }]}>{this.props.data1[numberHolder][count]}</Text>
               </TouchableOpacity>
             </View>
           </View>
         );
       }
-      else {
+      else if(score){
         return (
           <ScoreScreen item={this.props.item} game={this.props.game} user={this.props.user} />
         );
@@ -164,7 +155,6 @@ export default class TapHome extends Component {
 
     else {
       const { container, circle, text, subText, scoreText } = stylesPotrait;
-      const { count, numberHolder, score } = this.state;
 
       if (this.state.showModal == false) {
         return (
@@ -174,12 +164,12 @@ export default class TapHome extends Component {
               <View style={[circle, { width: width, height: width, borderRadius: width / 2 }]}>
                 <View>
                   <Animatable.View ref="view">
-                    <Text style={[text, { fontSize: fontSizer(width) }]}>{numberHolder}</Text>
+                    <Text style={[text, { fontSize: fontSizer(width) }]}>{this.props.data[numberHolder]}</Text>
                   </Animatable.View>
                 </View>
               </View>
               <TouchableOpacity onPress={this.GenerateRandomNumber}>
-                <Text style={[subText, { fontSize: fontSizer(width) + 20 }]}>{count}</Text>
+                <Text style={[subText, { fontSize: fontSizer(width) + 20 }]}>{this.props.data1[numberHolder][count]}</Text>
               </TouchableOpacity>
             </View>
           </View>
