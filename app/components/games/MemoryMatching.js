@@ -8,6 +8,8 @@ import {
   Animated,
   Alert
 } from 'react-native';
+import PropTypes from 'prop-types';
+import TileGrid from './TileGrid';
 import Orientation from 'react-native-orientation';
 import Board from './Board';
 import Card from './Card';
@@ -70,16 +72,6 @@ export default class MemoryMatching extends Component {
   }
 
 
-  getPlayerToggleButtons() {
-  return (
-      <View style={styles.playerToggleButtons}>
-          <TouchableHighlight onPress={this.makeSinglePlayer} underlayColor="transparent" activeOpacity={0.5}>
-              <Text style={styles.buttonText}>👤 Single Player</Text>
-          </TouchableHighlight>
-      </View>
-  );
-}
-
 handleCardPress(url: string, row: number, col: number) {
   var board = this.state.board;
   var previous = board.selected;
@@ -122,7 +114,7 @@ onCardHide() {
   }
 
   render() {
-
+  
     var board = this.state.board;
     console.log(this.state.board);
     var rows = board.grid.map((cards, row) =>
@@ -139,13 +131,11 @@ onCardHide() {
           />
         )}
       </View>
-  );
+    );
+    
 
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Memory Game</Text>
-
-        {this.getPlayerToggleButtons()}
 
         <View style={styles.board}>
           {rows}
