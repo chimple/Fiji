@@ -1,4 +1,5 @@
 import { contentDB, remoteContentDB } from '../db'
+import { resetScore } from './score'
 
 const FETCH_GAMES_REQUEST = 'Fiji/game/FETCH_GAMES_REQUEST'
 const FETCH_GAMES_SUCCESS = 'Fiji/game/FETCH_GAMES_SUCCESS'
@@ -154,6 +155,7 @@ export const fetchGameTheme = ( game_id ) => async(dispatch, getState) => {
 export const fetchGameData = () => async(dispatch, getState) => {
   try {
     dispatch(fetchGameDataRequest())
+    dispatch(resetScore())
     let data = []
     for (let index = 0; index < 26; index++) {
       data.push(String.fromCharCode(65 + index))

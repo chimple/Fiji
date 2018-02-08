@@ -21,21 +21,13 @@ class UserList extends PureComponent {
     this.props.dispatch(addUser(userImage))
   }
   _addItem = () => (
-      <TouchableOpacity onPress={() => this.props.navigation.navigate('Cam')} >
-        <View style={styles.ImageViewStyle}>
+      <TouchableOpacity style={styles.UserListStyle} onPress={() => this.props.navigation.navigate('Cam')} >
+        <View style={styles.ViewStyle}>
         <Image
           style={styles.ImageStyle}
           source={{ uri: 'https://cdn.pixabay.com/photo/2017/01/10/23/01/icon-1970474_960_720.png' }}
         />
-        </View>
-          {/*<SvgUri
-            width="200"
-            height="200"
-            // source={{ uri:'http://thenewcode.com/assets/images/thumbnails/homer-simpson.svg' }}
-            svgXmlData= { svg }
-          /> */}
-        <View style={styles.TextViewStyle}>
-          <Text style={styles.TextStyle}>
+        <Text style={styles.TextStyle}>
             ADD USER
           </Text>
         </View>
@@ -45,14 +37,13 @@ class UserList extends PureComponent {
   // merge = _renderItem + 
 
   render() {
-    // console.log('thisdfdfgdfgdfgdfgdfgd'+item._id);
-    // const add = this._renderItem;
-    // add.push(this._addItem); 
+    // console.disableYellowBox = true;
     return (
       <View style={styles.UserListStyle}>
         <FlatList
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap' }}
+          // contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap' }}
+          numColumns={3}
           data={this.props.users}
           // extraData={this._addItem()}
           keyExtractor={this._keyExtractor}
@@ -90,7 +81,7 @@ const styles = StyleSheet.create({
     // marginTop: Dimensions.get('window').width * 0.02,
     // marginLeft: Dimensions.get('window').width * 0.04
   },
-  TextViewStyle:{
+  ViewStyle:{
     flex:1,
     alignItems:'center',
     // justifyContent:'center', 
@@ -103,12 +94,12 @@ const styles = StyleSheet.create({
   },
   TouchableStyle:{
     flex:1,
-    height:120, 
-    width:100, 
+    // height:Dimensions.get('window').width * 0.3,
+    // width: Dimensions.get('window').width * 0.3,
     // justifyContent: 'center',
-    borderColor:'black',
-    borderWidth:2, 
-    marginLeft:'4%',
+    // borderColor:'black',
+    // borderWidth:2, 
+    marginLeft:'7%',
     marginTop:'10%'
   }
 });

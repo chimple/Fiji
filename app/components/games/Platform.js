@@ -27,8 +27,6 @@ export const isLandscape = () => {
  */
 export const isTablet = () => {
     const dim = Dimensions.get('screen');
-    console.log(dim.scale < 2 && msp(dim, 1000));
-    console.log(dim.scale >= 2 && msp(dim, 1900));
     return ((dim.scale < 2 && msp(dim, 1000)) || (dim.scale >= 2 && msp(dim, 1900)));
     
 };

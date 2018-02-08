@@ -30,6 +30,81 @@ Object {
       "score": 10,
       "user_id": "alice",
     },
+    Object {
+      "_id": "high-score:game:reflex:mad-hatter",
+      "score": 20,
+      "user_id": "mad-hatter",
+    },
+    Object {
+      "_id": "high-score:game:reflex:white-rabbit",
+      "score": 30,
+      "user_id": "white-rabbit",
+    },
+    Object {
+      "_id": "high-score:game:reflex:alice",
+      "score": 10,
+      "user_id": "alice",
+    },
+    Object {
+      "_id": "high-score:game:tap-wrong:mad-hatter",
+      "score": 20,
+      "user_id": "mad-hatter",
+    },
+    Object {
+      "_id": "high-score:game:tap-wrong:white-rabbit",
+      "score": 30,
+      "user_id": "white-rabbit",
+    },
+    Object {
+      "_id": "high-score:game:tap-wrong:alice",
+      "score": 10,
+      "user_id": "alice",
+    },
+    Object {
+      "_id": "high-score:game:word:mad-hatter",
+      "score": 20,
+      "user_id": "mad-hatter",
+    },
+    Object {
+      "_id": "high-score:game:word:white-rabbit",
+      "score": 30,
+      "user_id": "white-rabbit",
+    },
+    Object {
+      "_id": "high-score:game:word:alice",
+      "score": 10,
+      "user_id": "alice",
+    },
+    Object {
+      "_id": "high-score:game:multiple-choice:mad-hatter",
+      "score": 20,
+      "user_id": "mad-hatter",
+    },
+    Object {
+      "_id": "high-score:game:multiple-choice:white-rabbit",
+      "score": 30,
+      "user_id": "white-rabbit",
+    },
+    Object {
+      "_id": "high-score:game:multiple-choice:alice",
+      "score": 10,
+      "user_id": "alice",
+    },
+    Object {
+      "_id": "high-score:game:tap-home:mad-hatter",
+      "score": 20,
+      "user_id": "mad-hatter",
+    },
+    Object {
+      "_id": "high-score:game:tap-home:white-rabbit",
+      "score": 30,
+      "user_id": "white-rabbit",
+    },
+    Object {
+      "_id": "high-score:game:tap-home:alice",
+      "score": 10,
+      "user_id": "alice",
+    },
   ],
   "type": "Fiji/game/FETCH_GAME_HIGH_SCORES_SUCCESS",
 }
@@ -39,7 +114,7 @@ exports[`handles FETCH_GAME_HIGH_SCORES_FAILURE action 1`] = `
 Object {
   "gameHighScores": Array [],
   "isFetching": false,
-  "score": 0,
+  "myScore": 0,
 }
 `;
 
@@ -47,7 +122,7 @@ exports[`handles FETCH_GAME_HIGH_SCORES_REQUEST action 1`] = `
 Object {
   "gameHighScores": Array [],
   "isFetching": true,
-  "score": 0,
+  "myScore": 0,
 }
 `;
 
@@ -69,9 +144,84 @@ Object {
       "score": 10,
       "user_id": "alice",
     },
+    Object {
+      "_id": "high-score:game:reflex:mad-hatter",
+      "score": 20,
+      "user_id": "mad-hatter",
+    },
+    Object {
+      "_id": "high-score:game:reflex:white-rabbit",
+      "score": 30,
+      "user_id": "white-rabbit",
+    },
+    Object {
+      "_id": "high-score:game:reflex:alice",
+      "score": 10,
+      "user_id": "alice",
+    },
+    Object {
+      "_id": "high-score:game:tap-wrong:mad-hatter",
+      "score": 20,
+      "user_id": "mad-hatter",
+    },
+    Object {
+      "_id": "high-score:game:tap-wrong:white-rabbit",
+      "score": 30,
+      "user_id": "white-rabbit",
+    },
+    Object {
+      "_id": "high-score:game:tap-wrong:alice",
+      "score": 10,
+      "user_id": "alice",
+    },
+    Object {
+      "_id": "high-score:game:word:mad-hatter",
+      "score": 20,
+      "user_id": "mad-hatter",
+    },
+    Object {
+      "_id": "high-score:game:word:white-rabbit",
+      "score": 30,
+      "user_id": "white-rabbit",
+    },
+    Object {
+      "_id": "high-score:game:word:alice",
+      "score": 10,
+      "user_id": "alice",
+    },
+    Object {
+      "_id": "high-score:game:multiple-choice:mad-hatter",
+      "score": 20,
+      "user_id": "mad-hatter",
+    },
+    Object {
+      "_id": "high-score:game:multiple-choice:white-rabbit",
+      "score": 30,
+      "user_id": "white-rabbit",
+    },
+    Object {
+      "_id": "high-score:game:multiple-choice:alice",
+      "score": 10,
+      "user_id": "alice",
+    },
+    Object {
+      "_id": "high-score:game:tap-home:mad-hatter",
+      "score": 20,
+      "user_id": "mad-hatter",
+    },
+    Object {
+      "_id": "high-score:game:tap-home:white-rabbit",
+      "score": 30,
+      "user_id": "white-rabbit",
+    },
+    Object {
+      "_id": "high-score:game:tap-home:alice",
+      "score": 10,
+      "user_id": "alice",
+    },
   ],
   "isFetching": false,
-  "score": 0,
+  "myScore": 0,
 }
 `;
 
@@ -83,9 +233,44 @@ Array [
   Object {
     "gameHighScores": Array [
       Object {
+        "_id": "high-score:game:tap-home:white-rabbit",
+        "score": 30,
+        "user_id": "white-rabbit",
+      },
+      Object {
+        "_id": "high-score:game:reflex:white-rabbit",
+        "score": 30,
+        "user_id": "white-rabbit",
+      },
+      Object {
+        "_id": "high-score:game:tap-wrong:white-rabbit",
+        "score": 30,
+        "user_id": "white-rabbit",
+      },
+      Object {
+        "_id": "high-score:game:multiple-choice:white-rabbit",
+        "score": 30,
+        "user_id": "white-rabbit",
+      },
+      Object {
         "_id": "high-score:game:memory-matching:white-rabbit",
         "score": 30,
         "user_id": "white-rabbit",
+      },
+      Object {
+        "_id": "high-score:game:word:white-rabbit",
+        "score": 30,
+        "user_id": "white-rabbit",
+      },
+      Object {
+        "_id": "high-score:game:word:mad-hatter",
+        "score": 20,
+        "user_id": "mad-hatter",
+      },
+      Object {
+        "_id": "high-score:game:reflex:mad-hatter",
+        "score": 20,
+        "user_id": "mad-hatter",
       },
       Object {
         "_id": "high-score:game:memory-matching:mad-hatter",
@@ -93,7 +278,47 @@ Array [
         "user_id": "mad-hatter",
       },
       Object {
+        "_id": "high-score:game:tap-home:mad-hatter",
+        "score": 20,
+        "user_id": "mad-hatter",
+      },
+      Object {
+        "_id": "high-score:game:tap-wrong:mad-hatter",
+        "score": 20,
+        "user_id": "mad-hatter",
+      },
+      Object {
+        "_id": "high-score:game:multiple-choice:mad-hatter",
+        "score": 20,
+        "user_id": "mad-hatter",
+      },
+      Object {
+        "_id": "high-score:game:word:alice",
+        "score": 10,
+        "user_id": "alice",
+      },
+      Object {
+        "_id": "high-score:game:tap-wrong:alice",
+        "score": 10,
+        "user_id": "alice",
+      },
+      Object {
+        "_id": "high-score:game:multiple-choice:alice",
+        "score": 10,
+        "user_id": "alice",
+      },
+      Object {
+        "_id": "high-score:game:reflex:alice",
+        "score": 10,
+        "user_id": "alice",
+      },
+      Object {
         "_id": "high-score:game:memory-matching:alice",
+        "score": 10,
+        "user_id": "alice",
+      },
+      Object {
+        "_id": "high-score:game:tap-home:alice",
         "score": 10,
         "user_id": "alice",
       },
@@ -107,6 +332,6 @@ exports[`returns the same state on an unhandled action 1`] = `
 Object {
   "gameHighScores": Array [],
   "isFetching": false,
-  "score": 0,
+  "myScore": 0,
 }
 `;
