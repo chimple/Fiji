@@ -8,89 +8,16 @@ import {
   StatusBar
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
+// import { connect } from 'react-redux';
+
+// import { fetchMultipleChoiceData } from '../../redux/data'
 import Animbutton from './Animbutton';
 
 const { width, height } = Dimensions.get('window');
 
 let arrnew = [];
 
-const jsonData = { quiz: {
-    quiz1: {
-      question1: {
-        correctoption: 'option1',
-        options: {
-          option1: 'A',
-          option2: 'Z'
-        },
-        question: 'A'
-      },
-      question2: {
-        correctoption: 'option2',
-        options: {
-            option1: 'W',
-            option2: 'C'
-          },
-        question: 'C'
-      },
-      question3: {
-        correctoption: 'option1',
-        options: {
-            option1: 'F',
-            option2: 'R'
-          },
-        question: 'F'
-      },
-      question4: {
-        correctoption: 'option2',
-        options: {
-            option1: 'P',
-            option2: 'Q'
-          },
-        question: 'Q'
-      },
-      question5: {
-        correctoption: 'option2',
-        options: {
-            option1: 'H',
-            option2: 'S'
-          },
-        question: 'S'
-      },
-      question6: {
-        correctoption: 'option4',
-        options: {
-            option1: 'B',
-            option2: 'S',
-            option3: 'D',
-            option4: 'K'
-          },
-        question: 'K'
-      },
-      question7: {
-        correctoption: 'option3',
-        options: {
-            option1: 'E',
-            option2: 'R',
-            option3: 'F',
-            option4: 'N'
-          },
-        question: 'F'
-      },
-      question8: {
-        correctoption: 'option4',
-        options: {
-            option1: 'W',
-            option2: 'C',
-            option3: 'G',
-            option4: 'L'
-          },
-        question: 'L'
-      }
-    }
-  }
-  };
-  
-  export default class Quiz extends Component {
+export default class Quiz extends Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -106,12 +33,15 @@ const jsonData = { quiz: {
       this.qno = 0;
       this.score = 0;
    
-      const jdata = jsonData.quiz.quiz1;
-      arrnew = Object.keys(jdata).map((k) => { return jdata[k]; });
+      
+      arrnew = Object.assign({}, this.props.choice);
+
+      console.log(arrnew);
+
       this.state = {
-        question: arrnew[this.qno].question,
-        options: arrnew[this.qno].options,
-        correctoption: arrnew[this.qno].correctoption,
+        question: this.props.ques,
+        options: this.props.choice,
+        correctoption: this.props.correctans,
         countCheck: 0
       };
     
@@ -120,9 +50,16 @@ const jsonData = { quiz: {
     state = Dimensions.get("window");
     handler = dims => this.setState(dims);
 
-    componentDidMount() {
+    componentDidMount() {      
+    // this.props.dispatch(fetchMultipleChoiceData(0, 2, 1));
         Dimensions.addEventListener("change", this.handler);
     }
+
+    componentWillMount() {
+      Dimensions.addEventListener("change", this.handler);
+      width = Dimensions.get('window').width;
+      height = Dimensions.get('window').height;
+  }
 
     componentWillUnmount() {
       // Important to stop updating state after unmount
@@ -131,13 +68,13 @@ const jsonData = { quiz: {
 
 
     next() {
-      if (this.qno < arrnew.length - 1) {
+      if (this.qno < 25) {
         this.qno++;
    
         this.setState({ countCheck: 0, 
-          question: arrnew[this.qno].question, 
-          options: arrnew[this.qno].options, 
-          correctoption: arrnew[this.qno].correctoption });
+          question: this.props.ques,
+        options: arrnew,
+        correctoption: this.props.correctans });
       } else {
         this.props.quizFinish(this.score);
        }
@@ -166,6 +103,7 @@ const jsonData = { quiz: {
 
       const _this = this;
       const currentOptions = this.state.options;
+      console.log(currentOptions);
       const options = Object.keys(currentOptions).map((k) => {
         return (<View
         key={k}
@@ -265,4 +203,9 @@ const jsonData = { quiz: {
           flex: 1
       }
   };
+
+  // export default connect(state => ({
+  //   gameData: state.data.gameData,
+  //   isFetching: state.data.isFetching,
+  // }))(Quiz)
 

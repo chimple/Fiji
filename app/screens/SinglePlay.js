@@ -51,7 +51,13 @@ class SinglePlay extends Component {
     return (
       <View style={{ flex: 1 }}>
  
-       { this.state.quizFinish ? <ScoreScreen item={this.props.navigation.state.params.item} game={this.props.navigation.state.params.game} user={this.props.navigation.state.params.user}/> : <Quiz quizFinish={(score) => this._quizFinish(score)} /> }
+       { this.state.quizFinish ? <ScoreScreen 
+       item={this.props.navigation.state.params.item} 
+       game={this.props.navigation.state.params.game} 
+       user={this.props.navigation.state.params.user}/> : <Quiz ques={arrques}
+       correctans={arrans}
+       choice={arrchoice}
+       quizFinish={(score) => this._quizFinish(score)} /> }
 
       </View>
     );

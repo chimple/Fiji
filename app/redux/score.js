@@ -89,15 +89,34 @@ export const fetchGameHighScores = (game_id) => async (dispatch, getState) => {
 }
 
 export const finalizeScore = (user_id, game_id, myScore) => async (dispatch, getState) => {
+  console.log(myScore)
+  let currentHighScoreDoc = null
   try {
-    const currentHighScore = await contentDB.get('high-score:' + game_id + ':' + user_id)
-    if (myScore > currentHighScore) {
+    currentHighScoreDoc = await contentDB.get('high-score:' + game_id + ':' + user_id)
+  } catch (error) {
+    console.log('finalizeScore: ' + error)
+  }
+  console.log(currentHighScoreDoc)
+  console.log(currentHighScoreDoc.score)
+  try {
+    if (currentHighScoreDoc == null) {
       const result = await contentDB.put({
         _id: 'high-score:' + game_id + ':' + user_id,
         user_id,
-        myScore
+        score: myScore
+      })
+      console.log(result)      
+    } else if(myScore > currentHighScoreDoc.score) {
+      console.log('updating score:'+myScore)
+      const result = await contentDB.put({
+        _id: 'high-score:' + game_id + ':' + user_id,
+        _rev: currentHighScoreDoc._rev,
+        user_id,
+        score: myScore
       })
       console.log(result)
+    } else {
+      console.log('here')
     }
   } catch (error) {
     console.log('finalizeScore: ' + error)
