@@ -42,7 +42,6 @@ class GameFrontScreen extends PureComponent{
                     this.props.theme._id
                         ?   
                             <View>
-                            <View>
                                 <FlatList
                                 showsVerticalScrollIndicator={false}
                                 data={this.props.theme.sets}
@@ -50,8 +49,8 @@ class GameFrontScreen extends PureComponent{
                                 keyExtractor={this._keyExtractor}
                                 />
                             </View> 
-                            <TouchableOpacity onPress={()=> this.props.navigation.navigate('Score', {game:this.props.navigation.state.params.title, user: this.props.navigation.state.params.user})} ><Text>take me to score screen</Text></TouchableOpacity>
-                            </View>
+                            //<TouchableOpacity onPress={()=> this.props.navigation.navigate('Score', {game:this.props.navigation.state.params.title, user: this.props.navigation.state.params.user})} ><Text>take me to score screen</Text></TouchableOpacity>
+                            
                         :
                             <View><Text>No Themes Found.</Text></View>
 
