@@ -52,7 +52,7 @@ class GameScreen extends Component {
 
   componentDidMount() {
     if(this.props.navigation.state.params.game._id == 'game:reflex') {
-      this.props.dispatch(fetchGameData())
+      this.props.dispatch(fetchConsecutiveData('set:letters', 20, 0, 1))
     } else if(this.props.navigation.state.params.game._id == 'game:multiple-choice') {
       this.props.dispatch(fetchMultipleChoiceData('set:letters', 4, 2))
     } else if(this.props.navigation.state.params.game._id == 'game:tap-home') {
@@ -101,7 +101,7 @@ class GameScreen extends Component {
                 </Text>
               </View>
               <GameComponent
-                data={this.props.gameData}
+                data={this.props.gameData[0]}
                 onScore={this._onScore}
                 onEnd={this._onEnd}
                 style={{
