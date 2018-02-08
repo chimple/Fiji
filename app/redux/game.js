@@ -1,4 +1,5 @@
 import { contentDB, remoteContentDB } from '../db'
+import { resetScore } from './score'
 
 const FETCH_GAMES_REQUEST = 'Fiji/game/FETCH_GAMES_REQUEST'
 const FETCH_GAMES_SUCCESS = 'Fiji/game/FETCH_GAMES_SUCCESS'
@@ -14,7 +15,7 @@ const initialState = {
   isFetching: false,
   games: [],
   theme: {},
-  data: []
+  gameData: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -62,13 +63,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        data: action.data
+        gameData: action.gameData
       }
     case FETCH_GAME_DATA_FAILURE:
       return {
         ...state,
         isFetching: false,
-        data: []
+        gameData: []
       }
     default:
       return state
@@ -105,9 +106,9 @@ export const fetchGameDataRequest = () => ({
   type: FETCH_GAME_DATA_REQUEST
 })
 
-export const fetchGameDataSuccess = (data) => ({
+export const fetchGameDataSuccess = (gameData) => ({
   type: FETCH_GAME_DATA_SUCCESS,
-  data
+  gameData
 })
 
 export const fetchGameDataFailure = () => ({
@@ -154,11 +155,12 @@ export const fetchGameTheme = ( game_id ) => async(dispatch, getState) => {
 export const fetchGameData = () => async(dispatch, getState) => {
   try {
     dispatch(fetchGameDataRequest())
-    let data = []
-    for (let index = 0; index < 26; index++) {
-      data.push(String.fromCharCode(65 + index))
+    dispatch(resetScore())
+    let gameData = []
+    for (let index = 0; index < 4; index++) {
+      gameData.push(String.fromCharCode(65 + index))
     }
-    dispatch(fetchGameDataSuccess(data))
+    dispatch(fetchGameDataSuccess(gameData))
   } catch(error) {
       console.log('fetchGameData: ' + error)
       dispatch(fetchGameDataFailure())

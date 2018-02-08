@@ -14,7 +14,10 @@ export default class User extends PureComponent {
     // let svg = Buffer.from(this.props.user.svg, 'base64').toString('utf8')
     // console.log(this.props.user)
     return (
-      <TouchableOpacity onPress={ this._onPress } style={styles.TouchableStyle}>
+      <TouchableOpacity 
+        onPress={ this._onPress } 
+        style={styles.TouchableStyle}
+        accessibilityLabel={this.props.user.name}>
         <View style={styles.ImageViewStyle}>
           <Image
             style={styles.ImageStyle}
@@ -74,7 +77,17 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     // borderColor:'black',
     // borderWidth:2, 
-    marginLeft:'7%',
-    marginTop:'10%'
+    marginLeft:'2%',
+    marginTop:'5%'
   }
+  // TouchableStyle:{
+  //   flex:1,
+  //   // height:Dimensions.get('window').width * 0.3,
+  //   // width: Dimensions.get('window').width * 0.3,
+  //   // justifyContent: 'center',
+  //   // borderColor:'black',
+  //   // borderWidth:2, 
+  //   marginLeft:'7%',
+  //   marginTop:'10%'
+  // }
 });

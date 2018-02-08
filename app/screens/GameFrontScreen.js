@@ -18,7 +18,7 @@ class GameFrontScreen extends PureComponent{
     _renderItem = ({item}) => (
         <TouchableOpacity onPress={()=> this.props.navigation.navigate( this.props.navigation.state.params.title.screen , 
                                                                         {item, 
-                                                                        title: this.props.navigation.state.params.title, 
+                                                                        game: this.props.navigation.state.params.title, 
                                                                         user: this.props.navigation.state.params.user} 
                                                                         ) } style={{flexDirection:'row', borderColor:'black', borderWidth:2}}>
             <SvgUri 
@@ -42,7 +42,6 @@ class GameFrontScreen extends PureComponent{
                     this.props.theme._id
                         ?   
                             <View>
-                            <View>
                                 <FlatList
                                 showsVerticalScrollIndicator={false}
                                 data={this.props.theme.sets}
@@ -50,8 +49,8 @@ class GameFrontScreen extends PureComponent{
                                 keyExtractor={this._keyExtractor}
                                 />
                             </View> 
-                            <TouchableOpacity onPress={()=> this.props.navigation.navigate('Score', {game:this.props.navigation.state.params.title, user: this.props.navigation.state.params.user})} ><Text>take me to score screen</Text></TouchableOpacity>
-                            </View>
+                            //<TouchableOpacity onPress={()=> this.props.navigation.navigate('Score', {game:this.props.navigation.state.params.title, user: this.props.navigation.state.params.user})} ><Text>take me to score screen</Text></TouchableOpacity>
+                            
                         :
                             <View><Text>No Themes Found.</Text></View>
 
@@ -65,7 +64,8 @@ GameFrontScreen.propTypes = {
     navigation: PropTypes.shape({
         state: PropTypes.shape({
           params: PropTypes.shape({
-            title: PropTypes.object.isRequired
+            title: PropTypes.object.isRequired,
+            user: PropTypes.object.isRequired
           })
         })
       })
