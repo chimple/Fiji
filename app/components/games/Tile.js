@@ -14,7 +14,9 @@ export default class Tile extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if(this.props.text != nextProps.text) {
+    if(this.props.text != nextProps.text
+        || this.props.style.height != nextProps.style.height
+        || this.props.style.width != nextProps.style.width) {
       return true
     }
     return false
@@ -64,7 +66,7 @@ export default class Tile extends Component {
             <Text style={{
               color: this.props.textColor,
               backgroundColor: 'transparent',
-              fontSize: this.props.style.height-30
+              fontSize: this.props.style.height-40
             }}>
               {this.props.text}
             </Text>
