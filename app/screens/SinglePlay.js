@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 
-import { fetchMultipleChoiceData } from '../redux/data'
+// import { fetchMultipleChoiceData } from '../redux/data'
 import Quiz from '../components/games/Quiz';
 import ScoreScreen from '../screens/ScoreScreen'
 
-let count = 0;
-let j = 0;
-let arrques = [];
-let arrans = [];
-let arrchoice = [];
+// let count = 0;
+// let j = 0;
+// let arrques = [];
+// let arrans = [];
+// let arrchoice = [];
 
-class SinglePlay extends Component {
+export default class SinglePlay extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,7 +22,7 @@ class SinglePlay extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(fetchMultipleChoiceData(0, 2, 1));
+    // this.props.dispatch(fetchMultipleChoiceData(0, 2, 10));
     console.log(count);
   }
   
@@ -34,30 +34,27 @@ class SinglePlay extends Component {
     console.log(this.props.navigation.state.params.item.name)
     console.log(this.props.navigation.state.params.game.name)
     console.log(this.props.navigation.state.params.user.name)
-    data = this.props.gameData.map(function(temp, index){
-      arrques[j] = temp.question;
-      arrans[j] = temp.answerIndex;
-      arrchoice[j] = temp.choices;
-      console.log(arrques[j]);
-      console.log(arrans[j]);
-      console.log(arrchoice[j]);
-      j++;
-    });
-    console.log(j);
-    console.log(arrques);
-    console.log(arrans);
-    console.log(arrchoice);
-    console.log(this.props.gameData);
+    // data = this.props.gameData.map(function(temp, index){
+    //   arrques[j] = temp.question;
+    //   arrans[j] = temp.answerIndex;
+    //   arrchoice[j] = temp.choices;
+    //   console.log(arrques[j]);
+    //   console.log(arrans[j]);
+    //   console.log(arrchoice[j]);
+    //   j++;
+    // });
+    // console.log(j);
+    // console.log(arrques);
+    // console.log(arrans);
+    // console.log(arrchoice);
+    // console.log(this.props.gameData);
     return (
       <View style={{ flex: 1 }}>
  
        { this.state.quizFinish ? <ScoreScreen 
        item={this.props.navigation.state.params.item} 
        game={this.props.navigation.state.params.game} 
-       user={this.props.navigation.state.params.user}/> : <Quiz ques={arrques}
-       correctans={arrans}
-       choice={arrchoice}
-       quizFinish={(score) => this._quizFinish(score)} /> }
+       user={this.props.navigation.state.params.user}/> : <Quiz quizFinish={(score) => this._quizFinish(score)} /> }
 
       </View>
     );
@@ -95,7 +92,7 @@ const styles = {
   }
 };
 
-export default connect(state => ({
-  gameData: state.data.gameData,
-  isFetching: state.data.isFetching,
-}))(SinglePlay)
+// export default connect(state => ({
+//   gameData: state.data.gameData,
+//   isFetching: state.data.isFetching,
+// }))(SinglePlay)

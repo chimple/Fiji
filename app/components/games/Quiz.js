@@ -8,9 +8,8 @@ import {
   StatusBar
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
-// import { connect } from 'react-redux';
 
-// import { fetchMultipleChoiceData } from '../../redux/data'
+import Tile from './Tile';
 import Animbutton from './Animbutton';
 
 const { width, height } = Dimensions.get('window');
@@ -33,17 +32,20 @@ export default class Quiz extends Component {
       this.qno = 0;
       this.score = 0;
    
-      
-      arrnew = Object.assign({}, this.props.choice);
-
-      console.log(arrnew);
-
+      // const jdata = Object.assign({}, this.props.data);
+      // arrnew = Object.keys(jdata).map((k) => { return jdata[k]; });
+      // console.log(arrnew);
+      console.log(this.props)
       this.state = {
-        question: this.props.ques,
-        options: this.props.choice,
-        correctoption: this.props.correctans,
-        countCheck: 0
+        question: this.props.data.question,
+        options: this.props.data.choices,
+        correctoption: this.props.data.answerIndex,
+        countCheck: 0,
       };
+
+      // console.log(question);
+      // console.log(options);
+      // console.log(correctoption);
     
     }
 
@@ -68,7 +70,7 @@ export default class Quiz extends Component {
 
 
     next() {
-      if (this.qno < 25) {
+      if (this.qno < arrnew.length - 1) {
         this.qno++;
    
         this.setState({ countCheck: 0, 
@@ -86,7 +88,7 @@ export default class Quiz extends Component {
           this.setState({ countCheck: count });
           if (ans === this.state.correctoption) {
             this.score += 20;
-            this.next();
+            this.props.onEnd()
             this.refs.questionView.zoomIn(800);
           }
         } else {
