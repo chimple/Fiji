@@ -136,25 +136,25 @@ export const AppNavigator = StackNavigator({
     }
   },
   Game1: {
-    screen: MemoryMatchingScreen
+    screen: GameScreen
   },
   Game2: {
-    screen: TapHomeScreen
+    screen: GameScreen
   },
   Game3: {
-    screen: TapWrongScreen
+    screen: GameScreen
   },
   Game4: {
-    screen: WordScreen
+    screen: GameScreen
   },
   Game5: {
-    screen: ConnectDotsScreen
+    screen: GameScreen
   },
   Game6: {
-    screen: multipleChoiceHome
+    screen: GameScreen
   },
   Game7:{
-    screen: SinglePlay
+    screen: GameScreen
   },
   Reflex:{
     screen: GameScreen
