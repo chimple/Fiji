@@ -29,6 +29,7 @@ import ConnectDotsScreen from '../screens/ConnectDotsScreen'
 import ScoreScreen from '../screens/ScoreScreen'
 import CamPage from '../components/CamPage'
 import GameScreen from '../screens/GameScreen';
+import NewLevel from '../screens/NewLevel'
 
 const CamNavigator = StackNavigator({
   Cam: {
@@ -165,6 +166,13 @@ export const AppNavigator = StackNavigator({
       headerTitle: 'Score',
       headerStyle:{backgroundColor: '#19a4f2'}
     },
+  },
+  NewLevel:{
+    screen: NewLevel,
+    navigationOptions:{
+      headerTitle: 'New Level',
+      headerStyle:{backgroundColor:'#19a4f2'}
+    }
   }
 })
 
