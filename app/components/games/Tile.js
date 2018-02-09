@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component, PureComponent } from 'react';
 import {
   Text,
   TouchableWithoutFeedback,
@@ -8,12 +8,22 @@ import {
 import PropTypes from 'prop-types'
 import * as Animatable from 'react-native-animatable';
 
-export default class Tile extends PureComponent {
+export default class Tile extends Component {
   _onPressIn = () => {
     this.props.onPress(this.props.id, this.refs.view)
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if(this.props.text != nextProps.text
+        || this.props.style.height != nextProps.style.height
+        || this.props.style.width != nextProps.style.width) {
+      return true
+    }
+    return false
+  }
+
   render() {
+    console.log('Tile.render:'+this.props.text)
     return (
       <Animatable.View
         ref="view"
@@ -55,7 +65,8 @@ export default class Tile extends PureComponent {
             }} >
             <Text style={{
               color: this.props.textColor,
-              backgroundColor: 'transparent'
+              backgroundColor: 'transparent',
+              fontSize: this.props.style.height-40
             }}>
               {this.props.text}
             </Text>

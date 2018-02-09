@@ -67,14 +67,17 @@ class ScoreScreen extends PureComponent{
 
 ScoreScreen.propTypes = {
     gameScore:PropTypes.array,
-    navigation: PropTypes.shape({
+    game:PropTypes.object,
+    item:PropTypes.object,
+    user:PropTypes.object,
+    /*navigation: PropTypes.shape({
         state: PropTypes.shape({
           params: PropTypes.shape({
             game: PropTypes.object.isRequired,
             user: PropTypes.object.isRequired
           })
         })
-      })
+      })*/
 }
 
 const styles = StyleSheet.create({

@@ -9,7 +9,7 @@ import score, {
   fetchGameHighScoresRequest,
   fetchGameHighScoresSuccess,
   fetchGameHighScoresFailure,
-  addScore,
+  addMyScore,
   fetchGameHighScores
 } from '../score'
 import { highScoresData } from '../../../config/jest/mockData'
