@@ -20,6 +20,12 @@ class multipleChoiceHome extends Component {
         Dimensions.addEventListener("change", this.handler);
     }
 
+    componentWillMount() {
+        Dimensions.addEventListener("change", this.handler);
+        width = Dimensions.get('window').width;
+        height = Dimensions.get('window').height;
+    }
+
     componentWillUnmount() {
         // Important to stop updating state after unmount
         Dimensions.removeEventListener("change", this.handler);
@@ -59,20 +65,20 @@ class multipleChoiceHome extends Component {
                     </TouchableOpacity>
                     <TouchableOpacity>
                         <Text style={styles.endButtonStyle}>Multi player</Text>
-                    </TouchableOpacity></View> : <View style={{ flexDirection: 'row' }}>
+                    </TouchableOpacity></View> : <View style={{ flexDirection: 'row', alignContent: 'space-between', justifyContent: 'space-between' }}>
                         <TouchableOpacity
                             onPress={() => this.props.navigation.navigate('Game7', {
                                 item: this.props.navigation.state.params.item,
                                 game: this.props.navigation.state.params.game,
                                 user: this.props.navigation.state.params.user
                             })}
-                            style={{ margin: height * 0.1 }}>
+                            style={{ paddingTop: height * 0.1 }}>
                             <Text style={styles.landscapeEndButtonStyle}>Single player</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ margin: height * 0.1 }}>
+                        <TouchableOpacity style={{ paddingTop: height * 0.1 }}>
                             <Text style={styles.landscapeEndButtonStyle}>Timed Mode</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ margin: height * 0.1 }}>
+                        <TouchableOpacity style={{ paddingTop: height * 0.1 }}>
                             <Text style={styles.landscapeEndButtonStyle}>Multi player</Text>
                         </TouchableOpacity>
                     </View>}
