@@ -32,19 +32,20 @@ export default class Quiz extends Component {
       this.qno = 0;
       this.score = 0;
    
-      const jdata = Object.assign({}, this.props.data);
-      arrnew = Object.keys(jdata).map((k) => { return jdata[k]; });
-      console.log(arrnew);
+      // const jdata = Object.assign({}, this.props.data);
+      // arrnew = Object.keys(jdata).map((k) => { return jdata[k]; });
+      // console.log(arrnew);
+      console.log(this.props)
       this.state = {
-        question: arrnew[this.qno].question,
-        options: arrnew[this.qno].choices,
-        correctoption: arrnew[this.qno].answerIndex,
+        question: this.props.data.question,
+        options: this.props.data.choices,
+        correctoption: this.props.data.answerIndex,
         countCheck: 0,
       };
 
-      console.log(question);
-      console.log(options);
-      console.log(correctoption);
+      // console.log(question);
+      // console.log(options);
+      // console.log(correctoption);
     
     }
 
@@ -87,7 +88,7 @@ export default class Quiz extends Component {
           this.setState({ countCheck: count });
           if (ans === this.state.correctoption) {
             this.score += 20;
-            this.next();
+            this.props.onEnd()
             this.refs.questionView.zoomIn(800);
           }
         } else {

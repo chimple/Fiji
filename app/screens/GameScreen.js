@@ -5,27 +5,29 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { fetchGameData } from '../redux/game'
 import { addMyScore, finalizeScore } from '../redux/score'
+import ProgressBar from '../components/ProgressBar'
 import ReflexBoard from '../components/games/ReflexBoard'
 import ScoreScreen from '../../app/screens/ScoreScreen'
 import TapHome from '../components/games/TapHome';
 import TapWrongGridComponent from '../components/games/TapWrongGridComponent';
 import WordGrid from '../components/games/WordGrid';
 import Quiz from '../components/games/Quiz';
-import ConnectDots from '../components/games/ConnectDots';
+import ConnectDotsScreen from './ConnectDotsScreen';
 import MemoryMatching from '../components/games/MemoryMatching';
 import { fetchMultipleChoiceData, fetchSerialData, fetchWordData, fetchConsecutiveData, fetchMatchData } from '../redux/data';
+import WordScreen from './WordScreen';
 
 const TOP_HEIGHT = 100
-const BOTTOM_PADDING = 20
+const BOTTOM_PADDING = 80
 
 const GameComponents = {
   'game:reflex': ReflexBoard,
   'game:tap-home': TapHome,
   'game:tap-wrong': TapWrongGridComponent,
-  'game:word': WordGrid,
+  'game:word': WordScreen,
   'game:multiple-choice': Quiz,
-  'game:connect-dots': ConnectDots,
-  'game:memory-matching': MemoryMatching
+'game:connect-dots': ConnectDotsScreen,
+'game:memory-matching': MemoryMatching
 }
 
 class GameScreen extends Component {
@@ -58,8 +60,8 @@ class GameScreen extends Component {
     } else if(this.props.navigation.state.params.game._id == 'game:tap-home') {
       this.props.dispatch(fetchSerialData('set:letters', 4))
     } else if(this.props.navigation.state.params.game._id == 'game:tap-wrong') {
-      this.props.dispatch(fetchWordData('set:letters', 5, 4, 3))
-    } else if(this.props.navigation.state.params.game._id == 'word') {
+      this.props.dispatch(fetchWordData('set:letters', 3, 1, 1))
+    } else if(this.props.navigation.state.params.game._id == 'game:word') {
       this.props.dispatch(fetchWordData('set:letters', 5, 4, 3))
     } else if(this.props.navigation.state.params.game._id == 'game:connect-dots') {
       this.props.dispatch(fetchConsecutiveData('set:letters', 5, 4, 3))
@@ -100,6 +102,12 @@ class GameScreen extends Component {
 
                 </Text>
               </View>
+              <ProgressBar
+                fillStyle={{}}
+                backgroundStyle={{backgroundColor: '#cccccc', borderRadius: 2}}
+                style={{width: this.state.window.width}}
+                initialProgress={0.5}
+              />              
               <GameComponent
                 data={this.props.gameData[0]}
                 onScore={this._onScore}
@@ -158,7 +166,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     textAlign: 'center',
     textAlignVertical: 'center',
-    fontSize: TOP_HEIGHT - BOTTOM_PADDING - 30
+    fontSize: TOP_HEIGHT - BOTTOM_PADDING
   },
   icon: {
     height: TOP_HEIGHT - BOTTOM_PADDING,

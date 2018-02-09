@@ -23,15 +23,16 @@ export default class ConnectDots extends Component {
       
     
     arraylist(val) {
-     
-        console.log("counted values is ", this.state.count);
-     
-         if(count==this.state.arr1.length-1)
+        if(count==this.props.array1.length-1)
          {
              Alert.alert(
                  'Game over'
              )
          }
+     
+        console.log("counted values is ", this.state.count);
+     
+         
          if (this.props.array1[count] == val  ) {
              count= count+1 ;
              score=score+1;
@@ -57,7 +58,7 @@ export default class ConnectDots extends Component {
                  'Alert Title',
                  'My Alert Msg',
                  [
-                   {text: 'Restart', onPress: () => this.props.navigation.goBack()}
+                   {text: 'Restart'}
                   
                  ],
                  { cancelable: false }
