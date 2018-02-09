@@ -12,11 +12,7 @@
       "_id": "chat:alice:2018-01-10T09:45:35.341Z",
       "message": {
         "type": "text",
-<<<<<<< HEAD
         "content": "Care for a tea party"
-=======
-        "content": "Of course, I will be wearing my party hat"
->>>>>>> refs/remotes/origin/master
       },
       "sender": "alice"
     },
@@ -24,11 +20,7 @@
       "_id": "chat:alice:2018-01-11T08:45:35.341Z",
       "message": {
         "type": "text",
-<<<<<<< HEAD
         "content": "Care for a tea party"
-=======
-        "content": "Where are you?"
->>>>>>> refs/remotes/origin/master
       },
       "sender": "mad-hatter"
     }
