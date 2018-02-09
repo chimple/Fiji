@@ -78,7 +78,7 @@ class GameScreen extends Component {
     } else if (this.props.navigation.state.params.game._id == 'game:connect-dots') {
       this.props.dispatch(fetchConsecutiveData('set:letters', 5, 4, 3))
     } else if (this.props.navigation.state.params.game._id == 'game:memory-matching') {
-      this.props.dispatch(fetchMatchData('set:letters', 8))
+      this.props.dispatch(fetchMatchData('set:letters', 8, 1))
     }
     Dimensions.addEventListener("change", this._dimChangeHandler)
   }
