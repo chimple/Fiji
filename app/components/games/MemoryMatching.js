@@ -15,6 +15,8 @@ import Board from './Board';
 import Card from './Card';
 import ScoreBoard from './ScoreBoard';
 
+const SIZE = 4
+
 export default class MemoryMatching extends Component {
   constructor(props) {
     super(props);
@@ -63,14 +65,6 @@ export default class MemoryMatching extends Component {
     return true;
   }
 
-  getScoreboard() {
-      var board = this.state.board;
-
-      if (this.state.players === 1) {
-        return <ScoreBoard board={board}/>;
-      }
-  }
-
 
 handleCardPress(url: string, row: number, col: number) {
   var board = this.state.board;
@@ -113,43 +107,55 @@ onCardHide() {
     return !this.state.board.isLocked;
   }
 
+  arrayShuffle(items: arry) {
+    var currentIndex = items.length,
+    temporaryValue, randomIndex;
+
+    while (0 !== currentIndex) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        temporaryValue = items[currentIndex];
+        items[currentIndex] = items[randomIndex];
+        items[randomIndex] = temporaryValue;
+    }
+  return items;
+  }
+
   render() {
+    console.log("Rajesh data",this.props.data);
+
+    arry =[];
+    j =0;
+    const data=this.props.data.map( function (item, i){
+        item.map(function(element, i) { 
+          arry[j]=element;
+          j++;
+        });
+      }
+    )
+
+    console.log("Rajesh-Array",arry);
+
+    var shuffledArray = this.arrayShuffle(arry)
+
+    console.log("Rajesh-Shuffled-Array",shuffledArray);
   
-    var board = this.state.board;
-    console.log(this.state.board);
-    var rows = board.grid.map((cards, row) =>
-    <View key={'row' + row} ref={'row' + row} style={styles.row}>
-        {cards.map((cardCfg, col) =>
-          <Card
-            key={'col' + col}
-            ref={'card' + row + col}
-            img={cardCfg.url}
-            onPress={this.handleCardPress.bind(this, cardCfg.url, row, col)}
-            onHide={this.onCardHide}
-            canShow={this.canShow}
-            cardCfg={cardCfg}
-          />
-        )}
-      </View>
-    );
-    
-
     return (
-      <View style={styles.container}>
-
-        <View style={styles.board}>
-          {rows}
-        </View>
-
-        {this.getScoreboard()}
-
-        <TouchableHighlight
-            onPress={this.onRestartPress}
-            underlayColor="transparent"
-            activeOpacity={0.5}>
-            <Text style={styles.buttonText}>🔄 Restart</Text>
-          </TouchableHighlight>
-    </View>
+      <TileGrid
+        numRows={SIZE}
+        numCols={SIZE}
+        data={shuffledArray}
+        tileColor='#24B2EA'
+        edgeColor='deepskyblue'
+        pressedTileColor='goldenrod'
+        pressedEdgeColor='darkgoldenrod'
+        textColor='#FFFFFF'
+        style={{
+          width: this.props.style.width,
+          height: this.props.style.height
+        }}
+      />
     );
   }
 }

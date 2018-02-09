@@ -71,9 +71,11 @@ class Board {
         var numberOfCards = numRows * numCols / 2;
         this.maxScore = numberOfCards;
 
-        var cards = this.cards = this.getCards(numberOfCards);
-        this.createGrid();
+        //var cards = this.cards = this.getCards(numberOfCards);
+        //this.createGrid();
     }
+
+    /*
 
     getCards(numberOfCards: number): Array {
         var playingCards = this.arrayShuffle([
@@ -131,6 +133,7 @@ class Board {
 
         this.grid = grid;
     }
+    */
 
     lock(): Boolean {
         this.isLocked = true;
