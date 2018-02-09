@@ -30,6 +30,7 @@ import ScoreScreen from '../screens/ScoreScreen'
 import CamPage from '../components/CamPage'
 import GameScreen from '../screens/GameScreen';
 import NewLevel from '../screens/NewLevel'
+import HeadToHeadPlayScreen from '../screens/HeadToHeadPlayScreen'
 
 const CamNavigator = StackNavigator({
   Cam: {
@@ -160,6 +161,9 @@ export const AppNavigator = StackNavigator({
   Reflex:{
     screen: GameScreen
   },
+  CommonGameScreen: {
+    screen: GameScreen
+  },
   Score:{
     screen: ScoreScreen,
     navigationOptions: {
@@ -173,6 +177,9 @@ export const AppNavigator = StackNavigator({
       headerTitle: 'New Level',
       headerStyle:{backgroundColor:'#19a4f2'}
     }
+  },
+  HeadToHead:{
+    screen: HeadToHeadPlayScreen
   }
 })
 
