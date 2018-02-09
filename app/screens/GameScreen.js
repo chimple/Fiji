@@ -88,6 +88,9 @@ class GameScreen extends Component {
   }
 
   render() {
+    console.log(this.props.navigation.state.params.game._id)
+    console.log(this.props.navigation.state.params.user.name)
+    console.log(this.props.navigation.state.params.item.name)
     const GameComponent = GameComponents[this.props.navigation.state.params.game._id]
     const { width, height } = this.state.window
     return (
