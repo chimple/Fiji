@@ -69,23 +69,26 @@ export const fetchMultipleChoiceData = (set_id, num_choices, num_rows) => (dispa
   dispatch(fetchGameDataSuccess(data))
 }
 
-export const fetchMatchData = (set_id, num_rows) => (dispatch, getState) => {
+export const fetchMatchData = (set_id, num_sets, num_rows) => (dispatch, getState) => {
   let choices = []
   for (let index = 0; index < 26; index++) {
     choices.push(String.fromCharCode(65 + index))
     choices.push(String.fromCharCode(97 + index))
   }
   dispatch(fetchGameDataRequest())
-  let entries = []
-  while (entries.length < num_rows) {
-    let rIndex = getRandomInt(0, choices.length)
-    if (!entries.includes(choices[rIndex])) {
-      entries.push(choices[rIndex])
+  let data = []
+  for (let i = 0; i < num_rows; i++) {
+    let entries = []
+    while (entries.length < num_sets) {
+      let rIndex = getRandomInt(0, choices.length)
+      if (!entries.includes(choices[rIndex])) {
+        entries.push(choices[rIndex])
+      }
     }
+    data.push(entries.map((val) => {
+      return [val, val]
+    }))
   }
-  let data = entries.map((val) => {
-    return [val, val]
-  })
   dispatch(fetchGameDataSuccess(data))
 }
 
@@ -98,7 +101,7 @@ export const fetchSerialData = (set_id, num_rows) => (dispatch, getState) => {
     let end = getRandomInt(2, 10)
     let serial = []
     for (let seq = answer - start; seq < answer + end; seq++) {
-      serial.push(seq)
+      serial.push(seq.toString())
     }
     data.push({
       answer,
@@ -116,11 +119,11 @@ export const fetchConsecutiveData = (set_id, dataLength, otherLength, num_rows) 
     let start = getRandomInt(1, MAX_INT)
     let serial = []
     for (let seq = start; seq < start + dataLength; seq++) {
-      serial.push(seq)
+      serial.push(seq.toString())
     }
     let others = []
     for (let other = 0; other < otherLength; other++) {
-      others.push((start + dataLength - 1 + getRandomInt(1, MAX_INT - dataLength)) % MAX_INT)
+      others.push(((start + dataLength - 1 + getRandomInt(1, MAX_INT - dataLength)) % MAX_INT).toString())
     }
     data.push({
       serial,
