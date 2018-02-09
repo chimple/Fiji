@@ -34,7 +34,7 @@ class GamesScreen extends Component {
   }
 
   _handlePress = ( title ) => {
-    this.props.navigation.navigate('Game', { title, user: this.props.user })
+    this.props.navigation.navigate('GameFrontScreen', { title, user: this.props.user })
   }
 
 }

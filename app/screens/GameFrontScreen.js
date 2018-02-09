@@ -11,12 +11,13 @@ class GameFrontScreen extends PureComponent{
     componentDidMount() {
         this.props.dispatch(fetchGameTheme(this.props.navigation.state.params.title._id))
         console.log(this.props.navigation.state.params.user.name)
+        console.log(this.props.navigation.state.params.title.name)
     }
 
     _keyExtractor = (item, index) => item._id
 
     _renderItem = ({item}) => (
-        <TouchableOpacity onPress={()=> this.props.navigation.navigate( this.props.navigation.state.params.title.screen , 
+        <TouchableOpacity onPress={()=> this.props.navigation.navigate( 'CommonGameScreen', 
                                                                         {item, 
                                                                         game: this.props.navigation.state.params.title, 
                                                                         user: this.props.navigation.state.params.user} 

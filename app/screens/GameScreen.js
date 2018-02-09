@@ -26,8 +26,8 @@ const GameComponents = {
   'game:tap-wrong': TapWrongGridComponent,
   'game:word': WordScreen,
   'game:multiple-choice': Quiz,
-'game:connect-dots': ConnectDotsScreen,
-'game:memory-matching': MemoryMatching
+  'game:connect-dots': ConnectDotsScreen,
+  'game:memory-matching': MemoryMatching
 }
 
 class GameScreen extends Component {
@@ -76,6 +76,9 @@ class GameScreen extends Component {
   }
 
   render() {
+    console.log(this.props.navigation.state.params.game._id)
+    console.log(this.props.navigation.state.params.user.name)
+    console.log(this.props.navigation.state.params.item.name)
     const GameComponent = GameComponents[this.props.navigation.state.params.game._id]
     const { width, height } = this.state.window
     return (

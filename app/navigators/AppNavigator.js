@@ -130,36 +130,12 @@ export const AppNavigator = StackNavigator({
       headerStyle:{backgroundColor: '#19a4f2'}
     }
   },
-  Game: {
+  GameFrontScreen: {
     screen: GameFrontScreen,
     navigationOptions:{
       headerTitle:'Game',
       headerStyle:{backgroundColor: '#19a4f2'}
     }
-  },
-  Game1: {
-    screen: GameScreen
-  },
-  Game2: {
-    screen: GameScreen
-  },
-  Game3: {
-    screen: GameScreen
-  },
-  Game4: {
-    screen: GameScreen
-  },
-  Game5: {
-    screen: GameScreen
-  },
-  Game6: {
-    screen: GameScreen
-  },
-  Game7:{
-    screen: GameScreen
-  },
-  Reflex:{
-    screen: GameScreen
   },
   CommonGameScreen: {
     screen: GameScreen
