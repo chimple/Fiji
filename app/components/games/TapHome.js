@@ -4,15 +4,15 @@ import { connect } from 'react-redux';
 import * as Animatable from 'react-native-animatable';
 import Confirm from './Confirm';
 import { isPortrait, isLandscape, isTablet } from './Platform';
-import ScoreScreen from '../../screens/ScoreScreen'
+import ScoreScreen from '../../screens/ScoreScreen';
+import Tile from './Tile';
 
 let timerId; 
 let width;
 let iterate = 0;
 let len = 0;
 let j = 0, i = 0;
-let ans = [];
-let options = [[]];
+let options = [];
 
 export default class TapHome extends Component {
 
@@ -21,40 +21,35 @@ export default class TapHome extends Component {
     super();
     this.state = {
       // This is our Default number value
-      numberHolder: 0,
+      len: 0,
       score: 0,
       count: 0,
       showModal: false,
     };
 
-    Dimensions.addEventListener('change', () => {
-      width = Dimensions.get('window').height * 0.225;
-      console.log(width);
-    });
-
-    width = Dimensions.get('window').height * 0.225;
-
   }
 
   timer = () => {
-    if( this.state.count  == options[this.state.numberHolder].length ){
+    if( this.state.count  == this.state.len ){
       this.setState({count: 0})
     }else
       this.setState({ count: this.state.count + 1 })
   }
 
   componentDidMount() {
-
+    this.setState({len: this.props.data.serial.length})
     //This will start timer and will update text value
     timerId = setInterval(this.timer, 1400)
+    width = this.props.style.height * 0.225
 
   }
 
   //This will generate random number and will check on tap condition
   GenerateRandomNumber = () => {
     
-    if (ans[this.state.numberHolder] == options[this.state.numberHolder] [this.state.count]) {
-      this.refs.view.zoomIn(500).then((endState) => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
+    if (this.props.data.answer == options [this.state.count]) {
+     // this.props.onEnd();
+     // this.refs.view.zoomIn(500).then((endState) => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
      
       if(this.state.score == 9 )
       {
@@ -94,7 +89,7 @@ export default class TapHome extends Component {
       }
     }
     else {
-      this.refs.view.shake(500).then((endState) => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
+      //this.refs.view.shake(500).then((endState) => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
       iterate = iterate + 1;
       this.setState({ count: 0 })
       if(iterate > 5 ) {
@@ -123,156 +118,64 @@ export default class TapHome extends Component {
   // }
 
   render() {
+    console.log(this.props.data.serial); 
 
-    ans = [];
-    options = [[]];
+    options = [];
     j = 0;
-    data = this.props.data.map( function (temp, index ){
-      let arr = [];
-      i = 0;
-      ans[j] = temp.answer; 
-      doubled = temp.serial.map( function (number, index ) {
-        arr[i] = number;
-        i++;
-      });
-      options[j] = arr;
+    data = this.props.data.serial.map( function (temp, index ){
+      options[j] = temp;
       j++;
     });
  
-    const { count, numberHolder, score } = this.state;    
-    if ( isLandscape() ) {
-      const { container, SubContainer, circle, text, subText, scoreText } = stylesLandscape;
-      
-      if (this.state.showModal == false) {
-        return (
-          <View style={{ flex: 1, backgroundColor: '#27ae60' }}>
-            <Text style={[scoreText, { fontSize: fontSizer(width) - 20 }]}>score: {score}</Text>
-            <View style={container} >
-              <View style={[circle, { width: width + 50, height: width + 50, borderRadius: width + 50 / 2 }]}>
-                <View>
-                  <Animatable.View ref="view">
-                    <Text style={[text, { fontSize: fontSizer(width) }]}>{ans[numberHolder]}</Text>
-                  </Animatable.View>
-                </View>
-              </View>
-              <TouchableOpacity onPress={this.GenerateRandomNumber}>
-                <Text style={[subText, { fontSize: fontSizer(width) + 30 }]}>{options[numberHolder][count]}</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        );
-      }  
-    }
+    const { container, circle, text, subText, scoreText } = stylesPotrait;
+    return (
 
-    else {
-      const { container, circle, text, subText, scoreText } = stylesPotrait;
+      <View style={container}>
+          <Tile
+            onPress={this.GenerateRandomNumber}
+            text={this.props.data.answer}
+            edgeColor='white'
+            style={{
+              width: 80,
+              height: 80,
+              position: 'relative',
+            }}
+          />
+        <TouchableOpacity onPress={this.GenerateRandomNumber}>
+            <Text style={[ subText, { fontSize: fontSizer(width) + 20}]}>
+            {options[this.state.count]}
+            </Text>
+         </TouchableOpacity>
+      </View>
 
-      if (this.state.showModal == false) {
-        return (
-          <View style={{ flex: 1, backgroundColor: '#27ae60' }}>
-            <Text style={[scoreText, { fontSize: fontSizer(width) - 30 }]}>score: {score}</Text>
-            <View style={container} >
-              <View style={[circle, { width: width, height: width, borderRadius: width / 2 }]}>
-                <View>
-                  <Animatable.View ref="view">
-                    <Text style={[text, { fontSize: fontSizer(width) }]}>{ans[numberHolder]}</Text>
-                  </Animatable.View>
-                </View>
-              </View>
-              <TouchableOpacity onPress={this.GenerateRandomNumber}>
-                <Text style={[subText, { fontSize: fontSizer(width) + 20 }]}>{options[numberHolder][count]}</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        );
-      }
-    }
+    );
   }
 }//End of class component
 
 function fontSizer (screenWidth) {
   if(screenWidth > 100 && screenWidth < 150){
-    return 50;
-  }else if(screenWidth < 100){
     return 40;
+  }else if(screenWidth < 100){
+    return 30;
   }else if(screenWidth < 200 && screenWidth > 150 ){
-    return 70
+    return 60
   }else if(screenWidth < 300 && screenWidth > 200 ){ 
-    return 90;
+    return 80;
   }
 }
+
 const stylesPotrait = {
-
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignSelf: 'center'
-  },
-  circle: {
-  
-    borderWidth: 5,
-    borderColor: 'white',
-    justifyContent: 'center',
-    alignSelf: 'center'
-  },
-  text: {
-    fontSize: 90,
-    fontFamily: 'Cochin',
-    color: 'white',
-    justifyContent: 'center',
     alignSelf: 'center',
-  },
-  subText: {
-    fontFamily: 'Cochin',
-    fontSize: 90,
-    color: 'white',
-    justifyContent: 'center',
-    alignSelf: 'center',
-    marginTop: '10%',
-  },
-  scoreText: {
-    fontFamily: 'Cochin',
-    fontSize: 30,
-    color: 'white',
-    paddingLeft: '5%',
-    paddingTop: '5%'
-  },
-};//End of styles
-
-const stylesLandscape = {
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
- 
-  circle: {
    
-    borderWidth: 5,
-    borderColor: 'white',
-    justifyContent: 'center',
-    alignSelf: 'center',
-    marginBottom: '5%'
-  },
-  text: {
-    fontFamily: 'Cochin',
-    fontSize: 90,
-    color: 'white',
-    justifyContent: 'center',
-    alignSelf: 'center',
   },
   subText: {
     fontFamily: 'Cochin',
-    fontSize: 90,
     color: 'white',
     justifyContent: 'center',
     alignSelf: 'center',
-  },
-  scoreText: {
-    fontFamily: 'Cochin',
-    fontSize: 20,
-    color: 'white',
-    paddingLeft: '2%',
-    paddingTop: '2%'
+    marginTop: '50%'
   },
 };//End of styles
