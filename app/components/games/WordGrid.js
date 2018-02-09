@@ -9,45 +9,48 @@ import {
 import * as Animatable from 'react-native-animatable';
 
 var count=0,tries=0,score=0,highscore=0;
-var jsontemp= [];
+var jsontemp= [], m2key=1;
 
 ShowAlertDialog = () =>{
     Alert.alert(
-        'Alert Dialog Title',
-        'My Alert Msg',
+        'Game Over',
+        'Do you want to go back ?',
         [
-          {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-          {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-          {text: 'OK', onPress: () => console.log('OK Pressed')},
+         // {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+         // {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+          {text: 'OK', onPress: () => this.props.navigation.goBack()}
         ],
         { cancelable: false }
     )
  
 }
 
-export default class WordGrid1 extends Component {
-    state = { show: false};
-   
+export default class WordGrid extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { show:false }
+    }
     onButton(val) {
      this.setState({show: true});
         jsontemp=this.props.data1;
         tries++;
-     /*   if(tries===7){
-            ShowAlertDialog();
-         } */
+        if(tries===7){
+    //     ShowAlertDialog();
+         } 
         if(jsontemp[count]===val)
         {
             count++; 
             score++;
+            console.log("your score",score);
             if(val==jsontemp[2]){
                 highscore=highscore<score?score:highscore;
-            //    console.log('finalscore, highscore',score,highscore);
-              //  this.props.navigation.navigate.goBack();
+                console.log("your high score",highscore);
+                console.log("your score",score);
             }
         }
         else{
             score--;
-            console.log(score);
+            console.log("your score",score);
          let flag=0;
          for(var i=0;i<=count;i++){
              if(val===jsontemp[i]){flag=1}
@@ -63,18 +66,22 @@ export default class WordGrid1 extends Component {
         case false:
          return(
             <View style={styles.gridStyle}>
-        <Text style={{fontSize:60,fontWeight:'bold'}}>{this.props.name}</Text>
+        <Text style={{fontSize:65,fontWeight:'bold'}}>{this.props.name}</Text>
         </View> );
         break;
          case true: 
          return(
             <View style={styles.gridStyle1}>
-        <Text style={{fontSize:60,fontWeight:'bold'}}>{this.props.name}</Text>
+        <Text style={{fontSize:65,fontWeight:'bold'}}>{this.props.name}</Text>
         </View> );
-    }
+    } 
     }
    
   render() {
+      if(this.props.mkey===m2key)
+      { m2key++;jsontemp= [];count=0,score=0,tries=0;
+       }
+      //count=0;
         return (
         <TouchableWithoutFeedback onPress={this.onButton.bind(this, this.props.name)}>
         <Animatable.View ref="view">
@@ -86,16 +93,16 @@ export default class WordGrid1 extends Component {
 }
 const styles = {
     gridStyle:{ 
-      backgroundColor:'white', marginLeft: '1%',
-      marginRight: '1%',height:110,
-      width:120,borderRadius: 30,
+      backgroundColor:'white', marginLeft: '4%',
+      marginTop: '8%',height:140,
+      width:150,borderRadius: 30,
       alignItems:'center',justifyContent:'center',
       borderColor:'grey',borderWidth:1.8
     },
     gridStyle1:{
-        backgroundColor:'yellow', marginLeft: '1%', 
-        marginRight: '1%', height:110,
-        width:120, borderRadius: 30,
+        backgroundColor:'yellow', marginLeft: '4%', 
+        marginTop: '8%', height:140,
+        width:150, borderRadius: 30,
         alignItems:'center',justifyContent:'center',
         borderColor:'grey',borderWidth:1.8
     }

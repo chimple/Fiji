@@ -29,6 +29,8 @@ import ConnectDotsScreen from '../screens/ConnectDotsScreen'
 import ScoreScreen from '../screens/ScoreScreen'
 import CamPage from '../components/CamPage'
 import GameScreen from '../screens/GameScreen';
+import NewLevel from '../screens/NewLevel'
+import HeadToHeadPlayScreen from '../screens/HeadToHeadPlayScreen'
 
 const CamNavigator = StackNavigator({
   Cam: {
@@ -128,35 +130,14 @@ export const AppNavigator = StackNavigator({
       headerStyle:{backgroundColor: '#19a4f2'}
     }
   },
-  Game: {
+  GameFrontScreen: {
     screen: GameFrontScreen,
     navigationOptions:{
       headerTitle:'Game',
       headerStyle:{backgroundColor: '#19a4f2'}
     }
   },
-  Game1: {
-    screen: MemoryMatchingScreen
-  },
-  Game2: {
-    screen: TapHomeScreen
-  },
-  Game3: {
-    screen: TapWrongScreen
-  },
-  Game4: {
-    screen: WordScreen
-  },
-  Game5: {
-    screen: ConnectDotsScreen
-  },
-  Game6: {
-    screen: multipleChoiceHome
-  },
-  Game7:{
-    screen: SinglePlay
-  },
-  Reflex:{
+  CommonGameScreen: {
     screen: GameScreen
   },
   Score:{
@@ -165,6 +146,16 @@ export const AppNavigator = StackNavigator({
       headerTitle: 'Score',
       headerStyle:{backgroundColor: '#19a4f2'}
     },
+  },
+  NewLevel:{
+    screen: NewLevel,
+    navigationOptions:{
+      headerTitle: 'New Level',
+      headerStyle:{backgroundColor:'#19a4f2'}
+    }
+  },
+  HeadToHead:{
+    screen: HeadToHeadPlayScreen
   }
 })
 

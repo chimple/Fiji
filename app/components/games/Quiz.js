@@ -4,120 +4,64 @@ import {
   View,
   Dimensions,
   ScrollView,
-  FlatList
+  FlatList,
+  StatusBar
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
+
+import Tile from './Tile';
 import Animbutton from './Animbutton';
 
 const { width, height } = Dimensions.get('window');
 
 let arrnew = [];
 
-const jsonData = { quiz: {
-    quiz1: {
-      question1: {
-        correctoption: 'option1',
-        options: {
-          option1: 'A',
-          option2: 'Z'
-        },
-        question: 'A'
-      },
-      question2: {
-        correctoption: 'option2',
-        options: {
-            option1: 'W',
-            option2: 'C'
-          },
-        question: 'C'
-      },
-      question3: {
-        correctoption: 'option1',
-        options: {
-            option1: 'F',
-            option2: 'R'
-          },
-        question: 'F'
-      },
-      question4: {
-        correctoption: 'option2',
-        options: {
-            option1: 'P',
-            option2: 'Q'
-          },
-        question: 'Q'
-      },
-      question5: {
-        correctoption: 'option2',
-        options: {
-            option1: 'H',
-            option2: 'S'
-          },
-        question: 'S'
-      },
-      question6: {
-        correctoption: 'option4',
-        options: {
-            option1: 'B',
-            option2: 'S',
-            option3: 'D',
-            option4: 'K'
-          },
-        question: 'K'
-      },
-      question7: {
-        correctoption: 'option3',
-        options: {
-            option1: 'E',
-            option2: 'R',
-            option3: 'F',
-            option4: 'N'
-          },
-        question: 'F'
-      },
-      question8: {
-        correctoption: 'option4',
-        options: {
-            option1: 'W',
-            option2: 'C',
-            option3: 'G',
-            option4: 'L'
-          },
-        question: 'L'
-      }
-    }
-  }
-  };
-  
-  export default class Quiz extends Component {
+export default class Quiz extends Component {
     constructor(props) {
       super(props);
-      this.qno = 0;
-      this.score = 0;
-   
-      const jdata = jsonData.quiz.quiz1;
-      arrnew = Object.keys(jdata).map((k) => { return jdata[k]; });
       this.state = {
-        question: arrnew[this.qno].question,
-        options: arrnew[this.qno].options,
-        correctoption: arrnew[this.qno].correctoption,
-        countCheck: 0,
         height,
         width
-      };
+      }
 
       Dimensions.addEventListener('change', () => {
         width = Dimensions.get('window').width;
         height = Dimensions.get('window').height;
-      });     
+      }); 
+
+      this.qno = 0;
+      this.score = 0;
+   
+      // const jdata = Object.assign({}, this.props.data);
+      // arrnew = Object.keys(jdata).map((k) => { return jdata[k]; });
+      // console.log(arrnew);
+      console.log(this.props)
+      this.state = {
+        question: this.props.data.question,
+        options: this.props.data.choices,
+        correctoption: this.props.data.answerIndex,
+        countCheck: 0,
+      };
+
+      // console.log(question);
+      // console.log(options);
+      // console.log(correctoption);
+    
     }
 
     state = Dimensions.get("window");
     handler = dims => this.setState(dims);
 
-    componentDidMount() {
+    componentDidMount() {      
+    // this.props.dispatch(fetchMultipleChoiceData(0, 2, 1));
         Dimensions.addEventListener("change", this.handler);
     }
+
+    componentWillMount() {
+      Dimensions.addEventListener("change", this.handler);
+      width = Dimensions.get('window').width;
+      height = Dimensions.get('window').height;
+  }
 
     componentWillUnmount() {
       // Important to stop updating state after unmount
@@ -130,11 +74,11 @@ const jsonData = { quiz: {
         this.qno++;
    
         this.setState({ countCheck: 0, 
-          question: arrnew[this.qno].question, 
-          options: arrnew[this.qno].options, 
-          correctoption: arrnew[this.qno].correctoption });
+          question: this.props.ques,
+        options: arrnew,
+        correctoption: this.props.correctans });
       } else {
-        this.props.quizFinish(this.score * 20);
+        this.props.quizFinish(this.score);
        }
     }
 
@@ -143,8 +87,8 @@ const jsonData = { quiz: {
           const count = this.state.countCheck + 1;
           this.setState({ countCheck: count });
           if (ans === this.state.correctoption) {
-            this.score += 1;
-            this.next();
+            this.score += 20;
+            this.props.onEnd()
             this.refs.questionView.zoomIn(800);
           }
         } else {
@@ -158,8 +102,10 @@ const jsonData = { quiz: {
 
        
     render() {
+
       const _this = this;
       const currentOptions = this.state.options;
+      console.log(currentOptions);
       const options = Object.keys(currentOptions).map((k) => {
         return (<View
         key={k}
@@ -178,9 +124,15 @@ const jsonData = { quiz: {
       });
       
       return (
-        <ScrollView style={{ backgroundColor: '#F5FCFF', paddingTop: 10 }}>
+        <ScrollView style={{ backgroundColor: '#F5FCFF', paddingTop: 5 }}>
+        <StatusBar barStyle="light-content" />
+        <View style={styles.toolbar}>
+          <Text style={styles.toolbarTitle}>Current Score - {this.score}</Text>
+        </View>
+ 
 
         <View style={styles.container}>
+         {height > width ? <View style= {{ paddingTop: height * 0.2 }} /> : <View /> }
                  
         <View 
         style={{ flex: 1,
@@ -224,7 +176,7 @@ const jsonData = { quiz: {
     oval: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: width * 0.5,
+    width: width * 0.35,
     borderRadius: 20,
     backgroundColor: '#483d8b',
     margin: 15
@@ -234,10 +186,28 @@ const jsonData = { quiz: {
       alignContent: 'space-between'
     },
     welcome: {
-      fontSize: height * 0.1,
+      fontSize: height * 0.08,
       fontWeight: 'bold',
       margin: height * 0.002,
       color: 'white',
-    }
+    },
+    toolbar: {
+          backgroundColor: '#483d8b',
+          paddingTop: height * 0.01,
+          paddingBottom: 10,
+          flexDirection: 'row'
+      },
+      toolbarTitle: {
+          color: '#fff',
+          justifyContent: 'center',
+          textAlign: 'center',
+          fontWeight: 'bold',
+          flex: 1
+      }
   };
+
+  // export default connect(state => ({
+  //   gameData: state.data.gameData,
+  //   isFetching: state.data.isFetching,
+  // }))(Quiz)
 

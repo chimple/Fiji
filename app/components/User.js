@@ -14,7 +14,10 @@ export default class User extends PureComponent {
     // let svg = Buffer.from(this.props.user.svg, 'base64').toString('utf8')
     // console.log(this.props.user)
     return (
-      <TouchableOpacity onPress={ this._onPress } style={styles.TouchableStyle}>
+      <TouchableOpacity 
+        onPress={ this._onPress } 
+        style={styles.TouchableStyle}
+        accessibilityLabel={this.props.user.name}>
         <View style={styles.ImageViewStyle}>
           <Image
             style={styles.ImageStyle}

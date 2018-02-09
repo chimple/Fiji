@@ -10,7 +10,7 @@ import { fetchGames } from '../redux/game'
 class GamesScreen extends Component {
   componentDidMount() {
     this.props.dispatch(fetchGames())
-    console.log(this.props.navigation.state.params.user.name)
+    console.log(this.props.user.name)
   }
 
   render() {
@@ -34,16 +34,24 @@ class GamesScreen extends Component {
   }
 
   _handlePress = ( title ) => {
-    this.props.navigation.navigate('Game', { title, user: this.props.navigation.state.params.user })
+    this.props.navigation.navigate('GameFrontScreen', { title, user: this.props.user })
   }
 
 }
 
 GamesScreen.propTypes = {
-  games: PropTypes.array
+  games: PropTypes.array,
+  navigation: PropTypes.shape({
+    state: PropTypes.shape({
+      params: PropTypes.shape({
+        user: PropTypes.object.isRequired
+      })
+    })
+  })
 }
 
 export default connect(state => ({
   games: state.game.games,
   isFetching: state.game.isFetching,
+  user:state.auth.user
 }))(GamesScreen)

@@ -9,8 +9,10 @@ import { fetchGameHighScores } from '../redux/score'
 
 class ScoreScreen extends PureComponent{
     componentDidMount(){
-        this.props.dispatch(fetchGameHighScores(this.props.navigation.state.params.game._id))
-        console.log(this.props.navigation.state.params.user.name)
+        this.props.dispatch(fetchGameHighScores(this.props.game._id))
+        console.log(this.props.user.name)
+        console.log(this.props.game.name)
+        console.log(this.props.item.name)
     }
 
     _keyExtractor = (item, index) => item._id
@@ -19,6 +21,14 @@ class ScoreScreen extends PureComponent{
         <View style={styles.RankingStyle}><Text style={{fontWeight:'bold', fontSize:30,}}>{item.score}</Text></View>
     )
     render(){
+        var UserScore
+        if(this.props.gameScore.length)
+            for( i=0; i<this.props.gameScore.length ; i++ ){
+                if(this.props.gameScore[i].user_id==this.props.user._id){
+                    UserScore = this.props.gameScore[i].score
+                    break
+                }
+            }
         return(
             this.props.isFetching
                 ?
@@ -29,9 +39,14 @@ class ScoreScreen extends PureComponent{
                 
                         <View style={styles.ScoreCardStyle}>
                             <View style={styles.PlayerScoreViewStyle}>
-                                <View style={styles.PlayerScoreStyle}><Text style={{fontWeight:'bold', fontSize:50,}}>A</Text></View>
+                                <ImageBackground style={[styles.PlayerScoreStyle, {width:20, height:100, alignSelf:'center'}]} source={{uri:'data:image/png;base64,' + this.props.user.image }} ><Text style={{fontWeight:'bold', fontSize:20,}}>{UserScore}</Text></ImageBackground>
                                 <View style={styles.CharacterStyle}></View>
                                 <View style={styles.PlayerScoreStyle}><Text style={{fontWeight:'bold', fontSize:50,}}>B</Text></View>
+                            </View>
+                            <View style={styles.OptionStyle}>
+                                <View style={[styles.EachOptionStyle, {backgroundColor:'#bac2d1'}]}><Text style={{fontSize:20,fontWeight:'bold', color:'black'}}>Home</Text></View>
+                                <View style={[styles.EachOptionStyle, {backgroundColor:'grey'}]}><Text style={{fontSize:20,fontWeight:'bold', color:'black'}}>Exit</Text></View>
+                                <View style={[styles.EachOptionStyle, {backgroundColor:'#91b587'}]}><Text style={{fontSize:20,fontWeight:'bold', color:'black'}}>Next</Text></View>
                             </View>
                             <View style={styles.RankingViewStyle}>
                                 <FlatList
@@ -52,13 +67,17 @@ class ScoreScreen extends PureComponent{
 
 ScoreScreen.propTypes = {
     gameScore:PropTypes.array,
-    navigation: PropTypes.shape({
+    game:PropTypes.object,
+    item:PropTypes.object,
+    user:PropTypes.object,
+    /*navigation: PropTypes.shape({
         state: PropTypes.shape({
           params: PropTypes.shape({
-            game: PropTypes.object.isRequired
+            game: PropTypes.object.isRequired,
+            user: PropTypes.object.isRequired
           })
         })
-      })
+      })*/
 }
 
 const styles = StyleSheet.create({
@@ -66,12 +85,12 @@ const styles = StyleSheet.create({
        flex:1 
     },
     PlayerScoreViewStyle:{
-        flex:1,
+        flex:3,
         backgroundColor:'#edca2f',
         flexDirection:'row'
     },
     RankingViewStyle:{
-        flex:1,
+        flex:3,
         backgroundColor:'#59c6c3'
     },
     PlayerScoreStyle:{
@@ -90,10 +109,21 @@ const styles = StyleSheet.create({
         borderRadius:30,
         marginTop:'5%',
         marginBottom:'5%'
+    },
+    OptionStyle:{
+        flexDirection:'row',
+        flex:1
+    },
+    EachOptionStyle:{
+        borderColor:'black',
+        borderWidth:1,
+        flex:1,
+        justifyContent:'center',
+        alignItems:'center'
     }
 });
 
 export default connect( state => ({
     gameScore: state.score.gameHighScores,
-    isFetching: state.game.isFetching
+    isFetching: state.score.isFetching
 }))(ScoreScreen)
