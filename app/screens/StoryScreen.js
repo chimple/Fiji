@@ -17,8 +17,17 @@ import { Buffer } from 'buffer'
 class StoryScreen extends Component {
   constructor(props) {
     super(props)
-    this.state = { count: 1, page: 0 };
+    this.state = {
+      count: 0,
+      page: 0,
+      stories: []
+    };
   }
+
+  componentWillUpdate() {
+
+  };
+
   _renderState() {
     // var page = this.getState;
     var dialog = this.props.story.pages[this.state.page].dialog;
@@ -26,23 +35,43 @@ class StoryScreen extends Component {
     if (this.state.count < dialog.length) {
       this.setState({ count: this.state.count + 1 });
       console.log("counter value is : ", this.state.count);
+      // this.state.stories.push({text:'this is suhas',speaker:'Alice'})
+
+      this.setState(prevState => ({
+        stories: [
+          ...prevState.stories,
+          this.props.story.pages[this.state.page].dialog[this.state.count]
+        ]
+      }))
     }
     else {
       //console.log("else part is trigger ....")
       console.log("page length data : ", this.props.story.pages.length)
       console.log("this.state.page : ", this.state.page)
       if (this.props.story.pages.length - 1 > this.state.page) {
-        this.setState({ count: 1, page: this.state.page + 1 })
+        this.setState({ count: 0, page: this.state.page + 1 })
+
+
       } else {
-        this.setState({ count: 1, page: 0 })
-        console.log("Thank you , you already gone throw all pages .... ")
+        // this.setState({ count: 0, page: 0 })
+        // console.log("Thank you , you already gone throw all pages .... ")
       }
     }
+    console.log('this.state is', this.state.stories);
   }
 
   componentDidMount() {
     this.props.dispatch(fetchStory(this.props.navigation.state.params.title))
   }
+
+  _keyExtractor = (item, index) => item._id
+
+  _renderItem = ({ item, index }) => (
+    <View >
+      <StorySection item={item} index={index} page={this.state.page} count={this.state.count} />
+    </View>
+  )
+
 
   render() {
     if (this.props.isFetching) {
@@ -55,7 +84,7 @@ class StoryScreen extends Component {
         const h = Dimensions.get("window").height
         const w = Dimensions.get("window").width
         const length = h > w ? h : w
-        
+
         return (
           <View style={{ flex: 1 }}>
             <View style={styles.headerViewStyle}>
@@ -75,23 +104,26 @@ class StoryScreen extends Component {
               > */}
               <SvgUri
                 style={{ flex: 1, position: 'absolute' }}
-                width={ length }
-                height={ length }
+                width={length}
+                height={length}
                 //source={{ uri:'data:image/svg+xml;base64,' + this.props.story.pages[this.state.page].bg }}
                 svgXmlData={svg}
               >
               </SvgUri>
 
-              <ScrollView ref="scrollView"
-                onContentSizeChange={(width, height) => this.refs.scrollView.scrollTo({ y: height })}>
-                <View >
-                  <StorySection
-                    page={this.state.page}
-                    count={this.state.count}
+              <FlatList
+                data={this.state.stories}
+                ref='flatlist'
+                // refreshControl=
+                refreshing
+                extraData={this.state.stories}
+                keyExtractor={this._keyExtractor}
+                renderItem={this._renderItem}
+                onContentSizeChange={() => {
+                  this.refs.flatlist.scrollToEnd()
+                }}
+              />
 
-                  />
-                </View>
-              </ScrollView>
 
             </View>
             <TouchableOpacity onPress={() => this._renderState()} >
