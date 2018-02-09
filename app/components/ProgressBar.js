@@ -9,18 +9,7 @@ import {
   Animated,
   Easing,
 } from 'react-native'
-
-var styles = StyleSheet.create({
-  background: {
-    backgroundColor: '#bbbbbb',
-    height: 5,
-    overflow: 'hidden'
-  },
-  fill: {
-    backgroundColor: '#3b5998',
-    height: 5
-  }
-})
+import PropTypes from 'prop-types'
 
 export default class ProgressBar extends Component {
   constructor(props) {
@@ -29,6 +18,13 @@ export default class ProgressBar extends Component {
       progress: new Animated.Value(this.props.initialProgress || 0)
     }
   }
+
+  componentDidMount() {
+    if (this.props.progress >= 0 && this.props.progress != this.props.initialProgress) {
+      this.update()
+    }
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (this.props.progress >= 0 && this.props.progress != prevProps.progress) {
       this.update()
@@ -36,7 +32,6 @@ export default class ProgressBar extends Component {
   }
 
   render() {
-
     var fillWidth = this.state.progress.interpolate({
       inputRange: [0, 1],
       outputRange: [0 * this.props.style.width, 1 * this.props.style.width],
@@ -52,14 +47,32 @@ export default class ProgressBar extends Component {
   update() {
     Animated.timing(this.state.progress, {
       easing: this.props.easing,
-      duration: this.props.easingDuration,
+      duration: this.props.duration,
       toValue: this.props.progress
-    }).start()
+    }).start((fin) => {this.props.onEnd && this.props.onEnd(fin)})
   }
+}
+
+ProgressBar.propTypes = {
+  initialProgress: PropTypes.number,
+  progress: PropTypes.number,
+  onEnd: PropTypes.func
 }
 
 ProgressBar.defaultProps = {
   style: styles,
   easing: Easing.inOut(Easing.ease),
-  easingDuration: 500
+  duration: 250
 }
+
+var styles = StyleSheet.create({
+  background: {
+    backgroundColor: '#bbbbbb',
+    height: 5,
+    overflow: 'hidden'
+  },
+  fill: {
+    backgroundColor: '#3b5998',
+    height: 5
+  }
+})

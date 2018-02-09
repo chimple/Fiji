@@ -30,6 +30,7 @@ export default class TileGrid extends PureComponent {
             key={id}
             id={id}
             onPress={this.props.onPress}
+            onRender={this.props.onRender}
             tileColor={this.props.tileColor}
             edgeColor={this.props.edgeColor}
             pressedTileColor={this.props.pressedTileColor}
@@ -57,6 +58,7 @@ export default class TileGrid extends PureComponent {
 
 TileGrid.propTypes = {
   onPress: PropTypes.func,
+  onRender: PropTypes.func,
   numRows: PropTypes.number,
   numCols: PropTypes.number,
   data: PropTypes.array
