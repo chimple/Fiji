@@ -17,6 +17,7 @@ export default class Tile extends Component {
     if(this.props.text != nextProps.text
         || this.props.style.height != nextProps.style.height
         || this.props.style.width != nextProps.style.width) {
+      this.props.onRender(this.props.id, this.refs.view)
       return true
     }
     return false

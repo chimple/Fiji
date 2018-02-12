@@ -2,17 +2,26 @@
   "docs": [
     {
       "_id": "chat:alice:2018-01-09T08:45:35.341Z",
-      "text": "Care for a tea party",
+      "message": {
+        "type": "text",
+        "content": "Care for a tea party"
+      },
       "sender": "mad-hatter"
     },
     {
       "_id": "chat:alice:2018-01-10T09:45:35.341Z",
-      "text": "Of course, I will be wearing my party hat",
+      "message": {
+        "type": "text",
+        "content": "Of course, I will be wearing my party hat"
+      },
       "sender": "alice"
     },
     {
       "_id": "chat:alice:2018-01-11T08:45:35.341Z",
-      "text": "Where are you?",
+      "message": {
+        "type": "text",
+        "content": "Where are you?"
+      },
       "sender": "mad-hatter"
     }
   ]
