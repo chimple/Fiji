@@ -12,32 +12,45 @@ let width;
 let iterate = 0;
 let len = 0;
 let j = 0, i = 0;
-let options = [];
 
 export default class TapHome extends Component {
 
-  constructor() {
+  constructor(props) {
 
-    super();
-    this.state = {
-      // This is our Default number value
-      len: 0,
-      score: 0,
-      count: 0,
-      showModal: false,
-    };
+    super(props);
+    this.state = this._initBoard(props)
 
   }
+
+  _initBoard = (props) => {
+    let options = [];
+    j = 0;
+    const data = props.data.serial.map( function (temp, index ){
+      options[j] = temp;
+      j++;
+    });
+    let len = options.length;
+    let score = 0;
+    let count = 0;
+   
+    return ({
+      options,
+      count,
+      len,
+      score
+    })
+  }
+
 
   timer = () => {
     if( this.state.count  == this.state.len ){
       this.setState({count: 0})
     }else
-      this.setState({ count: this.state.count + 1 })
+      this.setState({ count: this.state.count + 1})
   }
 
   componentDidMount() {
-    this.setState({len: this.props.data.serial.length})
+    //this.setState({len: this.props.data.serial.length})
     //This will start timer and will update text value
     timerId = setInterval(this.timer, 1400)
     width = this.props.style.height * 0.225
@@ -45,11 +58,11 @@ export default class TapHome extends Component {
   }
 
   //This will generate random number and will check on tap condition
-  GenerateRandomNumber = () => {
+  GenerateRandomNumber = (id , view) => {
     
-    if (this.props.data.answer == options [this.state.count]) {
-     // this.props.onEnd();
-     // this.refs.view.zoomIn(500).then((endState) => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
+    if (this.props.data.answer == this.state.options[this.state.count]) {
+      this.props.onScore(2)
+      view.zoomIn(500).then((endState) => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
      
       if(this.state.score == 9 )
       {
@@ -60,7 +73,6 @@ export default class TapHome extends Component {
       }
       else{
         this.setState({
-          numberHolder: this.state.numberHolder + 1,
           count: 0,
           score: this.state.score + 1,
         })
@@ -89,15 +101,9 @@ export default class TapHome extends Component {
       }
     }
     else {
-      //this.refs.view.shake(500).then((endState) => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
+      view.shake(500).then((endState) => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
       iterate = iterate + 1;
       this.setState({ count: 0 })
-      if(iterate > 5 ) {
-        this.setState({
-          showModal: true,
-        });
-        iterate = 0;
-      }
 
     }
   }//end of generateRandomNumber function
@@ -120,18 +126,14 @@ export default class TapHome extends Component {
   render() {
     console.log(this.props.data.serial); 
 
-    options = [];
-    j = 0;
-    data = this.props.data.serial.map( function (temp, index ){
-      options[j] = temp;
-      j++;
-    });
+   
  
     const { container, circle, text, subText, scoreText } = stylesPotrait;
     return (
 
       <View style={container}>
           <Tile
+            id={1}
             onPress={this.GenerateRandomNumber}
             text={this.props.data.answer}
             edgeColor='white'
@@ -140,17 +142,47 @@ export default class TapHome extends Component {
               height: 80,
               position: 'relative',
             }}
+            onRender={this._renderTile}
           />
         <TouchableOpacity onPress={this.GenerateRandomNumber}>
             <Text style={[ subText, { fontSize: fontSizer(width) + 20}]}>
-            {options[this.state.count]}
+            {this.state.options[this.state.count]}
             </Text>
-         </TouchableOpacity>
+        </TouchableOpacity>
       </View>
-
     );
   }
-}//End of class component
+}//End of class 
+
+_renderTile = (id, view) => {
+  //this.state.letters[id] && view.zoomIn(250)
+}
+
+_clickTile = (id, view) => {
+  if (this.state.letters[id] == this.props.data.serial[this.state.currentIndex]) {
+    this.props.onScore(2)
+    this.props.setProgress((this.state.currentIndex + 1) / this.props.data.serial.length)
+    view.zoomOut(250).then((endState) => {
+      if (this.state.currentIndex + 1 >= this.props.data.serial.length) {
+        this.props.onEnd()
+      } else {
+        this.setState((prevState, props) => {
+          const newLetters = prevState.letters.map((value, index) => {
+            return index == id ? prevState.shuffledData[prevState.currentIndex + SIZE * SIZE] : value
+          })
+          return {
+            letters: newLetters,
+            shuffledData: prevState.shuffledData,
+            currentIndex: prevState.currentIndex + 1
+          }
+        })
+        this.state.currentIndex + SIZE * SIZE <= this.props.data.serial.length && view.zoomIn(250)
+      }
+    })
+  } else {
+    view.shake(250)
+  }
+}
 
 function fontSizer (screenWidth) {
   if(screenWidth > 100 && screenWidth < 150){
