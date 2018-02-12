@@ -13,20 +13,25 @@ export default class Tile extends Component {
     this.props.onPress(this.props.id, this.refs.view)
   }
 
+  _onStatusChange = (prevStatus, currentStatus) => {
+    this.props.onStatusChange && this.props.onStatusChange(this.props.id, this.refs.view, prevStatus, currentStatus)    
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
     if(this.props.text != nextProps.text
         || this.props.style.height != nextProps.style.height
         || this.props.style.width != nextProps.style.width
         || (this.props.status && (this.props.status != nextProps.status))) {
-      this.props.onRender(this.props.id, this.refs.view)
+          this.props.onRender && this.props.onRender(this.props.id, this.refs.view)
       return true
     }
     return false
   }
 
   componentDidUpdate(prevProps, prevState) {
+    console.log('componentDidUpdate:',this.props.id,prevProps.status, this.props.status)
     if(prevProps.status != this.props.status) {
-      onStatusChange(prevProps.status, this.props.status)
+      this._onStatusChange(prevProps.status, this.props.status)
     }
   }
 
