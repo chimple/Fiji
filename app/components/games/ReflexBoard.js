@@ -19,11 +19,16 @@ export default class ReflexBoard extends Component {
     for (let i = 0; i < letters.length; i++) {
       letters[i] = shuffledData[i];
     }
+    let statuses = new Array(SIZE * SIZE)
+    for (let i = 0; i < statuses.length; i++) {
+      statuses[i] = 'visible';
+    }
     let currentIndex = 0
     return ({
       letters,
       shuffledData,
       currentIndex,
+      statuses
     })
   }
 
@@ -38,6 +43,8 @@ export default class ReflexBoard extends Component {
         numRows={SIZE}
         numCols={SIZE}
         data={this.state.letters}
+        statuses={this.state.statuses}
+        onStatusChange={this._onStatusChange}
         tileColor='#24B2EA'
         edgeColor='deepskyblue'
         pressedTileColor='goldenrod'
@@ -53,29 +60,40 @@ export default class ReflexBoard extends Component {
     )
   }
 
-  _renderTile = (id, view) => {
-    this.state.letters[id] && view.zoomIn(250)
+  _onStatusChange(id, view, prevStatus, currentStatus) {
+    console.log('onstatuschange:', prevStatus, currentStatus)
+    currentStatus == 'visible' && view.zoomIn(250)
   }
 
+  // _renderTile = (id, view) => {
+  //   this.state.letters[id] && view.zoomIn(250)
+  // }
+
   _clickTile = (id, view) => {
-    if (this.state.letters[id] == this.props.data.serial[this.state.currentIndex]) {
-      this.props.onScore(2)
-      this.props.setProgress((this.state.currentIndex + 1) / this.props.data.serial.length)
+    const currentIndex = this.state.currentIndex
+    if (this.state.letters[id] == this.props.data.serial[currentIndex]) {
+      this.props.onScore && this.props.onScore(2)
+      this.props.setProgress && this.props.setProgress((currentIndex + 1) / this.props.data.serial.length)
+      this.setState({...this.state, currentIndex: currentIndex + 1})
       view.zoomOut(250).then((endState) => {
-        if (this.state.currentIndex + 1 >= this.props.data.serial.length) {
+        if (currentIndex + 1 >= this.props.data.serial.length) {
+          this.setState({...this.state,
+            statuses: this.state.statuses.map(()=>'invisible')})
           this.props.onEnd()
         } else {
           this.setState((prevState, props) => {
             const newLetters = prevState.letters.map((value, index) => {
-              return index == id ? prevState.shuffledData[prevState.currentIndex + SIZE * SIZE] : value
+              return index == id ? prevState.shuffledData[currentIndex + SIZE * SIZE] : value
             })
-            return {
+            const newStatuses = prevState.statuses.map((value, index) => {
+              return (currentIndex + 1 + SIZE * SIZE > this.props.data.serial.length && index == id && value=='visible') ? 'invisible' : value
+            })
+            return {...prevState,
               letters: newLetters,
-              shuffledData: prevState.shuffledData,
-              currentIndex: prevState.currentIndex + 1
+              statuses: newStatuses,
             }
           })
-          this.state.currentIndex + SIZE * SIZE <= this.props.data.serial.length && view.zoomIn(250)
+          currentIndex + SIZE * SIZE < this.props.data.serial.length && view.zoomIn(250)
         }
       })
     } else {
