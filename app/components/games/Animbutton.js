@@ -17,7 +17,7 @@ export default class Animbutton extends Component {
        width
      };
      Dimensions.addEventListener('change', () => {
-      width = Dimensions.get('window').width;
+      width = Dimensions.get('window').widt;
       height = Dimensions.get('window').height;
     });
 
@@ -98,5 +98,5 @@ export default class Animbutton extends Component {
         </Animatable.View>
       </TouchableWithoutFeedback>
     );
-  }
+    }
 }

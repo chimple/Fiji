@@ -209,7 +209,8 @@ export default class Quiz extends Component {
       
       return (
         <ScrollView style={{ backgroundColor: '#E53554', paddingTop: 5 }}>
-        <View style={styles.container}>                 
+        <View style={styles.container}>
+                 
         <View 
         style={{ flex: 1,
         justifyContent: 'center', 
