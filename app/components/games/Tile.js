@@ -66,7 +66,7 @@ export default class Tile extends Component {
             <Text style={{
               color: this.props.textColor,
               backgroundColor: 'transparent',
-              fontSize: this.props.style.height-40
+              fontSize: Math.max(20, this.props.style.height - 40)
             }}>
               {this.props.text}
             </Text>
