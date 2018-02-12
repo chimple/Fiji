@@ -40,34 +40,34 @@ export default class Animbutton extends Component {
      this.setState({ status: this.state.status });
      switch (this.props.effect) {
        case 'bounce':
-         this.refs.view.bounce(100);
+         this.refs.view.bounce(250);
          break;
        case 'flash':
-         this.refs.view.flash(100);
+         this.refs.view.flash(250);
          break;
        case 'jello':
-         this.refs.view.jello(100);
+         this.refs.view.jello(250);
          break;
        case 'pulse':
-         this.refs.view.pulse(100);
+         this.refs.view.pulse(250);
          break;
        case 'rotate':
-         this.refs.view.rotate(100);
+         this.refs.view.rotate(250);
          break;
        case 'rubberBand':
-         this.refs.view.rubberBand(100);
+         this.refs.view.rubberBand(250);
          break;
        case 'shake':
-         this.refs.view.shake(100);
+         this.refs.view.shake(250);
          break;
        case 'swing':
-         this.refs.view.swing(100);
+         this.refs.view.swing(250);
          break;
        case 'tada':
-         this.refs.view.tada(100);
+         this.refs.view.tada(250);
          break;
        case 'wobble':
-         this.refs.view.wobble(100);
+         this.refs.view.wobble(250);
          break;
      }
    }
