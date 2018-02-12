@@ -14,17 +14,19 @@ class AnimationView extends Component {
         this.state = {
             progress: new Animated.Value(0),
         };
+        // this.manusMethod();
+        // console.log("constructor called ----> ");
     }
+
+    
     componentDidMount() {
+        console.log("--------------this is my progress--------------", this.state.progress)
         Animated.timing(this.state.progress, {
             toValue: 1,
             duration: 5000,
         }).start();
     }
     render() {
-        // var speaker = this.props.story.pages[this.props.page].dialog[i].speaker;
-        // let animation = Buffer.from(this.props.story.characters[characterData[speakerIndex]], 'base64').toString('utf8')
-        // let x = JSON.parse(animation);
         console.log(" the style data is : " , this.props.styles)
         console.log(" the animationcharacter data is : " , this.props.animationCharacter)
         
@@ -32,31 +34,31 @@ class AnimationView extends Component {
             <LottieView style={this.props.styles}
                 source={this.props.animationCharacter}
                 progress={this.state.progress} />
-
         )
     }
 }
 
 
 class StorySection extends Component {
-    constructor(props) {
-        super(props)
+    // constructor(props) {
+    //     super(props)
         // this.state = {
         //     progress: new Animated.Value(0),
         // };
-    }
-    componentDidMount() {
+    // }
+    //componentDidMount() {
     //     Animated.timing(this.state.progress, {
     //         toValue: 1,
     //         duration: 5000,
     //     }).start();
-    }
+    //}
 
     // this.animation.play();
-    render(props) {
+    render() {
         const stories = [];
-        console.log("the page number is :", this.props.page)
-        var dialog = this.props.story.pages[this.props.page].dialog;
+        console.log("the page number is :", this.props.item)
+        console.log("the count number is :", this.props.index)
+        var dialog = this.props.item.dialog;
 
         var characterData = [];
         console.log("How many character is there : ", Object.keys(this.props.story.characters).length)
@@ -66,10 +68,10 @@ class StorySection extends Component {
 
         console.log(characterData)
 
-        for (let i = 0; i < this.props.count; i++) {
-            for (let j = 0; j <= dialog.length; j++) {
+        // for (let i = 0; i < this.props.index; i++) {
+        //     for (let j = 0; j <= dialog.length; j++) {
 
-                var speaker = this.props.story.pages[this.props.page].dialog[i].speaker;
+                var speaker = this.props.item.speaker;
                 var speakerIndex = 0;
                 for (let k = 0; k < characterData.length; k++) {
                     if (characterData[k] == speaker) {
@@ -77,27 +79,27 @@ class StorySection extends Component {
                     }
                 }
                 //var chapter = this.props.story.pages[this.props.page].dialog[i].chapter;
-                if (!this.props.story.pages[this.props.page].dialog[i].speaker) {
+                if (!this.props.item.speaker) {
 
 
-                    console.log("checkinggg non dialog", this.props.story.pages[this.props.page].dialog[i].text);
+                    console.log("checkinggg non dialog", this.props.item.text);
 
                     stories.push(
                         <View style={styles.chapterContainer}>
                             <Image style={{ width: 200, height: 100, position: 'absolute' }}
                                 source={{
-                                    uri: 'data:image/png;base64,' + this.props.story.pages[this.props.page].dialog[i].img,
+                                    uri: 'data:image/png;base64,' + this.props.item.img,
                                 }} />
                             <Text style={styles.chapterTextStyle}>
-                                {this.props.story.pages[this.props.page].dialog[i].text}
+                                {this.props.item.text}
                             </Text>
                         </View>
                     );
-                    break
-
+                    // break
+                        
                 }
                 else {
-                    var speaker = this.props.story.pages[this.props.page].dialog[i].speaker;
+                    var speaker = this.props.item.speaker;
                     let animation = Buffer.from(this.props.story.characters[characterData[speakerIndex]], 'base64').toString('utf8')
                     let x = JSON.parse(animation);
 
@@ -132,20 +134,20 @@ class StorySection extends Component {
 
                                 <View style={styles.textContainer}>
                                     <Text style={styles.dialogStyle}>
-                                        {this.props.story.pages[this.props.page].dialog[i].text}
+                                        {this.props.item.text}
                                     </Text>
                                 </View>
                             </View>
 
                         );
-                        break;
+                        // break;
                     }
                     else {
                         stories.push(
                             <View style={styles.storyContainer2}>
                                 <View style={styles.textContainer2}>
                                     <Text style={styles.dialogStyle}>
-                                        {this.props.story.pages[this.props.page].dialog[i].text}
+                                        {this.props.item.text}
                                     </Text>
                                 </View>
                                 {/* <LottieView style={styles.characterImageStyle}
@@ -159,12 +161,12 @@ class StorySection extends Component {
                                 />
                             </View>
                         );
-                        break;
+                        // break;
                     }
 
                 }
-            }
-        }
+        //     }
+        // }
 
         return stories;
     }

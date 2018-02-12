@@ -12,7 +12,7 @@
       "_id": "chat:alice:2018-01-10T09:45:35.341Z",
       "message": {
         "type": "text",
-        "content": "Of course, I will be wearing my party hat"
+        "content": "Care for a tea party"
       },
       "sender": "alice"
     },
@@ -20,7 +20,7 @@
       "_id": "chat:alice:2018-01-11T08:45:35.341Z",
       "message": {
         "type": "text",
-        "content": "Where are you?"
+        "content": "Care for a tea party"
       },
       "sender": "mad-hatter"
     }
