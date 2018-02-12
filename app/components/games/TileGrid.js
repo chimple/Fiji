@@ -37,6 +37,7 @@ export default class TileGrid extends PureComponent {
             pressedEdgeColor={this.props.pressedEdgeColor}
             textColor={this.props.textColor}
             text={this.props.data[id]}
+            status={this.props.statuses[id]}
             style={{
               top: row * cellSize + topOffset,
               left: col * cellSize + leftOffset,
@@ -59,6 +60,8 @@ export default class TileGrid extends PureComponent {
 TileGrid.propTypes = {
   onPress: PropTypes.func,
   onRender: PropTypes.func,
+  statuses: PropTypes.array,
+  onStatusChange: PropTypes.func,
   numRows: PropTypes.number,
   numCols: PropTypes.number,
   data: PropTypes.array

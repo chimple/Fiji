@@ -19,11 +19,16 @@ export default class ReflexBoard extends Component {
     for (let i = 0; i < letters.length; i++) {
       letters[i] = shuffledData[i];
     }
+    let statuses = new Array(SIZE * SIZE)
+    for (let i = 0; i < statuses.length; i++) {
+      statuses[i] = 'visible';
+    }
     let currentIndex = 0
     return ({
       letters,
       shuffledData,
       currentIndex,
+      statuses
     })
   }
 
@@ -38,6 +43,7 @@ export default class ReflexBoard extends Component {
         numRows={SIZE}
         numCols={SIZE}
         data={this.state.letters}
+        statuses={this.state.statuses}
         tileColor='#24B2EA'
         edgeColor='deepskyblue'
         pressedTileColor='goldenrod'
@@ -59,8 +65,8 @@ export default class ReflexBoard extends Component {
 
   _clickTile = (id, view) => {
     if (this.state.letters[id] == this.props.data.serial[this.state.currentIndex]) {
-      this.props.onScore(2)
-      this.props.setProgress((this.state.currentIndex + 1) / this.props.data.serial.length)
+      this.props.onScore && this.props.onScore(2)
+      this.props.setProgress && this.props.setProgress((this.state.currentIndex + 1) / this.props.data.serial.length)
       view.zoomOut(250).then((endState) => {
         if (this.state.currentIndex + 1 >= this.props.data.serial.length) {
           this.props.onEnd()
@@ -68,6 +74,9 @@ export default class ReflexBoard extends Component {
           this.setState((prevState, props) => {
             const newLetters = prevState.letters.map((value, index) => {
               return index == id ? prevState.shuffledData[prevState.currentIndex + SIZE * SIZE] : value
+            })
+            const newStatuses = prevState.statuses.map((value, index) => {
+              return index == id ? 'visible' : 'invisible'
             })
             return {
               letters: newLetters,
