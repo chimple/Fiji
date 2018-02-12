@@ -30,14 +30,12 @@ const GameComponents = {
   'game:memory-matching': MemoryMatching
 }
 
-class GameScreen extends Component {
+class NewLevel extends Component {
   constructor(props) {
     super(props)
     this.state = {
       window: Dimensions.get("window"),
-      gameOver: false,
-      progress: 0,
-      dataIndex: 0
+      gameOver: false
     }
   }
 
@@ -49,36 +47,26 @@ class GameScreen extends Component {
     this.props.dispatch(addMyScore(score))
   }
 
-  _setProgress = (progress) => {
-    this.setState(...this.state,
-      { progress: (progress + this.state.dataIndex) / this.props.gameData.length })
-  }
-
   _onEnd = () => {
-    let dataIndex = this.state.dataIndex
-    if (++dataIndex < this.props.gameData.length) {
-      this.setState(...this.state, { dataIndex })
-    } else {
-      this.props.dispatch(finalizeScore(this.props.user._id, this.props.navigation.state.params.game._id, this.props.myScore))
-      this.setState(...this.state, { gameOver: true })
-    }
+    this.props.dispatch(finalizeScore(this.props.user._id, this.props.game._id, this.props.myScore))
+    this.setState(...this.state, { gameOver: true })
   }
 
   componentDidMount() {
-    if (this.props.navigation.state.params.game._id == 'game:reflex') {
-      this.props.dispatch(fetchConsecutiveData('set:letters', 20, 0, 2))
-    } else if (this.props.navigation.state.params.game._id == 'game:multiple-choice') {
+    if(this.props.game._id == 'game:reflex') {
+      this.props.dispatch(fetchConsecutiveData('set:letters', 20, 0, 1))
+    } else if(this.props.game._id == 'game:multiple-choice') {
       this.props.dispatch(fetchMultipleChoiceData('set:letters', 4, 2))
-    } else if (this.props.navigation.state.params.game._id == 'game:tap-home') {
+    } else if(this.props.game._id == 'game:tap-home') {
       this.props.dispatch(fetchSerialData('set:letters', 4))
-    } else if (this.props.navigation.state.params.game._id == 'game:tap-wrong') {
+    } else if(this.props.game._id == 'game:tap-wrong') {
       this.props.dispatch(fetchWordData('set:letters', 3, 1, 1))
-    } else if (this.props.navigation.state.params.game._id == 'game:word') {
+    } else if(this.props.game._id == 'game:word') {
       this.props.dispatch(fetchWordData('set:letters', 5, 4, 3))
-    } else if (this.props.navigation.state.params.game._id == 'game:connect-dots') {
+    } else if(this.props.game._id == 'game:connect-dots') {
       this.props.dispatch(fetchConsecutiveData('set:letters', 5, 4, 3))
-    } else if (this.props.navigation.state.params.game._id == 'game:memory-matching') {
-      this.props.dispatch(fetchMatchData('set:letters', 8, 1))
+    } else if(this.props.game._id == 'game:memory-matching') {
+      this.props.dispatch(fetchMatchData('set:letters', 8))
     }
     Dimensions.addEventListener("change", this._dimChangeHandler)
   }
@@ -88,15 +76,14 @@ class GameScreen extends Component {
   }
 
   render() {
-    console.log(this.props.navigation.state.params.game._id)
-    console.log(this.props.navigation.state.params.user.name)
-    console.log(this.props.navigation.state.params.item.name)
-    const GameComponent = GameComponents[this.props.navigation.state.params.game._id]
+    console.log(this.props.user._id)
+    console.log(this.props.user.name)
+    const GameComponent = GameComponents[this.props.game._id]
     const { width, height } = this.state.window
     return (
       this.state.gameOver
         ?
-        <ScoreScreen item={this.props.navigation.state.params.item} game={this.props.navigation.state.params.game} user={this.props.navigation.state.params.user} />
+        <ScoreScreen game={this.props.game} user={this.props.user} />
         :
         this.props.isFetching
           ?
@@ -119,19 +106,14 @@ class GameScreen extends Component {
               </View>
               <ProgressBar
                 fillStyle={{}}
-                backgroundStyle={{ backgroundColor: '#cccccc', borderRadius: 2 }}
-                style={{ width: this.state.window.width }}
-                progress={this.state.progress}
-              // progress={1}
-              // duration={3000}
-              // onEnd={this._onEnd}
-              />
+                backgroundStyle={{backgroundColor: '#cccccc', borderRadius: 2}}
+                style={{width: this.state.window.width}}
+                initialProgress={0.5}
+              />              
               <GameComponent
-                data={this.props.gameData[this.state.dataIndex]}
-                runIndex={this.state.dataIndex}
+                data={this.props.gameData[0]}
                 onScore={this._onScore}
                 onEnd={this._onEnd}
-                setProgress={this._setProgress}
                 style={{
                   height: this.state.window.height - TOP_HEIGHT - BOTTOM_PADDING,
                   width: this.state.window.width
@@ -143,21 +125,15 @@ class GameScreen extends Component {
             </View>
     )
   }
+
 }
 
-GameScreen.propTypes = {
+NewLevel.propTypes = {
   gameData: PropTypes.array,
   theme: PropTypes.object,
   isFetching: PropTypes.bool,
-  navigation: PropTypes.shape({
-    state: PropTypes.shape({
-      params: PropTypes.shape({
-        game: PropTypes.object.isRequired,
-        item: PropTypes.object.isRequired,
-        user: PropTypes.object.isRequired
-      })
-    })
-  })
+  game: PropTypes.object,
+  user: PropTypes.object
 }
 
 const styles = StyleSheet.create({
@@ -200,4 +176,4 @@ export default connect(state => ({
   isFetching: state.game.isFetching,
   myScore: state.score.myScore,
   user: state.auth.user
-}))(GameScreen)
+}))(NewLevel)

@@ -16,10 +16,18 @@ export default class Tile extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     if(this.props.text != nextProps.text
         || this.props.style.height != nextProps.style.height
-        || this.props.style.width != nextProps.style.width) {
+        || this.props.style.width != nextProps.style.width
+        || (this.props.status && (this.props.status != nextProps.status))) {
+      this.props.onRender(this.props.id, this.refs.view)
       return true
     }
     return false
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevProps.status != this.props.status) {
+      onStatusChange(prevProps.status, this.props.status)
+    }
   }
 
   render() {
@@ -79,7 +87,9 @@ export default class Tile extends Component {
 
 Tile.propTypes = {
   id: PropTypes.number,
+  status: PropTypes.string,
   onPress: PropTypes.func,
+  onStatusChange: PropTypes.func,
   tileColor: PropTypes.string,
   pressedTileColor: PropTypes.string,
   edgeColor: PropTypes.string,
