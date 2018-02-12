@@ -7,8 +7,11 @@ const SIZE = 4
 export default class ReflexBoard extends Component {
   constructor(props) {
     super(props)
-    //shuffle in sets of SIZE*SIZE
-    const shuffledData = this.props.data
+    this.state = this._initBoard(props)
+  }
+
+  _initBoard = (props) => {
+    const shuffledData = props.data.serial
       .map((a, i) => [Math.floor(i / (SIZE * SIZE)) + Math.random(), a])
       .sort((a, b) => a[0] - b[0])
       .map((a) => a[1])
@@ -16,20 +19,32 @@ export default class ReflexBoard extends Component {
     for (let i = 0; i < letters.length; i++) {
       letters[i] = shuffledData[i];
     }
+    let statuses = new Array(SIZE * SIZE)
+    for (let i = 0; i < statuses.length; i++) {
+      statuses[i] = 'visible';
+    }
     let currentIndex = 0
-    this.state = {
+    return ({
       letters,
       shuffledData,
       currentIndex,
-    }
+      statuses
+    })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.props.runIndex != nextProps.runIndex && this.setState(this._initBoard(nextProps))
   }
 
   render() {
+    console.log('ReflexBoard.render')
     return (
       <TileGrid
         numRows={SIZE}
         numCols={SIZE}
         data={this.state.letters}
+        statuses={this.state.statuses}
+        onStatusChange={this._onStatusChange}
         tileColor='#24B2EA'
         edgeColor='deepskyblue'
         pressedTileColor='goldenrod'
@@ -40,30 +55,45 @@ export default class ReflexBoard extends Component {
           height: this.props.style.height
         }}
         onPress={this._clickTile}
+        onRender={this._renderTile}
       />
     )
   }
 
+  _onStatusChange(id, view, prevStatus, currentStatus) {
+    console.log('onstatuschange:', prevStatus, currentStatus)
+    currentStatus == 'visible' && view.zoomIn(250)
+  }
+
+  // _renderTile = (id, view) => {
+  //   this.state.letters[id] && view.zoomIn(250)
+  // }
+
   _clickTile = (id, view) => {
-    if (this.state.letters[id] == this.props.data[this.state.currentIndex]) {
+    const currentIndex = this.state.currentIndex
+    if (this.state.letters[id] == this.props.data.serial[currentIndex]) {
+      this.props.onScore && this.props.onScore(2)
+      this.props.setProgress && this.props.setProgress((currentIndex + 1) / this.props.data.serial.length)
+      this.setState({...this.state, currentIndex: currentIndex + 1})
       view.zoomOut(250).then((endState) => {
-        this.props.onScore(2)
-        if (this.state.currentIndex + 1 >= this.props.data.length) {
+        if (currentIndex + 1 >= this.props.data.serial.length) {
+          this.setState({...this.state,
+            statuses: this.state.statuses.map(()=>'invisible')})
           this.props.onEnd()
         } else {
           this.setState((prevState, props) => {
-            console.log(prevState)
             const newLetters = prevState.letters.map((value, index) => {
-              return index == id ? prevState.shuffledData[prevState.currentIndex + SIZE * SIZE] : value
+              return index == id ? prevState.shuffledData[currentIndex + SIZE * SIZE] : value
             })
-            console.log(newLetters)
-            return {
+            const newStatuses = prevState.statuses.map((value, index) => {
+              return (currentIndex + 1 + SIZE * SIZE > this.props.data.serial.length && index == id && value=='visible') ? 'invisible' : value
+            })
+            return {...prevState,
               letters: newLetters,
-              shuffledData: prevState.shuffledData,
-              currentIndex: prevState.currentIndex + 1
+              statuses: newStatuses,
             }
           })
-          this.state.currentIndex + SIZE * SIZE <= this.state.shuffledData.length && view.zoomIn(250)
+          currentIndex + SIZE * SIZE < this.props.data.serial.length && view.zoomIn(250)
         }
       })
     } else {
@@ -73,7 +103,9 @@ export default class ReflexBoard extends Component {
 }
 
 ReflexBoard.propTypes = {
-  data: PropTypes.array,
+  data: PropTypes.object,
+  runIndex: PropTypes.number,
   onScore: PropTypes.func,
-  onEnd: PropTypes.func
+  onEnd: PropTypes.func,
+  setProgress: PropTypes.func
 }

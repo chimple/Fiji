@@ -1,5 +1,6 @@
 import PouchDB from 'pouchdb-react-native';
 import { remoteURL } from '../db';
+import sticker from './sticker';
 
 const START_CHAT_REQUEST = 'Fiji/chat/START_CHAT_REQUEST'
 const START_CHAT_SUCCESS = 'Fiji/chat/START_CHAT_SUCCESS'
@@ -39,7 +40,7 @@ const reducer = (state = initialState, action) => {
     case ADD_MESSAGE:
       return { 
         ...state,
-        messages: [action.message, ...state.messages]
+        messages: [action.message,...state.messages]
       }
     default:
       return state
@@ -82,7 +83,7 @@ export const startChat = (friend) => {
   }
 }
 
-export const sendMessage = (friend, message) => { 
+export const sendMessage = (friend, message, type) => { 
   console.log("this is chat send ");
   console.log(friend, message);
   return function(dispatch, getState) {
@@ -91,7 +92,10 @@ export const sendMessage = (friend, message) => {
     let msg = {
       _id: 'chat:' + friend._id + ':' + now,
       sender: getState().auth.user._id,
-      text: message
+      message:{
+          type: type,
+           content: message,
+      }    
     }
     dispatch(addMessage(msg))
     userDB.put(msg).then(function (response) {
@@ -99,7 +103,10 @@ export const sendMessage = (friend, message) => {
       let friendMsg = {
         _id: 'chat:' + getState().auth.user._id + ':' + now,
         sender: getState().auth.user._id,
-        text: message
+        message:{
+          type:message,
+          content: message,
+       }   
       }  
       friendDB.put(friendMsg).then(function (resp) {
         friendDB.replicate.to(remoteURL + 'user_' + friend._id).then(function (result) {

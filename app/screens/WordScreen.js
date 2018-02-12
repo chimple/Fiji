@@ -40,29 +40,28 @@ class WordScreen extends Component {
     }
 }
 componentDidMount() {
-    this.props.dispatch(fetchWordData(1, 3, 1, 1))
     mountkey++;
   }
  render() {
    // const data1 = this.state.jsonData.object.object1.arr1;
   //  const data2 = this.state.jsonData.object.object1.arr2;
    // console.log("game data props",this.props.gamedata)
-    const data=this.props.gamedata.map( function (item, i){
-       arr1=[];
-       arr2=[];
-       j=0;
-       k=0;
-         item.word.map(function(element, i) {
-            arr1[j]=element;
-            j++;
-          //  console.log(element);
-          });
-         item.others.map(function(element, i) {
-             arr2[k]=element;
-             k++;
-        //      console.log(element);
-          });
-        } )
+    // const data=this.props.gamedata.map( function (item, i){
+    //    arr1=[];
+    //    arr2=[];
+    //    j=0;
+    //    k=0;
+    //      item.word.map(function(element, i) {
+    //         arr1[j]=element;
+    //         j++;
+    //       //  console.log(element);
+    //       });
+    //      item.others.map(function(element, i) {
+    //          arr2[k]=element;
+    //          k++;
+    //     //      console.log(element);
+    //       });
+    //     } )
  return(
     <View style={{flex:1, backgroundColor:'blue'}}>
 
@@ -71,12 +70,12 @@ componentDidMount() {
 
                 <View style={{flex:4,flexWrap:'wrap',width:500,paddingLeft:85,flexDirection: 'row'}}>
                  
-                  {arr1.map((element, i) => (
+                  {this.props.data.word.map((element, i) => (
                   <WordGrid 
-                   name={element} key={i} data1={arr1} data2={arr2} mkey={mountkey} navigation={this.props.navigation} />))}
-                   {arr2.map((element, key) => (
+                   name={element} key={i} data1={this.props.data.word} data2={this.props.data.others} mkey={mountkey} navigation={this.props.navigation} />))}
+                   {this.props.data.others.map((element, key) => (
                   <WordGrid
-                    name={element} key={key} data2={arr2} data1={arr1} mkey={mountkey} navigation={this.props.navigation} />))}
+                    name={element} key={key} data2={this.props.data.others} data1={this.props.data.word} mkey={mountkey} navigation={this.props.navigation} />))}
                 
                 </View> 
         </View>
