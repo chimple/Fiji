@@ -147,13 +147,6 @@ export const AppNavigator = StackNavigator({
       headerStyle:{backgroundColor: '#19a4f2'}
     },
   },
-  NewLevel:{
-    screen: NewLevel,
-    navigationOptions:{
-      headerTitle: 'New Level',
-      headerStyle:{backgroundColor:'#19a4f2'}
-    }
-  },
   HeadToHead:{
     screen: HeadToHeadPlayScreen
   }
