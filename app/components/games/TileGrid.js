@@ -39,6 +39,7 @@ export default class TileGrid extends PureComponent {
             text={this.props.data[id]}
             status={this.props.statuses[id]}
             onStatusChange={this.props.onStatusChange}
+            statusStyles={this.props.statusStyles}
             style={{
               top: row * cellSize + topOffset,
               left: col * cellSize + leftOffset,

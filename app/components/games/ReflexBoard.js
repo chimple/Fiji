@@ -45,14 +45,19 @@ export default class ReflexBoard extends Component {
         data={this.state.letters}
         statuses={this.state.statuses}
         onStatusChange={this._onStatusChange}
-        tileColor='#24B2EA'
-        edgeColor='deepskyblue'
-        pressedTileColor='goldenrod'
-        pressedEdgeColor='darkgoldenrod'
-        textColor='#FFFFFF'
         style={{
           width: this.props.style.width,
           height: this.props.style.height
+        }}
+        statusStyles = {{
+          visible: {
+            View: {
+              backgroundColor: '#24B2EA'
+            },
+            Text: {
+              color: '#FFFFFF'
+            }
+          }
         }}
         onPress={this._clickTile}
         onRender={this._renderTile}
