@@ -20,7 +20,6 @@ export default class StoryList extends PureComponent {
     return (
         <FlatList
           contentContainerStyle={styles.StoryListStyle}
-          columnWrapperStyle={{}}
           horizontal={false}
           numColumns={3}
           showsVerticalScrollIndicator={false}
