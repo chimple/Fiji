@@ -3,12 +3,13 @@ import { contentDB, remoteContentDB } from '../db'
 const FETCH_GAME_HIGH_SCORES_REQUEST = 'Fiji/game/FETCH_GAME_HIGH_SCORES_REQUEST'
 const FETCH_GAME_HIGH_SCORES_SUCCESS = 'Fiji/game/FETCH_GAME_HIGH_SCORES_SUCCESS'
 const FETCH_GAME_HIGH_SCORES_FAILURE = 'Fiji/game/FETCH_GAME_HIGH_SCORES_FAILURE'
-const ADD_SCORE = 'Fiji/chat/ADD_SCORE'
+const ADD_SCORE = 'Fiji/game/ADD_SCORE'
+const RESET_SCORE = 'Fiji/game/RESET_SCORE'
 
 export const initialState = {
   isFetching: false,
   gameHighScores: [],
-  score: 0,
+  myScore: 0,
 }
 
 const reducer = (state = initialState, action) => {
@@ -33,7 +34,12 @@ const reducer = (state = initialState, action) => {
     case ADD_SCORE:
       return {
         ...state,
-        score: state.score + action.score
+        myScore: state.myScore + action.myScore
+      }
+    case RESET_SCORE:
+      return {
+        ...state,
+        myScore: 0
       }
     default:
       return state
@@ -53,9 +59,13 @@ export const fetchGameHighScoresFailure = () => ({
   type: FETCH_GAME_HIGH_SCORES_FAILURE
 })
 
-export const addScore = (score) => ({
-  type: ADD_SCORE_REQUEST,
-  score
+export const addMyScore = (myScore) => ({
+  type: ADD_SCORE,
+  myScore
+})
+
+export const resetScore = () => ({
+  type: RESET_SCORE
 })
 
 export const fetchGameHighScores = (game_id) => async (dispatch, getState) => {
@@ -69,8 +79,8 @@ export const fetchGameHighScores = (game_id) => async (dispatch, getState) => {
     const highScores = result.rows
       .map(function (row) { return row.doc })
       .sort((a, b) => {
-      return b.score - a.score
-    })
+        return b.score - a.score
+      })
     dispatch(fetchGameHighScoresSuccess(highScores))
   } catch (error) {
     console.log('fetchGameHighScores: ' + error)
@@ -78,19 +88,38 @@ export const fetchGameHighScores = (game_id) => async (dispatch, getState) => {
   }
 }
 
-export const finalizeScore = (user_id, game_id, score) => async (dispatch, getState) => {
+export const finalizeScore = (user_id, game_id, myScore) => async (dispatch, getState) => {
+  console.log(myScore)
+  let currentHighScoreDoc = null
   try {
-    const currentHighScore = await contentDB.get('high-score:' + game_id + ':' + user_id)
-    if (score > currentHighScore) {
+    currentHighScoreDoc = await contentDB.get('high-score:' + game_id + ':' + user_id)
+  } catch (error) {
+    console.log('finalizeScore: ' + error)
+  }
+  console.log(currentHighScoreDoc)
+  console.log(currentHighScoreDoc.score)
+  try {
+    if (currentHighScoreDoc == null) {
       const result = await contentDB.put({
         _id: 'high-score:' + game_id + ':' + user_id,
         user_id,
-        score
+        score: myScore
+      })
+      console.log(result)      
+    } else if(myScore > currentHighScoreDoc.score) {
+      console.log('updating score:'+myScore)
+      const result = await contentDB.put({
+        _id: 'high-score:' + game_id + ':' + user_id,
+        _rev: currentHighScoreDoc._rev,
+        user_id,
+        score: myScore
       })
       console.log(result)
+    } else {
+      console.log('here')
     }
   } catch (error) {
-    console.log('addScore: ' + error)
+    console.log('finalizeScore: ' + error)
   }
 }
 

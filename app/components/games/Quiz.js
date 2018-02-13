@@ -1,243 +1,190 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  Dimensions,
-  ScrollView,
-  FlatList
-} from 'react-native';
-import * as Animatable from 'react-native-animatable';
-import Animbutton from './Animbutton';
+import { View, ScrollView} from 'react-native';
+import PropTypes from 'prop-types'
 
-const { width, height } = Dimensions.get('window');
+import Tile from './Tile';
+import TileGrid from './TileGrid';
 
-let arrnew = [];
+const SIZE = 2;
+var arr1= [];
+var j=0;
 
-const jsonData = { quiz: {
-    quiz1: {
-      question1: {
-        correctoption: 'option1',
-        options: {
-          option1: 'A',
-          option2: 'Z'
-        },
-        question: 'A'
-      },
-      question2: {
-        correctoption: 'option2',
-        options: {
-            option1: 'W',
-            option2: 'C'
-          },
-        question: 'C'
-      },
-      question3: {
-        correctoption: 'option1',
-        options: {
-            option1: 'F',
-            option2: 'R'
-          },
-        question: 'F'
-      },
-      question4: {
-        correctoption: 'option2',
-        options: {
-            option1: 'P',
-            option2: 'Q'
-          },
-        question: 'Q'
-      },
-      question5: {
-        correctoption: 'option2',
-        options: {
-            option1: 'H',
-            option2: 'S'
-          },
-        question: 'S'
-      },
-      question6: {
-        correctoption: 'option4',
-        options: {
-            option1: 'B',
-            option2: 'S',
-            option3: 'D',
-            option4: 'K'
-          },
-        question: 'K'
-      },
-      question7: {
-        correctoption: 'option3',
-        options: {
-            option1: 'E',
-            option2: 'R',
-            option3: 'F',
-            option4: 'N'
-          },
-        question: 'F'
-      },
-      question8: {
-        correctoption: 'option4',
-        options: {
-            option1: 'W',
-            option2: 'C',
-            option3: 'G',
-            option4: 'L'
-          },
-        question: 'L'
-      }
-    }
-  }
-  };
-  
-  export default class Quiz extends Component {
+export default class Quiz extends Component {
     constructor(props) {
       super(props);
-      this.qno = 0;
-      this.score = 0;
-   
-      const jdata = jsonData.quiz.quiz1;
-      arrnew = Object.keys(jdata).map((k) => { return jdata[k]; });
       this.state = {
-        question: arrnew[this.qno].question,
-        options: arrnew[this.qno].options,
-        correctoption: arrnew[this.qno].correctoption,
-        countCheck: 0,
-        height,
-        width
-      };
+        height: this.props.style.height,
+        width: this.props.style.width,
+        question: this.props.data.question,
+        options: this.props.data.choices,
+        correctoption: this.props.data.answerIndex
+      }
 
-      Dimensions.addEventListener('change', () => {
-        width = Dimensions.get('window').width;
-        height = Dimensions.get('window').height;
-      });     
+      const shuffledData = this.props.data.choices.map(function(element, i) {
+        arr1[j]=element;
+        j++;
+        console.log(element);
+      });
+
+      let letters = new Array(SIZE * SIZE);
+      for (let i = 0; i < letters.length; i++) {
+        letters[i] = arr1[i];
+        shuffledData[i] = arr1[i];
+      }
+
+      let statuses = new Array(SIZE * SIZE)
+      for (let i = 0; i < statuses.length; i++) {
+        statuses[i] = 'visible';
+      }
+
+      arr1 =[];
+      j=0;
+
+      let currentIndex = this.props.data.answerIndex;
+      
+      this.state = {
+        letters,
+        shuffledData,
+        currentIndex,
+        statuses
+      }
+      
+      console.log(shuffledData);
+      console.log(letters);
+      console.log(currentIndex);
+      console.log(this.props.data.question);
+    
     }
 
-    state = Dimensions.get("window");
-    handler = dims => this.setState(dims);
+    componentWillReceiveProps(nextProps) {
+      this.props.runIndex != nextProps.runIndex && this.setState(this._initBoard(nextProps))
+    }
+  
 
-    componentDidMount() {
-        Dimensions.addEventListener("change", this.handler);
+    _onStatusChange(id, view, prevStatus, currentStatus) {
+      console.log('onstatuschange:', prevStatus, currentStatus)
+      currentStatus == 'visible' && view.zoomIn(250)
     }
 
-    componentWillUnmount() {
-      // Important to stop updating state after unmount
-      Dimensions.removeEventListener("change", this.handler);
-    }
-
-
-    next() {
-      if (this.qno < arrnew.length - 1) {
-        this.qno++;
-   
-        this.setState({ countCheck: 0, 
-          question: arrnew[this.qno].question, 
-          options: arrnew[this.qno].options, 
-          correctoption: arrnew[this.qno].correctoption });
-      } else {
-        this.props.quizFinish(this.score * 20);
-       }
-    }
-
-    _answer(status, ans) {
-      if (status === true) {
-          const count = this.state.countCheck + 1;
-          this.setState({ countCheck: count });
-          if (ans === this.state.correctoption) {
-            this.score += 1;
-            this.next();
-            this.refs.questionView.zoomIn(800);
+    _clickTile = (id, view) => {
+      const currentIndex = this.state.currentIndex
+      if (this.state.letters[id] == this.props.data.choices[currentIndex]) {
+        this.props.onScore && this.props.onScore(2)
+        this.props.setProgress && this.props.setProgress((currentIndex + 1) / this.props.data.choices.length)
+        this.setState({...this.state, currentIndex: currentIndex + 1})
+        view.zoomOut(250).then((endState) => {
+          if (currentIndex + 1 >= this.props.data.choices.length) {
+            this.setState({...this.state,
+              statuses: this.state.statuses.map(()=>'invisible')})
+            this.props.onEnd()
+          } else {
+            this.setState((prevState, props) => {
+              const newLetters = prevState.letters.map((value, index) => {
+                return index == id ? prevState.shuffledData[currentIndex + SIZE * SIZE] : value
+              })
+              const newStatuses = prevState.statuses.map((value, index) => {
+                return (currentIndex + 1 + SIZE * SIZE > this.props.data.choices.length && index == id && value=='visible') ? 'invisible' : value
+              })
+              return {...prevState,
+                letters: newLetters,
+                statuses: newStatuses,
+              }
+            })
+            currentIndex + SIZE * SIZE < this.props.data.choices.length && view.zoomIn(250)
           }
-        } else {
-          const count = this.state.countCheck - 1;
-          this.setState({ countCheck: count });
-          if (this.state.countCheck < 1 || ans === this.state.correctoption) {
-          this.score -= 1;
-         }
-        }
+        })
+      } else {
+        view.shake(250);
+      }
+    }
+    
+
+    _onPress = () => {
+      
     }
 
        
     render() {
-      const _this = this;
-      const currentOptions = this.state.options;
-      const options = Object.keys(currentOptions).map((k) => {
-        return (<View
-        key={k}
-        style={{ alignItems: 'center', justifyContent: 'center', margin: 10 }}
-        >
-   
-          <Animbutton 
-          countCheck={_this.state.countCheck} 
-          onColor={'#483d8b'} 
-          effect={k === this.state.correctoption ? 'tada' : 'shake'} 
-          _onPress={(status) => _this._answer(status, k)} 
-          text={currentOptions[k]} 
-          />
-   
-        </View>);
-      });
+
+      const cellSize = Math.min(
+        Math.floor(this.props.style.width / 2),
+        Math.floor(this.props.style.height / 2)
+      );
+  
+      const padding = Math.floor(cellSize * .05);
+      const tileSize = cellSize - padding * 2;
+     
       
       return (
-        <ScrollView style={{ backgroundColor: '#F5FCFF', paddingTop: 10 }}>
-
+        <ScrollView style={{ backgroundColor: '#E53554', paddingTop: 5 }}>
         <View style={styles.container}>
                  
         <View 
         style={{ flex: 1,
         justifyContent: 'center', 
         alignItems: 'center',
-        paddingBottom: height * 0.01 }}
+        paddingBottom: this.state.height * 0.01 }}
         >
 
-        <Animatable.View ref="questionView" style={styles.oval}>
-          <Text style={styles.welcome}>
-            {this.state.question}
-          </Text>
-       </Animatable.View> 
-
-          {options.length === 2 ? <View 
-          style={{ flexDirection: 'row', 
-          justifyContent: 'center',
-          alignItems: 'center', 
-          width }}
-          >
-          { options }
-          </View> : 
-          <FlatList 
-            data={options}
-            numColumns={2}
-            style={{ flexGrow: 1 }}
-            renderItem={({ item }) => <View key={item}>{item}</View>}
-          />
         
+          <View>
+          <Tile
+            id={0}
+            onPress={this.props._onPress}
+            tileColor='#24B2EA'
+            edgeColor='black'
+            pressedTileColor='goldenrod'
+            pressedEdgeColor='darkgoldenrod'
+            textColor='#fff'
+            text={this.props.data.question}
+            status
+            style={{
+              width: tileSize,
+              height: tileSize
+            }}
+          />
+          </View>      
           
-          }
+
+       <TileGrid
+        numRows={SIZE}
+        numCols={SIZE}
+        data={this.state.letters}
+        statuses={this.state.statuses}
+        onStatusChange={this._onStatusChange}
+        tileColor='#24B2EA'
+        edgeColor='deepskyblue'
+        pressedTileColor='goldenrod'
+        pressedEdgeColor='darkgoldenrod'
+        textColor='#FFFFFF'
+        style={{
+          width: this.props.style.width * 0.5,
+          height: this.props.style.height * 0.5
+        }}
+        onPress={this._clickTile}
+      />
+
+
           </View>
         </View>
         </ScrollView>
       );
-    
+      this.state.letters=[];
     }
   }
    
   const styles = {    
-    oval: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: width * 0.5,
-    borderRadius: 20,
-    backgroundColor: '#483d8b',
-    margin: 15
-    },
     container: {
       flex: 1,
       alignContent: 'space-between'
     },
-    welcome: {
-      fontSize: height * 0.1,
-      fontWeight: 'bold',
-      margin: height * 0.002,
-      color: 'white',
-    }
+   
   };
 
+  Quiz.propTypes = {
+    data: PropTypes.object,
+  runIndex: PropTypes.number,
+  onScore: PropTypes.func,
+  onEnd: PropTypes.func,
+  setProgress: PropTypes.func
+  }

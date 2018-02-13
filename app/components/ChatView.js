@@ -1,52 +1,94 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Image, KeyboardAvoidingView, ListView, TextInput } from 'react-native';
-import PropTypes from 'prop-types'
+import PropTypes, { element } from 'prop-types'
 //import SvgUri from 'react-native-svg-uri'
+import { Buffer } from 'buffer'
+import SvgUri from 'react-native-svg-uri'
 import { sendMessage, startChat } from '../redux/chat';
 
 
 class ChatView extends Component {
-  
-  render() {
 
-    console.log("this is sender::" + this.props.item.sender)
-    console.log("this is user::" + this.props.friend._id)
-    const Eachmsg = (props) => {
+
+
+    // console.log("this is sender::" + this.props.item.sender)
+    // console.log("this is user::" + this.props.friend._id)
+    Eachmsg = (props) => {
       //show message from sender
-      if (this.props.item.sender == this.props.friend._id) 
-        return (
-          <View style={styles.eachMsg}>
-            <Image source={{ uri: 'data:image/png;base64,' + this.props.friend.image }} style={styles.userPic} />
+      //  console.log("chatview sticker",this.props.sticker)
+     
+  
+        if (this.props.item.sender == this.props.friend._id)
+  
+          return (
+            <View style={styles.eachMsg}>
+  
+              <Image source={{ uri: 'data:image/png;base64,' + this.props.friend.image }} style={styles.userPic} />
               <View style={styles.msgBlock}>
-              <Text style={styles.msgTxt}>{this.props.item.text}</Text>
+  
+                {/* <SvgUri
+                  width="30"
+                  height="30"
+                  svgXmlData={Buffer.from(this.props.sticker.svg, 'base64').toString('utf8')}
+                /> */}
+  
+               {/* <Text>{this.props.item.message.type}</Text> */}
+  
+              </View>
             </View>
-          </View>
-        );
-
+          );
+  
         return (
+          // svgImage = Buffer.from(this.props.sticker.svg, 'base64').toString('utf8')
           <View style={styles.rightMsg} >
             <View style={styles.rightBlock} >
-              <Text style={styles.rightTxt}>{this.props.item.text}</Text>
+              {/* <Text style={styles.rightTxt}>{this.props.item.text}</Text>  */}
+              {/* <Text style={styles.rightTxt}>{this.props.item.message.message}</Text> */}
+              {/* <SvgUri
+                width="30"
+                height="30"
+                svgXmlData={Buffer.from(this.props.sticker.svg, 'base64').toString('utf8')}
+              /> */}
+              {/* {this.props.item.message.map((element,i)=>{
+                  <Text>{element.content}</Text>
+                })} */}
             </View>
             <Image source={{ uri: 'data:image/png;base64,' + this.props.user.image }} style={styles.userPic} />
           </View>
         );
-      
+      // }
     }
-    return (
+  
+  
+    render() {
+      // console.log("this is a component", this.props.sticker);
+       console.log("this is sticker from content::",  this.props.item.message)
+      
+      //  console.log("this is sticker::" + this.props.stickerImage._id)
+      //  const ImageUri= this.props.stickerImage.svg
+  
+  
+  
+      return (
+        this.props.isFetching ?
+          <ActivityIndicator />
+          :
           <View>
-          <Eachmsg />
+            {this.Eachmsg()}
+            
           </View>
-    );
-
+      );
   }
+
+  
 }
 
 ChatView.propTypes = {
-  text: PropTypes.object,
+  text: PropTypes.string,
   sender: PropTypes.object,
   user: PropTypes.object,
   message: PropTypes.object,
+  content:PropTypes.object,
   friend: PropTypes.object,
   image: PropTypes.object
 }

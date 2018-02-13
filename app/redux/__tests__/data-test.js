@@ -62,7 +62,7 @@ it('handles fetchMultipleChoiceData action', () => {
 
 it('handles fetchMatchData action', () => {
   const store = mockStore(initialState)
-  store.dispatch(fetchMatchData('set:letters', 4))
+  store.dispatch(fetchMatchData('set:letters', 4, 2))
   expect(store.getActions()).toMatchSnapshot()
 })
 

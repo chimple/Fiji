@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component, PureComponent } from 'react';
 import {
   Text,
   TouchableWithoutFeedback,
@@ -8,12 +8,35 @@ import {
 import PropTypes from 'prop-types'
 import * as Animatable from 'react-native-animatable';
 
-export default class Tile extends PureComponent {
+export default class Tile extends Component {
   _onPressIn = () => {
     this.props.onPress(this.props.id, this.refs.view)
   }
 
+  _onStatusChange = (prevStatus, currentStatus) => {
+    this.props.onStatusChange && this.props.onStatusChange(this.props.id, this.refs.view, prevStatus, currentStatus)    
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if(this.props.text != nextProps.text
+        || this.props.style.height != nextProps.style.height
+        || this.props.style.width != nextProps.style.width
+        || (this.props.status && (this.props.status != nextProps.status))) {
+          this.props.onRender && this.props.onRender(this.props.id, this.refs.view)
+      return true
+    }
+    return false
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('componentDidUpdate:',this.props.id,prevProps.status, this.props.status)
+    if(prevProps.status != this.props.status) {
+      this._onStatusChange(prevProps.status, this.props.status)
+    }
+  }
+
   render() {
+    console.log('Tile.render:'+this.props.text)
     return (
       <Animatable.View
         ref="view"
@@ -55,7 +78,8 @@ export default class Tile extends PureComponent {
             }} >
             <Text style={{
               color: this.props.textColor,
-              backgroundColor: 'transparent'
+              backgroundColor: 'transparent',
+              fontSize: Math.max(20, this.props.style.height - 40)
             }}>
               {this.props.text}
             </Text>
@@ -68,7 +92,9 @@ export default class Tile extends PureComponent {
 
 Tile.propTypes = {
   id: PropTypes.number,
+  status: PropTypes.string,
   onPress: PropTypes.func,
+  onStatusChange: PropTypes.func,
   tileColor: PropTypes.string,
   pressedTileColor: PropTypes.string,
   edgeColor: PropTypes.string,
