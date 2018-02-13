@@ -149,7 +149,7 @@ export const fetchStickerPacks = () => async(dispatch, getState) => {
       startkey: 'sticker-pack:', 
       endkey: 'sticker-pack:' +'\ufff0', 
       include_docs: true})
-    console.log(result)
+    console.log("this is a pack ",result)
     dispatch(fetchStickerPacksSuccess(result.rows.map(function(row) { return row.doc})))
   } catch(error) {
       console.log('fetchStickers: ' + error)
