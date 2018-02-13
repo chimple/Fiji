@@ -18,15 +18,15 @@ export default class StoryList extends PureComponent {
 
   render() {
     return (
-      <View style={styles.StoryListStyle}>
         <FlatList
-          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.StoryListStyle}
+          horizontal={false}
           numColumns={3}
+          showsVerticalScrollIndicator={false}
           data={this.props.titles}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
         />
-      </View>
     )
   }
 }
@@ -38,7 +38,7 @@ StoryList.propTypes = {
 
 const styles = StyleSheet.create({
   StoryListStyle: {
-    flex: 1,
+    //flex: 1,
     backgroundColor: 'white',
     //paddingTop: '8%',
     //paddingLeft: '7%',
