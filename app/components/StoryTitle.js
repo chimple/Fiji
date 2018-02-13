@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 
-import { StyleSheet, TouchableOpacity, View, Text, FlatList, Image } from 'react-native'
+import { StyleSheet, TouchableOpacity, View, Text, FlatList, Image, Dimensions } from 'react-native'
 import PropTypes from 'prop-types'
 
 export default class StoryTitle extends PureComponent {
@@ -32,24 +32,26 @@ StoryTitle.propTypes = {
 const styles = StyleSheet.create({
   ImageViewStyle:{ 
     flex:3, 
-    alignItems:'center', 
-    padding:'4%'
+    alignItems:'center',
+    backgroundColor:'red',
+    padding:'4%',
+    borderBottomLeftRadius:30,
+    borderBottomRightRadius:30
   },
   ImageStyle:{
-    width: '100%',
-    height: '100%',
-    //resizeMode: Image.resizeMode.contain,
-    borderRadius:60,
     borderColor:'black',
     borderWidth:2
   },
   TextViewStyle:{
     flex:2,
-    padding:'1%',
+    borderColor:'black',
+    borderWidth:2,
     flexDirection:'row',
     flexWrap:'wrap',
-    justifyContent:'flex-start',
-    //alignItems:'center',
+    //justifyContent:'flex-start',
+    alignItems:'center',
+    //justifyContent:'center',
+    alignContent:'center',
     backgroundColor:'#19a4f2',
     borderTopLeftRadius:30,
     borderTopRightRadius:30,
@@ -58,22 +60,14 @@ const styles = StyleSheet.create({
     fontWeight:'bold', 
     fontSize:20, 
     color:'black',
-    marginTop:'1%'
+    marginTop:'2%',
   },
   TouchableStyle:{
     flex:1,
     height:140, 
-    width:105, 
-    borderColor:'black',
-    borderWidth:2, 
-    //marginBottom:'18%',
-    //marginTop:'17%',
-    //marginRight:'1%',
-    //margin:'2%',
-    //marginBottom:'30%',
-    //marginHorizontal:'5%',
-    marginRight:'3%',
-    marginLeft:'3%',
+    width:Dimensions.get('window').width * 0.3, 
+    //marginRight:'3%',
+    marginLeft:Dimensions.get('window').width * 0.02,
     marginTop:'20%',
     marginBottom:'12%',
     borderTopLeftRadius:30,

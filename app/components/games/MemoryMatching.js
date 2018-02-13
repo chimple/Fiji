@@ -15,174 +15,110 @@ import Board from './Board';
 import Card from './Card';
 import ScoreBoard from './ScoreBoard';
 
+const SIZE = 4
+arry =[];
+arryCheck =[];
+j =0;
+k =0;
+cnt =0;
+
 export default class MemoryMatching extends Component {
   constructor(props) {
     super(props);
-    this.state = {board: new Board(4 , 4), players: 1}
+
+    {this.fetchData()}
+    var shuffledArray = this.arrayShuffle(arry)
+
+    this.state = { arry: arry , shuffledArray: shuffledArray , arryCheck: arryCheck}
+
+  }
+
+  fetchData() {
+      const data=this.props.data.map( function (item, i){
+        item.map(function(element, i) { 
+          arry[j]=element;
+          j++;
+        });
+      }
+    )
+  }
+
+  arrayShuffle(items: arry) {
+    var currentIndex = items.length,
+    temporaryValue, randomIndex;
+
+    while (0 !== currentIndex) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        temporaryValue = items[currentIndex];
+        items[currentIndex] = items[randomIndex];
+        items[randomIndex] = temporaryValue;
+    }
+  return items;
   }
 
   componentDidMount() {
-    Orientation.lockToPortrait();
+   // Orientation.lockToPortrait();
   }
 
   componentWillUnmount() {
-    Orientation.unlockAllOrientations();
+   // Orientation.unlockAllOrientations();
+  }
+  
+
+  _clickTile = (id , view) => {
+
+      arryCheck[k] = this.state.shuffledArray[id];
+      if(arryCheck.length===2)
+      {
+        if(arryCheck[0]===arryCheck[1])
+          {
+            alert("Matched!!!");
+            this.props.onScore(2);
+          }
+        else
+          {
+            alert("UnMatched!!!");
+            console.log("arryCheck",arryCheck); 
+          }
+
+          arryCheck = [];
+          k=0;
+          return;
+      } 
+      console.log("arryCheck",arryCheck); 
+      console.log("Value of K",k);
+      k++;   
+
   }
 
-  onRestartPress() {
-    alert("RestartGame!!!");
-  }
-
-  makeSinglePlayer() {
-    alert("makeSinglePlayer!!!");
-  }
-
-  isGameOver() {
-    var board = this.state.board,
-        totalScore = board.score[0] + board.score[1],
-        maxScore = board.maxScore,
-        msg;
-
-    if (totalScore < maxScore) {
-        return false;
-    }
-
-    if (this.state.players === 1) {
-        msg = 'Hey!! You\'ve done it!';
-      }
-
-    Alert.alert(
-        'Game Over',
-        msg,
-        [
-          {text: 'Alright!'},
-          {text: 'Start new'}
-      ]
-    );
-
-    return true;
-  }
-
-  getScoreboard() {
-      var board = this.state.board;
-
-      if (this.state.players === 1) {
-        return <ScoreBoard board={board}/>;
-      }
-  }
-
-
-handleCardPress(url: string, row: number, col: number) {
-  var board = this.state.board;
-  var previous = board.selected;
-  var selected = this.refs['card' + row + col];
-  var current = {
-      url: url,
-      node: selected
-  }
-
-  if (!previous) {
-      // first card
-      board.selected = current;
-  } else if (previous.url === url) {
-      // successful hit
-      previous.node.setPaired();
-      selected.setPaired();
-
-      this.setState({board: board.pair()});
-  } else {
-      // missed hit
-      board.miss(true);
-
-      setTimeout(
-          () => {
-              selected.hide();
-              previous.node.hide();
-              this.setState({board: board});
-          },
-        100
-      );
-  }
-}
-
-onCardHide() {
-    this.state.board.unlock();
-  }
-
-  canShow() {
-    return !this.state.board.isLocked;
-  }
 
   render() {
+     console.log("Original-Raw-Rajesh data",this.props.data);
+     console.log("Rajesh-1DArray",this.state.arry);
+     console.log("Rajesh-Shuffled-Array",this.state.shuffledArray);
   
-    var board = this.state.board;
-    console.log(this.state.board);
-    var rows = board.grid.map((cards, row) =>
-    <View key={'row' + row} ref={'row' + row} style={styles.row}>
-        {cards.map((cardCfg, col) =>
-          <Card
-            key={'col' + col}
-            ref={'card' + row + col}
-            img={cardCfg.url}
-            onPress={this.handleCardPress.bind(this, cardCfg.url, row, col)}
-            onHide={this.onCardHide}
-            canShow={this.canShow}
-            cardCfg={cardCfg}
-          />
-        )}
-      </View>
-    );
-    
-
     return (
-      <View style={styles.container}>
-
-        <View style={styles.board}>
-          {rows}
-        </View>
-
-        {this.getScoreboard()}
-
-        <TouchableHighlight
-            onPress={this.onRestartPress}
-            underlayColor="transparent"
-            activeOpacity={0.5}>
-            <Text style={styles.buttonText}>🔄 Restart</Text>
-          </TouchableHighlight>
-    </View>
+      <TileGrid
+        numRows={SIZE}
+        numCols={SIZE}
+        data={this.state.shuffledArray}
+        tileColor='#24B2EA'
+        edgeColor='deepskyblue'
+        pressedTileColor='goldenrod'
+        pressedEdgeColor='darkgoldenrod'
+        textColor='#FFFFFF'
+        style={{
+          width: this.props.style.width,
+          height: this.props.style.height
+        }}
+        onPress={this._clickTile}
+      />
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F4F9CB',
-    width: '100%',
-    height: '100%'
-  },
-  title: {
-    fontFamily: 'ChalkboardSE-Bold',
-    fontSize: 39,
-    marginBottom: 0,
-    color: '#535659',
-  },
-  buttonText: {
-    fontFamily: 'ChalkboardSE-Bold',
-    fontSize: 16,
-    marginTop: 25,
-    color: '#535659',
-  },
-  playerToggleButtons: {
-    flexDirection: 'row',
-  },
-  board: {
-    padding: 5,
-    backgroundColor: 'transparent',
-    borderRadius: 10,
-  },
-  row: {
-    flexDirection: 'row',
-  }
+  
 });

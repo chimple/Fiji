@@ -9,12 +9,14 @@ import game from './game'
 import user from './user'
 import score from './score'
 import data from './data'
+import sticker from './sticker'
 
 const rootReducer = combineReducers({
     users,
     nav,
     auth,
     chat,
+    sticker,
     story,
     game,
     user,
