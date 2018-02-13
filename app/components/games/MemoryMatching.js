@@ -16,95 +16,31 @@ import Card from './Card';
 import ScoreBoard from './ScoreBoard';
 
 const SIZE = 4
+arry =[];
+arryCheck =[];
+j =0;
+k =0;
+cnt =0;
 
 export default class MemoryMatching extends Component {
   constructor(props) {
     super(props);
-    this.state = {board: new Board(4 , 4), players: 1}
+
+    {this.fetchData()}
+    var shuffledArray = this.arrayShuffle(arry)
+
+    this.state = { arry: arry , shuffledArray: shuffledArray , arryCheck: arryCheck}
+
   }
 
-  componentDidMount() {
-    Orientation.lockToPortrait();
-  }
-
-  componentWillUnmount() {
-    Orientation.unlockAllOrientations();
-  }
-
-  onRestartPress() {
-    alert("RestartGame!!!");
-  }
-
-  makeSinglePlayer() {
-    alert("makeSinglePlayer!!!");
-  }
-
-  isGameOver() {
-    var board = this.state.board,
-        totalScore = board.score[0] + board.score[1],
-        maxScore = board.maxScore,
-        msg;
-
-    if (totalScore < maxScore) {
-        return false;
-    }
-
-    if (this.state.players === 1) {
-        msg = 'Hey!! You\'ve done it!';
+  fetchData() {
+      const data=this.props.data.map( function (item, i){
+        item.map(function(element, i) { 
+          arry[j]=element;
+          j++;
+        });
       }
-
-    Alert.alert(
-        'Game Over',
-        msg,
-        [
-          {text: 'Alright!'},
-          {text: 'Start new'}
-      ]
-    );
-
-    return true;
-  }
-
-
-handleCardPress(url: string, row: number, col: number) {
-  var board = this.state.board;
-  var previous = board.selected;
-  var selected = this.refs['card' + row + col];
-  var current = {
-      url: url,
-      node: selected
-  }
-
-  if (!previous) {
-      // first card
-      board.selected = current;
-  } else if (previous.url === url) {
-      // successful hit
-      previous.node.setPaired();
-      selected.setPaired();
-
-      this.setState({board: board.pair()});
-  } else {
-      // missed hit
-      board.miss(true);
-
-      setTimeout(
-          () => {
-              selected.hide();
-              previous.node.hide();
-              this.setState({board: board});
-          },
-        100
-      );
-  }
-}
-
-onCardHide() {
-    this.state.board.unlock();
-  }
-
-  canShow() {
-    return !this.state.board.isLocked;
+    )
   }
 
   arrayShuffle(items: arry) {
@@ -122,30 +58,52 @@ onCardHide() {
   return items;
   }
 
+  componentDidMount() {
+   // Orientation.lockToPortrait();
+  }
+
+  componentWillUnmount() {
+   // Orientation.unlockAllOrientations();
+  }
+  
+
+  _clickTile = (id , view) => {
+
+      arryCheck[k] = this.state.shuffledArray[id];
+      if(arryCheck.length===2)
+      {
+        if(arryCheck[0]===arryCheck[1])
+          {
+            alert("Matched!!!");
+            this.props.onScore(2);
+          }
+        else
+          {
+            alert("UnMatched!!!");
+            console.log("arryCheck",arryCheck); 
+          }
+
+          arryCheck = [];
+          k=0;
+          return;
+      } 
+      console.log("arryCheck",arryCheck); 
+      console.log("Value of K",k);
+      k++;   
+
+  }
+
+
   render() {
-    console.log("Rajesh data",this.props.data);
-
-    arry =[];
-    j =0;
-    const data=this.props.data.map( function (item, i){
-        item.map(function(element, i) { 
-          arry[j]=element;
-          j++;
-        });
-      }
-    )
-
-    console.log("Rajesh-Array",arry);
-
-    var shuffledArray = this.arrayShuffle(arry)
-
-    console.log("Rajesh-Shuffled-Array",shuffledArray);
+     console.log("Original-Raw-Rajesh data",this.props.data);
+     console.log("Rajesh-1DArray",this.state.arry);
+     console.log("Rajesh-Shuffled-Array",this.state.shuffledArray);
   
     return (
       <TileGrid
         numRows={SIZE}
         numCols={SIZE}
-        data={shuffledArray}
+        data={this.state.shuffledArray}
         tileColor='#24B2EA'
         edgeColor='deepskyblue'
         pressedTileColor='goldenrod'
@@ -155,40 +113,12 @@ onCardHide() {
           width: this.props.style.width,
           height: this.props.style.height
         }}
+        onPress={this._clickTile}
       />
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F4F9CB',
-    width: '100%',
-    height: '100%'
-  },
-  title: {
-    fontFamily: 'ChalkboardSE-Bold',
-    fontSize: 39,
-    marginBottom: 0,
-    color: '#535659',
-  },
-  buttonText: {
-    fontFamily: 'ChalkboardSE-Bold',
-    fontSize: 16,
-    marginTop: 25,
-    color: '#535659',
-  },
-  playerToggleButtons: {
-    flexDirection: 'row',
-  },
-  board: {
-    padding: 5,
-    backgroundColor: 'transparent',
-    borderRadius: 10,
-  },
-  row: {
-    flexDirection: 'row',
-  }
+  
 });
