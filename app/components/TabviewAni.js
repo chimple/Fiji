@@ -23,7 +23,7 @@ import { Buffer } from 'buffer'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { fetchStickerPacks, fetchStickers ,fetchSticker} from '../redux/sticker';
+import { fetchStickerPacks, fetchStickers ,fetchSticker, fetchStickerFailure} from '../redux/sticker';
 import { sendMessage } from '../redux/chat';
 
 
@@ -34,7 +34,9 @@ class TabbedView extends Component {
   // componentDidMount() {
   //   this.props.dispatch(fetchStickerPacks());
   // }
-
+  componentWillUnmount() {
+    this.props.dispatch(fetchStickerFailure())
+  }
 
  onPressTabView = (pack_id) => {
     this.packId = pack_id
@@ -71,7 +73,7 @@ class TabbedView extends Component {
         <View style={styles.card}>
           {this.props.stickers.map((tab, i) => {
             let svgImage = Buffer.from(tab.svg, 'base64').toString('utf8')
-            // console.log("this is svgImage ", svgImage);
+            console.log("this is svgImage ", svgImage);
             //  return <Text key={i} >{tab._id}</Text>
 
             return <TouchableOpacity key={i} onPress={() => this.updatedStickerId(tab._id)}>

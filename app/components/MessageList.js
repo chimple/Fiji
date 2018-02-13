@@ -118,22 +118,39 @@ export default class MessageList extends PureComponent {
     else{
       return(
         <View >
-        <View style={{backgroundColor:"#ffffff",height:"100%",justifyContent:"flex-end"}}>
-      <View style={styles.input}>
-      <TextInput  
-                ref={component => this._textInput = component}
-                placeholder="Start typing...."
-                style={{ flex: 1 }}
-                value={this.state.message}
-                clearButtonMode='while-editing'
-                blurOnSubmit={true}
-                clearTextOnFocus={true}
-                onSubmitEditing={this.clearText}
-                onChangeText={(message) => this.setState({ message })}
-                          />
-        <Icon name="send" size={40} color="#900" onPress={this.clearText}/>       
-        
+        <View style={{ flex: this.state.emoFlex }} >
+
+<View style={styles.input}>
+  <TouchableOpacity onPress={this.toggleEmo}  >
+    <Icon name="insert-emoticon" size={40} color="#900" />
+  </TouchableOpacity>
+  <TextInput
+    ref={component => this._textInput = component}
+    placeholder="Start typing...."
+    style={{ flex: 1 }}
+    // keyboardType="default"
+    value={this.state.message}
+    clearButtonMode='while-editing'
+    // onFocus={this.setState({emoFlex:0})}
+    blurOnSubmit={true}
+    clearTextOnFocus={true}
+    onSubmitEditing={this.clearText}
+    onChangeText={(message) => this.setState({ message: message })}
+  />
+
+  <TouchableOpacity onPress={this.clearText}>
+    <Icon name="send"
+      size={40} color="#900" />
+  </TouchableOpacity>
 </View>
+
+
+<TabbedView
+packs= {this.props.packs}
+tabPress = {this.ontabPress}
+onPress = {this.onPressGetSticker}
+friend={this.props.friend}
+/>
 </View>
 </View>
 );
