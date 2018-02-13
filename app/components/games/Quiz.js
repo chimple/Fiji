@@ -12,49 +12,37 @@ var j=0;
 export default class Quiz extends Component {
     constructor(props) {
       super(props);
-      this.state = {
-        height: this.props.style.height,
-        width: this.props.style.width,
-        question: this.props.data.question,
-        options: this.props.data.choices,
-        correctoption: this.props.data.answerIndex
-      }
+      this.state = this._initBoard(props);      
+    }
 
-      const shuffledData = this.props.data.choices.map(function(element, i) {
-        arr1[j]=element;
-        j++;
-        console.log(element);
-      });
-
-      let letters = new Array(SIZE * SIZE);
+    _initBoard = (props) => {
+      const shuffledData = props.data.choices
+        .map((a, i) => [Math.floor(i / (SIZE * SIZE)) + Math.random(), a])
+        .sort((a, b) => a[0] - b[0])
+        .map((a) => a[1])
+      let letters = new Array(SIZE * SIZE)
       for (let i = 0; i < letters.length; i++) {
-        letters[i] = arr1[i];
-        shuffledData[i] = arr1[i];
+        letters[i] = shuffledData[i];
       }
-
       let statuses = new Array(SIZE * SIZE)
       for (let i = 0; i < statuses.length; i++) {
-        statuses[i] = 'visible';
+        statuses[i] = 'Neutral';
       }
-
-      arr1 =[];
-      j=0;
-
       let currentIndex = this.props.data.answerIndex;
-      
-      this.state = {
+      let question = this.props.data.question;
+      let height = this.props.data.height;
+      let width = this.props.data.width;
+      return ({
         letters,
         shuffledData,
         currentIndex,
-        statuses
-      }
-      
-      console.log(shuffledData);
-      console.log(letters);
-      console.log(currentIndex);
-      console.log(this.props.data.question);
-    
+        statuses,
+        question,
+        height, 
+        width
+      })
     }
+  
 
     componentWillReceiveProps(nextProps) {
       this.props.runIndex != nextProps.runIndex && this.setState(this._initBoard(nextProps))
@@ -63,7 +51,7 @@ export default class Quiz extends Component {
 
     _onStatusChange(id, view, prevStatus, currentStatus) {
       console.log('onstatuschange:', prevStatus, currentStatus)
-      currentStatus == 'visible' && view.zoomIn(250)
+      currentStatus == 'Selected' && view.zoomIn(250)
     }
 
     _clickTile = (id, view) => {
@@ -75,7 +63,7 @@ export default class Quiz extends Component {
         view.zoomOut(250).then((endState) => {
           if (currentIndex + 1 >= this.props.data.choices.length) {
             this.setState({...this.state,
-              statuses: this.state.statuses.map(()=>'invisible')})
+              statuses: this.state.statuses.map(()=>'Selected')})
             this.props.onEnd()
           } else {
             this.setState((prevState, props) => {
@@ -83,7 +71,7 @@ export default class Quiz extends Component {
                 return index == id ? prevState.shuffledData[currentIndex + SIZE * SIZE] : value
               })
               const newStatuses = prevState.statuses.map((value, index) => {
-                return (currentIndex + 1 + SIZE * SIZE > this.props.data.choices.length && index == id && value=='visible') ? 'invisible' : value
+                return (currentIndex + 1 + SIZE * SIZE > this.props.data.choices.length && index == id && value=='Selected') ? 'Neutral' : value
               })
               return {...prevState,
                 letters: newLetters,
@@ -182,7 +170,7 @@ export default class Quiz extends Component {
   };
 
   Quiz.propTypes = {
-    data: PropTypes.object,
+  data: PropTypes.object,
   runIndex: PropTypes.number,
   onScore: PropTypes.func,
   onEnd: PropTypes.func,
