@@ -21,7 +21,7 @@ class FriendList extends PureComponent {
     // const add = this._renderItem;
     // add.push(this._addItem); 
     return (
-      <View style={styles.FriendListStyle}>
+      <View style={styles.FriendListStyle} >
         <FlatList
           horizontal={false}
           showsVerticalScrollIndicator={false}
