@@ -59,6 +59,7 @@ export default class GameWrapper extends Component {
 }
 
 GameWrapper.propTypes = {
+  play: PropTypes.string,
   onEnd: PropTypes.func,
   onScore: PropTypes.func,
   gameComponent: PropTypes.func,

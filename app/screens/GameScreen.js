@@ -13,7 +13,7 @@ import WordGrid from '../components/games/WordGrid';
 import Quiz from '../components/games/Quiz';
 import ConnectDotsScreen from './ConnectDotsScreen';
 import MemoryMatching from '../components/games/MemoryMatching';
-import { fetchMultipleChoiceData, fetchSerialData, fetchWordData, fetchConsecutiveData, fetchMatchData } from '../redux/data';
+import { fetchMultipleChoiceData, fetchSerialData, fetchWordData, fetchConsecutiveData, fetchMatchData, fetchGameDataFailure } from '../redux/data';
 import WordScreen from './WordScreen'
 import SingleGame from '../components/games/SingleGame'
 import HeadToHeadGame from '../components/games/HeadToHeadGame'
@@ -54,9 +54,13 @@ class GameScreen extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.dispatch(fetchGameDataFailure())
+  }
+
   render() {
     console.log('GameScreen', this.props.mode)
-    // const GameComponent = GameComponents[this.props.navigation.state.params.game._id]
+    const GameComponent = GameComponents[this.props.navigation.state.params.game._id]
     return (
       this.state.gameOver
         ?
@@ -72,15 +76,15 @@ class GameScreen extends Component {
               ?
               <SingleGame
                 myScore={this.props.myScore}
-                mode={this.props.navigation.state.params.mode}
-                gameComponent={ReflexBoard}
+                play={this.props.navigation.state.params.play}
+                gameComponent={GameComponent}
                 onEnd={this._onEnd}
                 onScore={this._onScore}
                 gameData={this.props.gameData} />
               :
               <HeadToHeadGame
                 myScore={this.props.myScore}
-                mode={this.props.navigation.state.params.mode}
+                play={this.props.navigation.state.params.play}
                 gameComponent={GameComponent}
                 onEnd={this._onEnd}
                 onScore={this._onScore}

@@ -56,6 +56,7 @@ export default class HeadToHeadGame extends Component {
         </View>
         <GameWrapper
           gameComponent={this.props.gameComponent}
+          play={this.props.play}
           onEnd={this.props.onEnd}
           onScore={this._addOtherScore}
           gameData={this.props.gameData}
@@ -76,6 +77,7 @@ export default class HeadToHeadGame extends Component {
         </View>
         <GameWrapper
           gameComponent={this.props.gameComponent}
+          play={this.props.play}
           onEnd={this.props.onEnd}
           onScore={this._addMyScore}
           gameData={this.props.gameData}
@@ -124,6 +126,7 @@ const styles = StyleSheet.create({
 
 HeadToHeadGame.propTypes = {
   myScore: PropTypes.number,
+  play: PropTypes.string,
   onEnd: PropTypes.func,
   onScore: PropTypes.func,
   gameComponent: PropTypes.func,
