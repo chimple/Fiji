@@ -59,7 +59,10 @@ class GameScreen extends Component {
   }
 
   render() {
-    console.log('GameScreen', this.props.mode)
+    console.log('GameScreen', this.props.navigation.state.params.user._id)
+    console.log('GameScreen', this.props.navigation.state.params.game._id)
+    console.log('GameScreen', this.props.navigation.state.params.mode)
+    console.log('GameScreen', this.props.navigation.state.params.play)
     const GameComponent = GameComponents[this.props.navigation.state.params.game._id]
     return (
       this.state.gameOver
