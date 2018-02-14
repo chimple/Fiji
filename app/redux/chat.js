@@ -11,7 +11,7 @@ const ADD_MESSAGE = 'Fiji/chat/ADD_MESSAGE'
 const initialState = {
   isFetching: false,
   messages: [],
-  friend: {}
+  friend: {} 
 }
 
 const reducer = (state = initialState, action) => {
@@ -104,7 +104,7 @@ export const sendMessage = (friend, message, type) => {
         _id: 'chat:' + getState().auth.user._id + ':' + now,
         sender: getState().auth.user._id,
         message:{
-          type:message,
+          type:type,
           content: message,
        }   
       }  

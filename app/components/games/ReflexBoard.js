@@ -7,6 +7,7 @@ const SIZE = 4
 export default class ReflexBoard extends Component {
   constructor(props) {
     super(props)
+    console.log('constructor',props)
     this.state = this._initBoard(props)
   }
 
@@ -33,6 +34,7 @@ export default class ReflexBoard extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps', nextProps)
     this.props.runIndex != nextProps.runIndex && this.setState(this._initBoard(nextProps))
   }
 
@@ -45,14 +47,19 @@ export default class ReflexBoard extends Component {
         data={this.state.letters}
         statuses={this.state.statuses}
         onStatusChange={this._onStatusChange}
-        tileColor='#24B2EA'
-        edgeColor='deepskyblue'
-        pressedTileColor='goldenrod'
-        pressedEdgeColor='darkgoldenrod'
-        textColor='#FFFFFF'
         style={{
           width: this.props.style.width,
           height: this.props.style.height
+        }}
+        statusStyles = {{
+          visible: {
+            View: {
+              backgroundColor: '#24B2EA'
+            },
+            Text: {
+              color: '#FFFFFF'
+            }
+          }
         }}
         onPress={this._clickTile}
         onRender={this._renderTile}
@@ -71,6 +78,8 @@ export default class ReflexBoard extends Component {
 
   _clickTile = (id, view) => {
     const currentIndex = this.state.currentIndex
+    console.log(id, this.state.letters[id])
+    console.log(currentIndex, this.props.data.serial[currentIndex])
     if (this.state.letters[id] == this.props.data.serial[currentIndex]) {
       this.props.onScore && this.props.onScore(2)
       this.props.setProgress && this.props.setProgress((currentIndex + 1) / this.props.data.serial.length)
