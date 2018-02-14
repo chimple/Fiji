@@ -13,7 +13,7 @@ import WordGrid from '../components/games/WordGrid';
 import Quiz from '../components/games/Quiz';
 import ConnectDotsScreen from './ConnectDotsScreen';
 import MemoryMatching from '../components/games/MemoryMatching';
-import { fetchMultipleChoiceData, fetchSerialData, fetchWordData, fetchConsecutiveData, fetchMatchData } from '../redux/data';
+import { fetchMultipleChoiceData, fetchSerialData, fetchWordData, fetchConsecutiveData, fetchMatchData, fetchGameDataFailure } from '../redux/data';
 import WordScreen from './WordScreen'
 import SingleGame from '../components/games/SingleGame'
 import HeadToHeadGame from '../components/games/HeadToHeadGame'
@@ -52,6 +52,10 @@ class GameScreen extends Component {
     } else if (this.props.navigation.state.params.game._id == 'game:memory-matching') {
       this.props.dispatch(fetchMatchData('set:letters', 8, 1))
     }
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(fetchGameDataFailure())
   }
 
   render() {
