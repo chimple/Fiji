@@ -41,6 +41,7 @@ class UserList extends PureComponent {
     return (
       <View style={styles.UserListStyle}>
         <FlatList
+          horizontal={false}
           showsVerticalScrollIndicator={false}
           // contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap' }}
           numColumns={3}

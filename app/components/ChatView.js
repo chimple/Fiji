@@ -4,83 +4,89 @@ import PropTypes, { element } from 'prop-types'
 //import SvgUri from 'react-native-svg-uri'
 import { Buffer } from 'buffer'
 import SvgUri from 'react-native-svg-uri'
-import { sendMessage, startChat } from '../redux/chat';
+import { sendMessage, startChat, endChat } from '../redux/chat';
+import { STICKERS_PATH } from '../redux/sticker'
 
 
 class ChatView extends Component {
-
-
-
-    // console.log("this is sender::" + this.props.item.sender)
-    // console.log("this is user::" + this.props.friend._id)
-    Eachmsg = (props) => {
-      //show message from sender
-      //  console.log("chatview sticker",this.props.sticker)
-     
-  
-        if (this.props.item.sender == this.props.friend._id)
-  
-          return (
-            <View style={styles.eachMsg}>
-  
-              <Image source={{ uri: 'data:image/png;base64,' + this.props.friend.image }} style={styles.userPic} />
-              <View style={styles.msgBlock}>
-  
-                {/* <SvgUri
-                  width="30"
-                  height="30"
-                  svgXmlData={Buffer.from(this.props.sticker.svg, 'base64').toString('utf8')}
-                /> */}
-  
-               {/* <Text>{this.props.item.message.type}</Text> */}
-  
-              </View>
-            </View>
-          );
-  
+  messageShow() {
+    if (this.props.item.message && this.props.item.message.type && this.props.item.message.content) {
+      if (this.props.item.message.type === 'text') {
+        // console.log("this is a sticker in chat view", this.props.sticker.svg);
+        // console.log("this is a message", this.props.item.message.content);
         return (
-          // svgImage = Buffer.from(this.props.sticker.svg, 'base64').toString('utf8')
-          <View style={styles.rightMsg} >
-            <View style={styles.rightBlock} >
-              {/* <Text style={styles.rightTxt}>{this.props.item.text}</Text>  */}
-              {/* <Text style={styles.rightTxt}>{this.props.item.message.message}</Text> */}
-              {/* <SvgUri
-                width="30"
-                height="30"
-                svgXmlData={Buffer.from(this.props.sticker.svg, 'base64').toString('utf8')}
-              /> */}
-              {/* {this.props.item.message.map((element,i)=>{
-                  <Text>{element.content}</Text>
-                })} */}
-            </View>
-            <Image source={{ uri: 'data:image/png;base64,' + this.props.user.image }} style={styles.userPic} />
-          </View>
+          <Text>{this.props.item.message.content}</Text>
         );
-      // }
+      }
+      else if (this.props.item.message.type === 'sticker') {
+        const svg = this.props.item.message.content == 'caterpillar.svg'
+        ? require('../assets/stickers/caterpillar.svg')
+        : this.props.item.message.content == 'caterpillar_walk.svg'
+          ? require('../assets/stickers/caterpillar_walk.svg')
+          : this.props.item.message.content == 'caterpillar_dance.svg'
+            ? require('../assets/stickers/caterpillar_dance.svg')
+            : this.props.item.message.content == 'cheshire-cat.svg'
+            ? require('../assets/stickers/cheshire-cat.svg')
+            : this.props.item.message.content == 'cheshire-cat_grin.svg'
+              ? require('../assets/stickers/cheshire-cat_grin.svg')
+              : this.props.item.message.content == 'cheshire-cat_clap.svg'
+                ? require('../assets/stickers/cheshire-cat_clap.svg')
+                : ''
+    return (
+          <SvgUri
+            width="30"
+            height="30"
+            source={svg}
+          />
+        );
+      }
     }
-  
-  
-    render() {
-      // console.log("this is a component", this.props.sticker);
-       console.log("this is sticker from content::",  this.props.item.message)
-      
-      //  console.log("this is sticker::" + this.props.stickerImage._id)
-      //  const ImageUri= this.props.stickerImage.svg
-  
-  
-  
-      return (
-        this.props.isFetching ?
-          <ActivityIndicator />
-          :
-          <View>
-            {this.Eachmsg()}
-            
-          </View>
-      );
+
   }
 
-  
+
+
+  Eachmsg() {
+    //show message from sender
+    //  console.log("chatview sticker",this.props.sticker)
+    //  if(this.props.sticker !== null){
+
+    if (this.props.item.sender === this.props.friend._id)
+      return (
+        <View style={styles.eachMsg}>
+
+          <Image source={{ uri: 'data:image/png;base64,' + this.props.friend.image }} style={styles.userPic} />
+          <View style={styles.msgBlock}>
+            {this.messageShow()}
+          </View>
+        </View>
+      );
+    return (
+      <View style={styles.rightMsg} >
+        <View style={styles.rightBlock} >
+          {this.messageShow()}
+        </View>
+        <Image source={{ uri: 'data:image/png;base64,' + this.props.user.image }} style={styles.userPic} />
+      </View>
+    );
+
+  }
+
+
+  render() {
+    // console.log("this is sticker from content::", this.props.item.message.content)
+    return (
+      this.props.isFetching ?
+        <ActivityIndicator />
+        :
+        <View>
+          {this.Eachmsg()}
+
+        </View>
+    );
+  }
+
+
 }
 
 ChatView.propTypes = {
@@ -88,7 +94,8 @@ ChatView.propTypes = {
   sender: PropTypes.object,
   user: PropTypes.object,
   message: PropTypes.object,
-  content:PropTypes.object,
+  content: PropTypes.object,
+  type: PropTypes.object,
   friend: PropTypes.object,
   image: PropTypes.object
 }
@@ -181,7 +188,7 @@ const styles = StyleSheet.create({
   rightBlock: {
     width: 220,
     borderRadius: 5,
-    backgroundColor:"#f45180",
+    backgroundColor: "#f45180",
     padding: 10,
     shadowColor: '#3d3d3d',
     shadowRadius: 2,

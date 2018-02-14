@@ -12,6 +12,7 @@ const reducer = (state = initialState, action) => {
     case FETCH_GAME_DATA_REQUEST:
       return {
         ...state,
+        gameData: [],
         isFetching: true
       }
     case FETCH_GAME_DATA_SUCCESS:
