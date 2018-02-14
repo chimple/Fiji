@@ -43,48 +43,52 @@ export default class HeadToHeadGame extends Component {
     return (
       <View
         style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.info}>
-            {this.state.otherScore}
-          </Text>
-          <View style={styles.icon}>
+        <View style={{flex:1, transform:[{scaleY:-1},{scaleX:-1}]}}>
+          <View style={styles.header}>
+            <Text style={styles.info}>
+              {this.state.otherScore}
+            </Text>
+            <View style={styles.icon}>
 
+            </View>
+            <Text style={styles.info}>
+              {this.state.myScore}
+            </Text>
           </View>
-          <Text style={styles.info}>
-            {this.state.myScore}
-          </Text>
+          <GameWrapper
+            gameComponent={this.props.gameComponent}
+            play={this.props.play}
+            onEnd={this.props.onEnd}
+            onScore={this._addOtherScore}
+            gameData={this.props.gameData}
+            style={{
+              height: height/2 - TOP_HEIGHT - HEADER_TO_REMOVE,
+              width
+            }} />
         </View>
-        <GameWrapper
-          gameComponent={this.props.gameComponent}
-          play={this.props.play}
-          onEnd={this.props.onEnd}
-          onScore={this._addOtherScore}
-          gameData={this.props.gameData}
-          style={{
-            height: height/2 - TOP_HEIGHT - HEADER_TO_REMOVE,
-            width
-          }} />
-        <View style={styles.header}>
-          <Text style={styles.info}>
-            {this.state.myScore}
-          </Text>
-          <View style={styles.icon}>
+        <View style={{flex:1}}>
+          <View style={styles.header}>
+            <Text style={styles.info}>
+              {this.state.myScore}
+            </Text>
+            <View style={styles.icon}>
 
+            </View>
+            <Text style={styles.info}>
+              {this.state.otherScore}
+            </Text>
           </View>
-          <Text style={styles.info}>
-            {this.state.otherScore}
-          </Text>
+          <GameWrapper
+            gameComponent={this.props.gameComponent}
+            play={this.props.play}
+            onEnd={this.props.onEnd}
+            onScore={this._addMyScore}
+            gameData={this.props.gameData}
+            style={{
+              height: height/2 - TOP_HEIGHT - HEADER_TO_REMOVE,
+              width
+            }} />
         </View>
-        <GameWrapper
-          gameComponent={this.props.gameComponent}
-          play={this.props.play}
-          onEnd={this.props.onEnd}
-          onScore={this._addMyScore}
-          gameData={this.props.gameData}
-          style={{
-            height: height/2 - TOP_HEIGHT - HEADER_TO_REMOVE,
-            width
-          }} />
       </View>
     )
   }
