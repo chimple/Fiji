@@ -23,7 +23,7 @@ import { Buffer } from 'buffer'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { fetchStickerPacks, fetchStickers ,fetchSticker, fetchStickerFailure} from '../redux/sticker';
+import { fetchStickerPacks, fetchStickers ,fetchSticker, fetchStickerFailure, STICKERS_PATH} from '../redux/sticker';
 import { sendMessage } from '../redux/chat';
 
 
@@ -49,7 +49,7 @@ class TabbedView extends Component {
 
   updatedStickerId= (StickerId) => {
     //  this.props.onPress(StickerId, this.props.stickers);
-    this.props.dispatch(fetchSticker(StickerId));
+    // this.props.dispatch(fetchSticker(StickerId));
       this.props.dispatch(sendMessage(this.props.friend,StickerId,'sticker'))
       // this.props.stickers
  
@@ -72,17 +72,30 @@ class TabbedView extends Component {
       <ScrollView tabLabel="jionomk" >
         <View style={styles.card}>
           {this.props.stickers.map((tab, i) => {
-            let svgImage = Buffer.from(tab.svg, 'base64').toString('utf8')
-            console.log("this is svgImage ", svgImage);
+            // let svgImage = Buffer.from(tab.svg, 'base64').toString('utf8')
+            // console.log("this is svgImage ", svgImage);
             //  return <Text key={i} >{tab._id}</Text>
-
-            return <TouchableOpacity key={i} onPress={() => this.updatedStickerId(tab._id)}>
+            const svg = tab == 'caterpillar.svg'
+            ? require('../assets/stickers/caterpillar.svg')
+            : tab == 'caterpillar_walk.svg'
+              ? require('../assets/stickers/caterpillar_walk.svg')
+              : tab == 'caterpillar_dance.svg'
+                ? require('../assets/stickers/caterpillar_dance.svg')
+                : tab == 'cheshire-cat.svg'
+                ? require('../assets/stickers/cheshire-cat.svg')
+                : tab == 'cheshire-cat_grin.svg'
+                  ? require('../assets/stickers/cheshire-cat_grin.svg')
+                  : tab == 'cheshire-cat_clap.svg'
+                    ? require('../assets/stickers/cheshire-cat_clap.svg')
+                    : ''
+    
+            return <TouchableOpacity key={i} onPress={() => this.updatedStickerId(tab)}>
               <SvgUri
                 key={i}
                 width="30"
                 height="30"
-                svgXmlData={svgImage}
-              />
+                source={svg}
+                />
             </TouchableOpacity>
           })}
         </View>

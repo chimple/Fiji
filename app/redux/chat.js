@@ -1,6 +1,5 @@
 import PouchDB from 'pouchdb-react-native';
 import { remoteURL } from '../db';
-import sticker from './sticker';
 
 const START_CHAT_REQUEST = 'Fiji/chat/START_CHAT_REQUEST'
 const START_CHAT_SUCCESS = 'Fiji/chat/START_CHAT_SUCCESS'

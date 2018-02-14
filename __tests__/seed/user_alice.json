@@ -21,7 +21,7 @@
       "_id": "chat:mad-hatter:2018-01-11T08:45:35.341Z",
       "message": {
         "type": "sticker",
-        "content": "sticker:caterpillar:walk"
+        "content": "caterpillar_walk.svg"
       },
       "sender": "mad-hatter"
     },
