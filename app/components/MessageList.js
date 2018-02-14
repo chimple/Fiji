@@ -29,7 +29,7 @@ export default class MessageList extends PureComponent {
        <ChatView 
       item = {item}
       // to send user,friend to chatview
-      sticker = {this.props.sticker}
+      // sticker = {this.props.sticker}
      user={this.props.user}
        friend={this.props.friend}
      />
