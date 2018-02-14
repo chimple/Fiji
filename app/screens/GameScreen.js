@@ -60,7 +60,7 @@ class GameScreen extends Component {
 
   render() {
     console.log('GameScreen', this.props.mode)
-    // const GameComponent = GameComponents[this.props.navigation.state.params.game._id]
+    const GameComponent = GameComponents[this.props.navigation.state.params.game._id]
     return (
       this.state.gameOver
         ?
@@ -76,15 +76,15 @@ class GameScreen extends Component {
               ?
               <SingleGame
                 myScore={this.props.myScore}
-                mode={this.props.navigation.state.params.mode}
-                gameComponent={ReflexBoard}
+                play={this.props.navigation.state.params.play}
+                gameComponent={GameComponent}
                 onEnd={this._onEnd}
                 onScore={this._onScore}
                 gameData={this.props.gameData} />
               :
               <HeadToHeadGame
                 myScore={this.props.myScore}
-                mode={this.props.navigation.state.params.mode}
+                play={this.props.navigation.state.params.play}
                 gameComponent={GameComponent}
                 onEnd={this._onEnd}
                 onScore={this._onScore}

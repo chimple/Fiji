@@ -40,6 +40,7 @@ export default class SingleGame extends Component {
         </View>
         <GameWrapper
           gameComponent={this.props.gameComponent}
+          play={this.props.play}
           onEnd={this.props.onEnd}
           onScore={this.props.onScore}
           gameData={this.props.gameData}
@@ -93,6 +94,7 @@ const styles = StyleSheet.create({
 
 SingleGame.propTypes = {
   myScore: PropTypes.number,
+  play: PropTypes.string,
   onEnd: PropTypes.func,
   onScore: PropTypes.func,
   gameComponent: PropTypes.func,
