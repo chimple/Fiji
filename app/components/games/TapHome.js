@@ -8,101 +8,120 @@ import ScoreScreen from '../../screens/ScoreScreen';
 import Tile from './Tile';
 import { isAbsolute } from 'path';
 
-let timerId; 
-let iterate = 0;
+let timerId, iterate, iterateShake;
 let j = 0;
+let score = 0;
 
 export default class TapHome extends Component {
 
   constructor(props) {
     super(props);
     this.state = this._initBoard(props)
-
-    Dimensions.addEventListener('change', () => {
-      this.setState({
-        width : this.fontSizer(this.props.style.height * 0.225) + 20
-      })
+    iterate = 0;
+    iterateShake = 0;
+    // Dimensions.addEventListener('change', () => {
+    //   this.setState({
+    //     width : this.fontSizer(this.props.style.height * 0.225) + 20
+    //   })
      
-    });
+    // });
   }
 
   _initBoard = (props) => {
     let options = [];
     j = 0;
+    iterate = 0;
+    iterateShake = 0;
     const data = props.data.serial.map( function (temp, index ){
       options[j] = temp;
       j++;
     });
     let len = options.length;
-    let score = 0;
     let count = 0;
     let answer = props.data.answer;
     let width = this.fontSizer(this.props.style.height * 0.225) + 20;
-    let statuses = 'inVisible';
-   
+    let status = 'neutral';
     return ({
       options,
       count,
       len,
-      score,
       answer,
       width,
-      statuses
+      status
     })
   }
 
   componentWillReceiveProps(nextProps) {
     this.props.runIndex != nextProps.runIndex && this.setState(this._initBoard(nextProps))
+    clearInterval(timerId);
+    timerId = setInterval(this.timer, 2000) 
   }
 
 
   timer = () => {
+   
     if( this.state.count  == this.state.len ){
-      this.setState({count: 0})
-    }else
-      this.setState({ count: this.state.count + 1})
+      this.setState({...this.state, count: 0})
+      iterate = iterate + 1;
+      if( iterate == 2 )
+      {
+        iterate = 0;
+        this.setState({...this.state, status: 'selected', count: 0});
+      }
+    }else {
+      this.setState({...this.state, count: this.state.count + 1})
+      
+      //condition for increasing speed
+      if ( score > 1 && score <= 3) {
+        clearInterval(timerId);
+        timerId = setInterval(this.timer, 1400);
+      }
+      else if (score > 3 && score <= 5) {
+        clearInterval(timerId);
+        timerId = setInterval(this.timer, 1200);
+      }
+      else if (score > 5 && score <= 7) {
+        clearInterval(timerId)
+        timerId = setInterval(this.timer, 1000);
+      }
+      else if (score > 7 && score <= 10) {
+        clearInterval(timerId);
+        timerId = setInterval(this.timer, 700);
+      }
+    }
   }
 
   componentDidMount() {
-    //this.setState({len: this.props.data.serial.length})
     //This will start timer and will update text value
-    timerId = setInterval(this.timer, 1400) 
-
+    timerId = setInterval(this.timer, 2000) 
+    score = 0;
+ 
   }
 
   //This will generate random number and will check on tap condition
-  GenerateRandomNumber = (id , view) => {
+  GenerateRandomNumber = () => {
     
     if (this.state.answer == this.state.options[this.state.count]) {
       this.props.onScore(2)
-      this.props.onEnd();
-      this.setState({ statuses: 'visible'});
-      console.log(this.state.count);
+      score = score + 1;
+      console.log('score', score)
+      this.setState({...this.state, status: 'selected', count: 0});
      
-
-    //   //condition for increasing speed
-    //   if (this.state.count > 1 && this.state.count <= 3) {
-    //     clearInterval(timerId);
-    //     timerId = setInterval(this.timer, 1200);
-    //   }
-    //   else if (this.state.count > 3 && this.state.count <= 5) {
-    //     clearInterval(timerId);
-    //     timerId = setInterval(this.timer, 1000);
-    //   }
-    //   else if (this.state.count > 5 && this.state.count <= 7) {
-    //     clearInterval(timerId)
-    //     timerId = setInterval(this.timer, 800);
-    //   }
-    //   else if (this.state.count > 7 && this.state.count <= 10) {
-    //     clearInterval(timerId);
-    //     timerId = setInterval(this.timer, 600);
-    //   }
     }
     else {
-      iterate = iterate + 1;
-      this.setState({ count: 0 })
-
+      iterateShake = iterateShake + 1
+      this.refs.view.shake(350).then((endState)=> {
+        if(iterateShake == 2)
+        {
+          iterateShake = 0;
+          this.setState({...this.state, status: 'selected', count: 0});
+        }
+      })
+      
+      this.setState({...this.state, count: 0 })
     }
+
+    
   }//end of generateRandomNumber function
 
   fontSizer (screenWidth) {
@@ -131,20 +150,38 @@ export default class TapHome extends Component {
 
     return (
       <View style={container}>
+        <Animatable.View ref="view">
         <Tile
           id={1}
-          onPress={this.GenerateRandomNumber}
           text={this.state.answer}
           edgeColor='white'
-          statuses={this.state.statuses}
+          status={this.state.status}
           onStatusChange={this._onStatusChange}
+          pressedTileColor={this.props.pressedTileColor}
           style={{
-            width: tileSize ,
-            height: tileSize ,
-           
+            width: 80,
+            height: 80,
           }}
+          statusStyles = {{
+            neutral: {
+              View: {
+                backgroundColor: '#24B2EA'
+              },
+              Text: {
+                color: '#FFFFFF'
+              }
+            },
+            selected: {
+             
+              Text: {
+                color: '#FFFFFF'
+              }
+            }
+          }}
+          onPress={this.GenerateRandomNumber}
           onRender={this._renderTile}
         />
+        </Animatable.View>
         <TouchableOpacity onPress={this.GenerateRandomNumber}>
           <Text style={[subText, { fontSize: this.state.width }]}>
             {this.state.options[this.state.count]}
@@ -154,9 +191,12 @@ export default class TapHome extends Component {
     );
   }
 
-  _onStatusChange(id, view, prevStatus, currentStatus) {
+  _onStatusChange = (id, view, prevStatus, currentStatus) => {
     console.log('onstatuschange:', prevStatus, currentStatus)
-    currentStatus == 'visible' && view.zoomIn(250)
+    currentStatus == 'selected' && view.zoomIn(250).then((endState) => {
+      this.props.onEnd();
+    })
+    
   }
 
 }//End of class 

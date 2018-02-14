@@ -70,7 +70,7 @@ class GameScreen extends Component {
     } else if (this.props.navigation.state.params.game._id == 'game:multiple-choice') {
       this.props.dispatch(fetchMultipleChoiceData('set:letters', 4, 2))
     } else if (this.props.navigation.state.params.game._id == 'game:tap-home') {
-      this.props.dispatch(fetchSerialData('set:letters', 4))
+      this.props.dispatch(fetchSerialData('set:letters', 10))
     } else if (this.props.navigation.state.params.game._id == 'game:tap-wrong') {
       this.props.dispatch(fetchWordData('set:letters', 3, 1, 1))
     } else if (this.props.navigation.state.params.game._id == 'game:word') {
