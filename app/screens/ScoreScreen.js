@@ -40,7 +40,7 @@ class ScoreScreen extends PureComponent{
                 
                         <View style={styles.ScoreCardStyle}>
                             <View style={styles.PlayerScoreViewStyle}>
-                                <ImageBackground style={[styles.PlayerScoreStyle, {width:20, height:100, alignSelf:'center'}]} source={{uri:'data:image/png;base64,' + this.props.user.image }} ><Text style={{fontWeight:'bold', fontSize:20,}}>{UserHighScore}</Text></ImageBackground>
+                                <ImageBackground style={[styles.PlayerScoreStyle, {width:20, height:100, alignSelf:'center'}]} source={{uri:'data:image/png;base64,' + this.props.user.image }} ><Text style={{fontWeight:'bold', fontSize:20,}}>{this.props.currentScore}</Text></ImageBackground>
                                 <View style={styles.CharacterStyle}></View>
                                 <View style={styles.PlayerScoreStyle}><Text style={{fontWeight:'bold', fontSize:50,}}>B</Text></View>
                             </View>
