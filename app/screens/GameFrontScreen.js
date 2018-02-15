@@ -57,6 +57,7 @@ class GameFrontScreen extends PureComponent {
             </View>
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate('CommonGameScreen', {
+                item: this.props.theme.sets[0],
                 game: this.props.navigation.state.params.title,
                 user: this.props.navigation.state.params.user,
                 mode: 'HEAD_TO_HEAD',
@@ -69,6 +70,7 @@ class GameFrontScreen extends PureComponent {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate('CommonGameScreen', {
+                item: this.props.theme.sets[0],
                 game: this.props.navigation.state.params.title,
                 user: this.props.navigation.state.params.user,
                 mode: 'SINGLE',
