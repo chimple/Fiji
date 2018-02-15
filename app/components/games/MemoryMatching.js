@@ -15,6 +15,8 @@ const SIZE = 4
 arryCheck =[];
 arryID =[];
 let k =0;
+let Matched =0;
+let progressCnt =1;
 
 export default class MemoryMatching extends Component {
   constructor(props) {
@@ -86,7 +88,6 @@ export default class MemoryMatching extends Component {
         width: this.props.style.width,
         height: this.props.style.height
       }}
-      
       onPress={this._clickTile}
     />
     )
@@ -106,6 +107,7 @@ export default class MemoryMatching extends Component {
     if(this.state.statuses[id]=='V')
      return;
 
+
     view.flipInY(500).then((endState) => {
       arryCheck[k] = this.state.shuffledArray[id]; 
       arryID[k] =id;
@@ -116,9 +118,15 @@ export default class MemoryMatching extends Component {
           return id == index ? 'V' : val})})
     
       if(arryCheck.length===2)
-      {
+      { 
+        Matched++;
+        if(Matched == 8)
+         this.props.onEnd();
         if(arryCheck[0]===arryCheck[1])
           {
+            this.props.onScore(2);
+            this.props.setProgress((progressCnt) / (this.state.shuffledArray.length/2));
+            progressCnt++;
             for(let i=0; i<arryID.length; i++)
             {
               this.setState({...this.state,
@@ -153,5 +161,8 @@ export default class MemoryMatching extends Component {
 }
 
 MemoryMatching.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.object,
+  onScore: PropTypes.func,
+  onEnd: PropTypes.func,
+  setProgress: PropTypes.func
 }
