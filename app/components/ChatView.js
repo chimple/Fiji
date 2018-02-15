@@ -5,11 +5,12 @@ import PropTypes, { element } from 'prop-types'
 import { Buffer } from 'buffer'
 import SvgUri from 'react-native-svg-uri'
 import { sendMessage, startChat, endChat } from '../redux/chat';
+import { STICKERS_PATH } from '../redux/sticker'
 
 
 class ChatView extends Component {
   messageShow() {
-    if (this.props.item.message && this.props.item.message.type && this.props.item.message.content && this.props.sticker && this.props.sticker.svg !== null) {
+    if (this.props.item.message && this.props.item.message.type && this.props.item.message.content) {
       if (this.props.item.message.type === 'text') {
         // console.log("this is a sticker in chat view", this.props.sticker.svg);
         // console.log("this is a message", this.props.item.message.content);
@@ -17,25 +18,26 @@ class ChatView extends Component {
           <Text>{this.props.item.message.content}</Text>
         );
       }
-     else if(this.props.item.message.type === 'sticker') 
-     { 
-       console.log("this is svg in chat view",this.props.sticker.svg);
-       const stickerImage = this.props.sticker.svg;
-       console.log("this is stickerID",this.props.sticker._id);
-       console.log("this is message content",this.props.item.message.content);
-       if(this.props.sticker._id === this.props.item.message.content)
-        return (
-          // <Text>{this.props.item.message.content}</Text>
-          // stickerImage   
-          // ?
-            <SvgUri
+      else if (this.props.item.message.type === 'sticker') {
+        const svg = this.props.item.message.content == 'caterpillar.svg'
+        ? require('../assets/stickers/caterpillar.svg')
+        : this.props.item.message.content == 'caterpillar_walk.svg'
+          ? require('../assets/stickers/caterpillar_walk.svg')
+          : this.props.item.message.content == 'caterpillar_dance.svg'
+            ? require('../assets/stickers/caterpillar_dance.svg')
+            : this.props.item.message.content == 'cheshire-cat.svg'
+            ? require('../assets/stickers/cheshire-cat.svg')
+            : this.props.item.message.content == 'cheshire-cat_grin.svg'
+              ? require('../assets/stickers/cheshire-cat_grin.svg')
+              : this.props.item.message.content == 'cheshire-cat_clap.svg'
+                ? require('../assets/stickers/cheshire-cat_clap.svg')
+                : ''
+    return (
+          <SvgUri
             width="30"
             height="30"
-            svgXmlData={Buffer.from(this.props.sticker.svg, 'base64').toString('utf8')}
-          /> 
-          // // <Text>this is sticker</Text>
-          // :
-          // this.props.sticker.svg == null
+            source={svg}
+          />
         );
       }
     }
@@ -48,14 +50,14 @@ class ChatView extends Component {
     //show message from sender
     //  console.log("chatview sticker",this.props.sticker)
     //  if(this.props.sticker !== null){
-     
+
     if (this.props.item.sender === this.props.friend._id)
       return (
         <View style={styles.eachMsg}>
 
           <Image source={{ uri: 'data:image/png;base64,' + this.props.friend.image }} style={styles.userPic} />
           <View style={styles.msgBlock}>
-         {this.messageShow()}
+            {this.messageShow()}
           </View>
         </View>
       );
@@ -69,7 +71,7 @@ class ChatView extends Component {
     );
 
   }
-  
+
 
   render() {
     // console.log("this is sticker from content::", this.props.item.message.content)
