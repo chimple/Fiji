@@ -4,7 +4,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { fetchGameData } from '../redux/game'
-import { addMyScore, finalizeScore } from '../redux/score'
+import { addMyScore, finalizeScore, resetScore } from '../redux/score'
 import ReflexBoard from '../components/games/ReflexBoard'
 import ScoreScreen from '../../app/screens/ScoreScreen'
 import TapHome from '../components/games/TapHome';
@@ -55,6 +55,7 @@ class GameScreen extends Component {
 
   componentWillUnmount() {
     this.props.dispatch(fetchGameDataFailure())
+    this.props.dispatch(resetScore())
   }
 
   render() {
