@@ -72,8 +72,8 @@ export default class WordGrid extends Component {
         pressedEdgeColor='darkgoldenrod'
         textColor='#FFFFFF'
         style={{
-          width: this.props.style.width-50,
-          height: this.props.style.height-50
+          width: this.props.style.width,
+          height: this.props.style.height
         }}
         statusStyles = {{
             visible: {
