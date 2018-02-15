@@ -18,6 +18,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { fetchStickerPacks, fetchStickers, STICKERS_PATH } from '../redux/sticker';
+import stickers from '../assets/stickers/stickers';
 
 
 
@@ -91,20 +92,7 @@ export default class FacebookTabBar extends Component {
 return  <View style={[styles.tabs, this.props.style,]}>
 
             {this.props.tabData.map((tab, i) => {
-        const svg = tab == 'caterpillar.svg'
-        ? require('../assets/stickers/caterpillar.svg')
-        : tab == 'caterpillar_walk.svg'
-          ? require('../assets/stickers/caterpillar_walk.svg')
-          : tab == 'caterpillar_dance.svg'
-            ? require('../assets/stickers/caterpillar_dance.svg')
-            : tab == 'cheshire-cat.svg'
-            ? require('../assets/stickers/cheshire-cat.svg')
-            : tab == 'cheshire-cat_grin.svg'
-              ? require('../assets/stickers/cheshire-cat_grin.svg')
-              : tab == 'cheshire-cat_clap.svg'
-                ? require('../assets/stickers/cheshire-cat_clap.svg')
-                : ''
-              //  let svgImage = Buffer.from(tab.svg, 'base64').toString('utf8')
+                const svg = stickers[tab] ? stickers[tab] : stickers['unknown.svg']
                 return <TouchableOpacity key={i} onPress={ ()=>this.updatedId(i,tab)} style={styles.tab}>
                 
                     {/* <Text key={i} >{tab._id} </Text> */}
