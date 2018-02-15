@@ -44,7 +44,7 @@ class GameScreen extends Component {
     } else if (this.props.navigation.state.params.game._id == 'game:tap-home') {
       this.props.dispatch(fetchSerialData('set:letters', 10))
     } else if (this.props.navigation.state.params.game._id == 'game:tap-wrong') {
-      this.props.dispatch(fetchWordData('set:letters', 3, 1, 1))
+      this.props.dispatch(fetchWordData('set:letters', 3, 2, 3))
     } else if (this.props.navigation.state.params.game._id == 'game:word') {
       this.props.dispatch(fetchWordData('set:letters', 5, 4, 3))
     } else if (this.props.navigation.state.params.game._id == 'game:connect-dots') {
