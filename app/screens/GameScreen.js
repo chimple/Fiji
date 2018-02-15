@@ -4,7 +4,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { fetchGameData } from '../redux/game'
-import { addMyScore, finalizeScore } from '../redux/score'
+import { addMyScore, finalizeScore, resetScore } from '../redux/score'
 import ReflexBoard from '../components/games/ReflexBoard'
 import ScoreScreen from '../../app/screens/ScoreScreen'
 import TapHome from '../components/games/TapHome';
@@ -14,7 +14,6 @@ import Quiz from '../components/games/Quiz';
 import ConnectDotsScreen from './ConnectDotsScreen';
 import MemoryMatching from '../components/games/MemoryMatching';
 import { fetchMultipleChoiceData, fetchSerialData, fetchWordData, fetchConsecutiveData, fetchMatchData, fetchGameDataFailure } from '../redux/data';
-import WordScreen from './WordScreen'
 import SingleGame from '../components/games/SingleGame'
 import HeadToHeadGame from '../components/games/HeadToHeadGame'
 
@@ -22,7 +21,7 @@ const GameComponents = {
   'game:reflex': ReflexBoard,
   'game:tap-home': TapHome,
   'game:tap-wrong': TapWrongGridComponent,
-  'game:word': WordScreen,
+  'game:word': WordGrid,
   'game:multiple-choice': Quiz,
   'game:connect-dots': ConnectDotsScreen,
   'game:memory-matching': MemoryMatching
@@ -42,9 +41,9 @@ class GameScreen extends Component {
     } else if (this.props.navigation.state.params.game._id == 'game:multiple-choice') {
       this.props.dispatch(fetchMultipleChoiceData('set:letters', 4, 2))
     } else if (this.props.navigation.state.params.game._id == 'game:tap-home') {
-      this.props.dispatch(fetchSerialData('set:letters', 4))
+      this.props.dispatch(fetchSerialData('set:letters', 10))
     } else if (this.props.navigation.state.params.game._id == 'game:tap-wrong') {
-      this.props.dispatch(fetchWordData('set:letters', 3, 1, 1))
+      this.props.dispatch(fetchWordData('set:letters', 3, 2, 3))
     } else if (this.props.navigation.state.params.game._id == 'game:word') {
       this.props.dispatch(fetchWordData('set:letters', 5, 4, 3))
     } else if (this.props.navigation.state.params.game._id == 'game:connect-dots') {
@@ -56,6 +55,7 @@ class GameScreen extends Component {
 
   componentWillUnmount() {
     this.props.dispatch(fetchGameDataFailure())
+    this.props.dispatch(resetScore())
   }
 
   render() {
