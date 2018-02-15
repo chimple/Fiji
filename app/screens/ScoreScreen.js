@@ -13,6 +13,7 @@ class ScoreScreen extends PureComponent{
         console.log(this.props.user.name)
         console.log(this.props.game.name)
         console.log(this.props.item.name)
+        console.log(this.props.currentScore)
     }
 
     _keyExtractor = (item, index) => item._id
@@ -21,11 +22,11 @@ class ScoreScreen extends PureComponent{
         <View style={styles.RankingStyle}><Text style={{fontWeight:'bold', fontSize:30,}}>{item.score}</Text></View>
     )
     render(){
-        var UserScore
-        if(this.props.gameScore.length)
-            for( i=0; i<this.props.gameScore.length ; i++ ){
-                if(this.props.gameScore[i].user_id==this.props.user._id){
-                    UserScore = this.props.gameScore[i].score
+        var UserHighScore
+        if(this.props.gameHighScores.length)
+            for( i=0; i<this.props.gameHighScores.length ; i++ ){
+                if(this.props.gameHighScores[i].user_id==this.props.user._id){
+                    UserHighScore = this.props.gameHighScores[i].score
                     break
                 }
             }
@@ -34,12 +35,12 @@ class ScoreScreen extends PureComponent{
                 ?
                     <ActivityIndicator size="large" style={{ marginTop: 100 }}/>
                 :
-                    this.props.gameScore.length
+                    this.props.gameHighScores.length
                         ?
                 
                         <View style={styles.ScoreCardStyle}>
                             <View style={styles.PlayerScoreViewStyle}>
-                                <ImageBackground style={[styles.PlayerScoreStyle, {width:20, height:100, alignSelf:'center'}]} source={{uri:'data:image/png;base64,' + this.props.user.image }} ><Text style={{fontWeight:'bold', fontSize:20,}}>{UserScore}</Text></ImageBackground>
+                                <ImageBackground style={[styles.PlayerScoreStyle, {width:20, height:100, alignSelf:'center'}]} source={{uri:'data:image/png;base64,' + this.props.user.image }} ><Text style={{fontWeight:'bold', fontSize:20,}}>{this.props.currentScore}</Text></ImageBackground>
                                 <View style={styles.CharacterStyle}></View>
                                 <View style={styles.PlayerScoreStyle}><Text style={{fontWeight:'bold', fontSize:50,}}>B</Text></View>
                             </View>
@@ -51,7 +52,7 @@ class ScoreScreen extends PureComponent{
                             <View style={styles.RankingViewStyle}>
                                 <FlatList
                                 showsVerticalScrollIndicator={false}
-                                data={ this.props.gameScore }
+                                data={ this.props.gameHighScores }
                                 renderItem={this._renderItem}
                                 keyExtractor={this._keyExtractor}
                                 />
@@ -66,7 +67,7 @@ class ScoreScreen extends PureComponent{
 }
 
 ScoreScreen.propTypes = {
-    gameScore:PropTypes.array,
+    gameHighScores:PropTypes.array,
     game:PropTypes.object,
     item:PropTypes.object,
     user:PropTypes.object,
@@ -124,6 +125,6 @@ const styles = StyleSheet.create({
 });
 
 export default connect( state => ({
-    gameScore: state.score.gameHighScores,
+    gameHighScores: state.score.gameHighScores,
     isFetching: state.score.isFetching
 }))(ScoreScreen)
