@@ -76,7 +76,7 @@ export default class MemoryMatching extends Component {
       numCols={SIZE}
       data={this.state.shuffledArray}
       statuses={this.state.statuses}
-      onStatusChange={this.state._onStatusChange}
+      onStatusChange={this._onStatusChange}
       tileColor='#24B2EA'
       edgeColor='deepskyblue'
       pressedTileColor='goldenrod'
@@ -86,21 +86,25 @@ export default class MemoryMatching extends Component {
         width: this.props.style.width,
         height: this.props.style.height
       }}
+      
       onPress={this._clickTile}
     />
     )
   }
 
   _onStatusChange(id, view, prevStatus, currentStatus) {
-    console.log("onstatuschange:", id , prevStatus, currentStatus);
-    console.log("Pressed-Tile-id-Content",this.state.shuffledArray[id]);
-    //currentStatus == 'V';
+    console.log("Rajesh-Data-onstatuschange:", id , prevStatus, currentStatus);
+    currentStatus == 'D' && view.zoomOut(1000)
+    currentStatus == 'H' && view.flipInY(1000) 
   }
 
   _clickTile = (id, view) => {
     console.log("Pressed-Tile-id",id);
     console.log("Pressed-Tile-id-Content",this.state.shuffledArray[id]);
+    console.log("Pressed-Tile-status",this.state.statuses[id]);
 
+    if(this.state.statuses[id]=='V')
+     return;
 
     view.flipInY(500).then((endState) => {
       arryCheck[k] = this.state.shuffledArray[id]; 
@@ -115,21 +119,17 @@ export default class MemoryMatching extends Component {
       {
         if(arryCheck[0]===arryCheck[1])
           {
-            alert("Matched!!!");
             for(let i=0; i<arryID.length; i++)
             {
-              alert("Changing status to Disappear!!");
               this.setState({...this.state,
                 statuses: this.state.statuses.map((val, index)=> {
                   return arryID[i] == index ? 'D' : val})})
             }
           }
         else
-          {
-            alert("UnMatched!!!");
+          { 
             for(let i=0; i<arryID.length; i++)
             {
-              alert("Cahnging status to Hidden!!");
               this.setState({...this.state,
                 statuses: this.state.statuses.map((val, index)=> {
                   return arryID[i] == index ? 'H' : val})})
@@ -140,7 +140,8 @@ export default class MemoryMatching extends Component {
           arryCheck = [];
           k=0;
           console.log("Rajesh-Status-data",this.state.statuses);
-          return;
+          return {statuses};
+      
       }
       console.log("arryCheck",arryCheck); 
       console.log("Value of K",k);

@@ -14,20 +14,31 @@ export default class GameWrapper extends Component {
 
   render() {
     const GameComponent = this.props.gameComponent
+
+    const ProgressBarComponent = this.props.play == 'TRIES'
+      ?
+      <ProgressBar
+        fillStyle={{}}
+        backgroundStyle={{ backgroundColor: '#cccccc', borderRadius: 2 }}
+        style={{ width: this.props.style.width }}
+        progress={this.state.progress}
+      />
+      :
+      <ProgressBar
+        fillStyle={{}}
+        backgroundStyle={{ backgroundColor: '#cccccc', borderRadius: 2 }}
+        style={{ width: this.props.style.width }}
+        progress={1}
+        duration={20000}
+        onEnd={this.props.onEnd}
+      />
+
     return (
       <View style={{
         flex: 1
       }}
       >
-        <ProgressBar
-          fillStyle={{}}
-          backgroundStyle={{ backgroundColor: '#cccccc', borderRadius: 2 }}
-          style={{ width: this.props.style.width }}
-          progress={this.state.progress}
-        // progress={1}
-        // duration={3000}
-        // onEnd={this._onEnd}
-        />
+        {ProgressBarComponent}
         <GameComponent
           data={this.props.gameData[this.state.dataIndex]}
           runIndex={this.state.dataIndex}
