@@ -20,13 +20,20 @@ class StoryScreen extends Component {
     this.state = {
       count: 0,
       page: 0,
-      stories: []
+      stories: [],
+      refreshing: false
     };
   }
 
-  componentWillUpdate() {
-
-  };
+  // componentWillMount() {
+  //   this.setState(prevState => ({
+  //     stories: [
+  //       ...prevState.stories,
+  //       [this.props.story.pages[this.state.page].dialog[this.state.count], 
+  //       {bg: this.props.story.pages[this.state.page].bg}]
+  //     ]
+  //   }))
+  // };
 
   _renderState() {
     // var page = this.getState;
@@ -40,7 +47,8 @@ class StoryScreen extends Component {
       this.setState(prevState => ({
         stories: [
           ...prevState.stories,
-          this.props.story.pages[this.state.page].dialog[this.state.count]
+          [this.props.story.pages[this.state.page].dialog[this.state.count], 
+          {bg: this.props.story.pages[this.state.page].bg}]
         ]
       }))
     }
@@ -68,7 +76,7 @@ class StoryScreen extends Component {
 
   _renderItem = ({ item, index }) => (
     <View >
-      <StorySection item={item} index={index} page={this.state.page} count={this.state.count} />
+      <StorySection item={item} index={index} page={this.state.page} count={this.state.count} bg={this.props.story.pages[this.state.page].bg} />
     </View>
   )
 
@@ -80,10 +88,10 @@ class StoryScreen extends Component {
       )
     } else {
       if (this.props.story._id) {
-        let svg = Buffer.from(this.props.story.pages[this.state.page].bg, 'base64').toString('utf8')
-        const h = Dimensions.get("window").height
-        const w = Dimensions.get("window").width
-        const length = h > w ? h : w
+        // let svg = Buffer.from(this.props.story.pages[this.state.page].bg, 'base64').toString('utf8')
+        // const h = Dimensions.get("window").height
+        // const w = Dimensions.get("window").width
+        // const length = h > w ? h : w
 
         return (
           <View style={{ flex: 1 }}>
@@ -102,20 +110,21 @@ class StoryScreen extends Component {
               {/* <ImageBackground style={styles.backgroundImageStyle}
                source={{ uri: 'data:image/svg+xml;base64,' + this.props.story.pages[this.state.page].bg, }}
               > */}
-              <SvgUri
+              {/* <SvgUri
                 style={{ flex: 1, position: 'absolute' }}
                 width={length}
                 height={length}
                 //source={{ uri:'data:image/svg+xml;base64,' + this.props.story.pages[this.state.page].bg }}
                 svgXmlData={svg}
               >
-              </SvgUri>
+              </SvgUri> */}
 
               <FlatList
                 data={this.state.stories}
                 ref='flatlist'
                 // refreshControl=
-                refreshing
+                refreshing={this.state.refreshing}
+                onTouchMove={()=> this._renderState()}
                 extraData={this.state.stories}
                 keyExtractor={this._keyExtractor}
                 renderItem={this._renderItem}
@@ -126,11 +135,11 @@ class StoryScreen extends Component {
 
 
             </View>
-            <TouchableOpacity onPress={() => this._renderState()} >
+            {/* <TouchableOpacity onPress={() => this._renderState()} >
               <View style={styles.nextButtonStyle}>
                 <Icon name='keyboard-arrow-down' color='black' />
               </View>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         )
       } else {

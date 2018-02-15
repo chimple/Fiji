@@ -3,7 +3,7 @@ import { View, Text, ActivityIndicator } from 'react-native'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { fetchStickerPacks } from '../redux/sticker'
+import { fetchStickerPacks, fetchStickerFailure } from '../redux/sticker'
 import MessageList from '../components/MessageList'
 import { startChat, endChat,sendMessage } from '../redux/chat'
 
@@ -14,12 +14,13 @@ class ChatScreen extends Component {
   }
   componentWillUnmount() {
     this.props.dispatch(endChat())
+    this.props.dispatch(fetchStickerFailure())
   }
   _onPress = (message) => {
     // if(message !== null)
     this.props.dispatch(sendMessage(this.props.navigation.state.params.friend,message,'text'))
-  }
-
+  } 
+ 
   render() {
     // console.log("friend");
     // console.log(this.props.navigation.state.params.friend);
@@ -45,12 +46,14 @@ class ChatScreen extends Component {
               />
             :
             <MessageList
-                messages = { this.props.messages }
-                packs={this.props.packs}
-                navigation={ this.props.navigation }
-                user={this.props.user}
-                friend={this.props.navigation.state.params.friend}
-                onPress= { this._onPress }
+            messages = { this.props.messages }
+            navigation={ this.props.navigation }
+            packs={this.props.packs}
+            user={this.props.user}
+            sticker={this.props.sticker}
+            friend={this.props.navigation.state.params.friend}
+            onPress= { this._onPress }
+            onTabPress = {this._onTabpress}
               />
     ) 
   }
