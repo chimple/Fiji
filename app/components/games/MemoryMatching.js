@@ -86,6 +86,7 @@ export default class MemoryMatching extends Component {
         width: this.props.style.width,
         height: this.props.style.height
       }}
+      
       onPress={this._clickTile}
     />
     )
@@ -94,6 +95,7 @@ export default class MemoryMatching extends Component {
   _onStatusChange(id, view, prevStatus, currentStatus) {
     console.log("Rajesh-Data-onstatuschange:", id , prevStatus, currentStatus);
     currentStatus == 'D' && view.zoomOut(1000)
+    currentStatus == 'H' && view.flipInY(1000) 
   }
 
   _clickTile = (id, view) => {
@@ -125,7 +127,7 @@ export default class MemoryMatching extends Component {
             }
           }
         else
-          {
+          { 
             for(let i=0; i<arryID.length; i++)
             {
               this.setState({...this.state,
