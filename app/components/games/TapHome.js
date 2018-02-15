@@ -9,16 +9,14 @@ import Tile from './Tile';
 import { isAbsolute } from 'path';
 
 let timerId, iterate, iterateShake;
-let j = 0;
 let score = 0;
+let currentIndex = 0;
 
 export default class TapHome extends Component {
 
   constructor(props) {
     super(props);
-    this.state = this._initBoard(props)
-    iterate = 0;
-    iterateShake = 0;
+    this.state = this._initBoard(props);
     // Dimensions.addEventListener('change', () => {
     //   this.setState({
     //     width : this.fontSizer(this.props.style.height * 0.225) + 20
@@ -29,7 +27,7 @@ export default class TapHome extends Component {
 
   _initBoard = (props) => {
     let options = [];
-    j = 0;
+    let j = 0;
     iterate = 0;
     iterateShake = 0;
     const data = props.data.serial.map( function (temp, index ){
@@ -47,7 +45,8 @@ export default class TapHome extends Component {
       len,
       answer,
       width,
-      status
+      status,
+     
     })
   }
 
@@ -55,6 +54,15 @@ export default class TapHome extends Component {
     this.props.runIndex != nextProps.runIndex && this.setState(this._initBoard(nextProps))
     clearInterval(timerId);
     timerId = setInterval(this.timer, 2000) 
+    
+  }
+
+  componentWillUnmount() {
+    clearInterval(timerId);
+    iterate = 0;
+    iterateShake = 0;
+    currentIndex = 0;
+    score = 0;
   }
 
 
@@ -66,7 +74,9 @@ export default class TapHome extends Component {
       if( iterate == 2 )
       {
         iterate = 0;
-        this.setState({...this.state, status: 'selected', count: 0});
+        currentIndex = currentIndex + 1;
+        this.props.setProgress((currentIndex ) / 10)
+        this.setState({...this.state, status: 'selected'});
       }
     }else {
       this.setState({...this.state, count: this.state.count + 1})
@@ -103,18 +113,23 @@ export default class TapHome extends Component {
     
     if (this.state.answer == this.state.options[this.state.count]) {
       this.props.onScore(2)
+      currentIndex = currentIndex + 1;
+      console.log('test data', currentIndex , '\t', this.props.data.serial.length )
+      this.props.setProgress((currentIndex) / 10)
       score = score + 1;
       console.log('score', score)
-      this.setState({...this.state, status: 'selected', count: 0});
+      this.setState({...this.state, status: 'selected'});
      
     }
     else {
       iterateShake = iterateShake + 1
-      this.refs.view.shake(350).then((endState)=> {
+      this.refs.view.shake(250).then((endState)=> {
         if(iterateShake == 2)
         {
           iterateShake = 0;
-          this.setState({...this.state, status: 'selected', count: 0});
+          currentIndex = currentIndex + 1;
+          this.props.setProgress((currentIndex) / this.props.data.serial.length - 1)
+          this.setState({...this.state, status: 'selected'});
         }
       })
       
