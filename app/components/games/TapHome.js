@@ -123,7 +123,7 @@ export default class TapHome extends Component {
     }
     else {
       iterateShake = iterateShake + 1
-      this.refs.view.shake(350).then((endState)=> {
+      this.refs.view.shake(250).then((endState)=> {
         if(iterateShake == 2)
         {
           iterateShake = 0;
