@@ -9,6 +9,8 @@ const FETCH_STICKERS_FAILURE = 'Fiji/game/FETCH_STICKERS_FAILURE'
 const FETCH_STICKER_REQUEST = 'Fiji/game/FETCH_STICKER_REQUEST'
 const FETCH_STICKER_SUCCESS = 'Fiji/game/FETCH_STICKER_SUCCESS'
 const FETCH_STICKER_FAILURE = 'Fiji/game/FETCH_STICKER_FAILURE'
+export const STICKERS_PATH = 'asset:/stickers/'
+const STICKERS_JSON = STICKERS_PATH + 'stickers.json'
 
 const initialState = {
   isFetching: false,
@@ -116,14 +118,9 @@ export const fetchStickerFailure = () => ({
 
 export const fetchStickers = ( pack_id ) => async(dispatch, getState) => {
   try {
-    const prefix = 'sticker:' + pack_id.substring(13) + ':'
     dispatch(fetchStickersRequest())
-    const result = await contentDB.allDocs({
-      startkey: prefix, 
-      endkey: prefix +'\ufff0', 
-      include_docs: true})
-    console.log(result)
-    dispatch(fetchStickersSuccess(result.rows.map(function(row) { return row.doc})))
+    const stickers = require('../assets/stickers/stickers.json')
+    dispatch(fetchStickersSuccess(stickers[pack_id]))
   } catch(error) {
       console.log('fetchStickers: ' + error)
       dispatch(fetchStickersFailure())
@@ -145,12 +142,9 @@ export const fetchSticker = ( sticker_id ) => async(dispatch, getState) => {
 export const fetchStickerPacks = () => async(dispatch, getState) => {
   try {
     dispatch(fetchStickerPacksRequest())
-    const result = await contentDB.allDocs({
-      startkey: 'sticker-pack:', 
-      endkey: 'sticker-pack:' +'\ufff0', 
-      include_docs: true})
-    console.log("this is a pack ",result)
-    dispatch(fetchStickerPacksSuccess(result.rows.map(function(row) { return row.doc})))
+    const stickers = require('../assets/stickers/stickers.json')
+    console.log("this is a pack ",stickers)
+    dispatch(fetchStickerPacksSuccess(Object.keys(stickers)))
   } catch(error) {
       console.log('fetchStickers: ' + error)
       dispatch(fetchStickerPacksFailure())
