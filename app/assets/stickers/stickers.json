@@ -1,0 +1,10 @@
+{
+  "caterpillar.svg": [
+    "caterpillar_walk.svg",
+    "caterpillar_dance.svg"
+  ],
+  "cheshire-cat.svg": [
+    "cheshire-cat_grin.svg",
+    "cheshire-cat_clap.svg"
+  ]
+}

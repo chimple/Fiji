@@ -19,27 +19,11 @@ class TapHomeScreen extends Component {
   }
 
   render() {
-    ans = [];
-    options = [[]];
-    j = 0;
-    data = this.props.gameData.map( function (temp, index ){
-      let arr = [];
-      i = 0;
-      ans[j] = temp.answer; 
-      doubled = temp.serial.map( function (number, index ) {
-        arr[i] = number;
-        i++;
-      });
-      options[j] = arr;
-      j++;
-    });
+   
 
    
     return (
         <TapHome 
-          item={this.props.navigation.state.params.item} 
-          game={this.props.navigation.state.params.game} 
-          user={this.props.navigation.state.params.user}
           data={ans}
           data1={options}
         />
