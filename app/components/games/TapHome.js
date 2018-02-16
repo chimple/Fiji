@@ -9,8 +9,9 @@ import Tile from './Tile';
 import { isAbsolute } from 'path';
 
 
-let timerId;
+
 export default class TapHome extends Component {
+  timerId;
   constructor(props) {
     super(props);
     this.state = this._initBoard(props);
@@ -28,24 +29,21 @@ export default class TapHome extends Component {
       status,
       iterate,
       iterateShake,
-      timerId,
       width
     })
   }
 
   componentWillReceiveProps(nextProps) {
-    clearInterval(timerId);
-    timerId = setInterval(this.timer, 1400);
     this.props.runIndex != nextProps.runIndex && this.setState(this._initBoard(nextProps))
   }
 
   componentWillUnmount() {
-    clearInterval(timerId);
+    clearInterval(this.timerId);
   }
   
   componentDidMount(){
-    clearInterval(timerId);
-    timerId = setInterval(this.timer, 1400);
+    clearInterval(this.timerId);
+    this.timerId = setInterval(this.timer, 1400);
 
   }
 
@@ -60,23 +58,6 @@ export default class TapHome extends Component {
     }else {
       this.setState({...this.state, count: this.state.count + 1})
       
-      // //condition for increasing speed
-      // if ( score > 1 && score <= 3) {
-      //   clearInterval(this.state.timerId);
-      //   timerId = setInterval(this.timer, 1400);
-      // }
-      // else if (score > 3 && score <= 5) {
-      //   clearInterval(timerId);
-      //   timerId = setInterval(this.timer, 1200);
-      // }
-      // else if (score > 5 && score <= 7) {
-      //   clearInterval(timerId)
-      //   timerId = setInterval(this.timer, 1000);
-      // }
-      // else if (score > 7 && score <= 10) {
-      //   clearInterval(timerId);
-      //   timerId = setInterval(this.timer, 700);
-      // }
     }
   }
 
@@ -84,8 +65,8 @@ export default class TapHome extends Component {
   GenerateRandomNumber = () => {
     
     if (this.props.data.answer == this.props.data.serial[this.state.count]) {
-
-     // this.props.onScore()
+      
+      this.props.onScore()
       this.props.setProgress(1)
       this.setState({...this.state, status: 'selected'});
      
@@ -104,6 +85,18 @@ export default class TapHome extends Component {
 
     
   }//end of generateRandomNumber function
+
+  fontSizer (screenWidth) {
+    if(screenWidth > 100 && screenWidth < 150){
+      return 40;
+    }else if(screenWidth < 100){
+      return 30;
+    }else if(screenWidth < 200 && screenWidth > 150 ){
+      return 60
+    }else if(screenWidth < 300 && screenWidth > 200 ){ 
+      return 80;
+    }
+  }
 
   render() {
     const { container, subText } = styles;
