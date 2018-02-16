@@ -40,13 +40,13 @@ class CamPage extends Component {
     }
 
     takePicture() {
+        this.props.navigation.navigate('Friends');
         this.camera.capture()
             .then((data) => {
                 ImageResizer.createResizedImage(data.path, 128, 128, 'JPEG', 80)
                     .then(({ uri }) => {
                         RNFS.readFile(Platform.OS === 'android' ? uri.substring(7) : uri, "base64")  //substring(7) -> to remove the file://
                             .then(res => {
-                                this.props.navigation.navigate('Friends');
                                 this.props.dispatch(addUser({ name: '', image: res }));
                                 console.log('this is the id in camPage')
                             })
