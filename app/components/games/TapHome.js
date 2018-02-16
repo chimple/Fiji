@@ -9,16 +9,11 @@ import Tile from './Tile';
 import { isAbsolute } from 'path';
 
 
+let timerId;
 export default class TapHome extends Component {
   constructor(props) {
     super(props);
     this.state = this._initBoard(props);
-    // Dimensions.addEventListener('change', () => {
-    //   this.setState({
-    //     width : this.fontSizer(this.props.style.height * 0.225) + 20
-    //   })
-     
-    // });
   }
 
   _initBoard = (props) => {
@@ -27,7 +22,6 @@ export default class TapHome extends Component {
     let count = 0;
     let width = this.fontSizer(this.props.style.height * 0.225) + 20;
     let status = 'neutral';
-    let timerId = setInterval(this.timer, 1400);
     
     return ({
       count,
@@ -40,12 +34,19 @@ export default class TapHome extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    clearInterval(this.state.timerId);
+    clearInterval(timerId);
+    timerId = setInterval(this.timer, 1400);
     this.props.runIndex != nextProps.runIndex && this.setState(this._initBoard(nextProps))
   }
 
   componentWillUnmount() {
-    clearInterval(this.timerId);
+    clearInterval(timerId);
+  }
+  
+  componentDidMount(){
+    clearInterval(timerId);
+    timerId = setInterval(this.timer, 1400);
+
   }
 
   timer = () => {
@@ -83,11 +84,7 @@ export default class TapHome extends Component {
   GenerateRandomNumber = () => {
     
     if (this.props.data.answer == this.props.data.serial[this.state.count]) {
-      // this.props.onScore(2)
-      // this.setState({...this.state, currentIndex: this.state.currentIndex + 1 });
-      // this.props.setProgress((this.state.currentIndex ) / 10)
-      // score = score + 1;
-      // this.setState({...this.state, status: 'selected'});
+
      // this.props.onScore()
       this.props.setProgress(1)
       this.setState({...this.state, status: 'selected'});
@@ -108,24 +105,12 @@ export default class TapHome extends Component {
     
   }//end of generateRandomNumber function
 
-  fontSizer (screenWidth) {
-    if(screenWidth > 100 && screenWidth < 150){
-      return 40;
-    }else if(screenWidth < 100){
-      return 30;
-    }else if(screenWidth < 200 && screenWidth > 150 ){
-      return 60
-    }else if(screenWidth < 300 && screenWidth > 200 ){ 
-      return 80;
-    }
-  }
-
   render() {
     const { container, subText } = styles;
 
     const cellSize = Math.min(
-      Math.floor(this.props.style.width / 2),
-      Math.floor(this.props.style.height / 2)
+      Math.floor(this.props.style.width / 3),
+      Math.floor(this.props.style.height / 3)
     )
 
 
@@ -142,8 +127,8 @@ export default class TapHome extends Component {
           status={this.state.status}
           onStatusChange={this._onStatusChange}
           style={{
-            width: 80,
-            height: 80,
+            width: tileSize,
+            height: tileSize,
           }}
           statusStyles = {{
             neutral: {
@@ -166,9 +151,9 @@ export default class TapHome extends Component {
         />
         </Animatable.View>
         <TouchableOpacity onPress={this.GenerateRandomNumber}>
-          <Text style={[subText, { fontSize: this.state.width }]}>
-            {this.props.data.serial[this.state.count]}
-          </Text>
+            <Text style={[subText, {  fontSize: Math.max(20, tileSize - 40), marginTop: 30 }]}>
+              {this.props.data.serial[this.state.count]}
+            </Text>
         </TouchableOpacity>
       </View>
     );
@@ -196,6 +181,5 @@ const styles = {
     color: 'white',
     justifyContent: 'center',
     alignSelf: 'center',
-    marginTop: 30
   },
 };//End of styles
