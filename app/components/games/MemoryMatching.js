@@ -67,8 +67,8 @@ export default class MemoryMatching extends Component {
   return items;
   }
 
-  componentWillReceiveProps() {
-
+  componentDidMount() {
+    
   }
 
   render() {
@@ -121,8 +121,8 @@ export default class MemoryMatching extends Component {
 
   _onStatusChange(id, view, prevStatus, currentStatus) {
     console.log("Rajesh-Data-onstatuschange:", id , prevStatus, currentStatus);
-    currentStatus == 'D' && view.zoomOut(1000)
-    currentStatus == 'H' && view.flipInY(1000) 
+    currentStatus == 'D' && view.zoomOut(100)
+    currentStatus == 'H' && view.flipInY(250) 
   }
 
   _clickTile = (id, view) => {
@@ -133,14 +133,17 @@ export default class MemoryMatching extends Component {
     if(this.state.statuses[id]=='V')
      return;
 
+     if(this.state.statuses[id]=='D')
+     return;
+    
+    this.setState({...this.state,
+    statuses: this.state.statuses.map((val, index)=> {
+      return id == index ? 'V' : val})})
+
     view.flipInY(250).then((endState) => {
       arryCheck[k] = this.state.shuffledArray[id]; 
       arryID[k] =id;
       console.log("Rajesh-Id-Data",arryID);
-
-      this.setState({...this.state,
-        statuses: this.state.statuses.map((val, index)=> {
-          return id == index ? 'V' : val})})
     
       if(arryCheck.length===2)
       { 
@@ -155,6 +158,7 @@ export default class MemoryMatching extends Component {
             progressCnt++;
             const first = arryID[0];
             const second = arryID[1];
+            console.log("Checking",arryID);
             setTimeout( () => {
               this.setState({...this.state,
                 statuses: this.state.statuses.map((val, index)=> {
