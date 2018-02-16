@@ -17,7 +17,7 @@ class GameFrontScreen extends PureComponent {
   _keyExtractor = (item, index) => item._id
 
   _renderItem = ({ item }) => {
-    const svg = setIcons[item._id] ? setIcons[item._id] : setIcons['missing']
+    // const svg = setIcons[item._id] ? setIcons[item._id] : setIcons['missing']
     return (
     <TouchableOpacity onPress={() => this.props.navigation.navigate('CommonGameScreen',
       {
@@ -28,11 +28,11 @@ class GameFrontScreen extends PureComponent {
         play: 'TRIES'
       }
     )} style={{ flexDirection: 'row', borderColor: 'black', borderWidth: 2 }}>
-      <SvgUri
+      {/* <SvgUri
         width='50'
         height='50'
         source={svg}
-      />
+      /> */}
       <Text style={{ color: 'black', fontSize: 50, fontWeight: 'bold' }}>{item.name}</Text>
     </TouchableOpacity>
   )
