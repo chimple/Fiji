@@ -7,6 +7,10 @@ import User from './User'
 
 
 class UserList extends PureComponent {
+  state = {
+    len: null
+  }
+
   _keyExtractor = (item, index) => item._id
 
   _renderItem = ({ item }) => (
@@ -17,30 +21,43 @@ class UserList extends PureComponent {
   )
 
 
-  _imageSave = (userImage) =>{
+  _imageSave = (userImage) => {
     this.props.dispatch(addUser(userImage))
   }
   _addItem = () => (
-      <TouchableOpacity style={styles.UserListStyle} onPress={() => this.props.navigation.navigate('Cam')} >
-        <View style={styles.ViewStyle}>
+    <TouchableOpacity style={styles.UserListStyle} onPress={() => this.props.navigation.navigate('CamPage')} >
+      <View style={styles.ViewStyle}>
         <Image
-          style={styles.ImageStyle}
+          style={{
+              width: this.state.len * 0.24,
+              height: this.state.len * 0.24,
+              borderRadius: this.state.len * 0.12,
+            }}
           source={{ uri: 'https://cdn.pixabay.com/photo/2017/01/10/23/01/icon-1970474_960_720.png' }}
         />
         <Text style={styles.TextStyle}>
-            ADD USER
+          ADD USER
           </Text>
-        </View>
-      </TouchableOpacity>
-    )
+      </View>
+    </TouchableOpacity>
+  )
 
-  // merge = _renderItem + 
+  onLayoutHandler() {
+    console.log('onLayoutHandler');
+    // console.log(e.nativeEvent.layout);
+    // const h = Dimensions.get("window").height
+    const w = Dimensions.get("window").width
+    // const length = h < w ? h : w
+    this.setState({ len: w })
+  }
 
   render() {
     // console.disableYellowBox = true;
     return (
       <View style={styles.UserListStyle}>
         <FlatList
+          onLayout={this.onLayoutHandler.bind(this)}
+          horizontal={false}
           showsVerticalScrollIndicator={false}
           // contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap' }}
           numColumns={3}
@@ -68,39 +85,39 @@ const styles = StyleSheet.create({
     paddingLeft: '1%',
     // paddingRight: '2%'
   },
-  ImageViewStyle:{
+  ImageViewStyle: {
     //backgroundColor:'white', 
-    flex:3, 
+    flex: 3,
     // justifyContent:'center', 
-    padding:'4%'
+    padding: '4%'
   },
-  ImageStyle:{
+  ImageStyle: {
     width: Dimensions.get('window').width * 0.24,
     height: Dimensions.get('window').width * 0.24,
     borderRadius: Dimensions.get('window').width * 0.12,
     // marginTop: Dimensions.get('window').width * 0.02,
     // marginLeft: Dimensions.get('window').width * 0.04
   },
-  ViewStyle:{
-    flex:1,
-    alignItems:'center',
+  ViewStyle: {
+    flex: 1,
+    alignItems: 'center',
     // justifyContent:'center', 
     //backgroundColor:'grey'
   },
-  TextStyle:{
-    fontWeight:'bold', 
-    fontSize:15, 
-    color:'black'
+  TextStyle: {
+    fontWeight: 'bold',
+    fontSize: 15,
+    color: 'black'
   },
-  TouchableStyle:{
-    flex:1,
+  TouchableStyle: {
+    flex: 1,
     // height:Dimensions.get('window').width * 0.3,
     // width: Dimensions.get('window').width * 0.3,
     // justifyContent: 'center',
     // borderColor:'black',
     // borderWidth:2, 
-    marginLeft:'7%',
-    marginTop:'10%'
+    marginLeft: '7%',
+    marginTop: '10%'
   }
 });
 

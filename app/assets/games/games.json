@@ -1,0 +1,142 @@
+{
+  "game:memory-matching": {
+    "_id": "game:memory-matching",
+    "name": "Memory Matching",
+    "screen": "Game1",
+    "category": "Read",
+    "sets": [
+      {
+        "_id": "letters",
+        "name": "Letters"
+      },
+      {
+        "_id": "numbers",
+        "name": "Numbers"
+      },
+      {
+        "_id": "images",
+        "name": "Images"
+      }
+    ]
+  },
+  "game:tap-home": {
+    "_id": "game:tap-home",
+    "name": "Tap Home",
+    "screen": "Game2",
+    "category": "Read",
+    "sets": [
+      {
+        "_id": "letters",
+        "name": "Letters"
+      },
+      {
+        "_id": "numbers",
+        "name": "Numbers"
+      },
+      {
+        "_id": "images",
+        "name": "Images"
+      }
+    ]
+  },
+  "game:reflex": {
+    "_id": "game:reflex",
+    "name": "Reflex",
+    "screen": "Reflex",
+    "category": "listening",
+    "sets": [
+      {
+        "_id": "letters",
+        "name": "Letters"
+      },
+      {
+        "_id": "numbers",
+        "name": "Numbers"
+      },
+      {
+        "_id": "images",
+        "name": "Images"
+      }
+    ]
+  },
+  "game:tap-wrong": {
+    "_id": "game:tap-wrong",
+    "name": "Tap-wrong",
+    "screen": "Game3",
+    "category": "listening",
+    "sets": [
+      {
+        "_id": "letters",
+        "name": "Letters"
+      },
+      {
+        "_id": "numbers",
+        "name": "Numbers"
+      },
+      {
+        "_id": "images",
+        "name": "Images"
+      }
+    ]
+  },
+  "game:word": {
+    "_id": "game:word",
+    "name": "Word",
+    "screen": "Game4",
+    "category": "writing",
+    "sets": [
+      {
+        "_id": "letters",
+        "name": "Letters"
+      },
+      {
+        "_id": "numbers",
+        "name": "Numbers"
+      },
+      {
+        "_id": "images",
+        "name": "Images"
+      }
+    ]
+  },
+  "game:multiple-choice": {
+    "_id": "game:multiple-choice",
+    "name": "Multiple-choice",
+    "screen": "Game6",
+    "category": "writing",
+    "sets": [
+      {
+        "_id": "letters",
+        "name": "Letters"
+      },
+      {
+        "_id": "numbers",
+        "name": "Numbers"
+      },
+      {
+        "_id": "images",
+        "name": "Images"
+      }
+    ]
+  },
+  "game:connect-dots": {
+    "_id": "game:connect-dots",
+    "name": "Connect-dots",
+    "screen": "Game5",
+    "category": "reading",
+    "sets": [
+      {
+        "_id": "letters",
+        "name": "Letters"
+      },
+      {
+        "_id": "numbers",
+        "name": "Numbers"
+      },
+      {
+        "_id": "images",
+        "name": "Images"
+      }
+    ]
+  }
+}

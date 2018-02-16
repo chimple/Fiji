@@ -23,8 +23,9 @@ import { Buffer } from 'buffer'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { fetchStickerPacks, fetchStickers ,fetchSticker} from '../redux/sticker';
+import { fetchStickerPacks, fetchStickers ,fetchSticker, fetchStickerFailure, STICKERS_PATH} from '../redux/sticker';
 import { sendMessage } from '../redux/chat';
+import stickers from '../assets/stickers/stickers';
 
 
 
@@ -34,7 +35,9 @@ class TabbedView extends Component {
   // componentDidMount() {
   //   this.props.dispatch(fetchStickerPacks());
   // }
-
+  componentWillUnmount() {
+    this.props.dispatch(fetchStickerFailure())
+  }
 
  onPressTabView = (pack_id) => {
     this.packId = pack_id
@@ -47,7 +50,7 @@ class TabbedView extends Component {
 
   updatedStickerId= (StickerId) => {
     //  this.props.onPress(StickerId, this.props.stickers);
-    this.props.dispatch(fetchSticker(StickerId));
+    // this.props.dispatch(fetchSticker(StickerId));
       this.props.dispatch(sendMessage(this.props.friend,StickerId,'sticker'))
       // this.props.stickers
  
@@ -60,7 +63,7 @@ class TabbedView extends Component {
     // console.log("the data is :",this.props.packs)
     return <ScrollableTabView
 
-      style={{ marginTop: 20, }}
+      style={{ marginTop: 20,}}
 
       initialPage={0}
 
@@ -70,23 +73,22 @@ class TabbedView extends Component {
       <ScrollView tabLabel="jionomk" >
         <View style={styles.card}>
           {this.props.stickers.map((tab, i) => {
-            let svgImage = Buffer.from(tab.svg, 'base64').toString('utf8')
+            // let svgImage = Buffer.from(tab.svg, 'base64').toString('utf8')
             // console.log("this is svgImage ", svgImage);
             //  return <Text key={i} >{tab._id}</Text>
-
-            return <TouchableOpacity key={i} onPress={() => this.updatedStickerId(tab._id)}>
+            const svg = stickers[tab] || stickers['unknown.svg']
+            return <TouchableOpacity key={i} onPress={() => this.updatedStickerId(tab)}>
               <SvgUri
                 key={i}
                 width="30"
                 height="30"
-                svgXmlData={svgImage}
-              />
+                svgXmlData={svg.default}
+                />
             </TouchableOpacity>
           })}
         </View>
       </ScrollView>
-      {/* 
-    <ScrollView tabLabel="ios-people" style={styles.tabView}>
+    {/* <ScrollView tabLabel="ios-people" style={styles.tabView}>
 
       <View style={styles.card}>
 
@@ -94,7 +96,7 @@ class TabbedView extends Component {
 
       </View>
 
-    </ScrollView> */}
+    </ScrollView>  */}
     </ScrollableTabView>;
 
 

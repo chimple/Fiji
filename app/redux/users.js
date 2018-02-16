@@ -48,6 +48,10 @@ export const fetchUsers = () => async(dispatch) => {
   try {
     const syncResult = await usersDB.sync(remoteUsersDB)
     console.log(syncResult)
+  } catch(error) {
+    console.log('_getAllUsers: ' + error)
+  }
+  try {
     const result = await usersDB.allDocs({include_docs: true})
     dispatch(fetchUsersSuccess(result.rows.map(function(row) { return row.doc})))
   } catch(error) {

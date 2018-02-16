@@ -1,4 +1,3 @@
-import { contentDB, remoteContentDB } from '../db'
 import { resetScore } from './score'
 
 const FETCH_GAMES_REQUEST = 'Fiji/game/FETCH_GAMES_REQUEST'
@@ -118,16 +117,11 @@ export const fetchGameDataFailure = () => ({
 export const fetchGames = () => async(dispatch, getState) => {
   try {
     dispatch(fetchGamesRequest())
-    const result = await contentDB.allDocs({
-      startkey: 'game:', 
-      endkey: 'game:'+'\ufff0', 
-      include_docs: true})
-    console.log(result)
-    let categories = result.rows.reduce(function(grouped, item) { 
-      console.log(item.doc.category)
-      let key = item.doc['category']
+    const result = require('../assets/games/games.json')
+    let categories = Object.keys(result).reduce(function(grouped, item) { 
+      let key = result[item]['category']
       grouped[key] = grouped[key] || []
-      grouped[key].push(item.doc)
+      grouped[key].push(result[item])
       return grouped
     }, {})
     const categoryList = Object.keys(categories).map((category) => {
@@ -143,9 +137,8 @@ export const fetchGames = () => async(dispatch, getState) => {
 export const fetchGameTheme = ( game_id ) => async(dispatch, getState) => {
   try {
     dispatch(fetchGameThemeRequest())
-    const theme = await contentDB.get('gametheme:' + game_id.substring(5))
-    console.log(theme)
-    dispatch(fetchGameThemeSuccess(theme))
+    const sets = require('../assets/games/games.json')[game_id].sets
+    dispatch(fetchGameThemeSuccess({_id: game_id, sets}))
   } catch(error) {
       console.log('fetchGameTheme: ' + error)
       dispatch(fetchGameThemeFailure())

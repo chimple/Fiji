@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
+import TileGrid from './TileGrid'
 import {
   AppRegistry,
   StyleSheet,
@@ -8,106 +10,49 @@ import {
   Animated,
   Alert
 } from 'react-native';
-import PropTypes from 'prop-types';
-import TileGrid from './TileGrid';
-import Orientation from 'react-native-orientation';
-import Board from './Board';
-import Card from './Card';
-import ScoreBoard from './ScoreBoard';
 
 const SIZE = 4
+arryCheck =[];
+arryID =[];
+let k =0;
+let Matched =0;
+let progressCnt =1;
 
 export default class MemoryMatching extends Component {
   constructor(props) {
-    super(props);
-    this.state = {board: new Board(4 , 4), players: 1}
+    super(props)
+    this.state = this._initBoard(props)
   }
 
-  componentDidMount() {
-    Orientation.lockToPortrait();
-  }
+  _initBoard = (props) => {
+    let arry = new Array(SIZE * SIZE);
+    let j =0;
+    const data=props.data.map( function (item, i){
+        item.map(function(element, i) { 
+          arry[j]=element;
+          j++;
+        });
+      }
+    )
+    console.log("Rajesh-Original-Data",arry);
 
-  componentWillUnmount() {
-    Orientation.unlockAllOrientations();
-  }
+    let shuffledArray = new Array(SIZE * SIZE)
+    shuffledArray = this.arrayShuffle(arry);
+    
+    console.log("Rajesh-Shuffled-Data",shuffledArray);
 
-  onRestartPress() {
-    alert("RestartGame!!!");
-  }
-
-  makeSinglePlayer() {
-    alert("makeSinglePlayer!!!");
-  }
-
-  isGameOver() {
-    var board = this.state.board,
-        totalScore = board.score[0] + board.score[1],
-        maxScore = board.maxScore,
-        msg;
-
-    if (totalScore < maxScore) {
-        return false;
+    let statuses = new Array(SIZE * SIZE)
+    for (let i = 0; i < statuses.length; i++) {
+      statuses[i] = 'H';
     }
 
-    if (this.state.players === 1) {
-        msg = 'Hey!! You\'ve done it!';
-      }
+    console.log("Rajesh-Status-Data",statuses);
 
-    Alert.alert(
-        'Game Over',
-        msg,
-        [
-          {text: 'Alright!'},
-          {text: 'Start new'}
-      ]
-    );
+    return ({ shuffledArray , statuses })
 
-    return true;
   }
 
-
-handleCardPress(url: string, row: number, col: number) {
-  var board = this.state.board;
-  var previous = board.selected;
-  var selected = this.refs['card' + row + col];
-  var current = {
-      url: url,
-      node: selected
-  }
-
-  if (!previous) {
-      // first card
-      board.selected = current;
-  } else if (previous.url === url) {
-      // successful hit
-      previous.node.setPaired();
-      selected.setPaired();
-
-      this.setState({board: board.pair()});
-  } else {
-      // missed hit
-      board.miss(true);
-
-      setTimeout(
-          () => {
-              selected.hide();
-              previous.node.hide();
-              this.setState({board: board});
-          },
-        100
-      );
-  }
-}
-
-onCardHide() {
-    this.state.board.unlock();
-  }
-
-  canShow() {
-    return !this.state.board.isLocked;
-  }
-
-  arrayShuffle(items: arry) {
+  arrayShuffle(items: shuffledArray) {
     var currentIndex = items.length,
     temporaryValue, randomIndex;
 
@@ -122,73 +67,131 @@ onCardHide() {
   return items;
   }
 
+  componentDidMount() {
+    
+  }
+
   render() {
-    console.log("Rajesh data",this.props.data);
-
-    arry =[];
-    j =0;
-    const data=this.props.data.map( function (item, i){
-        item.map(function(element, i) { 
-          arry[j]=element;
-          j++;
-        });
-      }
-    )
-
-    console.log("Rajesh-Array",arry);
-
-    var shuffledArray = this.arrayShuffle(arry)
-
-    console.log("Rajesh-Shuffled-Array",shuffledArray);
-  
     return (
       <TileGrid
-        numRows={SIZE}
-        numCols={SIZE}
-        data={shuffledArray}
-        tileColor='#24B2EA'
-        edgeColor='deepskyblue'
-        pressedTileColor='goldenrod'
-        pressedEdgeColor='darkgoldenrod'
-        textColor='#FFFFFF'
-        style={{
-          width: this.props.style.width,
-          height: this.props.style.height
-        }}
-      />
-    );
+      numRows={SIZE}
+      numCols={SIZE}
+      data={this.state.shuffledArray}
+      statuses={this.state.statuses}
+      onStatusChange={this._onStatusChange}
+      tileColor='#24B2EA'
+      edgeColor='deepskyblue'
+      pressedTileColor='goldenrod'
+      pressedEdgeColor='darkgoldenrod'
+      textColor='#FFFFFF'
+      style={{
+        width: this.props.style.width,
+        height: this.props.style.height
+      }}
+      statusStyles = {{
+        H: {
+          View: {
+           
+          },
+          Text: {
+            opacity: 0
+          }
+        },
+        V: {
+          View: {
+            backgroundColor: '#24B2EA'
+          },
+          Text: {
+            opacity: 1
+          }
+        },
+        D: {
+          View: {
+           
+          },
+          Text: {
+           
+          }
+        }
+      }}
+      onPress={this._clickTile}
+    />
+    )
   }
+
+  _onStatusChange(id, view, prevStatus, currentStatus) {
+    console.log("Rajesh-Data-onstatuschange:", id , prevStatus, currentStatus);
+    currentStatus == 'D' && view.zoomOut(100)
+    currentStatus == 'H' && view.flipInY(250) 
+  }
+
+  _clickTile = (id, view) => {
+    console.log("Pressed-Tile-id",id);
+    console.log("Pressed-Tile-id-Content",this.state.shuffledArray[id]);
+    console.log("Pressed-Tile-status",this.state.statuses[id]);
+
+    if(this.state.statuses[id]=='V'||this.state.statuses[id]=='D')
+     return;
+    
+    this.setState({...this.state,
+    statuses: this.state.statuses.map((val, index)=> {
+      return id == index ? 'V' : val})})
+
+    view.flipInY(250).then((endState) => {
+      arryCheck[k] = this.state.shuffledArray[id]; 
+      arryID[k] =id;
+      console.log("Rajesh-Id-Data",arryID);
+
+      if(arryCheck.length===2)
+      {      
+        if(arryCheck[0]===arryCheck[1])
+          {
+            Matched++;     
+            if(Matched == 8)
+             this.props.onEnd();  
+
+            this.props.onScore(2);
+            this.props.setProgress((progressCnt) / (this.state.shuffledArray.length/2));
+            progressCnt++;
+            const first = arryID[0];
+            const second = arryID[1];
+            console.log("Checking",arryID);
+            setTimeout( () => {
+              this.setState({...this.state,
+                statuses: this.state.statuses.map((val, index)=> {
+                  return (first == index || second == index) ? 'D' : val})})
+          }, 0);
+          }
+        else
+          { 
+            const first = arryID[0];
+            const second = arryID[1];
+            setTimeout( () => {
+              this.setState({...this.state,
+                statuses: this.state.statuses.map((val, index)=> {
+                  return (first == index || second == index) ? 'H' : val})})
+          }, 0);    
+          }
+
+          arryID = [];
+          arryCheck = [];
+          k=0;
+          console.log("Rajesh-Status-data",this.state.statuses);
+          return {statuses};
+      
+      }
+      console.log("arryCheck",arryCheck); 
+      console.log("Value of K",k);
+      k++;   
+    })
+   // console.log("Rajesh-Status-data",this.state.statuses);
+  }
+
 }
 
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F4F9CB',
-    width: '100%',
-    height: '100%'
-  },
-  title: {
-    fontFamily: 'ChalkboardSE-Bold',
-    fontSize: 39,
-    marginBottom: 0,
-    color: '#535659',
-  },
-  buttonText: {
-    fontFamily: 'ChalkboardSE-Bold',
-    fontSize: 16,
-    marginTop: 25,
-    color: '#535659',
-  },
-  playerToggleButtons: {
-    flexDirection: 'row',
-  },
-  board: {
-    padding: 5,
-    backgroundColor: 'transparent',
-    borderRadius: 10,
-  },
-  row: {
-    flexDirection: 'row',
-  }
-});
+MemoryMatching.propTypes = {
+  data: PropTypes.object,
+  onScore: PropTypes.func,
+  onEnd: PropTypes.func,
+  setProgress: PropTypes.func
+}

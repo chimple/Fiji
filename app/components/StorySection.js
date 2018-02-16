@@ -39,7 +39,6 @@ class AnimationView extends Component {
 }
 
 class StorySection extends Component {
-    
     render() {
         const stories = [];
         console.log("the page number is :", this.props.item)
@@ -63,7 +62,6 @@ class StorySection extends Component {
 
         // for (let i = 0; i < this.props.index; i++) {
         //     for (let j = 0; j <= dialog.length; j++) {
-
         var speaker = this.props.item[0].speaker;
         var speakerIndex = 0;
         for (let k = 0; k < characterData.length; k++) {

@@ -17,7 +17,8 @@ import { Buffer } from 'buffer'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { fetchStickerPacks, fetchStickers } from '../redux/sticker';
+import { fetchStickerPacks, fetchStickers, STICKERS_PATH } from '../redux/sticker';
+import stickers from '../assets/stickers/stickers';
 
 
 
@@ -87,20 +88,20 @@ export default class FacebookTabBar extends Component {
 
 
     render() {
-            
+            console.log("data is not coming",this.props.tabData);
 return  <View style={[styles.tabs, this.props.style,]}>
 
             {this.props.tabData.map((tab, i) => {
-                     let svgImage = Buffer.from(tab.svg, 'base64').toString('utf8')
-                return <TouchableOpacity key={i} onPress={ ()=>this.updatedId(i,tab._id)} style={styles.tab}>
+                const svg = stickers[tab] || stickers['unknown.svg']
+                return <TouchableOpacity key={i} onPress={ ()=>this.updatedId(i,tab)} style={styles.tab}>
                 
                     {/* <Text key={i} >{tab._id} </Text> */}
                     <SvgUri
                                 key={i} 
                                 width="30"
                                 height="30"
-                                svgXmlData={svgImage}
-                            />
+                                svgXmlData={svg.default}
+                                />
                 </TouchableOpacity>;
 
             })}
