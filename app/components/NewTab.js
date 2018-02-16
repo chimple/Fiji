@@ -87,7 +87,7 @@ export default class FacebookTabBar extends Component {
 
 
     render() {
-            
+            console.log("data is not coming",this.props.tabData);
 return  <View style={[styles.tabs, this.props.style,]}>
 
             {this.props.tabData.map((tab, i) => {
@@ -105,13 +105,14 @@ return  <View style={[styles.tabs, this.props.style,]}>
                 ? require('../assets/stickers/cheshire-cat_clap.svg')
                 : ''
               //  let svgImage = Buffer.from(tab.svg, 'base64').toString('utf8')
+              console.log("data is not coming",this.props.tabData.tab);
                 return <TouchableOpacity key={i} onPress={ ()=>this.updatedId(i,tab)} style={styles.tab}>
                 
                     {/* <Text key={i} >{tab._id} </Text> */}
                     <SvgUri
                                 key={i} 
-                                width="30"
-                                height="30"
+                                width="50"
+                                height="50"
                                 source={svg}
                                 />
                 </TouchableOpacity>;
