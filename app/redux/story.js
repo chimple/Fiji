@@ -1,4 +1,4 @@
-import { contentDB, remoteContentDB } from '../db'
+import { contentDB, remoteContentDB, storyDB, remoteStoryDB } from '../db'
 
 const FETCH_TITLES_REQUEST = 'Fiji/story/FETCH_TITLES_REQUEST'
 const FETCH_TITLES_SUCCESS = 'Fiji/story/FETCH_TITLES_SUCCESS'
@@ -104,9 +104,17 @@ export const fetchTitles = () => async(dispatch, getState) => {
 
 export const fetchStory = ( title ) => async(dispatch, getState) => {
   dispatch(fetchStoryRequest())
+  const storyId = 'story:' + title._id.substring(11)
+  try {
+    const result = await remoteStoryDB.replicate.to(storyDB, {
+      doc_ids: [storyId]
+    })
+  } catch (error) {
+    console.log('fetchStory: '+error)
+  }
   try {
     // story._id is storytitle:xyz, so strip out storytitle:
-    const doc = await contentDB.get( 'story:' + title._id.substring(11))
+    const doc = await storyDB.get(storyId)
     console.log(doc)
     dispatch(fetchStorySuccess(doc))
   } catch(error) {

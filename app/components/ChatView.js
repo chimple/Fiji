@@ -6,6 +6,7 @@ import { Buffer } from 'buffer'
 import SvgUri from 'react-native-svg-uri'
 import { sendMessage, startChat, endChat } from '../redux/chat';
 import { STICKERS_PATH } from '../redux/sticker'
+import stickers from '../assets/stickers/stickers'
 
 
 class ChatView extends Component {
@@ -19,24 +20,12 @@ class ChatView extends Component {
         );
       }
       else if (this.props.item.message.type === 'sticker') {
-        const svg = this.props.item.message.content == 'caterpillar.svg'
-        ? require('../assets/stickers/caterpillar.svg')
-        : this.props.item.message.content == 'caterpillar_walk.svg'
-          ? require('../assets/stickers/caterpillar_walk.svg')
-          : this.props.item.message.content == 'caterpillar_dance.svg'
-            ? require('../assets/stickers/caterpillar_dance.svg')
-            : this.props.item.message.content == 'cheshire-cat.svg'
-            ? require('../assets/stickers/cheshire-cat.svg')
-            : this.props.item.message.content == 'cheshire-cat_grin.svg'
-              ? require('../assets/stickers/cheshire-cat_grin.svg')
-              : this.props.item.message.content == 'cheshire-cat_clap.svg'
-                ? require('../assets/stickers/cheshire-cat_clap.svg')
-                : ''
+        const svg = stickers[this.props.item.message.content] || stickers['unknown.svg']
     return (
           <SvgUri
             width="30"
             height="30"
-            source={svg}
+            svgXmlData={svg.default}
           />
         );
       }

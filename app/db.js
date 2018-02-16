@@ -36,6 +36,8 @@ const usersDB = new PouchDB('users')
 const remoteUsersDB = new PouchDB(remoteURL + 'users')
 const contentDB = new PouchDB('content')
 const remoteContentDB = new PouchDB(remoteURL + 'content')
+const storyDB = new PouchDB('story')
+const remoteStoryDB = new PouchDB(remoteURL + 'story')
 
 contentDB.replicate.from(remoteContentDB).then(function (result) {
   console.log("contentDB replication")
@@ -45,4 +47,4 @@ contentDB.replicate.from(remoteContentDB).then(function (result) {
   console.log(err)
 }) 
 
-export { usersDB, remoteUsersDB, contentDB, remoteContentDB, remoteURL }
+export { usersDB, remoteUsersDB, contentDB, remoteContentDB, storyDB, remoteStoryDB, remoteURL }
