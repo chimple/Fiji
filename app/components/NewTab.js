@@ -88,11 +88,11 @@ export default class FacebookTabBar extends Component {
 
 
     render() {
-            
+            console.log("data is not coming",this.props.tabData);
 return  <View style={[styles.tabs, this.props.style,]}>
 
             {this.props.tabData.map((tab, i) => {
-                const svg = stickers[tab] ? stickers[tab] : stickers['unknown.svg']
+                const svg = stickers[tab] || stickers['unknown.svg']
                 return <TouchableOpacity key={i} onPress={ ()=>this.updatedId(i,tab)} style={styles.tab}>
                 
                     {/* <Text key={i} >{tab._id} </Text> */}
@@ -100,7 +100,7 @@ return  <View style={[styles.tabs, this.props.style,]}>
                                 key={i} 
                                 width="30"
                                 height="30"
-                                source={svg}
+                                svgXmlData={svg.default}
                                 />
                 </TouchableOpacity>;
 

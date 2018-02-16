@@ -1,8 +1,8 @@
 const setIcons = {
-  'missing': require('./missing.svg'),
-  'letters': require('./letters.svg'),
-  'numbers': require('./numbers.svg'),
-  'images': require('./images.svg')
+  'missing': require('./missing.js'),
+  'letters': require('./letters.js'),
+  'numbers': require('./numbers.js'),
+  'images': require('./images.js')
 }
 
 export default setIcons

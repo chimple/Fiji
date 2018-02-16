@@ -67,8 +67,8 @@ export default class MemoryMatching extends Component {
   return items;
   }
 
-  componentWillReceiveProps() {
-
+  componentDidMount() {
+    
   }
 
   render() {
@@ -121,8 +121,8 @@ export default class MemoryMatching extends Component {
 
   _onStatusChange(id, view, prevStatus, currentStatus) {
     console.log("Rajesh-Data-onstatuschange:", id , prevStatus, currentStatus);
-    currentStatus == 'D' && view.zoomOut(1000)
-    currentStatus == 'H' && view.flipInY(1000) 
+    currentStatus == 'D' && view.zoomOut(100)
+    currentStatus == 'H' && view.flipInY(250) 
   }
 
   _clickTile = (id, view) => {
@@ -130,36 +130,37 @@ export default class MemoryMatching extends Component {
     console.log("Pressed-Tile-id-Content",this.state.shuffledArray[id]);
     console.log("Pressed-Tile-status",this.state.statuses[id]);
 
-    if(this.state.statuses[id]=='V')
+    if(this.state.statuses[id]=='V'||this.state.statuses[id]=='D')
      return;
+    
+    this.setState({...this.state,
+    statuses: this.state.statuses.map((val, index)=> {
+      return id == index ? 'V' : val})})
 
     view.flipInY(250).then((endState) => {
       arryCheck[k] = this.state.shuffledArray[id]; 
       arryID[k] =id;
       console.log("Rajesh-Id-Data",arryID);
 
-      this.setState({...this.state,
-        statuses: this.state.statuses.map((val, index)=> {
-          return id == index ? 'V' : val})})
-    
       if(arryCheck.length===2)
-      { 
-        if(Matched == 8)
-          this.props.onEnd();
-       
+      {      
         if(arryCheck[0]===arryCheck[1])
           {
-            Matched++;      
+            Matched++;     
+            if(Matched == 8)
+             this.props.onEnd();  
+
             this.props.onScore(2);
             this.props.setProgress((progressCnt) / (this.state.shuffledArray.length/2));
             progressCnt++;
             const first = arryID[0];
             const second = arryID[1];
+            console.log("Checking",arryID);
             setTimeout( () => {
               this.setState({...this.state,
                 statuses: this.state.statuses.map((val, index)=> {
                   return (first == index || second == index) ? 'D' : val})})
-          },1000);
+          }, 0);
           }
         else
           { 
@@ -169,7 +170,7 @@ export default class MemoryMatching extends Component {
               this.setState({...this.state,
                 statuses: this.state.statuses.map((val, index)=> {
                   return (first == index || second == index) ? 'H' : val})})
-          },1000);    
+          }, 0);    
           }
 
           arryID = [];
