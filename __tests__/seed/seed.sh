@@ -15,3 +15,7 @@ curl -X POST https://057d4c76-09e0-4f8d-b78d-7d61021e406c-bluemix:c497d04cafd1d0
 curl -X DELETE https://057d4c76-09e0-4f8d-b78d-7d61021e406c-bluemix:c497d04cafd1d098f244dcec455c1468cdf324a223da49e1f9f34a16f7d235f5@057d4c76-09e0-4f8d-b78d-7d61021e406c-bluemix.cloudant.com/content
 curl -X PUT https://057d4c76-09e0-4f8d-b78d-7d61021e406c-bluemix:c497d04cafd1d098f244dcec455c1468cdf324a223da49e1f9f34a16f7d235f5@057d4c76-09e0-4f8d-b78d-7d61021e406c-bluemix.cloudant.com/content
 curl -X POST https://057d4c76-09e0-4f8d-b78d-7d61021e406c-bluemix:c497d04cafd1d098f244dcec455c1468cdf324a223da49e1f9f34a16f7d235f5@057d4c76-09e0-4f8d-b78d-7d61021e406c-bluemix.cloudant.com/content/_bulk_docs -H "Content-Type: application/json" --data "@__tests__/seed/content.json"
+
+curl -X DELETE https://057d4c76-09e0-4f8d-b78d-7d61021e406c-bluemix:c497d04cafd1d098f244dcec455c1468cdf324a223da49e1f9f34a16f7d235f5@057d4c76-09e0-4f8d-b78d-7d61021e406c-bluemix.cloudant.com/story
+curl -X PUT https://057d4c76-09e0-4f8d-b78d-7d61021e406c-bluemix:c497d04cafd1d098f244dcec455c1468cdf324a223da49e1f9f34a16f7d235f5@057d4c76-09e0-4f8d-b78d-7d61021e406c-bluemix.cloudant.com/story
+curl -X POST https://057d4c76-09e0-4f8d-b78d-7d61021e406c-bluemix:c497d04cafd1d098f244dcec455c1468cdf324a223da49e1f9f34a16f7d235f5@057d4c76-09e0-4f8d-b78d-7d61021e406c-bluemix.cloudant.com/story/_bulk_docs -H "Content-Type: application/json" --data "@__tests__/seed/story.json"

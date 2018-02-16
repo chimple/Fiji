@@ -4,8 +4,8 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import SvgUri from 'react-native-svg-uri'
-import { Buffer } from 'buffer'
 import { fetchGameTheme } from '../redux/game'
+import setIcons from '../assets/games/setIcons';
 
 class GameFrontScreen extends PureComponent {
   componentDidMount() {
@@ -16,7 +16,9 @@ class GameFrontScreen extends PureComponent {
 
   _keyExtractor = (item, index) => item._id
 
-  _renderItem = ({ item }) => (
+  _renderItem = ({ item }) => {
+    const svg = setIcons[item._id] || setIcons['missing']
+    return (
     <TouchableOpacity onPress={() => this.props.navigation.navigate('CommonGameScreen',
       {
         item,
@@ -29,11 +31,12 @@ class GameFrontScreen extends PureComponent {
       <SvgUri
         width='50'
         height='50'
-        svgXmlData={Buffer.from(item.svg, 'base64').toString('utf8')}
+        svgXmlData={svg.default}
       />
       <Text style={{ color: 'black', fontSize: 50, fontWeight: 'bold' }}>{item.name}</Text>
     </TouchableOpacity>
   )
+  }
 
   render() {
 
@@ -57,6 +60,7 @@ class GameFrontScreen extends PureComponent {
             </View>
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate('CommonGameScreen', {
+                item: this.props.theme.sets[0],
                 game: this.props.navigation.state.params.title,
                 user: this.props.navigation.state.params.user,
                 mode: 'HEAD_TO_HEAD',
@@ -69,6 +73,7 @@ class GameFrontScreen extends PureComponent {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate('CommonGameScreen', {
+                item: this.props.theme.sets[0],
                 game: this.props.navigation.state.params.title,
                 user: this.props.navigation.state.params.user,
                 mode: 'SINGLE',

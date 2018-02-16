@@ -32,15 +32,15 @@ import GameScreen from '../screens/GameScreen';
 import NewLevel from '../screens/NewLevel'
 import HeadToHeadPlayScreen from '../screens/HeadToHeadPlayScreen'
 
-const CamNavigator = StackNavigator({
-  Cam: {
-    screen: CamPage,
-    navigationOptions:{
-      headerTitle: 'Take photo',
-      headerStyle:{ backgroundColor:'#19a4f2'}
-    }
-  }
-}, {headerMode:'none'}) 
+// const CamNavigator = StackNavigator({
+//   Cam: {
+//     screen: CamPage,
+//     navigationOptions:{
+//       headerTitle: 'Take photo',
+//       headerStyle:{ backgroundColor:'#19a4f2'}
+//     }
+//   }
+// }, {headerMode:'none'}) 
   //
 const ChatNavigator = StackNavigator({
   Friends: {
@@ -111,7 +111,11 @@ export const AppNavigator = StackNavigator({
     }
   },
   CamPage: {
-    screen: CamNavigator
+    screen: CamPage,
+    navigationOptions:{
+      headerTitle: 'Take photo',
+      headerStyle:{ backgroundColor:'#19a4f2'}
+    }
   },
   Main: {
     screen: MainNavigator

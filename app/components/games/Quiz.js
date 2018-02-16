@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView} from 'react-native';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import * as Animatable from 'react-native-animatable';
 
 import Tile from './Tile';
 import TileGrid from './TileGrid';
@@ -12,49 +13,19 @@ var j=0;
 export default class Quiz extends Component {
     constructor(props) {
       super(props);
-      this.state = {
-        height: this.props.style.height,
-        width: this.props.style.width,
-        question: this.props.data.question,
-        options: this.props.data.choices,
-        correctoption: this.props.data.answerIndex
-      }
+      this.state = this._initBoard(props);      
+    }
 
-      const shuffledData = this.props.data.choices.map(function(element, i) {
-        arr1[j]=element;
-        j++;
-        console.log(element);
-      });
-
-      let letters = new Array(SIZE * SIZE);
-      for (let i = 0; i < letters.length; i++) {
-        letters[i] = arr1[i];
-        shuffledData[i] = arr1[i];
-      }
-
+    _initBoard = (props) => {
       let statuses = new Array(SIZE * SIZE)
       for (let i = 0; i < statuses.length; i++) {
-        statuses[i] = 'visible';
+        statuses[i] = 'Neutral';
       }
-
-      arr1 =[];
-      j=0;
-
-      let currentIndex = this.props.data.answerIndex;
-      
-      this.state = {
-        letters,
-        shuffledData,
-        currentIndex,
+      return ({
         statuses
-      }
-      
-      console.log(shuffledData);
-      console.log(letters);
-      console.log(currentIndex);
-      console.log(this.props.data.question);
-    
+      });
     }
+  
 
     componentWillReceiveProps(nextProps) {
       this.props.runIndex != nextProps.runIndex && this.setState(this._initBoard(nextProps))
@@ -63,35 +34,17 @@ export default class Quiz extends Component {
 
     _onStatusChange(id, view, prevStatus, currentStatus) {
       console.log('onstatuschange:', prevStatus, currentStatus)
-      currentStatus == 'visible' && view.zoomIn(250)
+      currentStatus == 'Neutral' && view.zoomIn(250)
     }
 
     _clickTile = (id, view) => {
-      const currentIndex = this.state.currentIndex
-      if (this.state.letters[id] == this.props.data.choices[currentIndex]) {
+      if (id == this.props.data.answerIndex) {
         this.props.onScore && this.props.onScore(2)
-        this.props.setProgress && this.props.setProgress((currentIndex + 1) / this.props.data.choices.length)
-        this.setState({...this.state, currentIndex: currentIndex + 1})
+        this.props.setProgress && this.props.setProgress(1)
         view.zoomOut(250).then((endState) => {
-          if (currentIndex + 1 >= this.props.data.choices.length) {
             this.setState({...this.state,
-              statuses: this.state.statuses.map(()=>'invisible')})
+              statuses: this.state.statuses.map(()=>'Invisible')})
             this.props.onEnd()
-          } else {
-            this.setState((prevState, props) => {
-              const newLetters = prevState.letters.map((value, index) => {
-                return index == id ? prevState.shuffledData[currentIndex + SIZE * SIZE] : value
-              })
-              const newStatuses = prevState.statuses.map((value, index) => {
-                return (currentIndex + 1 + SIZE * SIZE > this.props.data.choices.length && index == id && value=='visible') ? 'invisible' : value
-              })
-              return {...prevState,
-                letters: newLetters,
-                statuses: newStatuses,
-              }
-            })
-            currentIndex + SIZE * SIZE < this.props.data.choices.length && view.zoomIn(250)
-          }
         })
       } else {
         view.shake(250);
@@ -100,7 +53,7 @@ export default class Quiz extends Component {
     
 
     _onPress = () => {
-      
+      this.refs.questionView.shake(800);
     }
 
        
@@ -116,40 +69,51 @@ export default class Quiz extends Component {
      
       
       return (
-        <ScrollView style={{ backgroundColor: '#E53554', paddingTop: 5 }}>
+        
         <View style={styles.container}>
                  
         <View 
         style={{ flex: 1,
         justifyContent: 'center', 
         alignItems: 'center',
-        paddingBottom: this.state.height * 0.01 }}
+        paddingBottom: this.props.height * 0.01 }}
         >
 
         
-          <View>
+          <Animatable.View ref="questionView">
           <Tile
             id={0}
-            onPress={this.props._onPress}
+            onPress={this._onPress}
             tileColor='#24B2EA'
             edgeColor='black'
             pressedTileColor='goldenrod'
             pressedEdgeColor='darkgoldenrod'
             textColor='#fff'
             text={this.props.data.question}
-            status
+            status='Same'
+            statusStyles={{
+              'Same': {
+                View: {
+                  backgroundColor: '#24B2EA'
+                },
+                Text: {
+                  color: 'white'
+                }
+              }
+            }}
             style={{
               width: tileSize,
-              height: tileSize
+              height: tileSize,
             }}
+            
           />
-          </View>      
+          </Animatable.View>      
           
 
        <TileGrid
         numRows={SIZE}
         numCols={SIZE}
-        data={this.state.letters}
+        data={this.props.data.choices}
         statuses={this.state.statuses}
         onStatusChange={this._onStatusChange}
         tileColor='#24B2EA'
@@ -162,14 +126,30 @@ export default class Quiz extends Component {
           height: this.props.style.height * 0.5
         }}
         onPress={this._clickTile}
+        statusStyles = {{
+          Neutral: {
+            View: {
+              backgroundColor: '#24B2EA'
+            },
+            Text: {
+              color: '#FFFFFF'
+            }
+          },
+          Selected: {
+            View: {
+              backgroundColor: '#24B2EA'
+            },
+            Text: {
+              color: '#FFFFFF'
+            }
+          }
+        }}
       />
 
 
           </View>
         </View>
-        </ScrollView>
       );
-      this.state.letters=[];
     }
   }
    
@@ -182,7 +162,7 @@ export default class Quiz extends Component {
   };
 
   Quiz.propTypes = {
-    data: PropTypes.object,
+  data: PropTypes.object,
   runIndex: PropTypes.number,
   onScore: PropTypes.func,
   onEnd: PropTypes.func,
