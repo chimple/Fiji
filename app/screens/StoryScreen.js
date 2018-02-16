@@ -21,7 +21,7 @@ class StoryScreen extends Component {
       count: 0,
       page: 0,
       stories: [],
-      refreshing: false
+      // refreshing: false
     };
   }
 
@@ -94,7 +94,7 @@ class StoryScreen extends Component {
         // const length = h > w ? h : w
 
         return (
-          <View style={{ flex: 1 }}>
+          <View style={{ flex: 1, backgroundColor: 'blue'}}>
             <View style={styles.headerViewStyle}>
               <Text style={styles.HeaderTextStyle}>
                 {this.props.navigation.state.params.title.title}
@@ -123,9 +123,9 @@ class StoryScreen extends Component {
                 data={this.state.stories}
                 ref='flatlist'
                 // refreshControl=
-                refreshing={this.state.refreshing}
-                onTouchMove={()=> this._renderState()}
-                extraData={this.state.stories}
+                // refreshing={this.state.refreshing}
+                // onTouchStart={()=> this._renderState()}
+                // extraData={this.state.stories}
                 keyExtractor={this._keyExtractor}
                 renderItem={this._renderItem}
                 onContentSizeChange={() => {
@@ -135,11 +135,11 @@ class StoryScreen extends Component {
 
 
             </View>
-            {/* <TouchableOpacity onPress={() => this._renderState()} >
+            <TouchableOpacity onPress={() => this._renderState()} >
               <View style={styles.nextButtonStyle}>
                 <Icon name='keyboard-arrow-down' color='black' />
               </View>
-            </TouchableOpacity> */}
+            </TouchableOpacity>
           </View>
         )
       } else {

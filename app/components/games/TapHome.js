@@ -8,159 +8,111 @@ import ScoreScreen from '../../screens/ScoreScreen';
 import Tile from './Tile';
 import { isAbsolute } from 'path';
 
-let timerId, iterate, iterateShake;
-let j = 0;
-let score = 0;
+
 
 export default class TapHome extends Component {
-
+  timerId;
   constructor(props) {
     super(props);
-    this.state = this._initBoard(props)
-    iterate = 0;
-    iterateShake = 0;
-    // Dimensions.addEventListener('change', () => {
-    //   this.setState({
-    //     width : this.fontSizer(this.props.style.height * 0.225) + 20
-    //   })
-     
-    // });
+    this.state = this._initBoard(props);
   }
 
   _initBoard = (props) => {
-    let options = [];
-    j = 0;
-    iterate = 0;
-    iterateShake = 0;
-    const data = props.data.serial.map( function (temp, index ){
-      options[j] = temp;
-      j++;
-    });
-    let len = options.length;
+    let iterate = 0;
+    let iterateShake = 0;
     let count = 0;
-    let answer = props.data.answer;
-    let width = this.fontSizer(this.props.style.height * 0.225) + 20;
     let status = 'neutral';
+    
     return ({
-      options,
       count,
-      len,
-      answer,
-      width,
-      status
+      status,
+      iterate,
+      iterateShake,
     })
   }
 
   componentWillReceiveProps(nextProps) {
     this.props.runIndex != nextProps.runIndex && this.setState(this._initBoard(nextProps))
-    clearInterval(timerId);
-    timerId = setInterval(this.timer, 2000) 
   }
 
+  componentWillUnmount() {
+    clearInterval(this.timerId);
+  }
+  
+  componentDidMount(){
+    clearInterval(this.timerId);
+    this.timerId = setInterval(this.timer, 1400);
+
+  }
 
   timer = () => {
    
-    if( this.state.count  == this.state.len ){
-      this.setState({...this.state, count: 0})
-      iterate = iterate + 1;
-      if( iterate == 2 )
+    if( this.state.count  == this.props.data.serial.length ){
+      this.setState({...this.state, count: 0, iterate: this.state.iterate + 1})
+      if( this.state.iterate == 2 )
       {
-        iterate = 0;
-        this.setState({...this.state, status: 'selected', count: 0});
+        this.props.setProgress(1)
+        this.setState({...this.state, status: 'selected'});
       }
     }else {
       this.setState({...this.state, count: this.state.count + 1})
       
-      //condition for increasing speed
-      if ( score > 1 && score <= 3) {
-        clearInterval(timerId);
-        timerId = setInterval(this.timer, 1400);
-      }
-      else if (score > 3 && score <= 5) {
-        clearInterval(timerId);
-        timerId = setInterval(this.timer, 1200);
-      }
-      else if (score > 5 && score <= 7) {
-        clearInterval(timerId)
-        timerId = setInterval(this.timer, 1000);
-      }
-      else if (score > 7 && score <= 10) {
-        clearInterval(timerId);
-        timerId = setInterval(this.timer, 700);
-      }
     }
-  }
-
-  componentDidMount() {
-    //This will start timer and will update text value
-    timerId = setInterval(this.timer, 2000) 
-    score = 0;
- 
   }
 
   //This will generate random number and will check on tap condition
   GenerateRandomNumber = () => {
     
-    if (this.state.answer == this.state.options[this.state.count]) {
-      this.props.onScore(2)
-      score = score + 1;
-      console.log('score', score)
-      this.setState({...this.state, status: 'selected', count: 0});
+    if (this.props.data.answer == this.props.data.serial[this.state.count]) {
+      
+      this.props.onScore()
+      this.props.setProgress(1)
+      this.setState({...this.state, status: 'selected'});
      
     }
     else {
-      iterateShake = iterateShake + 1
-      this.refs.view.shake(350).then((endState)=> {
-        if(iterateShake == 2)
+      this.refs.view.shake(250).then((endState)=> {
+        if(this.state.iterateShake == 2)
         {
-          iterateShake = 0;
-          this.setState({...this.state, status: 'selected', count: 0});
+          this.props.setProgress(1);
+          this.setState({...this.state, status: 'selected'});
+        } else {
+          this.setState({...this.state, iterateShake: this.state.iterateShake + 1, count: 0});
         }
       })
       
-      this.setState({...this.state, count: 0 })
     }
 
     
   }//end of generateRandomNumber function
 
-  fontSizer (screenWidth) {
-    if(screenWidth > 100 && screenWidth < 150){
-      return 40;
-    }else if(screenWidth < 100){
-      return 30;
-    }else if(screenWidth < 200 && screenWidth > 150 ){
-      return 60
-    }else if(screenWidth < 300 && screenWidth > 200 ){ 
-      return 80;
-    }
-  }
 
   render() {
     const { container, subText } = styles;
 
     const cellSize = Math.min(
-      Math.floor(this.props.style.width / 2),
-      Math.floor(this.props.style.height / 2)
+      Math.floor(this.props.style.width / 3.5),
+      Math.floor(this.props.style.height / 3.5)
     )
 
 
     const padding = Math.floor(cellSize * .05)
     const tileSize = cellSize - padding * 2
+    const height = (this.props.style.height / 5)
+    const heighttext = this.props.style.height / 10;
 
     return (
-      <View style={container}>
+      <View style={[container, {paddingTop: height}]}>
         <Animatable.View ref="view">
         <Tile
           id={1}
-          text={this.state.answer}
+          text={this.props.data.answer}
           edgeColor='white'
           status={this.state.status}
           onStatusChange={this._onStatusChange}
-          pressedTileColor={this.props.pressedTileColor}
           style={{
-            width: 80,
-            height: 80,
+            width: tileSize,
+            height: tileSize,
           }}
           statusStyles = {{
             neutral: {
@@ -183,9 +135,9 @@ export default class TapHome extends Component {
         />
         </Animatable.View>
         <TouchableOpacity onPress={this.GenerateRandomNumber}>
-          <Text style={[subText, { fontSize: this.state.width }]}>
-            {this.state.options[this.state.count]}
-          </Text>
+            <Text style={[subText, {  fontSize: Math.max(20, tileSize - 40) + 15, marginTop: heighttext }]}>
+              {this.props.data.serial[this.state.count]}
+            </Text> 
         </TouchableOpacity>
       </View>
     );
@@ -203,9 +155,8 @@ export default class TapHome extends Component {
 
 const styles = {
   container: {
-    flex: 1,
     justifyContent: 'center',
-    alignSelf: 'center',
+    alignItems: 'center',
    
   },
   subText: {
@@ -213,6 +164,5 @@ const styles = {
     color: 'white',
     justifyContent: 'center',
     alignSelf: 'center',
-    marginTop: 30
   },
 };//End of styles
