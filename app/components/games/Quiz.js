@@ -69,7 +69,7 @@ export default class Quiz extends Component {
      
       
       return (
-        <ScrollView style={{ backgroundColor: '#E53554', paddingTop: 5 }}>
+        
         <View style={styles.container}>
                  
         <View 
@@ -94,7 +94,7 @@ export default class Quiz extends Component {
             statusStyles={{
               'Same': {
                 View: {
-                  backgroundColor: 'green'
+                  backgroundColor: '#24B2EA'
                 },
                 Text: {
                   color: 'white'
@@ -149,7 +149,6 @@ export default class Quiz extends Component {
 
           </View>
         </View>
-        </ScrollView>
       );
     }
   }
