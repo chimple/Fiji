@@ -8,12 +8,8 @@ import ScoreScreen from '../../screens/ScoreScreen';
 import Tile from './Tile';
 import { isAbsolute } from 'path';
 
-let timerId, iterate, iterateShake;
-let score = 0;
-let currentIndex = 0;
 
 export default class TapHome extends Component {
-
   constructor(props) {
     super(props);
     this.state = this._initBoard(props);
@@ -26,114 +22,87 @@ export default class TapHome extends Component {
   }
 
   _initBoard = (props) => {
-    let options = [];
-    let j = 0;
-    iterate = 0;
-    iterateShake = 0;
-    const data = props.data.serial.map( function (temp, index ){
-      options[j] = temp;
-      j++;
-    });
-    let len = options.length;
+    let iterate = 0;
+    let iterateShake = 0;
     let count = 0;
-    let answer = props.data.answer;
     let width = this.fontSizer(this.props.style.height * 0.225) + 20;
     let status = 'neutral';
+    let timerId = setInterval(this.timer, 1400);
+    
     return ({
-      options,
       count,
-      len,
-      answer,
-      width,
       status,
-     
+      iterate,
+      iterateShake,
+      timerId,
+      width
     })
   }
 
   componentWillReceiveProps(nextProps) {
+    clearInterval(this.state.timerId);
     this.props.runIndex != nextProps.runIndex && this.setState(this._initBoard(nextProps))
-    clearInterval(timerId);
-    timerId = setInterval(this.timer, 2000) 
-    
   }
 
   componentWillUnmount() {
-    clearInterval(timerId);
-    iterate = 0;
-    iterateShake = 0;
-    currentIndex = 0;
-    score = 0;
+    clearInterval(this.timerId);
   }
-
 
   timer = () => {
    
-    if( this.state.count  == this.state.len ){
-      this.setState({...this.state, count: 0})
-      iterate = iterate + 1;
-      if( iterate == 2 )
+    if( this.state.count  == this.props.data.serial.length ){
+      this.setState({...this.state, count: 0, iterate: this.state.iterate + 1})
+      if( this.state.iterate == 2 )
       {
-        iterate = 0;
-        currentIndex = currentIndex + 1;
-        this.props.setProgress((currentIndex ) / 10)
         this.setState({...this.state, status: 'selected'});
       }
     }else {
       this.setState({...this.state, count: this.state.count + 1})
       
-      //condition for increasing speed
-      if ( score > 1 && score <= 3) {
-        clearInterval(timerId);
-        timerId = setInterval(this.timer, 1400);
-      }
-      else if (score > 3 && score <= 5) {
-        clearInterval(timerId);
-        timerId = setInterval(this.timer, 1200);
-      }
-      else if (score > 5 && score <= 7) {
-        clearInterval(timerId)
-        timerId = setInterval(this.timer, 1000);
-      }
-      else if (score > 7 && score <= 10) {
-        clearInterval(timerId);
-        timerId = setInterval(this.timer, 700);
-      }
+      // //condition for increasing speed
+      // if ( score > 1 && score <= 3) {
+      //   clearInterval(this.state.timerId);
+      //   timerId = setInterval(this.timer, 1400);
+      // }
+      // else if (score > 3 && score <= 5) {
+      //   clearInterval(timerId);
+      //   timerId = setInterval(this.timer, 1200);
+      // }
+      // else if (score > 5 && score <= 7) {
+      //   clearInterval(timerId)
+      //   timerId = setInterval(this.timer, 1000);
+      // }
+      // else if (score > 7 && score <= 10) {
+      //   clearInterval(timerId);
+      //   timerId = setInterval(this.timer, 700);
+      // }
     }
-  }
-
-  componentDidMount() {
-    //This will start timer and will update text value
-    timerId = setInterval(this.timer, 2000) 
-    score = 0;
- 
   }
 
   //This will generate random number and will check on tap condition
   GenerateRandomNumber = () => {
     
-    if (this.state.answer == this.state.options[this.state.count]) {
-      this.props.onScore(2)
-      currentIndex = currentIndex + 1;
-      console.log('test data', currentIndex , '\t', this.props.data.serial.length )
-      this.props.setProgress((currentIndex) / 10)
-      score = score + 1;
-      console.log('score', score)
+    if (this.props.data.answer == this.props.data.serial[this.state.count]) {
+      // this.props.onScore(2)
+      // this.setState({...this.state, currentIndex: this.state.currentIndex + 1 });
+      // this.props.setProgress((this.state.currentIndex ) / 10)
+      // score = score + 1;
+      // this.setState({...this.state, status: 'selected'});
+     // this.props.onScore()
+      this.props.setProgress(1)
       this.setState({...this.state, status: 'selected'});
      
     }
     else {
-      iterateShake = iterateShake + 1
       this.refs.view.shake(250).then((endState)=> {
-        if(iterateShake == 2)
+        if(this.state.iterateShake == 2)
         {
-          iterateShake = 0;
-          currentIndex = currentIndex + 1;
-          this.props.setProgress((currentIndex) / this.props.data.serial.length - 1)
           this.setState({...this.state, status: 'selected'});
+        } else {
+          this.setState({...this.state, iterateShake: this.state.iterateShake + 1, count: 0});
         }
       })
       
-      this.setState({...this.state, count: 0 })
     }
 
     
@@ -168,11 +137,10 @@ export default class TapHome extends Component {
         <Animatable.View ref="view">
         <Tile
           id={1}
-          text={this.state.answer}
+          text={this.props.data.answer}
           edgeColor='white'
           status={this.state.status}
           onStatusChange={this._onStatusChange}
-          pressedTileColor={this.props.pressedTileColor}
           style={{
             width: 80,
             height: 80,
@@ -199,7 +167,7 @@ export default class TapHome extends Component {
         </Animatable.View>
         <TouchableOpacity onPress={this.GenerateRandomNumber}>
           <Text style={[subText, { fontSize: this.state.width }]}>
-            {this.state.options[this.state.count]}
+            {this.props.data.serial[this.state.count]}
           </Text>
         </TouchableOpacity>
       </View>
