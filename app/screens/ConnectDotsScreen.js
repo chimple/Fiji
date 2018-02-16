@@ -20,32 +20,327 @@ export default class ConnectDotsScreen extends Component {
     .map((a, i) => [Math.floor(i / (SIZE * SIZE)), a])
     .sort((a, b) => a[0] - b[0])
     .map((a) => a[1])
-  
     let shuffledData1 = props.data.others
     .map((a, i) => [Math.floor(i / (SIZE * SIZE)) + Math.random(), a])
     .sort((a, b) => a[0] - b[0])
     .map((a) => a[1])
+  
+    var randomnumber = Math.floor(Math.random() * (6 - 0 + 1)) + 0;
 
-    shuffledData1.forEach(function(e) {
-    shuffledData.push(e);
-    var i=shuffledData.length-1;
-    for (; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      const temp = shuffledData[i];
-      shuffledData[i] = shuffledData[j];
-      shuffledData[j] = temp;
+    let letters = new Array(SIZE * SIZE)
+    for (let i = 0; i < letters.length; i++){
+      letters[i]='null';
     }
-    return shuffledData.sort();
-    shuffledData.sort()
-})
+    let i=randomnumber;
+    let j=0;
+    if(i==0)
+    {
+    
+    while(shuffledData[j])
+    {
+    letters[i]=shuffledData[j];
 
+    i++;
+    j++
+    if(i>=SIZE-1){
+       i=i+SIZE-1;
+      
+      while(shuffledData[j]){
+      
+               letters[i]=shuffledData[j];
+              
+                j++;
+              
+                i--;
+                if(i>=SIZE){
+                  i=i+SIZE+1;
+                  while(shuffledData[j]){
+                   letters[i]=shuffledData[j];
+                   j++;
+                   i++;
+                  }
+    
+                }
+          }
+          break;
+    }
+    
+    
+    
+    }
+    }
+    else if(i==1){
+    
+    while(shuffledData[j])
+    {
+    letters[i]=shuffledData[j];
+    i++;
+    j++;
+    if(i>=SIZE-1){
+    i=i+SIZE-1;
+   
+    while(shuffledData[j]){
+   
+           letters[i]=shuffledData[j];
+      
+            j++;
+          
+            i--;
+            if(i>=SIZE){
+              i=i+SIZE+1;
+              while(shuffledData[j]){
+               letters[i]=shuffledData[j];
+               j++;
+               i++;
+           
+              }
+            }
+          
+            if(i-1>=SIZE*SIZE)
+            {
+              i=i-SIZE-2;
+              j--;
+          
+    
+              while(shuffledData[j])
+              { 
+                letters[i]=shuffledData[j];
+                i--;
+                j++;
+        
+              }
+            }
+    
+            
+      }
+      break;
+    }
+    
+    
+    
+    }
+    
+    }
+    else if(i==2)
+    {
+    while(shuffledData[j])
+    {
+    letters[i]=shuffledData[j];
+ 
+    i++;
+    j++;
+    if(i>=SIZE-1){
+    i=i+SIZE-1;
+   
+    while(shuffledData[j]){
+    
+           letters[i]=shuffledData[j];
+  
+            j++;
 
-  let letters = new Array(SIZE * SIZE)
-  for (let i = 0; i < letters.length; i++) {
-    letters[i] =shuffledData[i];
+            i--;
+            if(i>=SIZE){
+              i=i+SIZE+1;
+              while(shuffledData[j]){
+               letters[i]=shuffledData[j];
+               j++;
+               i--;
+         
+              }
+            }
+          
+            if(i-1>=SIZE*SIZE)
+            {
+              i=i-SIZE-2;
+              j--;
+            
+    
+              while(shuffledData[j])
+              { 
+                letters[i]=shuffledData[j];
+                i--;
+                j++;
+               
+              }
+            }
+    
+            
+      }
+      break;
+    }
+    
+    
+    
+    }
+    }
+    else if(i==3 || i==4)
+    {
+     
+    while(shuffledData[j])
+    {
+    letters[i]=shuffledData[j];
+
+    i++;
+    j++;
+    if(i>=SIZE-1){
+    // i=i+SIZE-1;
+  
+    while(shuffledData[j]){
+    
+            letters[i]=shuffledData[j];
+         
+             j++;
+        
+             i++;
+             if(i>=SIZE+SIZE){
+               i=i+SIZE-1;
+               while(shuffledData[j]){
+                letters[i]=shuffledData[j];
+                j++;
+                i--;
+              
+               }
+             }
+        
+             if(i-1>=SIZE*SIZE)
+             {
+               i=i-SIZE-2;
+               j--;
+         
+               while(shuffledData[j])
+               { 
+                 letters[i]=shuffledData[j];
+                 i--;
+                 j++;
+             
+               }
+             }
+    
+             
+       }
+       break;
+    }
+    
+    
+    
+    }
+    }
+    else if(i==5){
+       
+while(shuffledData[j])
+{
+  letters[i]=shuffledData[j];
+
+  i++;
+  j++;
+  if(i>=SIZE-1){
+     i=i+SIZE-1;
+
+    while(shuffledData[j]){
+   
+             letters[i]=shuffledData[j];
+     
+              j++;
+            
+              i--;
+              if(i==SIZE+SIZE-1){
+                i=i-SIZE+1;
+                while(shuffledData[j]){
+                 letters[i]=shuffledData[j];
+                 j++;
+                 i--;
+              
+                }
+              }
+          
+              if(i-1>=SIZE*SIZE)
+              {
+                i=i-SIZE-2;
+                j--;
+            
+
+                while(shuffledData[j])
+                { 
+                  letters[i]=shuffledData[j];
+                  i--;
+                  j++;
+            
+                }
+              }
+
+              
+        }
+        break;
   }
+ 
+  
+  
+}
+    }
+    else if(i==6)
+    {
+      
+while(shuffledData[j])
+{
+letters[i]=shuffledData[j];
+
+i++;
+j++;
+if(i==SIZE*SIZE){
+   i=i+SIZE-1;
+   
+  while(shuffledData[j]){
+ 
+           letters[i]=shuffledData[j];
+    
+            j++;
+         
+            i--;
+            if(i==SIZE+SIZE-1){
+              i=i-SIZE+1;
+              while(shuffledData[j]){
+               letters[i]=shuffledData[j];
+               j++;
+               i--;
+          
+              }
+            }
+         
+            if(i-1>=SIZE*SIZE)
+            {
+              i=i-SIZE-2;
+              j--;
+           
+
+              while(shuffledData[j])
+              { 
+                letters[i]=shuffledData[j];
+                i--;
+                j++;
+         
+              }
+            }
+
+            
+      }
+      break;
+}
+
+
+
+}
+    }
+
+    
+ for (let i = 0,j=0; i < SIZE*SIZE ; i++){
+  if(letters[i]=='null'){
+    letters[i]=shuffledData1[j];
+    j++;
+  }
+}
+
   let statuses = new Array(SIZE * SIZE)
-  for (let i = 0; i < statuses.length; i++) {
+  for (let i = 0; i < statuses.length; i++ ) {
     statuses[i] = 'visible';
   }
   let currentIndex = 0
@@ -81,7 +376,7 @@ export default class ConnectDotsScreen extends Component {
         textColor='#FFFFFF'
         style={{
           width: this.props.style.width,
-          height: this.props.style.height-90
+          height: this.props.style.height-100
         }}
         statusStyles = {{
           visible: {
@@ -150,23 +445,10 @@ export default class ConnectDotsScreen extends Component {
         
 
     } else {
-      count1++;
+      
       view.shake(250)
       
-      if(count1==3)
-      { 
-        count1=0;
       
-        Alert.alert(
-            'Alert Title',
-            'My Alert Msg',
-            [
-              {text: 'Restart'}
-             
-            ],
-            { cancelable: false }
-          )
-      }
     }
   }
 }
