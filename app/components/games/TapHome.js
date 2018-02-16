@@ -21,7 +21,6 @@ export default class TapHome extends Component {
     let iterate = 0;
     let iterateShake = 0;
     let count = 0;
-    let width = this.fontSizer(this.props.style.height * 0.225) + 20;
     let status = 'neutral';
     
     return ({
@@ -29,7 +28,6 @@ export default class TapHome extends Component {
       status,
       iterate,
       iterateShake,
-      width
     })
   }
 
@@ -53,6 +51,7 @@ export default class TapHome extends Component {
       this.setState({...this.state, count: 0, iterate: this.state.iterate + 1})
       if( this.state.iterate == 2 )
       {
+        this.props.setProgress(1)
         this.setState({...this.state, status: 'selected'});
       }
     }else {
@@ -75,6 +74,7 @@ export default class TapHome extends Component {
       this.refs.view.shake(250).then((endState)=> {
         if(this.state.iterateShake == 2)
         {
+          this.props.setProgress(1);
           this.setState({...this.state, status: 'selected'});
         } else {
           this.setState({...this.state, iterateShake: this.state.iterateShake + 1, count: 0});
@@ -86,32 +86,23 @@ export default class TapHome extends Component {
     
   }//end of generateRandomNumber function
 
-  fontSizer (screenWidth) {
-    if(screenWidth > 100 && screenWidth < 150){
-      return 40;
-    }else if(screenWidth < 100){
-      return 30;
-    }else if(screenWidth < 200 && screenWidth > 150 ){
-      return 60
-    }else if(screenWidth < 300 && screenWidth > 200 ){ 
-      return 80;
-    }
-  }
 
   render() {
     const { container, subText } = styles;
 
     const cellSize = Math.min(
-      Math.floor(this.props.style.width / 3),
-      Math.floor(this.props.style.height / 3)
+      Math.floor(this.props.style.width / 3.5),
+      Math.floor(this.props.style.height / 3.5)
     )
 
 
     const padding = Math.floor(cellSize * .05)
     const tileSize = cellSize - padding * 2
+    const height = (this.props.style.height / 5)
+    const heighttext = this.props.style.height / 10;
 
     return (
-      <View style={container}>
+      <View style={[container, {paddingTop: height}]}>
         <Animatable.View ref="view">
         <Tile
           id={1}
@@ -144,9 +135,9 @@ export default class TapHome extends Component {
         />
         </Animatable.View>
         <TouchableOpacity onPress={this.GenerateRandomNumber}>
-            <Text style={[subText, {  fontSize: Math.max(20, tileSize - 40), marginTop: 30 }]}>
+            <Text style={[subText, {  fontSize: Math.max(20, tileSize - 40) + 15, marginTop: heighttext }]}>
               {this.props.data.serial[this.state.count]}
-            </Text>
+            </Text> 
         </TouchableOpacity>
       </View>
     );
@@ -164,9 +155,8 @@ export default class TapHome extends Component {
 
 const styles = {
   container: {
-    flex: 1,
     justifyContent: 'center',
-    alignSelf: 'center',
+    alignItems: 'center',
    
   },
   subText: {
