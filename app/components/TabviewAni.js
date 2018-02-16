@@ -76,13 +76,13 @@ class TabbedView extends Component {
             // let svgImage = Buffer.from(tab.svg, 'base64').toString('utf8')
             // console.log("this is svgImage ", svgImage);
             //  return <Text key={i} >{tab._id}</Text>
-            const svg = stickers[tab] ? stickers[tab] : stickers['unknown.svg']
+            const svg = stickers[tab] || stickers['unknown.svg']
             return <TouchableOpacity key={i} onPress={() => this.updatedStickerId(tab)}>
               <SvgUri
                 key={i}
                 width="30"
                 height="30"
-                source={svg}
+                svgXmlData={svg.default}
                 />
             </TouchableOpacity>
           })}
