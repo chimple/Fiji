@@ -67,8 +67,8 @@ export default class MemoryMatching extends Component {
   return items;
   }
 
-  componentWillReceiveProps() {
-
+  componentDidMount() {
+    
   }
 
   render() {
@@ -122,7 +122,7 @@ export default class MemoryMatching extends Component {
   _onStatusChange(id, view, prevStatus, currentStatus) {
     console.log("Rajesh-Data-onstatuschange:", id , prevStatus, currentStatus);
     currentStatus == 'D' && view.zoomOut(1000)
-    currentStatus == 'H' && view.flipInY(1000) 
+    currentStatus == 'H' && view.flipInY(250) 
   }
 
   _clickTile = (id, view) => {
