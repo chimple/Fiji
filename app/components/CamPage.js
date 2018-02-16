@@ -22,7 +22,7 @@ import { addUser } from '../redux/user'
 
 class CamPage extends Component {
 
-    componentDidMount() {
+    componentWillMount() {
         // this locks the view to Portrait Mode
         Orientation.lockToPortrait();
     }
@@ -39,20 +39,6 @@ class CamPage extends Component {
         );
     }
 
-    // resize(img) {
-    //     console.log('this is resize');
-    //     ImageResizer.createResizedImage(img, 800, 600, 'JPEG', 80)
-    //     .then(({uri}) => {
-    //         console.log('this is url converted',uri);
-    //         return uri;
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //       return Alert.alert('Unable to resize the photo',
-    //         'Check the console for full the error message');
-    //     });
-    //   }
-
     takePicture() {
         this.camera.capture()
             .then((data) => {
@@ -66,19 +52,29 @@ class CamPage extends Component {
                             })
                             .catch(err => console.error(err))
                     })
-                    .catch((err) => {
-                        console.log(err);
-                        return Alert.alert('Unable to resize the photo',
-                            'Check the console for full the error message');
-                    });
             })
+            .catch((err) => {
+                console.log(err);
+                // return Alert.alert('Unable to resize the photo',
+                //     'Check the console for full the error message');
+            });
     }
 
     render() {
         console.log("camera is working" + this.props);
+        const h = Dimensions.get("window").height
+        const w = Dimensions.get("window").width
+        const height = h > w ? h : w
+        const width = h < w ? h : w
         return (
             <View style={{ flex: 1, justifyContent: 'space-around' }}>
-                <View style={styles.container}>
+                <View style={{
+                    width: width,
+                    height: width,
+                    overflow: 'hidden',
+                    borderRadius: width * 0.5,
+                    alignItems: 'center'
+                }}>
                     <Camera
                         ref={(cam) => {
                             this.camera = cam;
@@ -86,13 +82,21 @@ class CamPage extends Component {
                         captureQuality={"480p"}
                         type={'front'}
                         onBarCodeRead={this.onBarCodeRead.bind(this)}
-                        style={styles.preview}
-                    // aspect={constants.Aspect.fill}
+                        style={{
+                            flex: 1,
+                            alignItems: 'center',
+                            width: width,
+                            height: width
+                        }}
                     />
                 </View>
                 <View style={{ alignItems: 'flex-end' }}>
                     <Icon
-                        containerStyle={styles.capture}
+                        containerStyle={{
+                            width: width * 0.97,
+                            height: height * 0.08,
+                            backgroundColor: 'red'
+                        }}
                         reverse
                         raised
                         name='check'
@@ -104,34 +108,6 @@ class CamPage extends Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        // flex: 1,
-        // flexDirection: 'row',
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').width,
-        overflow: 'hidden',
-        borderRadius: Dimensions.get('window').width * 0.5,
-        alignItems: 'center'
-    },
-    preview: {
-        flex: 1,
-        alignItems: 'center',
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').width
-    },
-    capture: {
-        // flex: 1,
-        width: Dimensions.get('window').width * 0.97,
-        height: Dimensions.get('window').height * 0.08,
-        backgroundColor: 'red',
-        // borderRadius: 5,
-        // color: '#000',
-        // padding: 10,
-        // margin: 40
-    }
-});
 
 CamPage.propTypes = {
     user: PropTypes.arrayOf(PropTypes.shape({
