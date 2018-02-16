@@ -63,7 +63,7 @@ class TabbedView extends Component {
     // console.log("the data is :",this.props.packs)
     return <ScrollableTabView
 
-      style={{ marginTop: 20, }}
+      style={{ marginTop: 20,}}
 
       initialPage={0}
 
@@ -88,8 +88,7 @@ class TabbedView extends Component {
           })}
         </View>
       </ScrollView>
-      {/* 
-    <ScrollView tabLabel="ios-people" style={styles.tabView}>
+    {/* <ScrollView tabLabel="ios-people" style={styles.tabView}>
 
       <View style={styles.card}>
 
@@ -97,7 +96,7 @@ class TabbedView extends Component {
 
       </View>
 
-    </ScrollView> */}
+    </ScrollView>  */}
     </ScrollableTabView>;
 
 

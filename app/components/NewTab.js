@@ -88,7 +88,7 @@ export default class FacebookTabBar extends Component {
 
 
     render() {
-            
+            console.log("data is not coming",this.props.tabData);
 return  <View style={[styles.tabs, this.props.style,]}>
 
             {this.props.tabData.map((tab, i) => {
