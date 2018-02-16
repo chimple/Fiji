@@ -34,12 +34,17 @@ export default class ProgressBar extends Component {
   render() {
     var fillWidth = this.state.progress.interpolate({
       inputRange: [0, 1],
-      outputRange: [0 * this.props.style.width, 1 * this.props.style.width],
+      outputRange: [-this.props.style.width, 0],
     })
 
     return (
       <View style={[styles.background, this.props.backgroundStyle, this.props.style]}>
-        <Animated.View style={[styles.fill, this.props.fillStyle, { width: fillWidth }]} />
+        <Animated.View style={[styles.fill, this.props.fillStyle, { 
+          width: this.props.style.width,
+          transform: [
+            {translateX: fillWidth}]
+        }]
+        } />
       </View>
     )
   }
@@ -48,6 +53,7 @@ export default class ProgressBar extends Component {
     Animated.timing(this.state.progress, {
       easing: this.props.easing,
       duration: this.props.duration,
+      useNativeDriver: true,
       toValue: this.props.progress
     }).start((fin) => {this.props.onEnd && this.props.onEnd(fin)})
   }
@@ -69,10 +75,11 @@ var styles = StyleSheet.create({
   background: {
     backgroundColor: '#bbbbbb',
     height: 5,
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   fill: {
     backgroundColor: '#3b5998',
-    height: 5
+    height: 5,
+    
   }
 })
