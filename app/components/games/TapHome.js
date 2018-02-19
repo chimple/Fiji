@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Dimensions, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import * as Animatable from 'react-native-animatable';
+import PropTypes from 'prop-types'
 import Confirm from './Confirm';
 import { isPortrait, isLandscape, isTablet } from './Platform';
 import ScoreScreen from '../../screens/ScoreScreen';
@@ -90,7 +91,7 @@ export default class TapHome extends Component {
     const { container, subText } = styles;
 
     const cellSize = Math.min(
-      Math.floor(this.props.style.width / 3.5),
+      Math.floor(this.props.style.width / 3.5),  
       Math.floor(this.props.style.height / 3.5)
     )
 
@@ -164,3 +165,11 @@ const styles = {
     alignSelf: 'center',
   },
 };//End of styles
+
+TapHome.propTypes = {
+  data: PropTypes.object,
+  onScore: PropTypes.func,
+  onEnd: PropTypes.func,
+  setProgress: PropTypes.func
+}
+
