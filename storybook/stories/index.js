@@ -8,7 +8,6 @@ import { linkTo } from '@storybook/addon-links';
 import Button from './Button';
 import CenterView from './CenterView';
 import Welcome from './Welcome';
-import testing from './testing';
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
@@ -22,10 +21,5 @@ storiesOf('Button', module)
   .add('with some emoji', () => (
     <Button onPress={action('clicked-emoji')}>
       <Text>😀 😎 👍 💯</Text>
-    </Button>
-  ))
-  .add('ayush and manu', () => (
-    <Button onPress={action('clicked-emoji')}>
-      <Text>ndffaayush</Text>
     </Button>
   ));
