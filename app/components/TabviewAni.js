@@ -63,7 +63,7 @@ class TabbedView extends Component {
     // console.log("the data is :",this.props.packs)
     return <ScrollableTabView
 
-      style={{ marginTop: 20, }}
+      style={{ marginTop: 20,}}
 
       initialPage={0}
 
@@ -76,20 +76,19 @@ class TabbedView extends Component {
             // let svgImage = Buffer.from(tab.svg, 'base64').toString('utf8')
             // console.log("this is svgImage ", svgImage);
             //  return <Text key={i} >{tab._id}</Text>
-            const svg = stickers[tab] ? stickers[tab] : stickers['unknown.svg']
+            const svg = stickers[tab] || stickers['unknown.svg']
             return <TouchableOpacity key={i} onPress={() => this.updatedStickerId(tab)}>
               <SvgUri
                 key={i}
                 width="30"
                 height="30"
-                source={svg}
+                svgXmlData={svg.default}
                 />
             </TouchableOpacity>
           })}
         </View>
       </ScrollView>
-      {/* 
-    <ScrollView tabLabel="ios-people" style={styles.tabView}>
+    {/* <ScrollView tabLabel="ios-people" style={styles.tabView}>
 
       <View style={styles.card}>
 
@@ -97,7 +96,7 @@ class TabbedView extends Component {
 
       </View>
 
-    </ScrollView> */}
+    </ScrollView>  */}
     </ScrollableTabView>;
 
 

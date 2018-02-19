@@ -8,6 +8,7 @@ import { addMessage,sendMessage } from '../redux/chat'
 import users from '../redux/users';
 import {Icon} from 'react-native-elements'
 import TabbedView from './TabviewAni';
+import Tabbed from './TabbedView'
 
 
 
@@ -16,7 +17,8 @@ export default class MessageList extends PureComponent {
     super(props);
     this.state = {
       message: '',
-      emoFlex: 0
+      emoFlex: 0,
+      emoji: false,
 
     };
   }
@@ -44,6 +46,7 @@ export default class MessageList extends PureComponent {
     }
     else {
       this.setState({ emoFlex: 0 })
+      this.state.emoji
       // console.log("sushas stick",this.props.stickers[0]._id);
     }
   }
@@ -52,16 +55,28 @@ export default class MessageList extends PureComponent {
   clearText =()=>{
     if(this.state.message.trim() !== ''){
     this._textInput.clear();
+    Keyboard.dismiss()
     this.props.onPress(this.state.message);
     this.setState({ message: '' });
     }
+  }
+
+  toggleEmoji =()=>{
+    const oldEmoji = this.state.emoji;
+    Keyboard.dismiss()
+    this.setState({emoji: !oldEmoji});
+  }
+  onPress(x) {
+    this.setState({
+      message: this.state.message + x
+    })
   }
 
   render() {
     // console.log("sendMessage");
     // console.log(this.props.friend,this.state.message);
      // console.log("packs",this.props.packs);
-     console.log("i got in sticker",this.props.sticker)
+    //  console.log("i got in sticker",this.props.sticker)
 
     if(this.props.messages.length !== ''){
         return (
@@ -80,6 +95,9 @@ export default class MessageList extends PureComponent {
           <View style={{ flex: this.state.emoFlex }} >
 
             <View style={styles.input}>
+              <TouchableOpacity onPress={this.toggleEmoji}  >
+                <Icon name="insert-emoticon" size={40} color="#900" />
+              </TouchableOpacity>
               <TouchableOpacity onPress={this.toggleEmo}  >
                 <Icon name="insert-emoticon" size={40} color="#900" />
               </TouchableOpacity>
@@ -102,15 +120,22 @@ export default class MessageList extends PureComponent {
                   size={40} color="#900" />
               </TouchableOpacity>
             </View>
-
-           
-            <TabbedView
+          <TabbedView
             packs= {this.props.packs}
             tabPress = {this.ontabPress}
             onPress = {this.onPressGetSticker}
             friend={this.props.friend}
-            />
+            /> 
           </View>
+          {this.state.emoji &&
+          <View style={{height: 300}}>
+            <Tabbed onPress={this.onPress.bind(this)}/>
+            {/* <TabbedView  packs= {this.props.packs}
+            tabPress = {this.ontabPress}
+            onPress = {this.onPressGetSticker}
+            friend={this.props.friend}/> */}
+          </View>
+        } 
         </View>
 
       );

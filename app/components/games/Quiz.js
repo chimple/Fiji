@@ -7,8 +7,6 @@ import Tile from './Tile';
 import TileGrid from './TileGrid';
 
 const SIZE = 2;
-var arr1= [];
-var j=0;
 
 export default class Quiz extends Component {
     constructor(props) {
@@ -39,6 +37,7 @@ export default class Quiz extends Component {
 
     _clickTile = (id, view) => {
       if (id == this.props.data.answerIndex) {
+        this.refs.questionView.zoomIn(800);
         this.props.onScore && this.props.onScore(2)
         this.props.setProgress && this.props.setProgress(1)
         view.zoomOut(250).then((endState) => {
@@ -53,7 +52,6 @@ export default class Quiz extends Component {
     
 
     _onPress = () => {
-      this.refs.questionView.shake(800);
     }
 
        
