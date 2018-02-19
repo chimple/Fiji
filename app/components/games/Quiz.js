@@ -7,8 +7,6 @@ import Tile from './Tile';
 import TileGrid from './TileGrid';
 
 const SIZE = 2;
-var arr1= [];
-var j=0;
 
 export default class Quiz extends Component {
     constructor(props) {
