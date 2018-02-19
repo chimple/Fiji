@@ -20,12 +20,12 @@ class ChatView extends Component {
         );
       }
       else if (this.props.item.message.type === 'sticker') {
-        const svg = stickers[this.props.item.message.content] ? stickers[this.props.item.message.content] : stickers['unknown.svg']
+        const svg = stickers[this.props.item.message.content] || stickers['unknown.svg']
     return (
           <SvgUri
             width="30"
             height="30"
-            source={svg}
+            svgXmlData={svg.default}
           />
         );
       }
