@@ -137,7 +137,7 @@ export default class TapWrongGridComponent extends Component {
                 'Game Over',
                 'Restart Game ?',
                 [
-
+                    {text: 'Restart', onPress:{} }
                 ],
                 {
                     cancelable: false
