@@ -12,6 +12,7 @@ exports[`User List Component 1`] = `
   }
 >
   <RCTScrollView
+    ListFooterComponent={[Function]}
     data={
       Array [
         Object {
@@ -1332,6 +1333,78 @@ exports[`User List Component 1`] = `
                 XYZ12
               </Text>
             </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "backgroundColor": "white",
+              "flex": 1,
+              "opacity": 1,
+              "paddingLeft": "1%",
+              "paddingTop": "4%",
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+              }
+            }
+          >
+            <Image
+              source={
+                Object {
+                  "uri": "https://cdn.pixabay.com/photo/2017/01/10/23/01/icon-1970474_960_720.png",
+                }
+              }
+              style={
+                Object {
+                  "borderRadius": 0,
+                  "height": 0,
+                  "width": 0,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "black",
+                  "fontSize": 15,
+                  "fontWeight": "bold",
+                }
+              }
+            >
+              ADD USER
+            </Text>
           </View>
         </View>
       </View>

@@ -6,8 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "storybook": "storybook start -p 7007",
-    "prestorybook": "rnstl",
-    "postinstall": "rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json"
+    "prestorybook": "rnstl"
   },
   "config": {
     "react-native-storybook-loader": {

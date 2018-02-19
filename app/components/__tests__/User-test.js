@@ -1,6 +1,6 @@
 import 'react-native';
 import React from 'react';
-import FriendList from '../FriendList';
+import User from '../User';
 import { users } from '../../../config/jest/mockData'
 
 import renderer from 'react-test-renderer';
@@ -21,7 +21,12 @@ import renderer from 'react-test-renderer';
 //npm test -- --coverage User-test
 //this above command is used to test indivisual component
 
-it('User List Component', () => {
-  const tree = renderer.create(<FriendList users={users} />).toJSON();
+it('this is user 0', () => {
+  const tree = renderer.create(<User user={users[3]} />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+it('this is user 1', () => {
+  const tree = renderer.create(<User user={users[2]} />).toJSON();
   expect(tree).toMatchSnapshot();
 });

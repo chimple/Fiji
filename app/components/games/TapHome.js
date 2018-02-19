@@ -62,10 +62,9 @@ export default class TapHome extends Component {
 
   //This will generate random number and will check on tap condition
   GenerateRandomNumber = () => {
-    
     if (this.props.data.answer == this.props.data.serial[this.state.count]) {
       
-      this.props.onScore()
+      this.props.onScore(2)
       this.props.setProgress(1)
       this.setState({...this.state, status: 'selected'});
      
@@ -144,7 +143,6 @@ export default class TapHome extends Component {
   }
 
   _onStatusChange = (id, view, prevStatus, currentStatus) => {
-    console.log('onstatuschange:', prevStatus, currentStatus)
     currentStatus == 'selected' && view.zoomIn(250).then((endState) => {
       this.props.onEnd();
     })

@@ -1,6 +1,6 @@
 import 'react-native';
 import React from 'react';
-import FriendList from '../FriendList';
+import UserList from '../UserList';
 import { users } from '../../../config/jest/mockData'
 
 import renderer from 'react-test-renderer';
@@ -22,6 +22,6 @@ import renderer from 'react-test-renderer';
 //this above command is used to test indivisual component
 
 it('User List Component', () => {
-  const tree = renderer.create(<FriendList users={users} />).toJSON();
+  const tree = renderer.create(<UserList users={users} />).toJSON();
   expect(tree).toMatchSnapshot();
 });
