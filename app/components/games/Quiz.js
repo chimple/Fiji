@@ -17,30 +17,12 @@ export default class Quiz extends Component {
     }
 
     _initBoard = (props) => {
-      const shuffledData = props.data.choices
-        .map((a, i) => [Math.floor(i / (SIZE * SIZE)) + Math.random(), a])
-        .sort((a, b) => a[0] - b[0])
-        .map((a) => a[1])
-      let letters = new Array(SIZE * SIZE)
-      for (let i = 0; i < letters.length; i++) {
-        letters[i] = shuffledData[i];
-      }
       let statuses = new Array(SIZE * SIZE)
       for (let i = 0; i < statuses.length; i++) {
         statuses[i] = 'Neutral';
       }
-      let currentIndex = this.props.data.answerIndex;
-      let question = this.props.data.question;
-      let height = this.props.data.height;
-      let width = this.props.data.width;
       return ({
-        letters,
-        shuffledData,
-        currentIndex,
-        statuses,
-        question,
-        height, 
-        width
+        statuses
       });
     }
   
@@ -56,33 +38,14 @@ export default class Quiz extends Component {
     }
 
     _clickTile = (id, view) => {
-      const currentIndex = this.state.currentIndex
-      if (this.state.letters[id] == this.props.data.choices[currentIndex]) {
+      if (id == this.props.data.answerIndex) {
+        this.refs.questionView.zoomIn(800);
         this.props.onScore && this.props.onScore(2)
-        this.props.setProgress && this.props.setProgress((currentIndex) / this.props.data.choices.length)
-        this.setState({...this.state, currentIndex: currentIndex})
+        this.props.setProgress && this.props.setProgress(1)
         view.zoomOut(250).then((endState) => {
-          if (currentIndex + 1 >= this.props.data.choices.length) {
             this.setState({...this.state,
-              statuses: this.state.statuses.map(()=>'Selected')})
+              statuses: this.state.statuses.map(()=>'Invisible')})
             this.props.onEnd()
-          } else {
-            this.setState((prevState, currentStatus, props) => {
-              const newquestion = currentStatus.data.question;
-              const newLetters = prevState.letters.map((value, index) => {
-                return index == id ? prevState.shuffledData[currentIndex + SIZE * SIZE] : value
-              })
-              const newStatuses = prevState.statuses.map((value, index) => {
-                return (currentIndex + 1 + SIZE * SIZE > this.props.data.choices.length && index == id && value=='Selected') ? 'Neutral' : value
-              })
-              return {...prevState,
-                letters: newLetters,
-                statuses: newStatuses,
-                question: newquestion
-              }
-            })
-            currentIndex + SIZE * SIZE < this.props.data.choices.length && view.zoomIn(250)
-          }
         })
       } else {
         view.shake(250);
@@ -91,7 +54,6 @@ export default class Quiz extends Component {
     
 
     _onPress = () => {
-      this.refs.questionView.shake(800);
     }
 
        
@@ -107,14 +69,14 @@ export default class Quiz extends Component {
      
       
       return (
-        <ScrollView style={{ backgroundColor: '#E53554', paddingTop: 5 }}>
+        
         <View style={styles.container}>
                  
         <View 
         style={{ flex: 1,
         justifyContent: 'center', 
         alignItems: 'center',
-        paddingBottom: this.state.height * 0.01 }}
+        paddingBottom: this.props.height * 0.01 }}
         >
 
         
@@ -128,13 +90,20 @@ export default class Quiz extends Component {
             pressedEdgeColor='darkgoldenrod'
             textColor='#fff'
             text={this.props.data.question}
-            status
+            status='Same'
+            statusStyles={{
+              'Same': {
+                View: {
+                  backgroundColor: '#24B2EA'
+                },
+                Text: {
+                  color: 'white'
+                }
+              }
+            }}
             style={{
               width: tileSize,
               height: tileSize,
-              backgroundColor: '#24B2EA',
-              textColor: '#fff',
-              borderColor: 'black'
             }}
             
           />
@@ -144,7 +113,7 @@ export default class Quiz extends Component {
        <TileGrid
         numRows={SIZE}
         numCols={SIZE}
-        data={this.state.letters}
+        data={this.props.data.choices}
         statuses={this.state.statuses}
         onStatusChange={this._onStatusChange}
         tileColor='#24B2EA'
@@ -180,9 +149,7 @@ export default class Quiz extends Component {
 
           </View>
         </View>
-        </ScrollView>
       );
-      this.state.letters=[];
     }
   }
    

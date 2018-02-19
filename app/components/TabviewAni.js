@@ -25,6 +25,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { fetchStickerPacks, fetchStickers ,fetchSticker, fetchStickerFailure, STICKERS_PATH} from '../redux/sticker';
 import { sendMessage } from '../redux/chat';
+import stickers from '../assets/stickers/stickers';
 
 
 
@@ -62,7 +63,7 @@ class TabbedView extends Component {
     // console.log("the data is :",this.props.packs)
     return <ScrollableTabView
 
-      style={{ marginTop: 20, }}
+      style={{ marginTop: 20,}}
 
       initialPage={0}
 
@@ -75,33 +76,19 @@ class TabbedView extends Component {
             // let svgImage = Buffer.from(tab.svg, 'base64').toString('utf8')
             // console.log("this is svgImage ", svgImage);
             //  return <Text key={i} >{tab._id}</Text>
-            const svg = tab == 'caterpillar.svg'
-            ? require('../assets/stickers/caterpillar.svg')
-            : tab == 'caterpillar_walk.svg'
-              ? require('../assets/stickers/caterpillar_walk.svg')
-              : tab == 'caterpillar_dance.svg'
-                ? require('../assets/stickers/caterpillar_dance.svg')
-                : tab == 'cheshire-cat.svg'
-                ? require('../assets/stickers/cheshire-cat.svg')
-                : tab == 'cheshire-cat_grin.svg'
-                  ? require('../assets/stickers/cheshire-cat_grin.svg')
-                  : tab == 'cheshire-cat_clap.svg'
-                    ? require('../assets/stickers/cheshire-cat_clap.svg')
-                    : ''
-    
+            const svg = stickers[tab] || stickers['unknown.svg']
             return <TouchableOpacity key={i} onPress={() => this.updatedStickerId(tab)}>
               <SvgUri
                 key={i}
                 width="30"
                 height="30"
-                source={svg}
+                svgXmlData={svg.default}
                 />
             </TouchableOpacity>
           })}
         </View>
       </ScrollView>
-      {/* 
-    <ScrollView tabLabel="ios-people" style={styles.tabView}>
+    {/* <ScrollView tabLabel="ios-people" style={styles.tabView}>
 
       <View style={styles.card}>
 
@@ -109,7 +96,7 @@ class TabbedView extends Component {
 
       </View>
 
-    </ScrollView> */}
+    </ScrollView>  */}
     </ScrollableTabView>;
 
 
