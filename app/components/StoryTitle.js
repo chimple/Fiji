@@ -23,7 +23,7 @@ export default class StoryTitle extends PureComponent {
     const {width, height} = this.state
     //const mode = height > width ? "portrait" : "landscape";
     return (
-      <TouchableOpacity onPress={ this._onPress } style={[styles.TouchableStyle, {height:Dimensions.get('window').height * 0.3, width:Dimensions.get('window').width * 0.3, marginLeft:Dimensions.get('window').width * 0.02 }]}>
+      <TouchableOpacity onPress={ this._onPress } style={[styles.TouchableStyle, { width:Dimensions.get('window').width * 0.3, marginLeft:Dimensions.get('window').width * 0.02 }]}>
         <View style={styles.TextViewStyle}>
           <Text style={styles.TextStyle}>
             {this.props.title.title}
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   },
   TouchableStyle:{
     flex:1,
-    //height:140, 
+    height:140, 
     //width:Dimensions.get('window').width * 0.3, 
     //marginRight:'3%',
     //marginLeft:Dimensions.get('window').width * 0.02,

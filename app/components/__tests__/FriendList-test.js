@@ -1,15 +1,15 @@
 import 'react-native';
 import React from 'react';
-import StoryTitle from '../StoryTitle';
-import { titles } from '../../../config/jest/mockData'
+import FriendList from '../FriendList'
+import { users } from '../../../config/jest/mockData'
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
 
 it('renders correctly', () => {
   const tree = renderer.create(
-    <StoryTitle 
-      title = { titles[0] }
+    <FriendList 
+      users = { users }
     />
   ).toJSON()
   expect(tree).toMatchSnapshot()
