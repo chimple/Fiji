@@ -1,7 +1,7 @@
 import 'react-native';
 import React from 'react';
-import User from '../User';
-import { users } from '../../../config/jest/mockData'
+import GameTitle from '../GameTitle';
+import { games } from '../../../config/jest/mockData'
 
 import renderer from 'react-test-renderer';
 
@@ -22,14 +22,11 @@ import renderer from 'react-test-renderer';
 //this above command is used to test indivisual component
 
 it('this is user 0', () => {
-  const tree = renderer.create(<User user={users[3]} />).toJSON();
-  expect(tree).toMatchSnapshot();
-});
-
-it('Rendering all the users', () => {
-  const tree = [];
-  for(i=0;i<users.length;i++)
- tree.push(renderer.create(<User user={users[i]} />).toJSON());
+  const tree = renderer.create(
+    <GameTitle
+    title={games[1]}
+    />
+).toJSON();
   expect(tree).toMatchSnapshot();
 });
 

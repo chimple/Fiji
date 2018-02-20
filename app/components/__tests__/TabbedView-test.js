@@ -1,9 +1,8 @@
 import 'react-native';
 import React from 'react';
-import MessageList from '../MessageList';
+import Tabbed from '../TabbedView';
 import { users, messages, stickersData, stickerPacksData } from '../../../config/jest/mockData'
 
-// Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
 
 //npm test -- --updateSnapshot
@@ -22,22 +21,20 @@ import renderer from 'react-test-renderer';
 //npm test -- --coverage User-test
 //this above command is used to test indivisual component
 
-it('renders correctly', () => {
-  const tree = renderer.create(
-    <MessageList
-      messages={messages}
-      user={users[0]}
-      friend={users[1]}
+it('TabbedView component', () => {
+    const tree = renderer.create(
+        <Tabbed
+            // packs={stickerPacksData}
+            // friend={users[1]}
+        />
+    ).toJSON();
+    expect(tree).toMatchSnapshot();
+});
 
-    />
-  ).toJSON()
-  expect(tree).toMatchSnapshot()
-})
+// FAIL  app\components\__tests__\TabbedView-test.js
+// × TabbedView component (31ms)
 
-// FAIL  app\components\__tests__\MessageList-test.js
-// × renders correctly (156ms)
+// ● TabbedView component
 
-// ● renders correctly
+//   Invariant Violation: Native animated module is not available
 
-//   Invariant Violation: Could not find "store" in either the context or props of "Connect(TabbedView)". 
-//   Either wrap the root component in a <Provider>, or explicitly pass "store" as a prop to "Connect(TabbedView)".
