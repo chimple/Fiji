@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react'
 
 import { FlatList, View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import PropTypes from 'prop-types'
-import Icon from 'react-native-vector-icons/MaterialIcons'
 import GameTitle from './GameTitle'
 
 export default class GameCategoryList extends PureComponent {
