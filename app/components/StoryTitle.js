@@ -20,7 +20,6 @@ export default class StoryTitle extends PureComponent {
   }
 
   render() {
-    const {width, height} = this.state
     //const mode = height > width ? "portrait" : "landscape";
     return (
       <TouchableOpacity onPress={ this._onPress } style={[styles.TouchableStyle, { width:Dimensions.get('window').width * 0.3, marginLeft:Dimensions.get('window').width * 0.02 }]}>

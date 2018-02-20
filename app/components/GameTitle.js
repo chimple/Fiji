@@ -27,10 +27,11 @@ const styles = StyleSheet.create({
     TouchableStyle:{
         borderWidth:2,
         borderColor:'black',
+        backgroundColor:'#114234'
     },
     TextStyle:{
         fontSize: 25,
-        color:'black',
+        color:'white',
         fontWeight:'bold'
     },
 });
