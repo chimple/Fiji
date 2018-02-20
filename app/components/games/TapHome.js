@@ -106,7 +106,7 @@ export default class TapHome extends Component {
         <Animatable.View ref="view">
         <Tile
           id={1}
-          text={this.props.data.answer}
+          text={this.props.data.answer.toString()}
           edgeColor='white'
           status={this.state.status}
           onStatusChange={this._onStatusChange}

@@ -11,7 +11,7 @@ it('renders correctly', () => {
   const tree = renderer.create(
     <TapHome 
         data={{
-            answer: 15,
+            answer: '15',
             serial: ['9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'],
         }}
         style = {{
