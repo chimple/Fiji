@@ -11,8 +11,8 @@ export default class GameTitle extends PureComponent{
 
     render(){
         return(
-        <TouchableOpacity onPress={this._onPress} >
-            <Text>{this.props.title.name}</Text>
+        <TouchableOpacity onPress={this._onPress} style={styles.TouchableStyle} >
+            <Text style={styles.TextStyle}>{this.props.title.name}</Text>
         </TouchableOpacity>
         )
     }
@@ -24,19 +24,15 @@ GameTitle.propTypes = {
 }
 
 const styles = StyleSheet.create({
-    EachGameViewStyle:{
-        //borderColor:'black',  
-        //borderWidth:1,
-        //justifyContent:'center',
-        //borderRadius:40, 
-        //height:85, 
-        //width:85,
-        //backgroundColor:'black',
-        //borderWidth:2,
-        marginTop:'6%',
-        marginBottom:'6%',
-        //paddingLeft:"4%"
-      }
+    TouchableStyle:{
+        borderWidth:2,
+        borderColor:'black',
+    },
+    TextStyle:{
+        fontSize: 25,
+        color:'black',
+        fontWeight:'bold'
+    },
 });
 
 
