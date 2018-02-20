@@ -34,7 +34,8 @@ export default class MemoryMatching extends Component {
         });
       }
     )
-    console.log("Rajesh-Original-Data",arry);
+    console.log("Rajesh-Original-Data",props.data);
+    console.log("Rajesh-1D-Data",arry);
 
     let shuffledArray = new Array(SIZE * SIZE)
     shuffledArray = this.arrayShuffle(arry);

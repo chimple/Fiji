@@ -31,6 +31,8 @@ import CamPage from '../components/CamPage'
 import GameScreen from '../screens/GameScreen';
 import NewLevel from '../screens/NewLevel'
 import HeadToHeadPlayScreen from '../screens/HeadToHeadPlayScreen'
+import ModeScreen from '../screens/ModeScreen'
+import TriesOrTimedScreen from '../screens/TriesOrTimedScreen'
 
 // const CamNavigator = StackNavigator({
 //   Cam: {
@@ -152,7 +154,25 @@ export const AppNavigator = StackNavigator({
     },
   },
   HeadToHead:{
-    screen: HeadToHeadPlayScreen
+    screen: HeadToHeadPlayScreen,
+    navigationOptions: {
+      headerTitle: 'Head to Head',
+      headerStyle:{backgroundColor: '#19a4f2'}
+    }
+  },
+  Modes:{
+    screen: ModeScreen,
+    navigationOptions: {
+      headerTitle: 'Select Mode',
+      headerStyle:{backgroundColor: '#19a4f2'}
+    }
+  },
+  TriesOrTimed: {
+    screen: TriesOrTimedScreen,
+    navigationOptions: {
+      headerTitle: 'Tries or Timed',
+      headerStyle:{backgroundColor: '#19a4f2'}
+    }
   }
 })
 
