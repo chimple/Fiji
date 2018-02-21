@@ -76,7 +76,13 @@ class StoryScreen extends Component {
 
   _renderItem = ({ item, index }) => (
     <View >
-      <StorySection item={item} index={index} page={this.state.page} count={this.state.count} bg={this.props.story.pages[this.state.page].bg} />
+      <StorySection
+      story={this.props.story} 
+      item={item} 
+      index={index} 
+      page={this.state.page} 
+      count={this.state.count} 
+      bg={this.props.story.pages[this.state.page].bg} />
     </View>
   )
 

@@ -256,7 +256,4 @@ const styles = {
 
 }
 
-export default connect(state => ({
-    story: state.story.story,
-    isFetching: state.story.isFetching,
-}))(StorySection)
+export default StorySection;

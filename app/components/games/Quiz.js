@@ -7,8 +7,6 @@ import Tile from './Tile';
 import TileGrid from './TileGrid';
 
 const SIZE = 2;
-var arr1= [];
-var j=0;
 
 export default class Quiz extends Component {
     constructor(props) {
@@ -34,16 +32,18 @@ export default class Quiz extends Component {
 
     _onStatusChange(id, view, prevStatus, currentStatus) {
       console.log('onstatuschange:', prevStatus, currentStatus)
-      currentStatus == 'Neutral' && view.zoomIn(250)
+      currentStatus == 'Selected' && view.zoomIn(250)
     }
 
     _clickTile = (id, view) => {
-      if (id == this.props.data.answerIndex) {
-        this.props.onScore && this.props.onScore(2)
-        this.props.setProgress && this.props.setProgress(1)
+      if (id == this.props.data.answerIndex) {                
         view.zoomOut(250).then((endState) => {
+          this.props.setProgress && this.props.setProgress(1)
+          this.refs.questionView.zoomIn(250);
+          this.props.onScore && this.props.onScore(2)
             this.setState({...this.state,
-              statuses: this.state.statuses.map(()=>'Invisible')})
+              statuses: this.state.statuses.map(()=>'Neutral')})
+              view.zoomIn(250);
             this.props.onEnd()
         })
       } else {
@@ -53,7 +53,6 @@ export default class Quiz extends Component {
     
 
     _onPress = () => {
-      this.refs.questionView.shake(800);
     }
 
        
