@@ -53,6 +53,7 @@ export default class MessageList extends PureComponent {
 
 
   clearText =()=>{
+    console.log('clearText')
     if(this.state.message.trim() !== ''){
     this._textInput.clear();
     Keyboard.dismiss()
@@ -62,6 +63,7 @@ export default class MessageList extends PureComponent {
   }
 
   toggleEmoji =()=>{
+    console.log('toggleEmoji')
     const oldEmoji = this.state.emoji;
     Keyboard.dismiss()
     this.setState({emoji: !oldEmoji});

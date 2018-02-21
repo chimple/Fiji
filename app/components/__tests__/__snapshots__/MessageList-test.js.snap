@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`renders with message 1`] = `
 <View
   style={
     Object {
@@ -1989,7 +1989,7 @@ exports[`renders correctly 1`] = `
 </View>
 `;
 
-exports[`renders correctly 2`] = `
+exports[`renders without message 1`] = `
 <View>
   <View
     style={
