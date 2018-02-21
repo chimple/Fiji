@@ -23,7 +23,6 @@ class GamesScreen extends Component {
             ?
               <GameCategoryList
                 games = { this.props.games }
-                navigation={ this.props.navigation }
                 onPressItem = { this._handlePress }
               />
             :
