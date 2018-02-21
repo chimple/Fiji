@@ -26,7 +26,9 @@ class GameFrontScreen extends PureComponent {
         user: this.props.navigation.state.params.user,
       }
     )} 
-    style={{ flexDirection: 'row', borderColor: 'black', borderWidth: 2 }}>
+    style={{ flexDirection: 'row', borderColor: 'black', borderWidth: 2 }}
+    accessibilityLabel={item.name} 
+    >
       <SvgUri
         width='50'
         height='50'

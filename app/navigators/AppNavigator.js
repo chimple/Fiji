@@ -32,6 +32,7 @@ import GameScreen from '../screens/GameScreen';
 import NewLevel from '../screens/NewLevel'
 import HeadToHeadPlayScreen from '../screens/HeadToHeadPlayScreen'
 import ModeScreen from '../screens/ModeScreen'
+import SelectFriendScreen from '../screens/SelectFriendScreen'
 
 // const CamNavigator = StackNavigator({
 //   Cam: {
@@ -163,6 +164,13 @@ export const AppNavigator = StackNavigator({
     screen: ModeScreen,
     navigationOptions: {
       headerTitle: 'Select Mode',
+      headerStyle:{backgroundColor: '#19a4f2'}
+    }
+  },
+  PlayWith:{
+    screen: SelectFriendScreen,
+    navigationOptions: {
+      headerTitle: 'Select Friend To Play',
       headerStyle:{backgroundColor: '#19a4f2'}
     }
   }

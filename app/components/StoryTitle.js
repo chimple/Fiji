@@ -22,7 +22,7 @@ export default class StoryTitle extends PureComponent {
   render() {
     //const mode = height > width ? "portrait" : "landscape";
     return (
-      <TouchableOpacity onPress={ this._onPress } style={[styles.TouchableStyle, { width:Dimensions.get('window').width * 0.3, marginLeft:Dimensions.get('window').width * 0.02 }]}>
+      <TouchableOpacity onPress={ this._onPress } style={[styles.TouchableStyle, { width:Dimensions.get('window').width * 0.3, marginLeft:Dimensions.get('window').width * 0.02 }]} accessibilityLabel={this.props.title.title}>
         <View style={styles.TextViewStyle}>
           <Text style={styles.TextStyle}>
             {this.props.title.title}

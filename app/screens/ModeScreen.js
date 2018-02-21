@@ -16,6 +16,7 @@ export default class ModeScreen extends PureComponent{
                     }
                     )} 
                     style={styles.TouchableStyle}
+                    accessibilityLabel={OfflineTries}
                     >
                         <Text style={styles.TextStyle}>OfflineTries</Text>
                     </TouchableOpacity>
@@ -29,12 +30,13 @@ export default class ModeScreen extends PureComponent{
                     }
                     )} 
                     style={styles.TouchableStyle}
+                    accessibilityLabel={OfflineTimed}
                     >
                         <Text style={styles.TextStyle}>OfflineTimed</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{flexDirection:'row', flex:1}}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CommonGameScreen',
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PlayWith',
                     {
                         item: this.props.navigation.state.params.item,
                         game: this.props.navigation.state.params.game,
@@ -44,10 +46,11 @@ export default class ModeScreen extends PureComponent{
                     }
                     )} 
                     style={styles.TouchableStyle}
+                    accessibilityLabel={OnlineTries}
                     >
                         <Text style={styles.TextStyle}>OnlineTries</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CommonGameScreen',
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PlayWith',
                     {
                         item: this.props.navigation.state.params.item,
                         game: this.props.navigation.state.params.game,
@@ -57,6 +60,7 @@ export default class ModeScreen extends PureComponent{
                     }
                     )} 
                     style={styles.TouchableStyle}
+                    accessibilityLabel={OnlineTimed}
                     >
                         <Text style={styles.TextStyle}>OnlineTimed</Text>
                     </TouchableOpacity>
