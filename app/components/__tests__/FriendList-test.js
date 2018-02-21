@@ -25,6 +25,3 @@ it('User List Component', () => {
   const tree = renderer.create(<FriendList users={users} />).toJSON();
   expect(tree).toMatchSnapshot();
 });
-
-
-
