@@ -16,7 +16,7 @@ export default class ModeScreen extends PureComponent{
                     }
                     )} 
                     style={styles.TouchableStyle}
-                    accessibilityLabel={OfflineTries}
+                    accessibilityLabel="OfflineTries"
                     >
                         <Text style={styles.TextStyle}>OfflineTries</Text>
                     </TouchableOpacity>
@@ -30,7 +30,7 @@ export default class ModeScreen extends PureComponent{
                     }
                     )} 
                     style={styles.TouchableStyle}
-                    accessibilityLabel={OfflineTimed}
+                    accessibilityLabel="OfflineTimed"
                     >
                         <Text style={styles.TextStyle}>OfflineTimed</Text>
                     </TouchableOpacity>
@@ -46,7 +46,7 @@ export default class ModeScreen extends PureComponent{
                     }
                     )} 
                     style={styles.TouchableStyle}
-                    accessibilityLabel={OnlineTries}
+                    accessibilityLabel="OnlineTries"
                     >
                         <Text style={styles.TextStyle}>OnlineTries</Text>
                     </TouchableOpacity>
@@ -60,7 +60,7 @@ export default class ModeScreen extends PureComponent{
                     }
                     )} 
                     style={styles.TouchableStyle}
-                    accessibilityLabel={OnlineTimed}
+                    accessibilityLabel="OnlineTimed"
                     >
                         <Text style={styles.TextStyle}>OnlineTimed</Text>
                     </TouchableOpacity>
