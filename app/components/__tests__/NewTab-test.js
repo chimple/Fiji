@@ -1,7 +1,7 @@
 import 'react-native';
 import React from 'react';
-import GameTitle from '../GameTitle';
-import { games } from '../../../config/jest/mockData'
+import FacebookTabBar from '../NewTab';
+import stickers from '../../assets/stickers/stickers.json'
 
 import renderer from 'react-test-renderer';
 
@@ -23,9 +23,7 @@ import renderer from 'react-test-renderer';
 
 it('this is user 0', () => {
   const tree = renderer.create(
-    <GameTitle
-    title={games[1]}
-    />
+  <FacebookTabBar tabData={stickers} />
 ).toJSON();
   expect(tree).toMatchSnapshot();
 });

@@ -1,6 +1,5 @@
 {
-  "docs": 
-  [
+  "docs": [
     {
       "_id": "storytitle:alice-in-wonderland",
       "title": "Alice in Wonderland",
@@ -81,6 +80,30 @@
     {
       "_id": "storytitle:phantasmagoria16",
       "title": "Phantasmagoria16"
+    },
+    {
+      "_id": "game:memory-matching",
+      "title": "memory-matching"
+    },
+    {
+      "_id": "game:reflex",
+      "title": "reflex"
+    },
+    {
+      "_id": "game:tap-wrong",
+      "title": "tap-wrong"
+    },
+    {
+      "_id": "game:word",
+      "title": "word"
+    },
+    {
+      "_id": "game:multiple-choice",
+      "title": "multiple-choice"
+    },
+    {
+      "_id": "game:tap-home",
+      "title": "tap-home"
     },
     {
       "_id": "high-score:game:memory-matching:mad-hatter",

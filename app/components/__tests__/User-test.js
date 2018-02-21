@@ -1,6 +1,6 @@
 import 'react-native';
 import React from 'react';
-import User from '../User';
+import User, { onLayoutHandler } from '../User';
 import { users } from '../../../config/jest/mockData'
 
 import renderer from 'react-test-renderer';
@@ -26,7 +26,14 @@ it('this is user 0', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('this is user 1', () => {
-  const tree = renderer.create(<User user={users[2]} />).toJSON();
+it('Rendering all the users', () => {
+  const tree = [];
+  for (i = 0; i < users.length; i++)
+    tree.push(renderer.create(<User user={users[i]} />).toJSON());
   expect(tree).toMatchSnapshot();
+});
+
+it('Mocking the function', () => {
+  const myMockFn = jest.fn(onLayoutHandler => onLayoutHandler())
+  expect(myMockFn).toMatchSnapshot();
 });
