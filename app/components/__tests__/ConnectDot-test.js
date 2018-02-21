@@ -16,12 +16,9 @@ it('renders correctly', () => {
       width: window.width,
       height: window.height
     }}
-    setProgress={()=>{}}
-    onScore={()=>{} }
-    onEnd={()=>{}}
-    _clickTile={() => {id:1, view}}
-  
-  />
- ).toJSON()
+   />
+ ).getInstance()
+ tree._clickTile(1,)
+ 
   expect(tree).toMatchSnapshot()
 })
