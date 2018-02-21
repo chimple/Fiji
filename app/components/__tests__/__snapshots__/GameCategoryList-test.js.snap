@@ -1,0 +1,1304 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "white",
+      "flex": 1,
+    }
+  }
+>
+  <RCTScrollView
+    data={
+      Array [
+        Object {
+          "_id": "game:memory-matching",
+          "category": "Read",
+          "name": "Memory Matching",
+          "screen": "Game1",
+          "sets": Array [
+            Object {
+              "_id": "letters",
+              "name": "Letters",
+            },
+            Object {
+              "_id": "numbers",
+              "name": "Numbers",
+            },
+            Object {
+              "_id": "images",
+              "name": "Images",
+            },
+          ],
+        },
+        Object {
+          "_id": "game:tap-home",
+          "category": "Read",
+          "name": "Tap Home",
+          "screen": "Game2",
+          "sets": Array [
+            Object {
+              "_id": "letters",
+              "name": "Letters",
+            },
+            Object {
+              "_id": "numbers",
+              "name": "Numbers",
+            },
+            Object {
+              "_id": "images",
+              "name": "Images",
+            },
+          ],
+        },
+        Object {
+          "_id": "game:reflex",
+          "category": "listening",
+          "name": "Reflex",
+          "screen": "Reflex",
+          "sets": Array [
+            Object {
+              "_id": "letters",
+              "name": "Letters",
+            },
+            Object {
+              "_id": "numbers",
+              "name": "Numbers",
+            },
+            Object {
+              "_id": "images",
+              "name": "Images",
+            },
+          ],
+        },
+        Object {
+          "_id": "game:tap-wrong",
+          "category": "listening",
+          "name": "Tap-wrong",
+          "screen": "Game3",
+          "sets": Array [
+            Object {
+              "_id": "letters",
+              "name": "Letters",
+            },
+            Object {
+              "_id": "numbers",
+              "name": "Numbers",
+            },
+            Object {
+              "_id": "images",
+              "name": "Images",
+            },
+          ],
+        },
+        Object {
+          "_id": "game:word",
+          "category": "writing",
+          "name": "Word",
+          "screen": "Game4",
+          "sets": Array [
+            Object {
+              "_id": "letters",
+              "name": "Letters",
+            },
+            Object {
+              "_id": "numbers",
+              "name": "Numbers",
+            },
+            Object {
+              "_id": "images",
+              "name": "Images",
+            },
+          ],
+        },
+        Object {
+          "_id": "game:multiple-choice",
+          "category": "writing",
+          "name": "Multiple-choice",
+          "screen": "Game6",
+          "sets": Array [
+            Object {
+              "_id": "letters",
+              "name": "Letters",
+            },
+            Object {
+              "_id": "numbers",
+              "name": "Numbers",
+            },
+            Object {
+              "_id": "images",
+              "name": "Images",
+            },
+          ],
+        },
+        Object {
+          "_id": "game:connect-dots",
+          "category": "reading",
+          "name": "Connect-dots",
+          "screen": "Game5",
+          "sets": Array [
+            Object {
+              "_id": "letters",
+              "name": "Letters",
+            },
+            Object {
+              "_id": "numbers",
+              "name": "Numbers",
+            },
+            Object {
+              "_id": "images",
+              "name": "Images",
+            },
+          ],
+        },
+      ]
+    }
+    disableVirtualization={false}
+    getItem={[Function]}
+    getItemCount={[Function]}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onContentSizeChange={[Function]}
+    onEndReachedThreshold={2}
+    onLayout={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    showsVerticalScrollIndicator={false}
+    stickyHeaderIndices={Array []}
+    updateCellsBatchingPeriod={50}
+    viewabilityConfigCallbackPairs={Array []}
+    windowSize={21}
+  >
+    <View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          style={
+            Object {
+              "flex": 1,
+              "height": 150,
+              "marginBottom": "8%",
+              "marginHorizontal": "4%",
+              "marginTop": "8%",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#dadbc5",
+                "borderTopLeftRadius": 20,
+                "borderTopRightRadius": 20,
+                "flex": 2,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#19a4f2",
+                  "fontSize": 25,
+                  "fontWeight": "bold",
+                }
+              }
+            >
+              Read
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignContent": "center",
+                "backgroundColor": "#eaefef",
+                "borderBottomLeftRadius": 20,
+                "borderBottomRightRadius": 20,
+                "flex": 4,
+                "flexDirection": "row",
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "paddingRight": "3%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                onPress={undefined}
+                style={
+                  Array [
+                    Object {
+                      "color": "white",
+                      "fontSize": 35,
+                    },
+                    Object {
+                      "color": "#19a4f2",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "flex": 12,
+                }
+              }
+            >
+              <RCTScrollView
+                data={undefined}
+                disableVirtualization={false}
+                getItem={[Function]}
+                getItemCount={[Function]}
+                horizontal={true}
+                initialNumToRender={10}
+                keyExtractor={[Function]}
+                maxToRenderPerBatch={10}
+                numColumns={1}
+                onContentSizeChange={[Function]}
+                onEndReachedThreshold={2}
+                onLayout={[Function]}
+                onMomentumScrollEnd={[Function]}
+                onScroll={[Function]}
+                onScrollBeginDrag={[Function]}
+                onScrollEndDrag={[Function]}
+                renderItem={[Function]}
+                scrollEventThrottle={50}
+                showsHorizontalScrollIndicator={false}
+                stickyHeaderIndices={Array []}
+                updateCellsBatchingPeriod={50}
+                viewabilityConfigCallbackPairs={Array []}
+                windowSize={21}
+              >
+                <View />
+              </RCTScrollView>
+            </View>
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "paddingRight": "3%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                onPress={undefined}
+                style={
+                  Array [
+                    Object {
+                      "color": "white",
+                      "fontSize": 35,
+                    },
+                    Object {
+                      "color": "#19a4f2",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          style={
+            Object {
+              "flex": 1,
+              "height": 150,
+              "marginBottom": "8%",
+              "marginHorizontal": "4%",
+              "marginTop": "8%",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#dadbc5",
+                "borderTopLeftRadius": 20,
+                "borderTopRightRadius": 20,
+                "flex": 2,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#19a4f2",
+                  "fontSize": 25,
+                  "fontWeight": "bold",
+                }
+              }
+            >
+              Read
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignContent": "center",
+                "backgroundColor": "#eaefef",
+                "borderBottomLeftRadius": 20,
+                "borderBottomRightRadius": 20,
+                "flex": 4,
+                "flexDirection": "row",
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "paddingRight": "3%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                onPress={undefined}
+                style={
+                  Array [
+                    Object {
+                      "color": "white",
+                      "fontSize": 35,
+                    },
+                    Object {
+                      "color": "#19a4f2",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "flex": 12,
+                }
+              }
+            >
+              <RCTScrollView
+                data={undefined}
+                disableVirtualization={false}
+                getItem={[Function]}
+                getItemCount={[Function]}
+                horizontal={true}
+                initialNumToRender={10}
+                keyExtractor={[Function]}
+                maxToRenderPerBatch={10}
+                numColumns={1}
+                onContentSizeChange={[Function]}
+                onEndReachedThreshold={2}
+                onLayout={[Function]}
+                onMomentumScrollEnd={[Function]}
+                onScroll={[Function]}
+                onScrollBeginDrag={[Function]}
+                onScrollEndDrag={[Function]}
+                renderItem={[Function]}
+                scrollEventThrottle={50}
+                showsHorizontalScrollIndicator={false}
+                stickyHeaderIndices={Array []}
+                updateCellsBatchingPeriod={50}
+                viewabilityConfigCallbackPairs={Array []}
+                windowSize={21}
+              >
+                <View />
+              </RCTScrollView>
+            </View>
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "paddingRight": "3%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                onPress={undefined}
+                style={
+                  Array [
+                    Object {
+                      "color": "white",
+                      "fontSize": 35,
+                    },
+                    Object {
+                      "color": "#19a4f2",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          style={
+            Object {
+              "flex": 1,
+              "height": 150,
+              "marginBottom": "8%",
+              "marginHorizontal": "4%",
+              "marginTop": "8%",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#dadbc5",
+                "borderTopLeftRadius": 20,
+                "borderTopRightRadius": 20,
+                "flex": 2,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#19a4f2",
+                  "fontSize": 25,
+                  "fontWeight": "bold",
+                }
+              }
+            >
+              listening
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignContent": "center",
+                "backgroundColor": "#eaefef",
+                "borderBottomLeftRadius": 20,
+                "borderBottomRightRadius": 20,
+                "flex": 4,
+                "flexDirection": "row",
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "paddingRight": "3%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                onPress={undefined}
+                style={
+                  Array [
+                    Object {
+                      "color": "white",
+                      "fontSize": 35,
+                    },
+                    Object {
+                      "color": "#19a4f2",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "flex": 12,
+                }
+              }
+            >
+              <RCTScrollView
+                data={undefined}
+                disableVirtualization={false}
+                getItem={[Function]}
+                getItemCount={[Function]}
+                horizontal={true}
+                initialNumToRender={10}
+                keyExtractor={[Function]}
+                maxToRenderPerBatch={10}
+                numColumns={1}
+                onContentSizeChange={[Function]}
+                onEndReachedThreshold={2}
+                onLayout={[Function]}
+                onMomentumScrollEnd={[Function]}
+                onScroll={[Function]}
+                onScrollBeginDrag={[Function]}
+                onScrollEndDrag={[Function]}
+                renderItem={[Function]}
+                scrollEventThrottle={50}
+                showsHorizontalScrollIndicator={false}
+                stickyHeaderIndices={Array []}
+                updateCellsBatchingPeriod={50}
+                viewabilityConfigCallbackPairs={Array []}
+                windowSize={21}
+              >
+                <View />
+              </RCTScrollView>
+            </View>
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "paddingRight": "3%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                onPress={undefined}
+                style={
+                  Array [
+                    Object {
+                      "color": "white",
+                      "fontSize": 35,
+                    },
+                    Object {
+                      "color": "#19a4f2",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          style={
+            Object {
+              "flex": 1,
+              "height": 150,
+              "marginBottom": "8%",
+              "marginHorizontal": "4%",
+              "marginTop": "8%",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#dadbc5",
+                "borderTopLeftRadius": 20,
+                "borderTopRightRadius": 20,
+                "flex": 2,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#19a4f2",
+                  "fontSize": 25,
+                  "fontWeight": "bold",
+                }
+              }
+            >
+              listening
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignContent": "center",
+                "backgroundColor": "#eaefef",
+                "borderBottomLeftRadius": 20,
+                "borderBottomRightRadius": 20,
+                "flex": 4,
+                "flexDirection": "row",
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "paddingRight": "3%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                onPress={undefined}
+                style={
+                  Array [
+                    Object {
+                      "color": "white",
+                      "fontSize": 35,
+                    },
+                    Object {
+                      "color": "#19a4f2",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "flex": 12,
+                }
+              }
+            >
+              <RCTScrollView
+                data={undefined}
+                disableVirtualization={false}
+                getItem={[Function]}
+                getItemCount={[Function]}
+                horizontal={true}
+                initialNumToRender={10}
+                keyExtractor={[Function]}
+                maxToRenderPerBatch={10}
+                numColumns={1}
+                onContentSizeChange={[Function]}
+                onEndReachedThreshold={2}
+                onLayout={[Function]}
+                onMomentumScrollEnd={[Function]}
+                onScroll={[Function]}
+                onScrollBeginDrag={[Function]}
+                onScrollEndDrag={[Function]}
+                renderItem={[Function]}
+                scrollEventThrottle={50}
+                showsHorizontalScrollIndicator={false}
+                stickyHeaderIndices={Array []}
+                updateCellsBatchingPeriod={50}
+                viewabilityConfigCallbackPairs={Array []}
+                windowSize={21}
+              >
+                <View />
+              </RCTScrollView>
+            </View>
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "paddingRight": "3%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                onPress={undefined}
+                style={
+                  Array [
+                    Object {
+                      "color": "white",
+                      "fontSize": 35,
+                    },
+                    Object {
+                      "color": "#19a4f2",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          style={
+            Object {
+              "flex": 1,
+              "height": 150,
+              "marginBottom": "8%",
+              "marginHorizontal": "4%",
+              "marginTop": "8%",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#dadbc5",
+                "borderTopLeftRadius": 20,
+                "borderTopRightRadius": 20,
+                "flex": 2,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#19a4f2",
+                  "fontSize": 25,
+                  "fontWeight": "bold",
+                }
+              }
+            >
+              writing
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignContent": "center",
+                "backgroundColor": "#eaefef",
+                "borderBottomLeftRadius": 20,
+                "borderBottomRightRadius": 20,
+                "flex": 4,
+                "flexDirection": "row",
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "paddingRight": "3%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                onPress={undefined}
+                style={
+                  Array [
+                    Object {
+                      "color": "white",
+                      "fontSize": 35,
+                    },
+                    Object {
+                      "color": "#19a4f2",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "flex": 12,
+                }
+              }
+            >
+              <RCTScrollView
+                data={undefined}
+                disableVirtualization={false}
+                getItem={[Function]}
+                getItemCount={[Function]}
+                horizontal={true}
+                initialNumToRender={10}
+                keyExtractor={[Function]}
+                maxToRenderPerBatch={10}
+                numColumns={1}
+                onContentSizeChange={[Function]}
+                onEndReachedThreshold={2}
+                onLayout={[Function]}
+                onMomentumScrollEnd={[Function]}
+                onScroll={[Function]}
+                onScrollBeginDrag={[Function]}
+                onScrollEndDrag={[Function]}
+                renderItem={[Function]}
+                scrollEventThrottle={50}
+                showsHorizontalScrollIndicator={false}
+                stickyHeaderIndices={Array []}
+                updateCellsBatchingPeriod={50}
+                viewabilityConfigCallbackPairs={Array []}
+                windowSize={21}
+              >
+                <View />
+              </RCTScrollView>
+            </View>
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "paddingRight": "3%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                onPress={undefined}
+                style={
+                  Array [
+                    Object {
+                      "color": "white",
+                      "fontSize": 35,
+                    },
+                    Object {
+                      "color": "#19a4f2",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          style={
+            Object {
+              "flex": 1,
+              "height": 150,
+              "marginBottom": "8%",
+              "marginHorizontal": "4%",
+              "marginTop": "8%",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#dadbc5",
+                "borderTopLeftRadius": 20,
+                "borderTopRightRadius": 20,
+                "flex": 2,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#19a4f2",
+                  "fontSize": 25,
+                  "fontWeight": "bold",
+                }
+              }
+            >
+              writing
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignContent": "center",
+                "backgroundColor": "#eaefef",
+                "borderBottomLeftRadius": 20,
+                "borderBottomRightRadius": 20,
+                "flex": 4,
+                "flexDirection": "row",
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "paddingRight": "3%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                onPress={undefined}
+                style={
+                  Array [
+                    Object {
+                      "color": "white",
+                      "fontSize": 35,
+                    },
+                    Object {
+                      "color": "#19a4f2",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "flex": 12,
+                }
+              }
+            >
+              <RCTScrollView
+                data={undefined}
+                disableVirtualization={false}
+                getItem={[Function]}
+                getItemCount={[Function]}
+                horizontal={true}
+                initialNumToRender={10}
+                keyExtractor={[Function]}
+                maxToRenderPerBatch={10}
+                numColumns={1}
+                onContentSizeChange={[Function]}
+                onEndReachedThreshold={2}
+                onLayout={[Function]}
+                onMomentumScrollEnd={[Function]}
+                onScroll={[Function]}
+                onScrollBeginDrag={[Function]}
+                onScrollEndDrag={[Function]}
+                renderItem={[Function]}
+                scrollEventThrottle={50}
+                showsHorizontalScrollIndicator={false}
+                stickyHeaderIndices={Array []}
+                updateCellsBatchingPeriod={50}
+                viewabilityConfigCallbackPairs={Array []}
+                windowSize={21}
+              >
+                <View />
+              </RCTScrollView>
+            </View>
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "paddingRight": "3%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                onPress={undefined}
+                style={
+                  Array [
+                    Object {
+                      "color": "white",
+                      "fontSize": 35,
+                    },
+                    Object {
+                      "color": "#19a4f2",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          style={
+            Object {
+              "flex": 1,
+              "height": 150,
+              "marginBottom": "8%",
+              "marginHorizontal": "4%",
+              "marginTop": "8%",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#dadbc5",
+                "borderTopLeftRadius": 20,
+                "borderTopRightRadius": 20,
+                "flex": 2,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#19a4f2",
+                  "fontSize": 25,
+                  "fontWeight": "bold",
+                }
+              }
+            >
+              reading
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignContent": "center",
+                "backgroundColor": "#eaefef",
+                "borderBottomLeftRadius": 20,
+                "borderBottomRightRadius": 20,
+                "flex": 4,
+                "flexDirection": "row",
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "paddingRight": "3%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                onPress={undefined}
+                style={
+                  Array [
+                    Object {
+                      "color": "white",
+                      "fontSize": 35,
+                    },
+                    Object {
+                      "color": "#19a4f2",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "flex": 12,
+                }
+              }
+            >
+              <RCTScrollView
+                data={undefined}
+                disableVirtualization={false}
+                getItem={[Function]}
+                getItemCount={[Function]}
+                horizontal={true}
+                initialNumToRender={10}
+                keyExtractor={[Function]}
+                maxToRenderPerBatch={10}
+                numColumns={1}
+                onContentSizeChange={[Function]}
+                onEndReachedThreshold={2}
+                onLayout={[Function]}
+                onMomentumScrollEnd={[Function]}
+                onScroll={[Function]}
+                onScrollBeginDrag={[Function]}
+                onScrollEndDrag={[Function]}
+                renderItem={[Function]}
+                scrollEventThrottle={50}
+                showsHorizontalScrollIndicator={false}
+                stickyHeaderIndices={Array []}
+                updateCellsBatchingPeriod={50}
+                viewabilityConfigCallbackPairs={Array []}
+                windowSize={21}
+              >
+                <View />
+              </RCTScrollView>
+            </View>
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "paddingRight": "3%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                onPress={undefined}
+                style={
+                  Array [
+                    Object {
+                      "color": "white",
+                      "fontSize": 35,
+                    },
+                    Object {
+                      "color": "#19a4f2",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;

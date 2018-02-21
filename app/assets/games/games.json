@@ -1,0 +1,128 @@
+{
+  "game:memory-matching": {
+    "_id": "game:memory-matching",
+    "name": "Memory Matching",
+    "sets": [
+      {
+        "_id": "letters",
+        "name": "Letters"
+      },
+      {
+        "_id": "numbers",
+        "name": "Numbers"
+      },
+      {
+        "_id": "images",
+        "name": "Images"
+      }
+    ]
+  },
+  "game:tap-home": {
+    "_id": "game:tap-home",
+    "name": "Tap Home",
+    "sets": [
+      {
+        "_id": "letters",
+        "name": "Letters"
+      },
+      {
+        "_id": "numbers",
+        "name": "Numbers"
+      },
+      {
+        "_id": "images",
+        "name": "Images"
+      }
+    ]
+  },
+  "game:reflex": {
+    "_id": "game:reflex",
+    "name": "Reflex",
+    "sets": [
+      {
+        "_id": "letters",
+        "name": "Letters"
+      },
+      {
+        "_id": "numbers",
+        "name": "Numbers"
+      },
+      {
+        "_id": "images",
+        "name": "Images"
+      }
+    ]
+  },
+  "game:tap-wrong": {
+    "_id": "game:tap-wrong",
+    "name": "Tap-wrong",
+    "sets": [
+      {
+        "_id": "letters",
+        "name": "Letters"
+      },
+      {
+        "_id": "numbers",
+        "name": "Numbers"
+      },
+      {
+        "_id": "images",
+        "name": "Images"
+      }
+    ]
+  },
+  "game:word": {
+    "_id": "game:word",
+    "name": "Word",
+    "sets": [
+      {
+        "_id": "letters",
+        "name": "Letters"
+      },
+      {
+        "_id": "numbers",
+        "name": "Numbers"
+      },
+      {
+        "_id": "images",
+        "name": "Images"
+      }
+    ]
+  },
+  "game:multiple-choice": {
+    "_id": "game:multiple-choice",
+    "name": "Multiple-choice",
+    "sets": [
+      {
+        "_id": "letters",
+        "name": "Letters"
+      },
+      {
+        "_id": "numbers",
+        "name": "Numbers"
+      },
+      {
+        "_id": "images",
+        "name": "Images"
+      }
+    ]
+  },
+  "game:connect-dots": {
+    "_id": "game:connect-dots",
+    "name": "Connect-dots",
+    "sets": [
+      {
+        "_id": "letters",
+        "name": "Letters"
+      },
+      {
+        "_id": "numbers",
+        "name": "Numbers"
+      },
+      {
+        "_id": "images",
+        "name": "Images"
+      }
+    ]
+  }
+}

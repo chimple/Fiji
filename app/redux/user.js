@@ -53,7 +53,7 @@ export const addUserFailure = (error) => ({
 })
 
 export const addUser = (user) => async(dispatch) => {
-  console.log("please save the data"+user.image)
+  // console.log("please save the data"+user.image)
   try {
     dispatch(addUserRequest())
     const response = await usersDB.post({

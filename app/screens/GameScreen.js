@@ -41,7 +41,7 @@ class GameScreen extends Component {
     } else if (this.props.navigation.state.params.game._id == 'game:multiple-choice') {
       this.props.dispatch(fetchMultipleChoiceData('set:letters', 4, 2))
     } else if (this.props.navigation.state.params.game._id == 'game:tap-home') {
-      this.props.dispatch(fetchSerialData('set:letters', 10))
+      this.props.dispatch(fetchSerialData('set:letters', 20))
     } else if (this.props.navigation.state.params.game._id == 'game:tap-wrong') {
       this.props.dispatch(fetchWordData('set:letters', 3, 2, 3))
     } else if (this.props.navigation.state.params.game._id == 'game:word') {
@@ -67,7 +67,7 @@ class GameScreen extends Component {
     return (
       this.state.gameOver
         ?
-        <ScoreScreen item={this.props.navigation.state.params.item} game={this.props.navigation.state.params.game} user={this.props.navigation.state.params.user} />
+        <ScoreScreen currentScore={this.props.myScore} item={this.props.navigation.state.params.item} game={this.props.navigation.state.params.game} user={this.props.navigation.state.params.user} />
         :
         this.props.isFetching
           ?
@@ -100,7 +100,7 @@ class GameScreen extends Component {
   }
 
   _onEnd = () => {
-    this.props.dispatch(finalizeScore(this.props.user._id, this.props.navigation.state.params.game._id, this.props.myScore))
+    //this.props.dispatch(finalizeScore(this.props.user._id, this.props.navigation.state.params.game._id, this.props.myScore))
     this.setState(...this.state, { gameOver: true })
   }
 

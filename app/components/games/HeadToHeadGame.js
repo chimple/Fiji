@@ -14,7 +14,7 @@ export default class HeadToHeadGame extends Component {
     super(props)
     this.state = {
       myScore: 0,
-      otherScore: 0
+      otherScore: 0,
     }
   }
 
@@ -39,7 +39,15 @@ export default class HeadToHeadGame extends Component {
   }
 
   render() {
-    const { width, height } = Dimensions.get('window')
+    let { width, height } = Dimensions.get('window')
+
+    if( width > height )
+    {
+      let temp = width
+      width = height
+      height = temp
+    }
+
     return (
       <View
         style={styles.container}>

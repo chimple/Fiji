@@ -15,6 +15,8 @@ const SIZE = 4
 arryCheck =[];
 arryID =[];
 let k =0;
+let Matched =0;
+let progressCnt =1;
 
 export default class MemoryMatching extends Component {
   constructor(props) {
@@ -32,7 +34,8 @@ export default class MemoryMatching extends Component {
         });
       }
     )
-    console.log("Rajesh-Original-Data",arry);
+    console.log("Rajesh-Original-Data",props.data);
+    console.log("Rajesh-1D-Data",arry);
 
     let shuffledArray = new Array(SIZE * SIZE)
     shuffledArray = this.arrayShuffle(arry);
@@ -65,8 +68,8 @@ export default class MemoryMatching extends Component {
   return items;
   }
 
-  componentWillReceiveProps() {
-
+  componentDidMount() {
+    
   }
 
   render() {
@@ -86,7 +89,32 @@ export default class MemoryMatching extends Component {
         width: this.props.style.width,
         height: this.props.style.height
       }}
-      
+      statusStyles = {{
+        H: {
+          View: {
+           
+          },
+          Text: {
+            opacity: 0
+          }
+        },
+        V: {
+          View: {
+            backgroundColor: '#24B2EA'
+          },
+          Text: {
+            opacity: 1
+          }
+        },
+        D: {
+          View: {
+           
+          },
+          Text: {
+           
+          }
+        }
+      }}
       onPress={this._clickTile}
     />
     )
@@ -94,8 +122,8 @@ export default class MemoryMatching extends Component {
 
   _onStatusChange(id, view, prevStatus, currentStatus) {
     console.log("Rajesh-Data-onstatuschange:", id , prevStatus, currentStatus);
-    currentStatus == 'D' && view.zoomOut(1000)
-    currentStatus == 'H' && view.flipInY(1000) 
+    currentStatus == 'D' && view.zoomOut(100)
+    currentStatus == 'H' && view.flipInY(250) 
   }
 
   _clickTile = (id, view) => {
@@ -103,37 +131,47 @@ export default class MemoryMatching extends Component {
     console.log("Pressed-Tile-id-Content",this.state.shuffledArray[id]);
     console.log("Pressed-Tile-status",this.state.statuses[id]);
 
-    if(this.state.statuses[id]=='V')
+    if(this.state.statuses[id]=='V'||this.state.statuses[id]=='D')
      return;
+    
+    this.setState({...this.state,
+    statuses: this.state.statuses.map((val, index)=> {
+      return id == index ? 'V' : val})})
 
-    view.flipInY(500).then((endState) => {
+    view.flipInY(250).then((endState) => {
       arryCheck[k] = this.state.shuffledArray[id]; 
       arryID[k] =id;
       console.log("Rajesh-Id-Data",arryID);
 
-      this.setState({...this.state,
-        statuses: this.state.statuses.map((val, index)=> {
-          return id == index ? 'V' : val})})
-    
       if(arryCheck.length===2)
-      {
+      {      
         if(arryCheck[0]===arryCheck[1])
           {
-            for(let i=0; i<arryID.length; i++)
-            {
+            Matched++;     
+            if(Matched == 8)
+             this.props.onEnd();  
+
+            this.props.onScore(2);
+            this.props.setProgress((progressCnt) / (this.state.shuffledArray.length/2));
+            progressCnt++;
+            const first = arryID[0];
+            const second = arryID[1];
+            console.log("Checking",arryID);
+            setTimeout( () => {
               this.setState({...this.state,
                 statuses: this.state.statuses.map((val, index)=> {
-                  return arryID[i] == index ? 'D' : val})})
-            }
+                  return (first == index || second == index) ? 'D' : val})})
+          }, 0);
           }
         else
           { 
-            for(let i=0; i<arryID.length; i++)
-            {
+            const first = arryID[0];
+            const second = arryID[1];
+            setTimeout( () => {
               this.setState({...this.state,
                 statuses: this.state.statuses.map((val, index)=> {
-                  return arryID[i] == index ? 'H' : val})})
-            }           
+                  return (first == index || second == index) ? 'H' : val})})
+          }, 0);    
           }
 
           arryID = [];
@@ -153,5 +191,8 @@ export default class MemoryMatching extends Component {
 }
 
 MemoryMatching.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.object,
+  onScore: PropTypes.func,
+  onEnd: PropTypes.func,
+  setProgress: PropTypes.func
 }

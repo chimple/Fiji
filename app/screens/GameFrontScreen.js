@@ -4,8 +4,8 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import SvgUri from 'react-native-svg-uri'
-import { Buffer } from 'buffer'
 import { fetchGameTheme } from '../redux/game'
+import setIcons from '../assets/games/setIcons';
 
 class GameFrontScreen extends PureComponent {
   componentDidMount() {
@@ -16,24 +16,26 @@ class GameFrontScreen extends PureComponent {
 
   _keyExtractor = (item, index) => item._id
 
-  _renderItem = ({ item }) => (
-    <TouchableOpacity onPress={() => this.props.navigation.navigate('CommonGameScreen',
+  _renderItem = ({ item }) => {
+    const svg = setIcons[item._id] || setIcons['missing']
+    return (
+    <TouchableOpacity onPress={() => this.props.navigation.navigate('Modes',
       {
         item,
         game: this.props.navigation.state.params.title,
         user: this.props.navigation.state.params.user,
-        mode: 'SINGLE',
-        play: 'TRIES'
       }
-    )} style={{ flexDirection: 'row', borderColor: 'black', borderWidth: 2 }}>
+    )} 
+    style={{ flexDirection: 'row', borderColor: 'black', borderWidth: 2 }}>
       <SvgUri
         width='50'
         height='50'
-        svgXmlData={Buffer.from(item.svg, 'base64').toString('utf8')}
+        svgXmlData={svg.default}
       />
       <Text style={{ color: 'black', fontSize: 50, fontWeight: 'bold' }}>{item.name}</Text>
     </TouchableOpacity>
   )
+  }
 
   render() {
 
@@ -46,7 +48,6 @@ class GameFrontScreen extends PureComponent {
         :
         this.props.theme._id
           ?
-          <View>
             <View>
               <FlatList
                 showsVerticalScrollIndicator={false}
@@ -55,7 +56,7 @@ class GameFrontScreen extends PureComponent {
                 keyExtractor={this._keyExtractor}
               />
             </View>
-            <TouchableOpacity
+            /*<TouchableOpacity
               onPress={() => this.props.navigation.navigate('CommonGameScreen', {
                 item: this.props.theme.sets[0],
                 game: this.props.navigation.state.params.title,
@@ -67,8 +68,8 @@ class GameFrontScreen extends PureComponent {
               <Text style={{ color: 'black', fontSize: 50, fontWeight: 'bold' }}>
                 Play Head to Head
               </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+            </TouchableOpacity>*/
+            /*<TouchableOpacity
               onPress={() => this.props.navigation.navigate('CommonGameScreen', {
                 item: this.props.theme.sets[0],
                 game: this.props.navigation.state.params.title,
@@ -80,8 +81,7 @@ class GameFrontScreen extends PureComponent {
               <Text style={{ color: 'black', fontSize: 50, fontWeight: 'bold' }}>
                 Play in Timed Mode
               </Text>
-            </TouchableOpacity>
-          </View>
+            </TouchableOpacity>*/
 
           :
           <View><Text>No Themes Found.</Text></View>
