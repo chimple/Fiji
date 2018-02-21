@@ -2,6 +2,9 @@ import React, {PureComponent} from 'react'
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native'
 
 export default class ModeScreen extends PureComponent{
+    componentDidMount(){
+        console.log(this.props.navigation.state.params.key)
+    }
     render(){
         return(
             <View style={{flex:1}}>
@@ -11,6 +14,7 @@ export default class ModeScreen extends PureComponent{
                         item: this.props.navigation.state.params.item,
                         game: this.props.navigation.state.params.game,
                         user: this.props.navigation.state.params.user,
+                        key:this.props.navigation.state.params.key,
                         mode: 'HEAD_TO_HEAD',
                         play: 'TRIES'
                     }
@@ -25,6 +29,7 @@ export default class ModeScreen extends PureComponent{
                         item: this.props.navigation.state.params.item,
                         game: this.props.navigation.state.params.game,
                         user: this.props.navigation.state.params.user,
+                        key:this.props.navigation.state.params.key,
                         mode: 'HEAD_TO_HEAD',
                         play: 'TIMED'
                     }
@@ -41,6 +46,7 @@ export default class ModeScreen extends PureComponent{
                         item: this.props.navigation.state.params.item,
                         game: this.props.navigation.state.params.game,
                         user: this.props.navigation.state.params.user,
+                        key:this.props.navigation.state.params.key,
                         mode: 'SINGLE',
                         play: 'TRIES'
                     }
@@ -55,6 +61,7 @@ export default class ModeScreen extends PureComponent{
                         item: this.props.navigation.state.params.item,
                         game: this.props.navigation.state.params.game,
                         user: this.props.navigation.state.params.user,
+                        key:this.props.navigation.state.params.key,
                         mode: 'SINGLE',
                         play: 'TIMED'
                     }
