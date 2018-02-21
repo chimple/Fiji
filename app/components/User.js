@@ -1,9 +1,7 @@
 import React, { PureComponent } from 'react'
-
-import { StyleSheet, TouchableOpacity, Dimensions, View, Text, FlatList, Image } from 'react-native'
+import { StyleSheet, TouchableOpacity, Dimensions, View, Text, Image } from 'react-native'
 import PropTypes from 'prop-types'
 import { Buffer } from 'buffer'
-//import SvgUri from 'react-native-svg-uri'
 
 export default class User extends PureComponent {
   state = {
@@ -16,23 +14,18 @@ export default class User extends PureComponent {
 
   onLayoutHandler() {
     console.log('onLayoutHandler');
-    // console.log(e.nativeEvent.layout);
-    // const h = Dimensions.get("window").height
     const w = Dimensions.get("window").width
-    // const length = h < w ? h : w
     this.setState({ len: w })
   }
 
   render() {
-    // let svg = Buffer.from(this.props.user.svg, 'base64').toString('utf8')
-    // console.log(this.props.user)
-
     return (
       <TouchableOpacity
         onLayout={this.onLayoutHandler.bind(this)}
         onPress={this._onPress}
         style={styles.TouchableStyle}
-        accessibilityLabel={this.props.user.name}>
+        accessibilityLabel={this.props.user.name}
+        >
         <View style={styles.ImageViewStyle}>
           <Image
             style={{
@@ -63,18 +56,8 @@ User.propTypes = {
 
 const styles = StyleSheet.create({
   ImageViewStyle: {
-    // flex:1,
-    // backgroundColor:'red',
-    // width: Dimensions.get('window').width * 0.24,
-    // height: Dimensions.get('window').width * 0.24, 
     flex: 3,
-    alignItems: 'center',
-    // padding:'4%'
-  },
-  ImageStyle: {
-    // flex:1,
-    // marginTop: Dimensions.get('window').width * 0.02,
-    // marginLeft: Dimensions.get('window').width * 0.04
+    alignItems: 'center'
   },
   TextViewStyle: {
     flex: 1,
@@ -88,22 +71,7 @@ const styles = StyleSheet.create({
   },
   TouchableStyle: {
     flex: 1,
-    // height:Dimensions.get('window').width * 0.3,
-    // width: Dimensions.get('window').width * 0.3,
-    // justifyContent: 'center',
-    // borderColor:'black',
-    // borderWidth:2, 
     marginLeft: '2%',
     marginTop: '5%'
   }
-  // TouchableStyle:{
-  //   flex:1,
-  //   // height:Dimensions.get('window').width * 0.3,
-  //   // width: Dimensions.get('window').width * 0.3,
-  //   // justifyContent: 'center',
-  //   // borderColor:'black',
-  //   // borderWidth:2, 
-  //   marginLeft:'7%',
-  //   marginTop:'10%'
-  // }
 });
