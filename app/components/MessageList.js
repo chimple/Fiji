@@ -78,7 +78,8 @@ export default class MessageList extends PureComponent {
      // console.log("packs",this.props.packs);
     //  console.log("i got in sticker",this.props.sticker)
 
-    if(this.props.messages.length !== ''){
+    // if(this.props.messages.length !== ''){
+      if(this.props.messages !== null){
         return (
     <View style={{ height: "100%" }}>
           <View style={{ flex: 1 }}>
@@ -120,12 +121,12 @@ export default class MessageList extends PureComponent {
                   size={40} color="#900" />
               </TouchableOpacity>
             </View>
-          <TabbedView
+          {/* <TabbedView
             packs= {this.props.packs}
             tabPress = {this.ontabPress}
             onPress = {this.onPressGetSticker}
             friend={this.props.friend}
-            /> 
+            />  */}
           </View>
           {this.state.emoji &&
           <View style={{height: 300}}>
@@ -170,12 +171,12 @@ export default class MessageList extends PureComponent {
 </View>
 
 
-<TabbedView
+{/* <TabbedView
 packs= {this.props.packs}
 tabPress = {this.ontabPress}
 onPress = {this.onPressGetSticker}
 friend={this.props.friend}
-/>
+/> */}
 </View>
 </View>
 );

@@ -41,3 +41,38 @@ it('renders correctly', () => {
 
 //   Invariant Violation: Could not find "store" in either the context or props of "Connect(TabbedView)". 
 //   Either wrap the root component in a <Provider>, or explicitly pass "store" as a prop to "Connect(TabbedView)".
+
+
+it('renders correctly', () => {
+  const tree = renderer.create(
+    <MessageList
+      messages={null}
+      user={users[0]}
+      friend={users[1]}
+
+    />
+  ).toJSON()
+  expect(tree).toMatchSnapshot()
+})
+
+it('Mocking the function', () => {
+  const tree = renderer.create(
+    <MessageList
+    messages={messages}
+    user={users[0]}
+    friend={users[1]}
+    
+  />
+).getInstance()
+tree.onPress("🐶")
+tree.toggleEmoji()
+tree.clearText()
+tree.toggleEmo()
+// tree._onPress(users[3])
+  expect(tree).toMatchSnapshot();
+});
+
+
+const UserManagement = new UserManagementPage({})
+UserManagement.onSubmitUser()
+console.log(UserManagement.state.userId)
