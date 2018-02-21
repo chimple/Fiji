@@ -25,3 +25,4 @@ it('User List Component', () => {
   const tree = renderer.create(<UserList users={users} />).toJSON();
   expect(tree).toMatchSnapshot();
 });
+

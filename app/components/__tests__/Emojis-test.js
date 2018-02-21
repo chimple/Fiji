@@ -1,7 +1,7 @@
 import 'react-native';
 import React from 'react';
-import GameTitle from '../GameTitle';
-import { games } from '../../../config/jest/mockData'
+import * as Emojis from '../Emojis';
+import { users } from '../../../config/jest/mockData'
 
 import renderer from 'react-test-renderer';
 
@@ -21,12 +21,7 @@ import renderer from 'react-test-renderer';
 //npm test -- --coverage User-test
 //this above command is used to test indivisual component
 
-it('this is user 0', () => {
-  const tree = renderer.create(
-    <GameTitle
-    title={games[1]}
-    />
-).toJSON();
-  expect(tree).toMatchSnapshot();
+it('this is Emojis-test', () => {
+  expect(Emojis).toMatchSnapshot();
 });
 

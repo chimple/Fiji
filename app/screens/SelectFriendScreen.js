@@ -7,13 +7,12 @@ import PropTypes from 'prop-types'
 import FriendList from '../components/FriendList'
 import { fetchUsers } from '../redux/users'
 
-class LoginScreen extends Component {
+class SelectFriendScreen extends Component {
   componentDidMount() {
     this.props.dispatch(fetchUsers())
   }
 
   render() {
-    const FilteredUsers = this.props.users.filter((user) => user._id != this.props.user._id)
     return (
       this.props.isFetching
         ?
@@ -22,7 +21,7 @@ class LoginScreen extends Component {
           this.props.users.length
             ?
               <FriendList
-                users={ FilteredUsers }
+                users={ this.props.users.filter((user) => user._id != this.props.user._id) }
                 navigation={ this.props.navigation }
                 onPressItem = { this._handleChat }
               />
@@ -34,11 +33,18 @@ class LoginScreen extends Component {
   }
 
   _handleChat = (friend) => {
-    this.props.navigation.navigate('ChatWith', { friend })
+    this.props.navigation.navigate('CommonGameScreen', { 
+        friend,
+        item: this.props.navigation.state.params.item,
+        game: this.props.navigation.state.params.game,
+        user: this.props.navigation.state.params.user,
+        mode: this.props.navigation.state.params.mode,
+        play: this.props.navigation.state.params.play
+     })
   }
 }
 
-LoginScreen.propTypes = {
+SelectFriendScreen.propTypes = {
   users: PropTypes.arrayOf(PropTypes.shape({
     _id: PropTypes.string,
     name: PropTypes.string
@@ -50,4 +56,4 @@ export default connect(state => ({
   users: state.users.list,
   isFetching: state.users.isFetching,
   user: state.auth.user
-}))(LoginScreen)
+}))(SelectFriendScreen)
