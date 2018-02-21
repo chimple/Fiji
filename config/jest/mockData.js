@@ -1,15 +1,18 @@
 import { fetchUsersFailure } from '../../app/redux/users';
 
-const contentJson = require('../../__tests__/seed/content.json')
-const usersJson = require('../../__tests__/seed/users.json')
-const userAliceJson = require('../../__tests__/seed/user_alice.json')
-const story = require('../../__tests__/seed/story.json')
+const contentJson = require('../../config/seed/content.json')
+const usersJson = require('../../config/seed/users.json')
+const userAliceJson = require('../../config/seed/user_alice.json')
+const story = require('../../config/seed/story.json')
 
 export const titles = contentJson['docs'].filter(function (doc) {
   return doc._id.startsWith('storytitle:')
 })
 
 export const stories = story['docs'].filter(function (doc) {
+  return doc._id.startsWith('story:')
+})
+export const storydetails = story['docs'].filter(function (doc) {
   return doc._id.startsWith('story:')
 })
 
