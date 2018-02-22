@@ -1,6 +1,5 @@
 {
-  "docs": 
-  [
+  "docs": [
     {
       "_id": "storytitle:alice-in-wonderland",
       "title": "Alice in Wonderland",
@@ -81,6 +80,30 @@
     {
       "_id": "storytitle:phantasmagoria16",
       "title": "Phantasmagoria16"
+    },
+    {
+      "_id": "game:memory-matching",
+      "title": "memory-matching"
+    },
+    {
+      "_id": "game:reflex",
+      "title": "reflex"
+    },
+    {
+      "_id": "game:tap-wrong",
+      "title": "tap-wrong"
+    },
+    {
+      "_id": "game:word",
+      "title": "word"
+    },
+    {
+      "_id": "game:multiple-choice",
+      "title": "multiple-choice"
+    },
+    {
+      "_id": "game:tap-home",
+      "title": "tap-home"
     },
     {
       "_id": "high-score:game:memory-matching:mad-hatter",
@@ -171,6 +194,146 @@
       "_id": "high-score:game:tap-home:alice",
       "user_id": "alice",
       "score": 10
+    },
+    {
+      "_id": "game:memory-matching",
+      "name": "Memory Matching",
+      "screen": "Game1",
+      "category": "Read",
+      "sets": [
+        {
+          "_id": "letters",
+          "name": "Letters"
+        },
+        {
+          "_id": "numbers",
+          "name": "Numbers"
+        },
+        {
+          "_id": "images",
+          "name": "Images"
+        }
+      ]
+    },
+    {
+      "_id": "game:tap-home",
+      "name": "Tap Home",
+      "screen": "Game2",
+      "category": "Read",
+      "sets": [
+        {
+          "_id": "letters",
+          "name": "Letters"
+        },
+        {
+          "_id": "numbers",
+          "name": "Numbers"
+        },
+        {
+          "_id": "images",
+          "name": "Images"
+        }
+      ]
+    },
+    {
+      "_id": "game:reflex",
+      "name": "Reflex",
+      "screen": "Reflex",
+      "category": "listening",
+      "sets": [
+        {
+          "_id": "letters",
+          "name": "Letters"
+        },
+        {
+          "_id": "numbers",
+          "name": "Numbers"
+        },
+        {
+          "_id": "images",
+          "name": "Images"
+        }
+      ]
+    },
+    {
+      "_id": "game:tap-wrong",
+      "name": "Tap-wrong",
+      "screen": "Game3",
+      "category": "listening",
+      "sets": [
+        {
+          "_id": "letters",
+          "name": "Letters"
+        },
+        {
+          "_id": "numbers",
+          "name": "Numbers"
+        },
+        {
+          "_id": "images",
+          "name": "Images"
+        }
+      ]
+    },
+    {
+      "_id": "game:word",
+      "name": "Word",
+      "screen": "Game4",
+      "category": "writing",
+      "sets": [
+        {
+          "_id": "letters",
+          "name": "Letters"
+        },
+        {
+          "_id": "numbers",
+          "name": "Numbers"
+        },
+        {
+          "_id": "images",
+          "name": "Images"
+        }
+      ]
+    },
+    {
+      "_id": "game:multiple-choice",
+      "name": "Multiple-choice",
+      "screen": "Game6",
+      "category": "writing",
+      "sets": [
+        {
+          "_id": "letters",
+          "name": "Letters"
+        },
+        {
+          "_id": "numbers",
+          "name": "Numbers"
+        },
+        {
+          "_id": "images",
+          "name": "Images"
+        }
+      ]
+    },
+    {
+      "_id": "game:connect-dots",
+      "name": "Connect-dots",
+      "screen": "Game5",
+      "category": "reading",
+      "sets": [
+        {
+          "_id": "letters",
+          "name": "Letters"
+        },
+        {
+          "_id": "numbers",
+          "name": "Numbers"
+        },
+        {
+          "_id": "images",
+          "name": "Images"
+        }
+      ]
     }
   ]
 }

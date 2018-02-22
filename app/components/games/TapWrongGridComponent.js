@@ -20,7 +20,7 @@ export default class TapWrongGridComponent extends Component {
     }
 
     _initBoard = (props) => {
-        let count1 = 0;
+    
         let j = 0;
 
         let m = 0;
@@ -33,8 +33,7 @@ export default class TapWrongGridComponent extends Component {
         let num = 0;
         let statuses = [];
        // statuses = [];
-        arr1 = [];
-        arr2 = [];
+        
       //  k = 0; m = 0;
        let numOFWrongElem=0;
        // num = 0;
@@ -51,7 +50,7 @@ export default class TapWrongGridComponent extends Component {
         });
 
 
-        var rr = 0;
+        var randNum = 0;
         var temp = 0;
         var q = 0;
         var temp1 = 0;
@@ -66,11 +65,11 @@ export default class TapWrongGridComponent extends Component {
         // Randomizing array
 
         for (let w = 0; w < arr2.length; w++) {
-            rr = Math.floor(Math.random() * (arr1.length+arr2.length-1)) + 0;
-            console.log("random num", rr, q);
-            temp = arr3[rr];
-            arr3[rr] = arr2[w];
-            for (q = rr; q < (arr1.length + (arr2.length - 1)); q++) {
+            randNum = Math.floor(Math.random() * (arr1.length+arr2.length-1)) + 0;
+            console.log("random num", randNum, q);
+            temp = arr3[randNum];
+            arr3[randNum] = arr2[w];
+            for (q = randNum; q < (arr1.length + (arr2.length - 1)); q++) {
                 temp1 = arr3[q + 1];
                 arr3[q + 1] = temp;
                 temp = temp1;
@@ -92,7 +91,7 @@ export default class TapWrongGridComponent extends Component {
             arr3,
             statuses,
             arr4,
-            count1,
+            
             num,
             numOFWrongElem
         })
@@ -123,7 +122,7 @@ export default class TapWrongGridComponent extends Component {
         var sp = this.state.arr4[id]
         this.state.arr4.splice(id, 1);
       //  console.log("array after delete", arr4);//}
-        this.state.count1 = this.state.count1 + 1;
+      
         for (let i = 0; i <this.state.arr4.length; i++) {
            // console.log("wrong new length", arr4.length, arr4[i]);
             if (this.state.arr1[j] == this.state.arr4[i]) {
@@ -131,19 +130,7 @@ export default class TapWrongGridComponent extends Component {
             }
         }
 
-        if (this.state.count1 >= 6) {
-            this.state.count1 = 0;
-            Alert.alert(
-                'Game Over',
-                'Restart Game ?',
-                [
-
-                ],
-                {
-                    cancelable: false
-                }
-            )
-        }
+     
 
         console.log("j is now", j);
         this.state.arr4.splice(id, 0, sp);
@@ -176,7 +163,7 @@ export default class TapWrongGridComponent extends Component {
                     })
                 })
 
-                this.props.onEnd();
+               setTimeout( () => { this.props.onEnd();},500)
 
             }
            // console.log("deleted array3", arr3);
@@ -270,7 +257,7 @@ const styles = {
     }
 }
 
-TapWrongGridComponent.PropTypes = {
+TapWrongGridComponent.propTypes = {
     data: PropTypes.object,
     onScore: PropTypes.func,
     onEnd: PropTypes.func,

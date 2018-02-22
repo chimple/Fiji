@@ -9,7 +9,8 @@ import renderer from 'react-test-renderer';
 it('renders correctly', () => {
   const tree = renderer.create(
     <StoryTitle 
-      title = { titles[0] } />
+      title = { titles[0] }
+    />
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })

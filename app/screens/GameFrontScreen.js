@@ -19,15 +19,16 @@ class GameFrontScreen extends PureComponent {
   _renderItem = ({ item }) => {
     const svg = setIcons[item._id] || setIcons['missing']
     return (
-    <TouchableOpacity onPress={() => this.props.navigation.navigate('CommonGameScreen',
+    <TouchableOpacity onPress={() => this.props.navigation.navigate('Modes',
       {
         item,
         game: this.props.navigation.state.params.title,
         user: this.props.navigation.state.params.user,
-        mode: 'SINGLE',
-        play: 'TRIES'
       }
-    )} style={{ flexDirection: 'row', borderColor: 'black', borderWidth: 2 }}>
+    )} 
+    style={{ flexDirection: 'row', borderColor: 'black', borderWidth: 2 }}
+    accessibilityLabel={item.name} 
+    >
       <SvgUri
         width='50'
         height='50'
@@ -49,7 +50,6 @@ class GameFrontScreen extends PureComponent {
         :
         this.props.theme._id
           ?
-          <View>
             <View>
               <FlatList
                 showsVerticalScrollIndicator={false}
@@ -58,7 +58,7 @@ class GameFrontScreen extends PureComponent {
                 keyExtractor={this._keyExtractor}
               />
             </View>
-            <TouchableOpacity
+            /*<TouchableOpacity
               onPress={() => this.props.navigation.navigate('CommonGameScreen', {
                 item: this.props.theme.sets[0],
                 game: this.props.navigation.state.params.title,
@@ -70,8 +70,8 @@ class GameFrontScreen extends PureComponent {
               <Text style={{ color: 'black', fontSize: 50, fontWeight: 'bold' }}>
                 Play Head to Head
               </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+            </TouchableOpacity>*/
+            /*<TouchableOpacity
               onPress={() => this.props.navigation.navigate('CommonGameScreen', {
                 item: this.props.theme.sets[0],
                 game: this.props.navigation.state.params.title,
@@ -83,8 +83,7 @@ class GameFrontScreen extends PureComponent {
               <Text style={{ color: 'black', fontSize: 50, fontWeight: 'bold' }}>
                 Play in Timed Mode
               </Text>
-            </TouchableOpacity>
-          </View>
+            </TouchableOpacity>*/
 
           :
           <View><Text>No Themes Found.</Text></View>
