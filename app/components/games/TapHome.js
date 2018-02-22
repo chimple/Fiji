@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import * as Animatable from 'react-native-animatable';
 import PropTypes from 'prop-types'
-import Confirm from './Confirm';
-import { isPortrait, isLandscape, isTablet } from './Platform';
-import ScoreScreen from '../../screens/ScoreScreen';
 import Tile from './Tile';
-import { isAbsolute } from 'path';
-
-
 
 export default class TapHome extends Component {
   timerId;
@@ -19,21 +13,19 @@ export default class TapHome extends Component {
   }
 
   _initBoard = (props) => {
-    let iterate = 0;
-    let iterateShake = 0;
-    let count = 0;
-    let status = 'neutral';
-    
     return ({
-      count,
-      status,
-      iterate,
-      iterateShake,
+      count : 0,
+      status : 'neutral',
+      iterate : 0,
+      iterateShake : 0,
     })
   }
 
   componentWillReceiveProps(nextProps) {
+    clearInterval(this.timerId);
+    this.timerId = setInterval(this._timer, 1400);
     this.props.runIndex != nextProps.runIndex && this.setState(this._initBoard(nextProps))
+   
   }
 
   componentWillUnmount() {
@@ -42,12 +34,10 @@ export default class TapHome extends Component {
   
   componentDidMount(){
     clearInterval(this.timerId);
-    this.timerId = setInterval(this.timer, 1400);
-
+    this.timerId = setInterval(this._timer, 1400);
   }
 
-  timer = () => {
-   
+  _timer = () => {
     if( this.state.count  == this.props.data.serial.length ){
       this.setState({...this.state, count: 0, iterate: this.state.iterate + 1})
       if( this.state.iterate == 2 )
@@ -61,15 +51,19 @@ export default class TapHome extends Component {
     }
   }
 
-  //This will generate random number and will check on tap condition
-  GenerateRandomNumber = () => {
-    if (this.props.data.answer == this.props.data.serial[this.state.count]) {
-      
-      this.props.onScore(2)
-      this.props.setProgress(1)
-      this.setState({...this.state, status: 'selected'});
-     
+  //This will check on tap condition
+  _clickText = () => {
+    if(this.state.status == 'selected')
+    {
+      return;
     }
+
+    if(this.props.data.answer == this.props.data.serial[this.state.count]) {
+      this.props.setProgress(1)
+      this.props.onScore && this.props.onScore(2)
+      this.setState({...this.state, status: 'selected'}); 
+    }
+
     else {
       this.refs.view.shake(250).then((endState)=> {
         if(this.state.iterateShake == 2)
@@ -79,13 +73,9 @@ export default class TapHome extends Component {
         } else {
           this.setState({...this.state, iterateShake: this.state.iterateShake + 1, count: 0});
         }
-      })
-      
-    }
-
-    
-  }//end of generateRandomNumber function
-
+      })  
+    }   
+  }//end of _clickText function
 
   render() {
     const { container, subText } = styles;
@@ -94,7 +84,6 @@ export default class TapHome extends Component {
       Math.floor(this.props.style.width / 3.5),  
       Math.floor(this.props.style.height / 3.5)
     )
-
 
     const padding = Math.floor(cellSize * .05)
     const tileSize = cellSize - padding * 2
@@ -124,17 +113,15 @@ export default class TapHome extends Component {
               }
             },
             selected: {
-             
               Text: {
                 color: '#FFFFFF'
               }
             }
           }}
-          onPress={this.GenerateRandomNumber}
-          onRender={this._renderTile}
+          onPress={()=>{}}
         />
         </Animatable.View>
-        <TouchableOpacity onPress={this.GenerateRandomNumber}>
+        <TouchableOpacity onPress={this._clickText}>
             <Text style={[subText, {  fontSize: Math.max(20, tileSize - 40) + 15, marginTop: heighttext }]}>
               {this.props.data.serial[this.state.count]}
             </Text> 
@@ -146,17 +133,14 @@ export default class TapHome extends Component {
   _onStatusChange = (id, view, prevStatus, currentStatus) => {
     currentStatus == 'selected' && view.zoomIn(250).then((endState) => {
       this.props.onEnd();
-    })
-    
+    })   
   }
-
 }//End of class 
 
 const styles = {
   container: {
     justifyContent: 'center',
-    alignItems: 'center',
-   
+    alignItems: 'center',  
   },
   subText: {
     fontFamily: 'Cochin',
@@ -167,7 +151,9 @@ const styles = {
 };//End of styles
 
 TapHome.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.shape({
+    serial: PropTypes.array
+  }),
   onScore: PropTypes.func,
   onEnd: PropTypes.func,
   setProgress: PropTypes.func
