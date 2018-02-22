@@ -1,10 +1,11 @@
-import 'react-native';
 import React from 'react';
+import { storiesOf } from '@storybook/react-native';
 import { Dimensions } from 'react-native'
+import { action } from '@storybook/addon-actions';
 import StorySection from '../StorySection';
-import { storydetails } from '../../../config/jest/mockData';
-// Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer';
+//import { story } from '../../../config/jest/mockData'
+const window = Dimensions.get("window")
+
 
 const story = {
     "_id": "story:alice-in-wonderland",
@@ -122,23 +123,23 @@ const item = [
         ]
     }
 ]
+   
 
+const { width, height } = Dimensions.get('window');
+storiesOf('StorySection', module)
+    .add('with story', () => (
+             
+                <StorySection
+                    story={story}
+                    item={item}
+                    index={1}
+                    page={0}
+                    count={1}
+                    bg={story.pages[0].bg}
 
-it('this is story section', () => {
-    
-    // console.log("this is story details", storydetails);
-    // console.log("this is story pages", storypages);
-    const tree = renderer.create(
-
-        <StorySection
-            story={story}
-            item={item}
-            index={1}
-            page={0}
-            count={1}
-            bg={story.pages[0].bg}
-        />
-        
-    ).toJSON()
-    expect(tree).toMatchSnapshot()
-})
+                    style= {{
+                        width: width,
+                        height: height
+                    }}
+                />
+    ));

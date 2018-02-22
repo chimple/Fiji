@@ -26,3 +26,13 @@ it('User List Component', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('Mocking the function', () => {
+  const tree = renderer.create(
+  <UserList 
+  user={users[3]}
+  />
+).getInstance()
+tree.onLayoutHandler(100,100)
+// tree._onPress(users[3])
+  expect(tree).toMatchSnapshot();
+});

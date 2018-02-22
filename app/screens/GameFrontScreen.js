@@ -12,6 +12,7 @@ class GameFrontScreen extends PureComponent {
     this.props.dispatch(fetchGameTheme(this.props.navigation.state.params.title._id))
     console.log(this.props.navigation.state.params.user._id)
     console.log(this.props.navigation.state.params.title._id)
+    console.log(this.props.navigation.state.key)
   }
 
   _keyExtractor = (item, index) => item._id
@@ -24,6 +25,7 @@ class GameFrontScreen extends PureComponent {
         item,
         game: this.props.navigation.state.params.title,
         user: this.props.navigation.state.params.user,
+        key:this.props.navigation.state.key
       }
     )} 
     style={{ flexDirection: 'row', borderColor: 'black', borderWidth: 2 }}
