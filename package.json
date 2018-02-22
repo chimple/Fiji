@@ -40,6 +40,7 @@
     "react-native-super-grid": "^2.0.2",
     "react-native-svg": "^6.0.1-rc.1",
     "react-native-svg-uri": "^1.2.3",
+    "react-native-tts": "^1.5.0",
     "react-native-vector-icons": "^4.4.3",
     "react-navigation": "^1.0.0-beta.22",
     "react-redux": "^5.0.6",

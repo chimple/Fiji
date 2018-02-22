@@ -1,7 +1,7 @@
 import 'react-native';
 import React from 'react';
-import GameTitle from '../GameTitle';
-import { games } from '../../../config/jest/mockData'
+import Tabbed from '../TabbedView';
+import { users, messages, stickersData, stickerPacksData } from '../../../config/jest/mockData'
 
 import renderer from 'react-test-renderer';
 
@@ -21,12 +21,20 @@ import renderer from 'react-test-renderer';
 //npm test -- --coverage User-test
 //this above command is used to test indivisual component
 
-it('this is user 0', () => {
-  const tree = renderer.create(
-    <GameTitle
-    title={games[1]}
-    />
-).toJSON();
-  expect(tree).toMatchSnapshot();
+it('TabbedView component', () => {
+    const tree = renderer.create(
+        <Tabbed
+            // packs={stickerPacksData}
+            // friend={users[1]}
+        />
+    ).toJSON();
+    expect(tree).toMatchSnapshot();
 });
+
+// FAIL  app\components\__tests__\TabbedView-test.js
+// × TabbedView component (31ms)
+
+// ● TabbedView component
+
+//   Invariant Violation: Native animated module is not available
 

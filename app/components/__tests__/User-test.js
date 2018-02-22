@@ -26,7 +26,38 @@ it('this is user 0', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('this is user 1', () => {
-  const tree = renderer.create(<User user={users[2]} />).toJSON();
+it('Rendering all the users', () => {
+  const tree = [];
+  for (i = 0; i < users.length; i++)
+    tree.push(renderer.create(<User user={users[i]} />).toJSON());
   expect(tree).toMatchSnapshot();
 });
+
+it('Mocking the function', () => {
+  const tree = renderer.create(
+  <User 
+  user={users[3]}
+  />
+).getInstance()
+tree.onLayoutHandler(100,100)
+// tree._onPress(users[3])
+  expect(tree).toMatchSnapshot();
+});
+
+// it('Mocking the function', () => {
+
+
+//   const LoginScreen = renderer.create(
+//     <LoginScreen/>
+//   ).getInstance()
+
+//   const User = renderer.create(
+//   <User 
+//   user={users[3]}
+//   onPressItem={LoginScreen._handleLogin.bind(this)}
+//   />
+// ).getInstance()
+// User.onLayoutHandler(100,100)
+// User._onPress(users[3])
+//   expect(User).toMatchSnapshot();
+// });
