@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react-native';
 import { Dimensions } from 'react-native'
 import { action } from '@storybook/addon-actions';
 import StorySection from '../StorySection';
-import { storydetails } from '../../../config/jest/mockData'
+//import { story } from '../../../config/jest/mockData'
 const window = Dimensions.get("window")
 
 
