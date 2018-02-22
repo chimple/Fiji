@@ -11,7 +11,7 @@ export default class GameTitle extends PureComponent{
 
     render(){
         return(
-        <TouchableOpacity onPress={this._onPress} style={styles.TouchableStyle} >
+        <TouchableOpacity onPress={this._onPress} style={styles.TouchableStyle} accessibilityLabel={this.props.title.name} >
             <Text style={styles.TextStyle}>{this.props.title.name}</Text>
         </TouchableOpacity>
         )
@@ -27,10 +27,11 @@ const styles = StyleSheet.create({
     TouchableStyle:{
         borderWidth:2,
         borderColor:'black',
+        backgroundColor:'#114234'
     },
     TextStyle:{
         fontSize: 25,
-        color:'black',
+        color:'white',
         fontWeight:'bold'
     },
 });

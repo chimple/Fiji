@@ -32,7 +32,7 @@ import GameScreen from '../screens/GameScreen';
 import NewLevel from '../screens/NewLevel'
 import HeadToHeadPlayScreen from '../screens/HeadToHeadPlayScreen'
 import ModeScreen from '../screens/ModeScreen'
-import TriesOrTimedScreen from '../screens/TriesOrTimedScreen'
+import SelectFriendScreen from '../screens/SelectFriendScreen'
 
 // const CamNavigator = StackNavigator({
 //   Cam: {
@@ -167,10 +167,10 @@ export const AppNavigator = StackNavigator({
       headerStyle:{backgroundColor: '#19a4f2'}
     }
   },
-  TriesOrTimed: {
-    screen: TriesOrTimedScreen,
+  PlayWith:{
+    screen: SelectFriendScreen,
     navigationOptions: {
-      headerTitle: 'Tries or Timed',
+      headerTitle: 'Select Friend To Play',
       headerStyle:{backgroundColor: '#19a4f2'}
     }
   }
