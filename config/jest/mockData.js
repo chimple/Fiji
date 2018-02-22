@@ -5,7 +5,6 @@ const usersJson = require('../seed/users.json')
 const userAliceJson = require('../seed/user_alice.json')
 const storyJson = require('../seed/story.json')
 
-
 export const titles = contentJson['docs'].filter(function (doc) {
   return doc._id.startsWith('storytitle:')
 })

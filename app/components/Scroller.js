@@ -1,8 +1,14 @@
 import React from 'react'
+<<<<<<< HEAD
 import { View, Text, SectionList, Dimensions, Animated, TouchableOpacity, Modal } from 'react-native'
 import { Buffer } from 'buffer'
 import SvgUri from 'react-native-svg-uri'
 import LottieView from 'lottie-react-native';
+=======
+import { View, Text, TouchableOpacity, FlatList, Dimensions, Image, PanResponder } from 'react-native'
+import ScrollableTabView from 'react-native-scrollable-tab-view'
+import { titles } from '../../config/jest/mockData'
+>>>>>>> master
 
 class AnimationView extends React.Component {
   constructor(props) {
