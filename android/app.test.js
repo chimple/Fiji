@@ -64,7 +64,7 @@ test('appium onlineTries renders', async () => {
 expect(await driver.hasElementByAccessibilityId('OnlineTries')).toBe(true);
 await driver.elementByAccessibilityId('OnlineTries').click();
 console.log("clicked on OnlineTries");
-await driver.sleep(8000);
+await driver.sleep(12000);
 });
     test('swipe in chat',async()=>{
       await driver.sleep(3000)
