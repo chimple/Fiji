@@ -1,7 +1,7 @@
 import wd from 'wd';
 import Dimensions from 'Dimensions';
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 800000000;
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 300000;
 const PORT = 4723;
 const config = {
   platformName: 'Android',
@@ -16,11 +16,11 @@ beforeAll(async () => {
 })
     
     test('swipe up',async()=>{
-      await driver.sleep(2000)
+      await driver.sleep(5000)
       console.log("scrolling........");
       let {width, height} = Dimensions.get('screen')
       const action = new wd.TouchAction(driver);
-      action.press({ x: width, y: height }).wait(1000).moveTo({ x: width, y: height/8 }).release();
+      action.press({ x: width, y: height }).wait(1000).moveTo({ x: width, y: height/3 }).release();
       driver.performTouchAction(action);
       console.log("scrolled."); 
 
@@ -50,45 +50,37 @@ test('appium game renders', async () => {
      expect(await driver.hasElementByAccessibilityId('Multiple-choice')).toBe(true);
      await driver.elementByAccessibilityId('Multiple-choice').click();
      console.log("multiple choices clicked");
-     await driver.sleep(15000);
+     await driver.sleep(10000);
 });
 test('appium letter renders', async () => {
     console.log("clicking on letters");
     expect(await driver.hasElementByAccessibilityId('Letters')).toBe(true);
     await driver.elementByAccessibilityId('Letters').click();
     console.log("clicked on letter");
-    await driver.sleep(12000);
+    await driver.sleep(15000);
 });
 test('appium onlineTries renders', async () => {
-  console.log("clicking on OnlineTries");
-expect(await driver.hasElementByAccessibilityId('OnlineTries')).toBe(true);
-await driver.elementByAccessibilityId('OnlineTries').click();
-console.log("clicked on OnlineTries");
-await driver.sleep(12000);
+     console.log("clicking on OnlineTries");
+     expect(await driver.hasElementByAccessibilityId('OnlineTries')).toBe(true);
+     await driver.elementByAccessibilityId('OnlineTries').click();
+     console.log("clicked on OnlineTries");
+     await driver.sleep(28000);
 });
-    test('swipe in chat',async()=>{
-      await driver.sleep(3000)
+    test('swipping up',async()=>{
+      console.log("swipping up.......")
       let {width, height} = Dimensions.get('screen')
- const action = new wd.TouchAction(driver);
-      action.press({ x: width, y: height }).wait(1000).moveTo({ x: width, y: height/15 }).release();
+      const action = new wd.TouchAction(driver);
+      action.press({ x: width, y: height }).wait(1000).moveTo({ x: width, y: height/12}).release();
       driver.performTouchAction(action); 
+      console.log("swipped....");
+      await driver.sleep(3000);
 
 });
-
-// test('touchAction 2', async() => {
-//   await driver.sleep(18000);
-//   console.log("scrolling........");
-//     var action = new wd.TouchAction(driver);
-//       action.press({ x: 500, y: 1600 }).wait(1000).moveTo({ x: 500, y: 700 }).release();
-//       driver.performTouchAction(action); 
-//       console.log("scrolled.");
-//       await driver.sleep(5000);
-// });
-// test('appium Madhatter renders', async () => {
-//   console.log("clicking on Mad Hatter");
-// expect(await driver.hasElementByAccessibilityId('Mad Hatter')).toBe(true);
-// await driver.elementByAccessibilityId('Mad Hatter').click();
-// console.log("clicked on Mad Hatter");
-// });
+test('appium Madhatter renders', async () => {
+     console.log("clicking on Mad Hatter");
+     expect(await driver.hasElementByAccessibilityId('Mad Hatter')).toBe(true);
+     await driver.elementByAccessibilityId('Mad Hatter').click();
+     console.log("clicked on Mad Hatter");
+});
 
 
