@@ -27,7 +27,6 @@ export default class GameCategoryList extends PureComponent {
     /*<Text>
       { item.category }
     </Text>*/
-                 
             <FlatList
             showsHorizontalScrollIndicator={false}
             data={item.games}

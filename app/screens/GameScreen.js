@@ -63,11 +63,12 @@ class GameScreen extends Component {
     console.log('GameScreen', this.props.navigation.state.params.game._id)
     console.log('GameScreen', this.props.navigation.state.params.mode)
     console.log('GameScreen', this.props.navigation.state.params.play)
+    console.log('GameScreen', this.props.navigation.state.params.key)
     const GameComponent = GameComponents[this.props.navigation.state.params.game._id]
     return (
       this.state.gameOver
         ?
-        <ScoreScreen currentScore={this.props.myScore} item={this.props.navigation.state.params.item} game={this.props.navigation.state.params.game} user={this.props.navigation.state.params.user} />
+        <ScoreScreen keys={this.props.navigation.state.params.key} navigation={this.props.navigation} currentScore={this.props.myScore} item={this.props.navigation.state.params.item} game={this.props.navigation.state.params.game} user={this.props.navigation.state.params.user} />
         :
         this.props.isFetching
           ?

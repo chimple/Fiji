@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`this is story section 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#09c3f2",
+      "flex": 1,
+      "height": 70,
+      "justifyContent": "center",
+      "marginTop": 20,
+    }
+  }
+>
+  <Image
+    source={
+      Object {
+        "uri": "data:image/png;base64,undefined",
+      }
+    }
+    style={
+      Object {
+        "height": 100,
+        "position": "absolute",
+        "width": 200,
+      }
+    }
+  />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "red",
+        "fontSize": 25,
+        "fontWeight": "600",
+      }
+    }
+  />
+</View>
+`;

@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "alignItems": "flex-end",
+        "flexDirection": "row",
+        "margin": 5,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "uri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==",
+        }
+      }
+      style={
+        Object {
+          "borderRadius": 20,
+          "height": 40,
+          "margin": 5,
+          "width": 40,
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "backgroundColor": "#f2f2f2",
+          "borderRadius": 5,
+          "padding": 10,
+          "shadowColor": "#adef12",
+          "shadowOffset": Object {
+            "height": 1,
+          },
+          "shadowOpacity": 0.8,
+          "shadowRadius": 2,
+          "width": 220,
+        }
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Care for a tea party
+      </Text>
+    </View>
+  </View>
+</View>
+`;

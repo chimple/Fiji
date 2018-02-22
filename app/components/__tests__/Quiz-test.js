@@ -44,7 +44,7 @@ it('renders correctly', () => {
       }}
       setprogress={() => {}}
       onScore={(score) => { this.props.dispatch(addMyScore(score)) }}
-      onEnd={() => {}}
+      onEnd={() => { this.setState(...this.state, { gameOver: true }) }}
       />
     ).toJSON()
     expect(tree).toMatchSnapshot()
