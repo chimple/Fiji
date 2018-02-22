@@ -5,8 +5,6 @@ import TileGrid from '../components/games/TileGrid';
 
 const SIZE = 3
 
-var count1=0;
-
 export default class ConnectDotsScreen extends Component {
   constructor(props) {
     super(props)
@@ -156,7 +154,7 @@ export default class ConnectDotsScreen extends Component {
    const currentIndex = this.state.currentIndex
 
     if (this.state.letters[id] == this.props.data.serial[this.state.currentIndex]) {
-      this.props.onScore(2)
+      this.props.onScore && this.props.onScore(2)
       view.pulse(10).then((endState) => {
         this.setState({...this.state,
         statuses: this.state.statuses.map((val, index)=> {
@@ -173,11 +171,10 @@ export default class ConnectDotsScreen extends Component {
           })
        
         this.props.onEnd()
-        
       } 
     } else {
       
-      view.shake(250)
+       view.shake(250)
      
     }
   }
