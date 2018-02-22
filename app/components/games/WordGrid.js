@@ -12,23 +12,23 @@ export default class WordGrid extends Component {
        
   _initBoard = (props) => {
       const Data1 = props.data.word 
-      let shuffledData1 = props.data.others
+      const shuffledData1 = props.data.others
       .map((a, i) => [Math.floor(i / (SIZE * SIZE)), a])
       .sort((a, b) => a[0] - b[0])
       .map((a) => a[1])
  
-      let darray = new Array(SIZE*SIZE)
-    for (let i = 0; i < darray.length; i++) {
-      darray[i] = 'null';
+      const letters = new Array(SIZE*SIZE)
+    for (let i = 0; i < letters.length; i++) {
+      letters[i] = 'null';
     }
- let h=1;
- let rno = Math.floor(Math.random() * ((SIZE*SIZE)-Data1.length+1)) + 0 ;
- let rindex = new Array(Data1.length)
-   console.log("random no",rno)
-   darray[rno]=Data1[0];
-   rindex[0]=rno;
- for (let i = 1; i < Data1.length; i++) {
-   let flag=0,flag2=0;
+  let h=1;
+  let rno = Math.floor(Math.random() * ((SIZE*SIZE)-Data1.length+1)) + 0 ;
+  const rindex = new Array(Data1.length)
+   // console.log("random no",rno)
+    letters[rno]=Data1[0];
+    rindex[0]=rno;
+  for (let i = 1; i < Data1.length; i++) {
+    let flag=0,flag2=0;
    for (let j =1; j <= SIZE;j++){
      if(rno==(j*SIZE-1))
      {flag=1;break;}
@@ -37,37 +37,32 @@ export default class WordGrid extends Component {
      rno+=SIZE;
      let p=0;
    while(p<SIZE){
-      darray[rno]=Data1[i];
+      letters[rno]=Data1[i];
       rindex[h]=rno;
       h++;
       i++;p++;
       rno--;
-      if(i==Data1.length){flag2=1;console.log("breaked");break;}
-      }
+      if(i==Data1.length){flag2=1;
+        //console.log("breaked");break; 
+      }}
       if(p==SIZE&&flag2==0){flag=0;rno+=SIZE;}
    }
  if(flag==0){
    rno++;
-   darray[rno]=Data1[i];
+   letters[rno]=Data1[i];
    rindex[h]=rno;
    h++;
  }}
- console.log("nn darray",darray)
+// console.log("nn letters",letters)
  for (let i = 0,j=0; i < SIZE*SIZE ; i++){
-   if(darray[i]=='null'){
-     darray[i]=shuffledData1[j];
+   if(letters[i]=='null'){
+     letters[i]=shuffledData1[j];
      j++;
    }
  }
- 
-        let letters = new Array(SIZE * SIZE)
-        for (let i = 0; i < letters.length; i++) {
-          letters[i] = darray[i];
-        }
-      //  data2.pop();
-        let statuses = new Array(SIZE * SIZE)
+       let statuses = new Array(SIZE * SIZE)
         for (let i = 0; i < statuses.length; i++) {
-          statuses[i] = 'visible';
+          statuses[i] = 'neutral';
         }
       let index = 0;
        return ({
@@ -75,14 +70,11 @@ export default class WordGrid extends Component {
           shuffledData1,
           index,
           statuses,
-          rno,
           rindex
         })
       }
       componentWillReceiveProps(nextProps) {
-        console.log('run index ',this.props.runIndex,nextProps.runIndex )
-       if( this.props.runIndex != nextProps.runIndex )
-        this.setState(this._initBoard(nextProps))
+      this.props.runIndex != nextProps.runIndex && this.setState(this._initBoard(nextProps))
       }
 
   render() {
@@ -103,7 +95,7 @@ export default class WordGrid extends Component {
           height: this.props.style.height
         }}
         statusStyles = {{
-            visible: {
+            neutral: {
               View: {
                 backgroundColor: 'white'
               },
@@ -126,12 +118,11 @@ export default class WordGrid extends Component {
   }
   _onStatusChange(id, view, prevStatus, currentStatus) {
     console.log('onstatuschange:',id, prevStatus, currentStatus)
-   // currentStatus == 'visible' && view.zoomIn(250)
+   // currentStatus == 'neutral' && view.zoomIn(250)
   }
    _clickTile = (id, view) => {
     const wlen = this.props.data.word.length;
     const index = this.state.index
-    const random = this.state.rno
     const rindex = this.state.rindex
     const riddata = rindex[index];
  
@@ -146,19 +137,13 @@ export default class WordGrid extends Component {
     this.props.setProgress && this.props.setProgress((index + 1) / wlen)
     this.setState({...this.state, index: index + 1})
             if(id===(rindex[wlen-1])){
-              this.setState({...this.state, index: 0})
-                setTimeout( () => {
-                  view.pulse(10).then((endState) => {
-                    this.setState({...this.state,
-                    statuses: this.state.statuses.map((val, riddata)=> {
-                    return id == riddata ? 'visible' : val})})
-                    })   
-                    this.props.onEnd()   
+              setTimeout( () => {
+              this.setState({...this.state, index: 0, statuses: this.state.statuses.map(()=> 'neutral')})
+              this.props.onEnd()   
               }, 1200);
             }
         }
-      
-        else{
+         else{
          let flag=0;
          for(var i=0;i<=index;i++){
              if(id===rindex[i]){flag=1}
