@@ -2,6 +2,9 @@ import React, {PureComponent} from 'react'
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native'
 
 export default class ModeScreen extends PureComponent{
+    componentDidMount(){
+        console.log(this.props.navigation.state.params.key)
+    }
     render(){
         return(
             <View style={{flex:1}}>
@@ -11,12 +14,13 @@ export default class ModeScreen extends PureComponent{
                         item: this.props.navigation.state.params.item,
                         game: this.props.navigation.state.params.game,
                         user: this.props.navigation.state.params.user,
+                        key:this.props.navigation.state.params.key,
                         mode: 'HEAD_TO_HEAD',
                         play: 'TRIES'
                     }
                     )} 
                     style={styles.TouchableStyle}
-                    accessibilityLabel={OfflineTries}
+                    accessibilityLabel="OfflineTries"
                     >
                         <Text style={styles.TextStyle}>OfflineTries</Text>
                     </TouchableOpacity>
@@ -25,12 +29,13 @@ export default class ModeScreen extends PureComponent{
                         item: this.props.navigation.state.params.item,
                         game: this.props.navigation.state.params.game,
                         user: this.props.navigation.state.params.user,
+                        key:this.props.navigation.state.params.key,
                         mode: 'HEAD_TO_HEAD',
                         play: 'TIMED'
                     }
                     )} 
                     style={styles.TouchableStyle}
-                    accessibilityLabel={OfflineTimed}
+                    accessibilityLabel="OfflineTimed"
                     >
                         <Text style={styles.TextStyle}>OfflineTimed</Text>
                     </TouchableOpacity>
@@ -41,12 +46,13 @@ export default class ModeScreen extends PureComponent{
                         item: this.props.navigation.state.params.item,
                         game: this.props.navigation.state.params.game,
                         user: this.props.navigation.state.params.user,
+                        key:this.props.navigation.state.params.key,
                         mode: 'SINGLE',
                         play: 'TRIES'
                     }
                     )} 
                     style={styles.TouchableStyle}
-                    accessibilityLabel={OnlineTries}
+                    accessibilityLabel="OnlineTries"
                     >
                         <Text style={styles.TextStyle}>OnlineTries</Text>
                     </TouchableOpacity>
@@ -55,12 +61,13 @@ export default class ModeScreen extends PureComponent{
                         item: this.props.navigation.state.params.item,
                         game: this.props.navigation.state.params.game,
                         user: this.props.navigation.state.params.user,
+                        key:this.props.navigation.state.params.key,
                         mode: 'SINGLE',
                         play: 'TIMED'
                     }
                     )} 
                     style={styles.TouchableStyle}
-                    accessibilityLabel={OnlineTimed}
+                    accessibilityLabel="OnlineTimed"
                     >
                         <Text style={styles.TextStyle}>OnlineTimed</Text>
                     </TouchableOpacity>
