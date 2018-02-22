@@ -88,7 +88,7 @@ export default class TapHome extends Component {
     const padding = Math.floor(cellSize * .05)
     const tileSize = cellSize - padding * 2
     const height = (this.props.style.height / 5)
-    const heighttext = this.props.style.height / 10;
+    const heightText = this.props.style.height / 10;
 
     return (
       <View style={[container, {paddingTop: height}]}>
@@ -122,7 +122,7 @@ export default class TapHome extends Component {
         />
         </Animatable.View>
         <TouchableOpacity onPress={this._clickText}>
-            <Text style={[subText, {  fontSize: Math.max(20, tileSize - 40) + 15, marginTop: heighttext }]}>
+            <Text style={[subText, {  fontSize: Math.max(20, tileSize - 40) + 15, marginTop: heightText }]}>
               {this.props.data.serial[this.state.count]}
             </Text> 
         </TouchableOpacity>
@@ -152,6 +152,7 @@ const styles = {
 
 TapHome.propTypes = {
   data: PropTypes.shape({
+    answer: PropTypes.number,
     serial: PropTypes.array
   }),
   onScore: PropTypes.func,
