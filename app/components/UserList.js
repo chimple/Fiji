@@ -26,7 +26,11 @@ class UserList extends PureComponent {
   }
   
   _addItem = () => (
-    <TouchableOpacity style={styles.UserListStyle} onPress={() => this.props.navigation.navigate('CamPage')} >
+    <TouchableOpacity 
+    style={styles.UserListStyle}
+    accessibilityLabel={'ADD-USER'} 
+    onPress={() => this.props.navigation.navigate('CamPage')} 
+    >
       <View style={styles.ViewStyle}>
         <Image
           style={{
