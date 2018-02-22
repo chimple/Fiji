@@ -3,13 +3,14 @@ import { fetchUsersFailure } from '../../app/redux/users';
 const contentJson = require('../seed/content.json')
 const usersJson = require('../seed/users.json')
 const userAliceJson = require('../seed/user_alice.json')
+const storyJson = require('../seed/story.json')
 
 
 export const titles = contentJson['docs'].filter(function (doc) {
   return doc._id.startsWith('storytitle:')
 })
 
-export const stories = contentJson['docs'].filter(function (doc) {
+export const stories = storyJson['docs'].filter(function (doc) {
   return doc._id.startsWith('story:')
 })
 
@@ -33,7 +34,7 @@ export const highScoresData = contentJson['docs'].filter(function (doc) {
   return doc._id.startsWith('high-score:')
 })
 
-export const story_alice_in_wonderland = contentJson['docs'].filter(function (doc) {
+export const story_alice_in_wonderland = storyJson['docs'].filter(function (doc) {
   return doc._id == 'story:alice-in-wonderland'
 })[0]
 
