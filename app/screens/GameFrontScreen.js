@@ -43,7 +43,7 @@ export default class GameFrontScreen extends PureComponent {
       style={[styles.TouchableStyle,{
             height:Dimensions.get('window').height * 0.25,
             marginVertical:Dimensions.get('window').height * 0.025,
-            backgroundColor: item.bgColor }]}
+            backgroundColor: item.backgroundColor }]}
       accessibilityLabel={item.name} 
       >
         {/* <SvgUri

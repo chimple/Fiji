@@ -29,7 +29,7 @@ export default class GameTitle extends PureComponent{
                                                         width:Dimensions.get('window').width * 0.45,
                                                         marginVertical:Dimensions.get('window').height * 0.011,
                                                         marginHorizontal:Dimensions.get('window').width * 0.0235,
-                                                        backgroundColor: this.props.title.bgColor}]} accessibilityLabel={this.props.title.name} >
+                                                        backgroundColor: this.props.title.backgroundColor}]} accessibilityLabel={this.props.title.name} >
             <SvgUri width= '120' height= '120' fill='#ffffff' svgXmlData={svg.default} />   
             <Text style={styles.TextStyle}>{this.props.title.name}</Text>
         </TouchableOpacity>
