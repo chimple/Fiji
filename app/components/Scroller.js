@@ -40,7 +40,7 @@ class Dialog extends React.Component {
   }
   _renderCharacter = (character, animation) => {
     return (
-      <View style={{ height: 100, width: 100, justifyContent: 'flex-end'}}>
+      <View style={{ height: 100, width: 100, justifyContent: 'flex-end' }}>
         <TouchableOpacity onPress={() => this._onPressCharacter()}>
           {this.state.imageMode
             ?
@@ -65,22 +65,12 @@ class Dialog extends React.Component {
   }
 
   _onAnimationEnd = () => {
-    this.setState({...this.state, imageMode: true})
+    this.setState({ ...this.state, imageMode: true })
   }
 
   _renderText = (text) => (
     <Text
-      style={{
-        flex: 1,
-        fontSize: 20,
-        padding: 10,
-        margin: 10,
-        borderRadius: 8,
-        borderColor: 'red',
-        borderWidth: 1,
-        borderBottomWidth: 4,
-        backgroundColor: 'white'
-      }}
+      style={styles.text}
     >
       {text}
     </Text>
@@ -91,22 +81,23 @@ class Dialog extends React.Component {
   }
 
   render() {
+    const speaker = this.props.dialog.speaker
+    const left = this.props.character && this.props.character.left
     return (
       <View style={[styles.itemContainer, { backgroundColor: this.props.dialog.color }]}>
-        {this.props.dialog.speaker && (this.props.character.left ?
-          <View style={styles.leftItem}>
+        {speaker
+          ?
+          <View style={left ? styles.leftItem : styles.rightItem}>
             {this._renderCharacter(this.props.character.character, this.props.animation)}
             {this._renderText(this.props.dialog.text)}
           </View>
           :
-          <View style={styles.rightItem}>
+          <View style={styles.centerItem}>
             {this._renderText(this.props.dialog.text)}
-            {this._renderCharacter(this.props.character.character, this.props.animation)}
           </View>
-        )}
+        }
       </View>
     )
-
   }
 }
 
@@ -148,14 +139,6 @@ export default class Scroller extends React.PureComponent {
     }
   }
 
-  // componentDidUpdate() {
-  //   this.refs.sectionList.scrollToLocation({
-  //     sectionIndex: this.state.pageIndex,
-  //     itemIndex: this.state.currentIndex,
-  //     viewPosition: 1
-  //   })
-  // }
-
   _renderItem = ({ item }) => (
     <Dialog
       dialog={item}
@@ -170,7 +153,7 @@ export default class Scroller extends React.PureComponent {
     return (
       <SvgUri
         width={w}
-        height={w/10}
+        height={w / 10}
         svgXmlData={section.title}
       />
     )
@@ -196,7 +179,7 @@ export default class Scroller extends React.PureComponent {
         ...state,
         currentIndex: nextCurrentIndex,
         pageIndex: nextPageIndex,
-        visibleDialogs: state.dialogs.slice(0,nextPageIndex+1).map((page, pageIndex) => (
+        visibleDialogs: state.dialogs.slice(0, nextPageIndex + 1).map((page, pageIndex) => (
           {
             title: page.title,
             data: page.data.filter((val, index) => pageIndex < nextPageIndex || index <= nextCurrentIndex).reverse()
@@ -215,7 +198,7 @@ export default class Scroller extends React.PureComponent {
         flex: 1
       }}>
         <SectionList
-          style={{flex: 1}}
+          style={{ flex: 1 }}
           ref="sectionList"
           sections={this.state.visibleDialogs}
           renderItem={this._renderItem}
@@ -229,7 +212,7 @@ export default class Scroller extends React.PureComponent {
           style={{
             position: 'absolute',
             bottom: 20,
-            left: w/2
+            left: w / 2
           }}
         >
           <Text>Next</Text>
@@ -242,20 +225,32 @@ export default class Scroller extends React.PureComponent {
 const styles = {
   itemContainer: {
     paddingVertical: 20,
-    flex: 1,
     justifyContent: 'center',
     minHeight: 80
   },
   leftItem: {
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'flex-end',
-    justifyContent: 'flex-start'
+    // justifyContent: 'flex-start'
   },
   rightItem: {
-    flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row-reverse',
     alignItems: 'flex-end',
-    justifyContent: 'flex-start'
+    // justifyContent: 'flex-end'
+  },
+  centerItem: {
+    flexDirection: 'row',
+    alignSelf: 'center'
+  },
+  text: {
+    flexShrink: 1,
+    fontSize: 20,
+    padding: 10,
+    margin: 10,
+    borderRadius: 8,
+    borderColor: 'red',
+    borderWidth: 1,
+    borderBottomWidth: 4,
+    backgroundColor: 'white'
   }
 }
