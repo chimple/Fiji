@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Orientation from 'react-native-orientation'
 import GameWrapper from './GameWrapper'
 import HeadToHeadPlayScreen from '../../screens/HeadToHeadPlayScreen';
+import Nimo from '../Nimo'
 
 const TOP_HEIGHT = 40
 const BOTTOM_PADDING = 5
@@ -56,9 +57,9 @@ export default class HeadToHeadGame extends Component {
             <Text style={styles.info}>
               {this.state.otherScore}
             </Text>
-            <View style={styles.icon}>
-
-            </View>
+            <Nimo
+              style={styles.nimo}    
+            />
             <Text style={styles.info}>
               {this.state.myScore}
             </Text>
@@ -79,9 +80,9 @@ export default class HeadToHeadGame extends Component {
             <Text style={styles.info}>
               {this.state.myScore}
             </Text>
-            <View style={styles.icon}>
-
-            </View>
+            <Nimo
+              style={styles.nimo}    
+            />
             <Text style={styles.info}>
               {this.state.otherScore}
             </Text>
@@ -121,18 +122,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#34E8E8'
   },
   info: {
-    height: TOP_HEIGHT - BOTTOM_PADDING,
-    width: TOP_HEIGHT - BOTTOM_PADDING,
+    height: TOP_HEIGHT * 0.75,
+    width: TOP_HEIGHT * 1.5,
+    borderRadius: TOP_HEIGHT/4,
     backgroundColor: '#B1D63E',
     color: '#FFFFFF',
     textAlign: 'center',
     textAlignVertical: 'center',
-    fontSize: TOP_HEIGHT - BOTTOM_PADDING
+    fontSize: 24
   },
-  icon: {
-    height: TOP_HEIGHT - BOTTOM_PADDING,
-    width: TOP_HEIGHT - BOTTOM_PADDING,
-    backgroundColor: '#B1D63E'
+  nimo: {
+    height: TOP_HEIGHT,
+    width: TOP_HEIGHT
   }
 })
 

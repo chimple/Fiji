@@ -27,3 +27,17 @@ it('User List Component', () => {
     ).toJSON();
     expect(tree).toMatchSnapshot();
 });
+
+
+it('Mocking the function', () => {
+    const tree = renderer.create(
+        <Keyboard 
+        tabLabel="😃" 
+        data={Emojis.people}
+        onPress={jest.fn()}  
+        />
+  ).getInstance()
+  tree._pressRow("😃")
+  // tree._onPress(users[3])
+    expect(tree).toMatchSnapshot();
+  });
