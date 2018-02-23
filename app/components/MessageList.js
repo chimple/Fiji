@@ -162,6 +162,8 @@ toggleSticker = ()=>{
                 />
               </View>
             }
+
+            
           {this.state.emoji &&
             <View style={{ height: 300 }}>
               {/* <Tabbed onPress={this.onPress.bind(this)} /> */}
