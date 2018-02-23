@@ -2,126 +2,154 @@
   {
     "_id": "game:memory-matching",
     "name": "Memory Matching",
+    "bgColor": "#14afca",
     "sets": [
       {
         "_id": "letters",
-        "name": "Letters"
+        "name": "Letters",
+        "bgColor": "#52c5ce"
       },
       {
         "_id": "numbers",
-        "name": "Numbers"
+        "name": "Numbers",
+        "bgColor": "#fc7466"
       },
       {
         "_id": "images",
-        "name": "Images"
+        "name": "Images",
+        "bgColor": "#fc66a2"
       }
     ]
   },
   {
     "_id": "game:tap-home",
     "name": "Tap Home",
+    "bgColor": "#eb1d65",
     "sets": [
       {
         "_id": "letters",
-        "name": "Letters"
+        "name": "Letters",
+        "bgColor": "#52c5ce"
       },
       {
         "_id": "numbers",
-        "name": "Numbers"
+        "name": "Numbers",
+        "bgColor": "#fc7466"
       },
       {
         "_id": "images",
-        "name": "Images"
+        "name": "Images",
+        "bgColor": "#fc66a2"
       }
     ]
   },
   {
     "_id": "game:reflex",
     "name": "Reflex",
+    "bgColor": "#fedc00",
     "sets": [
       {
         "_id": "letters",
-        "name": "Letters"
+        "name": "Letters",
+        "bgColor": "#52c5ce"
       },
       {
         "_id": "numbers",
-        "name": "Numbers"
+        "name": "Numbers",
+        "bgColor": "#fc7466"
       },
       {
         "_id": "images",
-        "name": "Images"
+        "name": "Images",
+        "bgColor": "#fc66a2"
       }
     ]
   },
   {
     "_id": "game:tap-wrong",
     "name": "Tap-wrong",
+    "bgColor": "#52c5ce",
     "sets": [
       {
         "_id": "letters",
-        "name": "Letters"
+        "name": "Letters",
+        "bgColor": "#52c5ce"
       },
       {
         "_id": "numbers",
-        "name": "Numbers"
+        "name": "Numbers",
+        "bgColor": "#fc7466"
       },
       {
         "_id": "images",
-        "name": "Images"
+        "name": "Images",
+        "bgColor": "#fc66a2"
       }
     ]
   },
   {
     "_id": "game:word",
     "name": "Word",
+    "bgColor": "#9c29b2",
     "sets": [
       {
         "_id": "letters",
-        "name": "Letters"
+        "name": "Letters",
+        "bgColor": "#52c5ce"
       },
       {
         "_id": "numbers",
-        "name": "Numbers"
+        "name": "Numbers",
+        "bgColor": "#fc7466"
       },
       {
         "_id": "images",
-        "name": "Images"
+        "name": "Images",
+        "bgColor": "#fc66a2"
       }
     ]
   },
   {
     "_id": "game:multiple-choice",
     "name": "Multiple-choice",
+    "bgColor": "#fc7466",
     "sets": [
       {
         "_id": "letters",
-        "name": "Letters"
+        "name": "Letters",
+        "bgColor": "#52c5ce"
       },
       {
         "_id": "numbers",
-        "name": "Numbers"
+        "name": "Numbers",
+        "bgColor": "#fc7466"
       },
       {
         "_id": "images",
-        "name": "Images"
+        "name": "Images",
+        "bgColor": "#fc66a2"
       }
     ]
   },
   {
     "_id": "game:connect-dots",
     "name": "Connect-dots",
+    "bgColor": "#51204d",
     "sets": [
       {
         "_id": "letters",
-        "name": "Letters"
+        "name": "Letters",
+        "bgColor": "#52c5ce"
       },
       {
         "_id": "numbers",
-        "name": "Numbers"
+        "name": "Numbers",
+        "bgColor": "#fc7466"
       },
       {
         "_id": "images",
-        "name": "Images"
+        "name": "Images",
+        "bgColor": "#fc66a2"
       }
     ]
   }

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { View, Text, TouchableOpacity, ActivityIndicator, FlatList } from 'react-native'
+import { View, Text, TouchableOpacity, ActivityIndicator, FlatList, StyleSheet, Dimensions } from 'react-native'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -8,6 +8,17 @@ import SvgUri from 'react-native-svg-uri'
 import setIcons from '../assets/games/setIcons';
 
 export default class GameFrontScreen extends PureComponent {
+  state = Dimensions.get("window")
+  handler = dims => this.setState(dims)
+
+  componentWillMount() {
+    Dimensions.addEventListener("change", this.handler);
+  }
+
+  componentWillUnmount() {
+    Dimensions.removeEventListener("change", this.handler); // This is an important to stop updating state after unmount
+  }
+
   componentDidMount() {
     //this.props.dispatch(fetchGameTheme(this.props.navigation.state.params.title._id))
     console.log(this.props.navigation.state.params.user._id)
@@ -20,24 +31,29 @@ export default class GameFrontScreen extends PureComponent {
   _renderItem = ({ item }) => {
     const svg = setIcons[item._id] || setIcons['missing']
     return (
-    <TouchableOpacity onPress={() => this.props.navigation.navigate('Modes',
-      {
-        item,
-        game: this.props.navigation.state.params.title,
-        user: this.props.navigation.state.params.user,
-        key:this.props.navigation.state.key
-      }
-    )} 
-    style={{ flexDirection: 'row', borderColor: 'black', borderWidth: 2 }}
-    accessibilityLabel={item.name} 
-    >
-      <SvgUri
-        width='50'
-        height='50'
-        svgXmlData={svg.default}
-      />
-      <Text style={{ color: 'black', fontSize: 50, fontWeight: 'bold' }}>{item.name}</Text>
-    </TouchableOpacity>
+    <View style={{flex:1}}>
+      <TouchableOpacity onPress={() => this.props.navigation.navigate('Modes',
+        {
+          item,
+          game: this.props.navigation.state.params.title,
+          user: this.props.navigation.state.params.user,
+          key:this.props.navigation.state.key
+        }
+      )} 
+      style={[styles.TouchableStyle,{
+            height:Dimensions.get('window').height * 0.25,
+            marginVertical:Dimensions.get('window').height * 0.025,
+            backgroundColor: item.bgColor }]}
+      accessibilityLabel={item.name} 
+      >
+        {/* <SvgUri
+          width='50'
+          height='50'
+          svgXmlData={svg.default}
+        /> */}
+        <Text style={styles.TextStyle}>{item.name}</Text>
+      </TouchableOpacity>
+    </View>
   )
   }
 
@@ -52,7 +68,7 @@ export default class GameFrontScreen extends PureComponent {
       //   :
         this.props.navigation.state.params.title.sets.length
           ?
-          <View>
+          <View style={{backgroundColor:'#ffffff', flex:1}}>
               <FlatList
                 showsVerticalScrollIndicator={false}
                 data={this.props.navigation.state.params.title.sets}
@@ -85,5 +101,21 @@ GameFrontScreen.propTypes = {
 //   isFetching: state.game.isFetching,
 // }))(GameFrontScreen)
 
+const styles = StyleSheet.create({
+  TouchableStyle:{
+      alignItems:'flex-end',
+      justifyContent:"flex-start",
+      flexDirection:'row',
+      borderBottomWidth: 1,
+      borderTopWidth:1,
+      borderBottomColor: 'black',
+      borderTopColor:'black'
+  },
+  TextStyle:{
+      fontSize: 50,
+      color:'#ffffff',
+      fontWeight:'bold'
+  },
+});
 
 
