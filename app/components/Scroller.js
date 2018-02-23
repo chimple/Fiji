@@ -18,7 +18,9 @@ class AnimationView extends React.Component {
     Animated.timing(this.state.progress, {
       toValue: 1,
       duration: 2000,
-    }).start();
+    }).start(({ finished }) => {
+      if (finished) this.props.onFinish()
+    })
   }
   render() {
     return (
@@ -33,7 +35,7 @@ class Dialog extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      imageMode: true
+      imageMode: false
     }
   }
   _renderCharacter = (character, animation) => {
@@ -52,8 +54,9 @@ class Dialog extends React.Component {
             />
             :
             <AnimationView
-              style={{ height: 80, width: 80, margin: 10 }}
+              style={{ height: 96, width: 96, alignSelf: 'center' }}
               animationCharacter={animation}
+              onFinish={this._onAnimationEnd}
             />
           }
         </TouchableOpacity>
@@ -61,12 +64,17 @@ class Dialog extends React.Component {
     )
   }
 
+  _onAnimationEnd = () => {
+    this.setState({...this.state, imageMode: true})
+  }
+
   _renderText = (text) => (
     <Text
       style={{
         flex: 1,
-        paddingHorizontal: 10,
-        paddingVertical: 20,
+        fontSize: 20,
+        padding: 10,
+        margin: 10,
         borderRadius: 8,
         borderColor: 'red',
         borderWidth: 1,
@@ -152,7 +160,7 @@ export default class Scroller extends React.PureComponent {
     <Dialog
       dialog={item}
       character={this.characters[item.speaker]}
-      animation={this.animations[item.speaker]}
+      animation={this.animations[item.animation]}
     />
   )
 
@@ -166,21 +174,6 @@ export default class Scroller extends React.PureComponent {
         svgXmlData={section.title}
       />
     )
-  }
-
-  _onRefresh = () => {
-    this.setState({ ...this.state, refreshing: true })
-    setTimeout(() => {
-      this.setState((state) => ({
-        ...state,
-        currentIndex: state.currentIndex + 1,
-        visibleDialogs: [{
-          ...state.dialogs[state.currentIndex + 1],
-          id: String(state.currentIndex + 1)
-        }].concat(state.visibleDialogs),
-        refreshing: false
-      }))
-    }, 500)
   }
 
   _onPress = () => {
@@ -248,7 +241,7 @@ export default class Scroller extends React.PureComponent {
 
 const styles = {
   itemContainer: {
-    padding: 20,
+    paddingVertical: 20,
     flex: 1,
     justifyContent: 'center',
     minHeight: 80
@@ -256,13 +249,13 @@ const styles = {
   leftItem: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'flex-end',
     justifyContent: 'flex-start'
   },
   rightItem: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'flex-end',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-start'
   }
 }
