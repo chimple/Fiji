@@ -24,9 +24,21 @@ import renderer from 'react-test-renderer';
 it('this is user 0', () => {
   const tree = renderer.create(
     <GameTitle
-    title={games[1]}
+      title={games[1]}
     />
-).toJSON();
+  ).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+
+it('Mocking the function', () => {
+  const tree = renderer.create(
+    <GameTitle
+      title={games[1]}
+      onPressItem={jest.fn()}
+    />
+  ).getInstance()
+  tree._onPress()
   expect(tree).toMatchSnapshot();
 });
 

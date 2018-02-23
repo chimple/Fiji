@@ -10,9 +10,9 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-"@storybook/addon-actions@^3.3.12":
-  version "3.3.12"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-3.3.12.tgz#1bd2668918a62f32c0907af14946cdd0c6be66f5"
+"@storybook/addon-actions@^3.3.13", "@storybook/addon-actions@^3.3.14":
+  version "3.3.14"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-3.3.14.tgz#b78e707b32130ad16ea8a0af62a66f23b5df502b"
   dependencies:
     deep-equal "^1.0.1"
     global "^4.3.2"
@@ -21,28 +21,28 @@
     react-inspector "^2.2.2"
     uuid "^3.1.0"
 
-"@storybook/addon-links@^3.3.12":
-  version "3.3.12"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-3.3.12.tgz#e1bb6e207506a45bea9e5f64cd78c045327412b7"
+"@storybook/addon-links@^3.3.13", "@storybook/addon-links@^3.3.14":
+  version "3.3.14"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-3.3.14.tgz#1de63e9b3819927fbb2f963fdabc65f86fde33cc"
   dependencies:
-    "@storybook/components" "^3.3.12"
+    "@storybook/components" "^3.3.14"
     global "^4.3.2"
     prop-types "^15.5.10"
 
-"@storybook/addons@^3.3.12":
-  version "3.3.12"
-  resolved "https://registry.yarnpkg.com/@storybook/addons/-/addons-3.3.12.tgz#682927b5ac4baad796922eec505a7e956a3f79d9"
+"@storybook/addons@^3.3.13", "@storybook/addons@^3.3.14":
+  version "3.3.14"
+  resolved "https://registry.yarnpkg.com/@storybook/addons/-/addons-3.3.14.tgz#20a65085b834898ea6154b9061ebc65a74c6cb33"
 
-"@storybook/channel-websocket@^3.3.12":
-  version "3.3.12"
-  resolved "https://registry.yarnpkg.com/@storybook/channel-websocket/-/channel-websocket-3.3.12.tgz#2f4ba6849e21dadf7875fb9fa1d402e0128b2812"
+"@storybook/channel-websocket@^3.3.14":
+  version "3.3.14"
+  resolved "https://registry.yarnpkg.com/@storybook/channel-websocket/-/channel-websocket-3.3.14.tgz#14be67d363460c1533083f31be5bc43810586984"
   dependencies:
-    "@storybook/channels" "^3.3.12"
+    "@storybook/channels" "^3.3.14"
     global "^4.3.2"
 
-"@storybook/channels@^3.3.12":
-  version "3.3.12"
-  resolved "https://registry.yarnpkg.com/@storybook/channels/-/channels-3.3.12.tgz#aa4106888971f9e689511093b0e6f2b569973a09"
+"@storybook/channels@^3.3.14":
+  version "3.3.14"
+  resolved "https://registry.yarnpkg.com/@storybook/channels/-/channels-3.3.14.tgz#b43f767f7775bb17cec5ab0696f918a475043df9"
 
 "@storybook/cli@^3.3.12":
   version "3.3.12"
@@ -71,9 +71,9 @@
   dependencies:
     jscodeshift "^0.4.0"
 
-"@storybook/components@^3.3.12":
-  version "3.3.12"
-  resolved "https://registry.yarnpkg.com/@storybook/components/-/components-3.3.12.tgz#e2571ca7150488f4ac3fa1cd1f70fa91ce38da8b"
+"@storybook/components@^3.3.14":
+  version "3.3.14"
+  resolved "https://registry.yarnpkg.com/@storybook/components/-/components-3.3.14.tgz#84ffcb5ac6a7d40e145402ed0d1521e6ad1b2d4d"
   dependencies:
     glamor "^2.20.40"
     glamorous "^4.11.2"
@@ -87,6 +87,13 @@
     "@storybook/react-simple-di" "^1.2.1"
     babel-runtime "6.x.x"
 
+"@storybook/podda@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@storybook/podda/-/podda-1.2.3.tgz#53c4a1a3f8c7bbd5755dff5c34576fd1af9d38ba"
+  dependencies:
+    babel-runtime "^6.11.6"
+    immutable "^3.8.1"
+
 "@storybook/react-komposer@^2.0.1", "@storybook/react-komposer@^2.0.3":
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@storybook/react-komposer/-/react-komposer-2.0.3.tgz#f9e12a9586b2ce95c24c137eabb8b71527ddb369"
@@ -97,15 +104,15 @@
     lodash.pick "^4.4.0"
     shallowequal "^0.2.2"
 
-"@storybook/react-native@^3.3.12":
-  version "3.3.12"
-  resolved "https://registry.yarnpkg.com/@storybook/react-native/-/react-native-3.3.12.tgz#065890d742a1706c39af264d68dabf5169351b19"
+"@storybook/react-native@^3.3.13":
+  version "3.3.14"
+  resolved "https://registry.yarnpkg.com/@storybook/react-native/-/react-native-3.3.14.tgz#f1b6a7c0288083d3c6e8aba72d0f1e875c0eea25"
   dependencies:
-    "@storybook/addon-actions" "^3.3.12"
-    "@storybook/addon-links" "^3.3.12"
-    "@storybook/addons" "^3.3.12"
-    "@storybook/channel-websocket" "^3.3.12"
-    "@storybook/ui" "^3.3.12"
+    "@storybook/addon-actions" "^3.3.14"
+    "@storybook/addon-links" "^3.3.14"
+    "@storybook/addons" "^3.3.14"
+    "@storybook/channel-websocket" "^3.3.14"
+    "@storybook/ui" "^3.3.14"
     autoprefixer "^7.2.3"
     babel-loader "^7.1.2"
     babel-plugin-syntax-async-functions "^6.13.0"
@@ -163,12 +170,13 @@
   dependencies:
     babel-runtime "^6.5.0"
 
-"@storybook/ui@^3.3.12":
-  version "3.3.12"
-  resolved "https://registry.yarnpkg.com/@storybook/ui/-/ui-3.3.12.tgz#b0a9cd83423c4d6cded0a0340fc4f48d5bdf3bc0"
+"@storybook/ui@^3.3.14":
+  version "3.3.14"
+  resolved "https://registry.yarnpkg.com/@storybook/ui/-/ui-3.3.14.tgz#85fdbb08d77edf79e8d4a3dee42673157e4b132d"
   dependencies:
-    "@storybook/components" "^3.3.12"
+    "@storybook/components" "^3.3.14"
     "@storybook/mantra-core" "^1.7.2"
+    "@storybook/podda" "^1.2.3"
     "@storybook/react-komposer" "^2.0.3"
     babel-runtime "^6.26.0"
     deep-equal "^1.0.1"
@@ -180,7 +188,6 @@
     lodash.debounce "^4.0.8"
     lodash.pick "^4.4.0"
     lodash.sortby "^4.7.0"
-    podda "^1.2.2"
     prop-types "^15.6.0"
     qs "^6.5.1"
     react-fuzzy "^0.5.1"
@@ -6465,13 +6472,6 @@ pn@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/pn/-/pn-1.1.0.tgz#e2f4cef0e219f463c179ab37463e4e1ecdccbafb"
 
-podda@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/podda/-/podda-1.2.2.tgz#15b0edbd334ade145813343f5ecf9c10a71cf500"
-  dependencies:
-    babel-runtime "^6.11.6"
-    immutable "^3.8.1"
-
 postcss-calc@^5.2.0:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/postcss-calc/-/postcss-calc-5.3.1.tgz#77bae7ca928ad85716e2fda42f261bf7c1d65b5e"
@@ -7420,6 +7420,10 @@ react-native-tab-view@^0.0.70:
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.70.tgz#1dd2ded32acd0cb6bfef38d26e53675db733b37b"
   dependencies:
     prop-types "^15.5.10"
+
+react-native-tts@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/react-native-tts/-/react-native-tts-1.5.0.tgz#1eb8b163e262f2ef7a73b48a090ffb6ff2bb8fac"
 
 react-native-vector-icons@^4.4.3:
   version "4.4.3"
