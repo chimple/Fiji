@@ -9,15 +9,18 @@
     "sets": [
       {
         "_id": "letters",
-        "name": "Letters"
+        "name": "Letters",
+        "backgroundColor": "#52c5ce"
       },
       {
         "_id": "numbers",
-        "name": "Numbers"
+        "name": "Numbers",
+        "backgroundColor": "#fc7466"
       },
       {
         "_id": "images",
-        "name": "Images"
+        "name": "Images",
+        "backgroundColor": "#fc66a2"
       }
     ]
   },
@@ -31,15 +34,18 @@
     "sets": [
       {
         "_id": "letters",
-        "name": "Letters"
+        "name": "Letters",
+        "backgroundColor": "#52c5ce"
       },
       {
         "_id": "numbers",
-        "name": "Numbers"
+        "name": "Numbers",
+        "backgroundColor": "#fc7466"
       },
       {
         "_id": "images",
-        "name": "Images"
+        "name": "Images",
+        "backgroundColor": "#fc66a2"
       }
     ]
   },
@@ -53,15 +59,18 @@
     "sets": [
       {
         "_id": "letters",
-        "name": "Letters"
+        "name": "Letters",
+        "backgroundColor": "#52c5ce"
       },
       {
         "_id": "numbers",
-        "name": "Numbers"
+        "name": "Numbers",
+        "backgroundColor": "#fc7466"
       },
       {
         "_id": "images",
-        "name": "Images"
+        "name": "Images",
+        "backgroundColor": "#fc66a2"
       }
     ]
   },
@@ -75,15 +84,18 @@
     "sets": [
       {
         "_id": "letters",
-        "name": "Letters"
+        "name": "Letters",
+        "backgroundColor": "#52c5ce"
       },
       {
         "_id": "numbers",
-        "name": "Numbers"
+        "name": "Numbers",
+        "backgroundColor": "#fc7466"
       },
       {
         "_id": "images",
-        "name": "Images"
+        "name": "Images",
+        "backgroundColor": "#fc66a2"
       }
     ]
   },
@@ -97,15 +109,18 @@
     "sets": [
       {
         "_id": "letters",
-        "name": "Letters"
+        "name": "Letters",
+        "backgroundColor": "#52c5ce"
       },
       {
         "_id": "numbers",
-        "name": "Numbers"
+        "name": "Numbers",
+        "backgroundColor": "#fc7466"
       },
       {
         "_id": "images",
-        "name": "Images"
+        "name": "Images",
+        "backgroundColor": "#fc66a2"
       }
     ]
   },
@@ -119,15 +134,18 @@
     "sets": [
       {
         "_id": "letters",
-        "name": "Letters"
+        "name": "Letters",
+        "backgroundColor": "#52c5ce"
       },
       {
         "_id": "numbers",
-        "name": "Numbers"
+        "name": "Numbers",
+        "backgroundColor": "#fc7466"
       },
       {
         "_id": "images",
-        "name": "Images"
+        "name": "Images",
+        "backgroundColor": "#fc66a2"
       }
     ]
   },
@@ -141,15 +159,18 @@
     "sets": [
       {
         "_id": "letters",
-        "name": "Letters"
+        "name": "Letters",
+        "backgroundColor": "#52c5ce"
       },
       {
         "_id": "numbers",
-        "name": "Numbers"
+        "name": "Numbers",
+        "backgroundColor": "#fc7466"
       },
       {
         "_id": "images",
-        "name": "Images"
+        "name": "Images",
+        "backgroundColor": "#fc66a2"
       }
     ]
   }
