@@ -118,16 +118,7 @@ export const fetchGames = () => async(dispatch, getState) => {
   try {
     dispatch(fetchGamesRequest())
     const result = require('../assets/games/games.json')
-    let categories = Object.keys(result).reduce(function(grouped, item) { 
-      let key = result[item]['category']
-      grouped[key] = grouped[key] || []
-      grouped[key].push(result[item])
-      return grouped
-    }, {})
-    const categoryList = Object.keys(categories).map((category) => {
-      return {_id: category, category: category, games: categories[category]}
-    })
-    dispatch(fetchGamesSuccess(categoryList))
+    dispatch(fetchGamesSuccess(result))
   } catch(error) {
       console.log('fetchGames: ' + error)
       dispatch(fetchGamesFailure())
@@ -137,7 +128,7 @@ export const fetchGames = () => async(dispatch, getState) => {
 export const fetchGameTheme = ( game_id ) => async(dispatch, getState) => {
   try {
     dispatch(fetchGameThemeRequest())
-    const sets = require('../assets/games/games.json')[game_id].sets
+    const sets = require('../assets/games/games.json').game_id.sets
     dispatch(fetchGameThemeSuccess({_id: game_id, sets}))
   } catch(error) {
       console.log('fetchGameTheme: ' + error)

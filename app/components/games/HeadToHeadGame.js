@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Orientation from 'react-native-orientation'
 import GameWrapper from './GameWrapper'
 import HeadToHeadPlayScreen from '../../screens/HeadToHeadPlayScreen';
+import Nimo from '../Nimo'
 
 const TOP_HEIGHT = 40
 const BOTTOM_PADDING = 5
@@ -50,16 +51,16 @@ export default class HeadToHeadGame extends Component {
 
     return (
       <View
-        style={styles.container}>
+        style={[styles.container, {backgroundColor: this.props.backgroundColor}]}>
         <View style={{flex:1, transform:[{scaleY:-1},{scaleX:-1}]}}>
-          <View style={styles.header}>
-            <Text style={styles.info}>
+          <View style={[styles.header, {backgroundColor: this.props.headerColor}]}>
+            <Text style={[styles.info, {backgroundColor: this.props.backgroundColor}]}>
               {this.state.otherScore}
             </Text>
-            <View style={styles.icon}>
-
-            </View>
-            <Text style={styles.info}>
+            <Nimo
+              style={styles.nimo}    
+            />
+            <Text style={[styles.info, {backgroundColor: this.props.backgroundColor}]}>
               {this.state.myScore}
             </Text>
           </View>
@@ -69,20 +70,21 @@ export default class HeadToHeadGame extends Component {
             onEnd={this.props.onEnd}
             onScore={this._addOtherScore}
             gameData={this.props.gameData}
+            progressBarColor={this.props.progressBarColor}            
             style={{
               height: height/2 - TOP_HEIGHT - HEADER_TO_REMOVE,
               width
             }} />
         </View>
         <View style={{flex:1}}>
-          <View style={styles.header}>
-            <Text style={styles.info}>
+          <View style={[styles.header, {backgroundColor: this.props.headerColor}]}>
+            <Text style={[styles.info, {backgroundColor: this.props.backgroundColor}]}>
               {this.state.myScore}
             </Text>
-            <View style={styles.icon}>
-
-            </View>
-            <Text style={styles.info}>
+            <Nimo
+              style={styles.nimo}    
+            />
+            <Text style={[styles.info, {backgroundColor: this.props.backgroundColor}]}>
               {this.state.otherScore}
             </Text>
           </View>
@@ -92,6 +94,7 @@ export default class HeadToHeadGame extends Component {
             onEnd={this.props.onEnd}
             onScore={this._addMyScore}
             gameData={this.props.gameData}
+            progressBarColor={this.props.progressBarColor}            
             style={{
               height: height/2 - TOP_HEIGHT - HEADER_TO_REMOVE,
               width
@@ -121,18 +124,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#34E8E8'
   },
   info: {
-    height: TOP_HEIGHT - BOTTOM_PADDING,
-    width: TOP_HEIGHT - BOTTOM_PADDING,
+    height: TOP_HEIGHT * 0.75,
+    width: TOP_HEIGHT * 1.5,
+    borderRadius: TOP_HEIGHT/4,
     backgroundColor: '#B1D63E',
     color: '#FFFFFF',
     textAlign: 'center',
     textAlignVertical: 'center',
-    fontSize: TOP_HEIGHT - BOTTOM_PADDING
+    fontSize: 24
   },
-  icon: {
-    height: TOP_HEIGHT - BOTTOM_PADDING,
-    width: TOP_HEIGHT - BOTTOM_PADDING,
-    backgroundColor: '#B1D63E'
+  nimo: {
+    height: TOP_HEIGHT,
+    width: TOP_HEIGHT
   }
 })
 
@@ -142,5 +145,8 @@ HeadToHeadGame.propTypes = {
   onEnd: PropTypes.func,
   onScore: PropTypes.func,
   gameComponent: PropTypes.func,
-  gameData: PropTypes.array
+  gameData: PropTypes.array,
+  backgroundColor: PropTypes.string,
+  headerColor: PropTypes.string,
+  progressBarColor: PropTypes.string  
 }
