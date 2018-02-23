@@ -51,16 +51,16 @@ export default class HeadToHeadGame extends Component {
 
     return (
       <View
-        style={styles.container}>
+        style={[styles.container, {backgroundColor: this.props.backgroundColor}]}>
         <View style={{flex:1, transform:[{scaleY:-1},{scaleX:-1}]}}>
-          <View style={styles.header}>
-            <Text style={styles.info}>
+          <View style={[styles.header, {backgroundColor: this.props.headerColor}]}>
+            <Text style={[styles.info, {backgroundColor: this.props.backgroundColor}]}>
               {this.state.otherScore}
             </Text>
             <Nimo
               style={styles.nimo}    
             />
-            <Text style={styles.info}>
+            <Text style={[styles.info, {backgroundColor: this.props.backgroundColor}]}>
               {this.state.myScore}
             </Text>
           </View>
@@ -70,20 +70,21 @@ export default class HeadToHeadGame extends Component {
             onEnd={this.props.onEnd}
             onScore={this._addOtherScore}
             gameData={this.props.gameData}
+            progressBarColor={this.props.progressBarColor}            
             style={{
               height: height/2 - TOP_HEIGHT - HEADER_TO_REMOVE,
               width
             }} />
         </View>
         <View style={{flex:1}}>
-          <View style={styles.header}>
-            <Text style={styles.info}>
+          <View style={[styles.header, {backgroundColor: this.props.headerColor}]}>
+            <Text style={[styles.info, {backgroundColor: this.props.backgroundColor}]}>
               {this.state.myScore}
             </Text>
             <Nimo
               style={styles.nimo}    
             />
-            <Text style={styles.info}>
+            <Text style={[styles.info, {backgroundColor: this.props.backgroundColor}]}>
               {this.state.otherScore}
             </Text>
           </View>
@@ -93,6 +94,7 @@ export default class HeadToHeadGame extends Component {
             onEnd={this.props.onEnd}
             onScore={this._addMyScore}
             gameData={this.props.gameData}
+            progressBarColor={this.props.progressBarColor}            
             style={{
               height: height/2 - TOP_HEIGHT - HEADER_TO_REMOVE,
               width
@@ -143,5 +145,8 @@ HeadToHeadGame.propTypes = {
   onEnd: PropTypes.func,
   onScore: PropTypes.func,
   gameComponent: PropTypes.func,
-  gameData: PropTypes.array
+  gameData: PropTypes.array,
+  backgroundColor: PropTypes.string,
+  headerColor: PropTypes.string,
+  progressBarColor: PropTypes.string  
 }
