@@ -154,14 +154,16 @@ export default class ConnectDotsScreen extends Component {
    const currentIndex = this.state.currentIndex
 
     if (this.state.letters[id] == this.props.data.serial[this.state.currentIndex]) {
-      this.props.onScore && this.props.onScore(2)
+  
       view.pulse(10).then((endState) => {
         this.setState({...this.state,
         statuses: this.state.statuses.map((val, index)=> {
         return id == index ? 'invisible' : val})})
         })
+        this.props.onScore && this.props.onScore(2) 
       this.props.setProgress && this.props.setProgress((currentIndex + 1) / this.props.data.serial.length)
       this.setState({...this.state, currentIndex: currentIndex + 1})
+     
       if (currentIndex == this.props.data.serial.length-1) {
         console.log(" currnt index , length ",currentIndex,this.props.data.serial.length)
         view.pulse(10).then((endState) => {
