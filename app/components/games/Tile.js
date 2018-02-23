@@ -74,6 +74,7 @@ export default class Tile extends Component {
         }} /> */}
         <TouchableWithoutFeedback
           onPressIn={() => this._onPressIn()}
+          accessibilityLabel={this.props.accessibilityLabel||'Tile'}
         >
           <View
             style={{
@@ -92,7 +93,8 @@ export default class Tile extends Component {
             }} >
             <Text style={{
               backgroundColor: 'transparent',
-              fontSize: Math.max(20, this.props.style.height - 40),
+              // fontSize: Math.max(20, this.props.style.width - 40),
+              fontSize: 24,
               ...stylesForText
             }}>
               {this.props.text}
@@ -106,6 +108,7 @@ export default class Tile extends Component {
 
 Tile.propTypes = {
   id: PropTypes.number,
+  accessibilityLabel: PropTypes.string,
   status: PropTypes.string,
   onPress: PropTypes.func,
   onStatusChange: PropTypes.func,

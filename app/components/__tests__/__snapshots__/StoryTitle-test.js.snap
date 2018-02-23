@@ -3,7 +3,7 @@
 exports[`renders correctly 1`] = `
 <View
   accessibilityComponentType={undefined}
-  accessibilityLabel={undefined}
+  accessibilityLabel="Alice in Wonderland"
   accessibilityTraits={undefined}
   accessible={true}
   collapsable={undefined}

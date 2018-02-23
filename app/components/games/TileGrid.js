@@ -29,6 +29,7 @@ export default class TileGrid extends PureComponent {
           <Tile
             key={id}
             id={id}
+            accessibilityLabel={'Tile_'+String(row)+String(col)}
             onPress={this.props.onPress}
             onRender={this.props.onRender}
             tileColor={this.props.tileColor}

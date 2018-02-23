@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, ActivityIndicator, StyleSheet, Dimensions } from 'react-native'
 import PropTypes from 'prop-types'
 import GameWrapper from './GameWrapper'
+import Nimo from '../Nimo'
 
 const TOP_HEIGHT = 100
 const BOTTOM_PADDING = 80
@@ -31,9 +32,9 @@ export default class SingleGame extends Component {
           <Text style={styles.info}>
             {this.props.myScore}
           </Text>
-          <View style={styles.icon}>
-
-          </View>
+          <Nimo
+            style={styles.nimo}    
+          />
           <Text style={styles.info}>
 
           </Text>
@@ -77,18 +78,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#34E8E8'
   },
   info: {
-    height: TOP_HEIGHT - BOTTOM_PADDING,
-    width: TOP_HEIGHT - BOTTOM_PADDING,
+    height: TOP_HEIGHT * 3 / 4,
+    width: TOP_HEIGHT,
+    borderRadius: TOP_HEIGHT/4,
     backgroundColor: '#B1D63E',
     color: '#FFFFFF',
     textAlign: 'center',
     textAlignVertical: 'center',
-    fontSize: TOP_HEIGHT - BOTTOM_PADDING
+    fontSize: 24
   },
-  icon: {
-    height: TOP_HEIGHT - BOTTOM_PADDING,
-    width: TOP_HEIGHT - BOTTOM_PADDING,
-    backgroundColor: '#B1D63E'
+  nimo: {
+    height: TOP_HEIGHT,
+    width: TOP_HEIGHT
   }
 })
 

@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react'
-import {FlatList,View, Text, StyleSheet, ImageBackground, ActivityIndicator } from 'react-native'
+import {FlatList,View, Text, StyleSheet, ImageBackground, ActivityIndicator, TouchableOpacity } from 'react-native'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -18,6 +18,7 @@ class ScoreScreen extends PureComponent{
         console.log(this.props.game.name)
         console.log(this.props.item.name)
         console.log(this.props.currentScore)
+        console.log("scorescreen",this.props.keys)
     }
 
     _keyExtractor = (item, index) => item._id
@@ -50,9 +51,9 @@ class ScoreScreen extends PureComponent{
                                 <View style={styles.PlayerScoreStyle}><Text style={{fontWeight:'bold', fontSize:50,}}>{UserLastScore}</Text></View>
                             </View>
                             <View style={styles.OptionStyle}>
-                                <View style={[styles.EachOptionStyle, {backgroundColor:'#bac2d1'}]}><Text style={{fontSize:20,fontWeight:'bold', color:'black'}}>Home</Text></View>
-                                <View style={[styles.EachOptionStyle, {backgroundColor:'grey'}]}><Text style={{fontSize:20,fontWeight:'bold', color:'black'}}>Exit</Text></View>
-                                <View style={[styles.EachOptionStyle, {backgroundColor:'#91b587'}]}><Text style={{fontSize:20,fontWeight:'bold', color:'black'}}>Next</Text></View>
+                                <TouchableOpacity onPress={()=> this.props.navigation.goBack(this.props.keys)} style={[styles.EachOptionStyle, {backgroundColor:'#bac2d1'}]}><Text style={{fontSize:20,fontWeight:'bold', color:'black'}}>Home</Text></TouchableOpacity>
+                                <TouchableOpacity style={[styles.EachOptionStyle, {backgroundColor:'grey'}]}><Text style={{fontSize:20,fontWeight:'bold', color:'black'}}>Restart</Text></TouchableOpacity>
+                                <TouchableOpacity style={[styles.EachOptionStyle, {backgroundColor:'#91b587'}]}><Text style={{fontSize:20,fontWeight:'bold', color:'black'}}>Next</Text></TouchableOpacity>
                             </View>
                             <View style={styles.RankingViewStyle}>
                                 <FlatList
