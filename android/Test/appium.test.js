@@ -1,6 +1,7 @@
 import wd from 'wd';
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 40000;
+
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
 const PORT = 4723;
 const config = {
   platformName: 'Android',
@@ -13,22 +14,30 @@ var action = new wd.TouchAction(driver);
 
 beforeAll(async () => {
   await driver.init(config);
-  await driver.sleep(15000); // wait for app to load
+  await driver.sleep(20000); // wait for app to load
 })
 
+
+// test('page scroll', async () => {
+
+//   driver.execute('mobile: scroll', {direction: 'down', element: element.value.'ADD-USER'});
+//   driver.performTouchAction(action);
+
+// });
+
 test('touchAction', async () => {
-    await driver.sleep(20000);
-    action.press({ x: 375 , y: 1750 }).wait(1000).moveTo({ x: 345 , y: 100 }).release();
+    await driver.sleep(15000);
+    action.press({ x: 375 , y: 1765 }).wait(500).moveTo({ x: 345 , y: 100 }).release();
     driver.performTouchAction(action);
 
 });
   
 test('add user', async () => {
-  await driver.sleep(15000);
+  await driver.sleep(10000);
   expect(await driver.hasElementByAccessibilityId('ADD-USER')).toBe(true);
    await driver.elementByAccessibilityId('ADD-USER').click();
 
-});
+})
 
 test('save pic', async () => {
   await driver.sleep(15000);
