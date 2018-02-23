@@ -1,14 +1,8 @@
 import React from 'react'
-<<<<<<< HEAD
 import { View, Text, SectionList, Dimensions, Animated, TouchableOpacity, Modal } from 'react-native'
 import { Buffer } from 'buffer'
 import SvgUri from 'react-native-svg-uri'
 import LottieView from 'lottie-react-native';
-=======
-import { View, Text, TouchableOpacity, FlatList, Dimensions, Image, PanResponder } from 'react-native'
-import ScrollableTabView from 'react-native-scrollable-tab-view'
-import { titles } from '../../config/jest/mockData'
->>>>>>> master
 
 class AnimationView extends React.Component {
   constructor(props) {
@@ -44,14 +38,17 @@ class Dialog extends React.Component {
   }
   _renderCharacter = (character, animation) => {
     return (
-      <View style={{ height: 100, width: 100 }}>
+      <View style={{ height: 100, width: 100, justifyContent: 'flex-end'}}>
         <TouchableOpacity onPress={() => this._onPressCharacter()}>
           {this.state.imageMode
             ?
             <SvgUri
-              width={32}
-              height={32}
+              width={64}
+              height={64}
               svgXmlData={character}
+              style={{
+                alignSelf: 'center'
+              }}
             />
             :
             <AnimationView
@@ -67,9 +64,13 @@ class Dialog extends React.Component {
   _renderText = (text) => (
     <Text
       style={{
+        flex: 1,
         paddingHorizontal: 10,
         paddingVertical: 20,
         borderRadius: 8,
+        borderColor: 'red',
+        borderWidth: 1,
+        borderBottomWidth: 4,
         backgroundColor: 'white'
       }}
     >
@@ -139,13 +140,13 @@ export default class Scroller extends React.PureComponent {
     }
   }
 
-  componentDidUpdate() {
-    this.refs.sectionList.scrollToLocation({
-      sectionIndex: this.state.pageIndex,
-      itemIndex: this.state.currentIndex,
-      viewPosition: 1
-    })
-  }
+  // componentDidUpdate() {
+  //   this.refs.sectionList.scrollToLocation({
+  //     sectionIndex: this.state.pageIndex,
+  //     itemIndex: this.state.currentIndex,
+  //     viewPosition: 1
+  //   })
+  // }
 
   _renderItem = ({ item }) => (
     <Dialog
@@ -160,9 +161,8 @@ export default class Scroller extends React.PureComponent {
     console.log(Dimensions.get("window"))
     return (
       <SvgUri
-        style={{ height: 41 }}
         width={w}
-        height={w}
+        height={w/10}
         svgXmlData={section.title}
       />
     )
@@ -206,9 +206,9 @@ export default class Scroller extends React.PureComponent {
         visibleDialogs: state.dialogs.slice(0,nextPageIndex+1).map((page, pageIndex) => (
           {
             title: page.title,
-            data: page.data.filter((val, index) => pageIndex < nextPageIndex || index <= nextCurrentIndex)
+            data: page.data.filter((val, index) => pageIndex < nextPageIndex || index <= nextCurrentIndex).reverse()
           }
-        ))
+        )).reverse()
       }
       console.log(newState)
       return newState
@@ -216,21 +216,29 @@ export default class Scroller extends React.PureComponent {
   }
 
   render() {
+    w = Dimensions.get("window").width
     return (
       <View style={{
         flex: 1
       }}>
         <SectionList
+          style={{flex: 1}}
           ref="sectionList"
           sections={this.state.visibleDialogs}
           renderItem={this._renderItem}
           renderSectionHeader={this._renderSectionHeader}
-          renderSectionFooter={this._renderSectionHeader}
+          // renderSectionFooter={this._renderSectionHeader}
           stickySectionHeadersEnabled={true}
           extraData={this.state.currentIndex}
-          // inverted={true}
+          inverted={true}
         />
-        <TouchableOpacity onPress={this._onPress}>
+        <TouchableOpacity onPress={this._onPress}
+          style={{
+            position: 'absolute',
+            bottom: 20,
+            left: w/2
+          }}
+        >
           <Text>Next</Text>
         </TouchableOpacity>
       </View>
