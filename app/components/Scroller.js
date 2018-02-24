@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, SectionList, Dimensions, Animated, TouchableOpacity, Modal } from 'react-native'
+import { View, Text, SectionList, Dimensions, Animated, TouchableOpacity, UIManager, LayoutAnimation } from 'react-native'
 import { Buffer } from 'buffer'
 import SvgUri from 'react-native-svg-uri'
 import LottieView from 'lottie-react-native';
@@ -15,6 +15,7 @@ class AnimationView extends React.Component {
 
   componentDidMount() {
     console.log('AnimationView.componentDidMount')
+    this.props.autoPlay &&
     Animated.timing(this.state.progress, {
       toValue: 1,
       duration: 2000,
@@ -22,6 +23,7 @@ class AnimationView extends React.Component {
       if (finished) this.props.onFinish()
     })
   }
+
   render() {
     return (
       <LottieView style={this.props.style}
@@ -35,13 +37,14 @@ class Dialog extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      imageMode: false
+      imageMode: false,
+      autoPlay: false
     }
   }
   _renderCharacter = (character, animation) => {
     return (
       <View style={{ height: 100, width: 100, justifyContent: 'flex-end' }}>
-        <TouchableOpacity onPress={() => this._onPressCharacter()}>
+        <TouchableOpacity onPress={this._onClick}>
           {this.state.imageMode
             ?
             <SvgUri
@@ -56,7 +59,8 @@ class Dialog extends React.Component {
             <AnimationView
               style={{ height: 96, width: 96, alignSelf: 'center' }}
               animationCharacter={animation}
-              onFinish={this._onAnimationEnd}
+              autoPlay={this.props.index==0 || this.state.autoPlay}
+              onFinish={this._onSwitch}
             />
           }
         </TouchableOpacity>
@@ -64,8 +68,14 @@ class Dialog extends React.Component {
     )
   }
 
-  _onAnimationEnd = () => {
-    this.setState({ ...this.state, imageMode: true })
+  _onSwitch = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.linear)
+    this.setState({ ...this.state, imageMode: !this.state.imageMode})
+  }
+
+  _onClick = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.linear)
+    this.setState({ ...this.state, imageMode: !this.state.imageMode, autoPlay: true })
   }
 
   _renderText = (text) => (
@@ -104,6 +114,7 @@ class Dialog extends React.Component {
 export default class Scroller extends React.PureComponent {
   constructor(props) {
     super(props)
+    UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true)
     const dialogs = props.data.pages.map(
       (page, pageIndex) => ({
         title: Buffer.from(page.bg, 'base64').toString('utf8'),
@@ -139,9 +150,10 @@ export default class Scroller extends React.PureComponent {
     }
   }
 
-  _renderItem = ({ item }) => (
+  _renderItem = ({ item, index }) => (
     <Dialog
       dialog={item}
+      index={index}
       character={this.characters[item.speaker]}
       animation={this.animations[item.animation]}
     />
@@ -186,7 +198,7 @@ export default class Scroller extends React.PureComponent {
           }
         )).reverse()
       }
-      console.log(newState)
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
       return newState
     })
   }
