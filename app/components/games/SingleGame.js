@@ -3,11 +3,12 @@ import { View, Text, ActivityIndicator, StyleSheet, Dimensions } from 'react-nat
 import PropTypes from 'prop-types'
 import GameWrapper from './GameWrapper'
 import Nimo from '../Nimo'
+import { touchDelegate } from './touchDelegate'
 
 const TOP_HEIGHT = 100
 const BOTTOM_PADDING = 80
 
-export default class SingleGame extends Component {
+class SingleGame extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -104,3 +105,5 @@ const styles = StyleSheet.create({
     width: TOP_HEIGHT
   }
 })
+
+export default touchDelegate(SingleGame)
