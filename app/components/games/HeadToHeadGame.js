@@ -5,12 +5,13 @@ import Orientation from 'react-native-orientation'
 import GameWrapper from './GameWrapper'
 import HeadToHeadPlayScreen from '../../screens/HeadToHeadPlayScreen';
 import Nimo from '../Nimo'
+import { touchDelegate } from './touchDelegate'
 
 const TOP_HEIGHT = 40
 const BOTTOM_PADDING = 5
 const HEADER_TO_REMOVE = 50
 
-export default class HeadToHeadGame extends Component {
+class HeadToHeadGame extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -66,11 +67,13 @@ export default class HeadToHeadGame extends Component {
           </View>
           <GameWrapper
             gameComponent={this.props.gameComponent}
+            delegateTouch={this.props.delegateTouch}
+            reverse={true}
             play={this.props.play}
             onEnd={this.props.onEnd}
             onScore={this._addOtherScore}
             gameData={this.props.gameData}
-            progressBarColor={this.props.progressBarColor}            
+            progressBarColor={this.props.progressBarColor}
             style={{
               height: height/2 - TOP_HEIGHT - HEADER_TO_REMOVE,
               width
@@ -90,6 +93,8 @@ export default class HeadToHeadGame extends Component {
           </View>
           <GameWrapper
             gameComponent={this.props.gameComponent}
+            delegateTouch={this._addToTiles}
+            reverse={false}
             play={this.props.play}
             onEnd={this.props.onEnd}
             onScore={this._addMyScore}
@@ -148,5 +153,8 @@ HeadToHeadGame.propTypes = {
   gameData: PropTypes.array,
   backgroundColor: PropTypes.string,
   headerColor: PropTypes.string,
-  progressBarColor: PropTypes.string  
+  progressBarColor: PropTypes.string,
+  delegateTouch: PropTypes.func
 }
+
+export default touchDelegate(HeadToHeadGame)

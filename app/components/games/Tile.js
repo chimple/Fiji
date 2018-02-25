@@ -35,6 +35,14 @@ export default class Tile extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.delegateTouch && this.props.delegateTouch({
+      view: this.refs.inner,
+      callback: this._onPressIn,
+      reverse: this.props.reverse
+    })
+  }
+
   render() {
     console.log('Tile.render:' + this.props.text)
     const stylesForView = this.props.statusStyles
@@ -63,20 +71,10 @@ export default class Tile extends Component {
           }
         ]}
       >
-        {/* <View style={{
-          height: this.props.tileHeight,
-          width: this.props.tileWidth,
-          backgroundColor: this.state.selected ? this.props.pressedEdgeColor : this.props.edgeColor,
-          borderRadius: 8,
-          position: 'absolute',
-          top: -this.props.tileHeight / 2 + 5,
-          left: -this.props.tileWidth / 2
-        }} /> */}
-        <TouchableWithoutFeedback
-          onPressIn={() => this._onPressIn()}
-          accessibilityLabel={this.props.accessibilityLabel||'Tile'}
-        >
           <View
+            ref="inner"
+            onStartShouldSetResponder={(e)=>true}
+            onResponderGrant={(e)=>{this._onPressIn()}}
             style={{
               height: this.props.style.height,
               width: this.props.style.width,
@@ -100,7 +98,6 @@ export default class Tile extends Component {
               {this.props.text}
             </Text>
           </View>
-        </TouchableWithoutFeedback>
       </Animatable.View>
     )
   }
@@ -117,4 +114,6 @@ Tile.propTypes = {
   edgeColor: PropTypes.string,
   pressedEdgeColor: PropTypes.string,
   text: PropTypes.string,
+  delegateTouch: PropTypes.func,
+  reverse: PropTypes.bool
 }
