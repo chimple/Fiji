@@ -22,12 +22,10 @@ export default class HeadToHeadGame extends Component {
   }
 
   _addToTiles = (tile) => {
-    console.log(tile)
     this._tiles.push(tile)
   }
 
   _callTile = (nativeEvent) => {
-    console.log('_callTile')
     this._tiles.forEach(({ view, callback, reverse }) => {
       view.measure((x, y, width, height, pageX, pageY) => {
         const xLow = reverse ? pageX - width : pageX

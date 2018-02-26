@@ -22,7 +22,6 @@ export default class SingleGame extends Component {
   }
 
   _callTile = (nativeEvent) => {
-    console.log('_callTile')
     this._tiles.forEach(({ view, callback, reverse }) => {
       view.measure((x, y, width, height, pageX, pageY) => {
         const xLow = reverse ? pageX - width : pageX
