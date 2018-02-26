@@ -43,6 +43,8 @@ export default class GameWrapper extends Component {
         {ProgressBarComponent}
         <GameComponent
           data={this.props.gameData[this.state.dataIndex]}
+          delegateTouch={this.props.delegateTouch}
+          reverse={this.props.reverse}
           runIndex={this.state.dataIndex}
           onScore={this.props.onScore}
           onEnd={this._onEnd}
@@ -77,5 +79,7 @@ GameWrapper.propTypes = {
   onScore: PropTypes.func,
   gameComponent: PropTypes.func,
   gameData: PropTypes.array,
-  progressBarColor: PropTypes.string
+  progressBarColor: PropTypes.string,
+  delegateTouch: PropTypes.func,
+  reverse: PropTypes.bool
 }
