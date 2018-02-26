@@ -9,7 +9,7 @@ import users from '../redux/users';
 import { Icon } from 'react-native-elements'
 import TabbedView from './TabviewAni';
 import Tabbed from './TabbedView'
-import Emoticons from 'react-native-emoticons';
+// import Emoticons from 'react-native-emoticons';
 
 
 
@@ -166,8 +166,8 @@ toggleSticker = ()=>{
             
           {this.state.emoji &&
             <View style={{ height: 300 }}>
-              {/* <Tabbed onPress={this.onPress.bind(this)} /> */}
-              <Emoticons
+              <Tabbed onPress={this.onPress.bind(this)} />
+              {/* <Emoticons
               //  ref={component => this._textInput = component}
  	         onEmoticonPress={(e)=>this.onPress(e.code)}
  	         onBackspacePress={(e)=>this.onbackPress()}
@@ -176,7 +176,7 @@ toggleSticker = ()=>{
            asyncRender={true}       
  	          showHistoryBar={true}
  	         showPlusBar={false}
-  />  
+  />   */}
             </View>
           }
            </View>

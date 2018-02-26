@@ -105,6 +105,7 @@ export default class ConnectDotsScreen extends Component {
    
     return (
       <TileGrid
+        delegateTouch={this.props.delegateTouch}
         numRows={SIZE}
         numCols={SIZE}
         data={this.state.letters}
@@ -187,5 +188,6 @@ ConnectDotsScreen.propTypes = {
   runIndex: PropTypes.number,
   onScore: PropTypes.func,
   onEnd: PropTypes.func,
+  delegateTouch: PropTypes.func,
   setProgress: PropTypes.func
 }
