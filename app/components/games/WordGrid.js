@@ -42,9 +42,8 @@ export default class WordGrid extends Component {
       h++;
       i++;p++;
       rno--;
-      if(i==Data1.length){flag2=1;
-        //console.log("breaked");break; 
-      }}
+      if(i==Data1.length){flag2=1;console.log('breaked');break;}
+    }
       if(p==SIZE&&flag2==0){flag=0;rno+=SIZE;}
    }
  if(flag==0){
@@ -53,13 +52,12 @@ export default class WordGrid extends Component {
    rindex[h]=rno;
    h++;
  }}
-// console.log("nn letters",letters)
  for (let i = 0,j=0; i < SIZE*SIZE ; i++){
    if(letters[i]=='null'){
      letters[i]=shuffledData1[j];
      j++;
    }
- }
+ } 
        let statuses = new Array(SIZE * SIZE)
         for (let i = 0; i < statuses.length; i++) {
           statuses[i] = 'neutral';
@@ -80,6 +78,7 @@ export default class WordGrid extends Component {
   render() {
   return (
       <TileGrid
+        delegateTouch={this.props.delegateTouch}
         numRows={SIZE}
         numCols={SIZE}
         data={this.state.letters}
@@ -158,5 +157,6 @@ WordGrid.propTypes = {
   runIndex: PropTypes.number,
   onScore: PropTypes.func,
   onEnd: PropTypes.func,
+  delegateTouch: PropTypes.func,
   setProgress: PropTypes.func
 }

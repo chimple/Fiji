@@ -3,11 +3,12 @@ import { View, Text, ActivityIndicator, StyleSheet, Dimensions } from 'react-nat
 import PropTypes from 'prop-types'
 import GameWrapper from './GameWrapper'
 import Nimo from '../Nimo'
+import { touchDelegate } from './touchDelegate'
 
 const TOP_HEIGHT = 100
 const BOTTOM_PADDING = 80
 
-export default class SingleGame extends Component {
+class SingleGame extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -27,9 +28,9 @@ export default class SingleGame extends Component {
     const { width, height } = this.state.window
     return (
       <View
-        style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.info}>
+        style={[styles.container, {backgroundColor: this.props.backgroundColor}]}>
+        <View style={[styles.header, {backgroundColor: this.props.headerColor}]}>
+          <Text style={[styles.info, {backgroundColor: this.props.backgroundColor}]}>
             {this.props.myScore}
           </Text>
           <Nimo
@@ -45,6 +46,7 @@ export default class SingleGame extends Component {
           onEnd={this.props.onEnd}
           onScore={this.props.onScore}
           gameData={this.props.gameData}
+          progressBarColor={this.props.progressBarColor}
           style={{
             height: this.state.window.height - TOP_HEIGHT - BOTTOM_PADDING,
             width: this.state.window.width
@@ -59,6 +61,17 @@ export default class SingleGame extends Component {
 
 }
 
+SingleGame.propTypes = {
+  myScore: PropTypes.number,
+  play: PropTypes.string,
+  onEnd: PropTypes.func,
+  onScore: PropTypes.func,
+  gameComponent: PropTypes.func,
+  gameData: PropTypes.array,
+  backgroundColor: PropTypes.string,
+  headerColor: PropTypes.string,
+  progressBarColor: PropTypes.string
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -93,11 +106,4 @@ const styles = StyleSheet.create({
   }
 })
 
-SingleGame.propTypes = {
-  myScore: PropTypes.number,
-  play: PropTypes.string,
-  onEnd: PropTypes.func,
-  onScore: PropTypes.func,
-  gameComponent: PropTypes.func,
-  gameData: PropTypes.array  
-}
+export default touchDelegate(SingleGame)
