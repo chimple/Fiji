@@ -13,6 +13,7 @@ class LoginScreen extends Component {
   }
 
   render() {
+    const FilteredUsers = this.props.users.filter((user) => user._id != this.props.user._id)
     return (
       this.props.isFetching
         ?
@@ -21,7 +22,7 @@ class LoginScreen extends Component {
           this.props.users.length
             ?
               <FriendList
-                users={ this.props.users.filter((user) => user._id != this.props.user._id) }
+                users={ FilteredUsers }
                 navigation={ this.props.navigation }
                 onPressItem = { this._handleChat }
               />

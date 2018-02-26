@@ -1,8 +1,5 @@
-import React, { Component } from 'react';
+import React, { PureComponent, Component } from 'react';
 import { View, Text, Image, ImageBackground, Animated, TouchableOpacity, Dimensions } from 'react-native';
-import { compose } from 'redux'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 import { Icon } from 'react-native-elements'
 import { fetchStory } from '../redux/story'
 import LottieView from 'lottie-react-native';
@@ -15,8 +12,6 @@ class AnimationView extends Component {
         this.state = {
             progress: new Animated.Value(0),
         };
-        // this.manusMethod();
-        // console.log("constructor called ----> ");
     }
 
     componentDidMount() {
@@ -38,11 +33,11 @@ class AnimationView extends Component {
     }
 }
 
-class StorySection extends Component {
+class StorySection extends PureComponent {
     render() {
         const stories = [];
-        console.log("the page number is :", this.props.item)
-        console.log("the count number is :", this.props.index)
+        // console.log("the page number is :", this.props.item)
+        // console.log("the count number is :", this.props.index)
         // var dialog = this.props.item.dialog;
 
         let svg = Buffer.from(this.props.item[1].bg, 'base64').toString('utf8')
@@ -56,7 +51,7 @@ class StorySection extends Component {
         console.log("How many character is there : ", Object.keys(this.props.story.characters).length)
 
         for (var i = 0; i < Object.keys(this.props.story.characters).length; i++)
-            characterData.push("" + Object.keys(this.props.story.characters)[i])
+            characterData.push(Object.keys(this.props.story.characters)[i])
 
         console.log(characterData)
 
@@ -97,7 +92,7 @@ class StorySection extends Component {
             if (speakerIndex % 2 == 0) {
                 // console.log("animation", this.props.story.characters[characterData[speakerIndex]]);
                 stories.push(
-                    <View style={{ marginTop: 20, borderColor:'grey',borderWidth:2,marginRight:'3%', marginLeft:'3%'}}>
+                    <View style={{ marginTop: 20, borderColor: 'grey', borderWidth: 2, marginRight: '3%', marginLeft: '3%' }}>
                         <SvgUri
                             style={{ position: 'absolute' }}
                             width={length}
@@ -132,7 +127,7 @@ class StorySection extends Component {
             }
             else {
                 stories.push(
-                    <View style={{ marginTop: 20, borderColor:'grey',borderWidth:2,marginRight:'3%', marginLeft:'3%',}}>
+                    <View style={{ marginTop: 20, borderColor: 'grey', borderWidth: 2, marginRight: '3%', marginLeft: '3%', }}>
                         <SvgUri
                             style={{ width: '100%', position: 'absolute' }}
                             width={length}
@@ -159,23 +154,16 @@ class StorySection extends Component {
                         </View>
                     </View>
                 );
-                // break;
+
             }
 
         }
-        //     }
-        // }
-
+       
         return stories;
     }
 
 }
 
-
-StorySection.propTypes = {
-    story: PropTypes.object,
-
-}
 const styles = {
     storyContainer: {
         flexDirection: 'row',
@@ -256,7 +244,4 @@ const styles = {
 
 }
 
-export default connect(state => ({
-    story: state.story.story,
-    isFetching: state.story.isFetching,
-}))(StorySection)
+export default StorySection;

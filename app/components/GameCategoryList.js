@@ -10,30 +10,14 @@ export default class GameCategoryList extends PureComponent {
 
   _keyExtractor = (item, index) => item._id
 
-  _renderItem1 = ({item}) => (
-    /* <TouchableOpacity style={styles.EachGameViewStyle}>
-    </TouchableOpacity>
-    */
-    
-      <GameTitle
-      title={item}
-      onPressItem={this.props.onPressItem}
-      />
-    
-     
-  )
-
   _renderItem = ({item}) => (
     /*<Text>
       { item.category }
     </Text>*/
-                 
-            <FlatList
-            showsHorizontalScrollIndicator={false}
-            data={item.games}
-            keyExtractor={this._keyExtractor}
-            renderItem={ this._renderItem1 }
-            />
+      <GameTitle
+      title={item}
+      onPressItem={this.props.onPressItem}
+      />
     
   )
 
@@ -42,6 +26,8 @@ export default class GameCategoryList extends PureComponent {
       <View style={styles.GameCategoryListStyle}>
         <FlatList
           showsVerticalScrollIndicator={false}
+          horizontal={false}
+          numColumns={2}
           data={this.props.games}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}

@@ -1,10 +1,10 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 
 import {
 
     StyleSheet,
 
-    Text, 
+    Text,
 
     View,
 
@@ -78,30 +78,30 @@ export default class FacebookTabBar extends Component {
     //     return `rgb(${red}, ${green}, ${blue})`;
 
     // }
-    updatedId= (keyValue,packId) => {
-         this.props.goToPage(keyValue);
-         this.props.onPressTab(packId)
+    updatedId = (keyValue, packId) => {
+        this.props.goToPage(keyValue);
+        this.props.onPressTab(packId)
         // console.log("the tabId : ", keyValue);
         // this.props.onPressTab(packId);
         // console.log("this is on presss",packId);
-      }
+    }
 
 
     render() {
-            console.log("data is not coming",this.props.tabData);
-return  <View style={[styles.tabs, this.props.style,]}>
+        console.log("data is not coming", this.props.tabData);
+        return <View style={[styles.tabs, this.props.style,]}>
 
             {this.props.tabData.map((tab, i) => {
                 const svg = stickers[tab] || stickers['unknown.svg']
-                return <TouchableOpacity key={i} onPress={ ()=>this.updatedId(i,tab)} style={styles.tab}>
-                
+                return <TouchableOpacity key={i} onPress={() => this.updatedId(i, tab)} style={styles.tab}>
+
                     {/* <Text key={i} >{tab._id} </Text> */}
                     <SvgUri
-                                key={i} 
-                                width="30"
-                                height="30"
-                                svgXmlData={svg.default}
-                                />
+                        key={i}
+                        width="30"
+                        height="30"
+                        svgXmlData={svg.default}
+                    />
                 </TouchableOpacity>;
 
             })}
@@ -151,11 +151,11 @@ const styles = StyleSheet.create({
 });
 
 FacebookTabBar.propTypes = {
-    _id:PropTypes.string,
-     i:PropTypes.number,
-     stickers:PropTypes.array
-  }
-  
+    _id: PropTypes.string,
+    i: PropTypes.number,
+    stickers: PropTypes.array
+}
+
 //   export default connect(state => ({
 //     packs: state.sticker.packs,
 //     stickers: state.sticker.stickers,

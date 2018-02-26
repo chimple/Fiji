@@ -42,6 +42,8 @@ export default class ReflexBoard extends Component {
     console.log('ReflexBoard.render')
     return (
       <TileGrid
+        delegateTouch={this.props.delegateTouch}
+        reverse={this.props.reverse}
         numRows={SIZE}
         numCols={SIZE}
         data={this.state.letters}
@@ -71,10 +73,6 @@ export default class ReflexBoard extends Component {
     console.log('onstatuschange:', prevStatus, currentStatus)
     currentStatus == 'visible' && view.zoomIn(250)
   }
-
-  // _renderTile = (id, view) => {
-  //   this.state.letters[id] && view.zoomIn(250)
-  // }
 
   _clickTile = (id, view) => {
     const currentIndex = this.state.currentIndex
@@ -116,5 +114,7 @@ ReflexBoard.propTypes = {
   runIndex: PropTypes.number,
   onScore: PropTypes.func,
   onEnd: PropTypes.func,
-  setProgress: PropTypes.func
+  setProgress: PropTypes.func,
+  delegateTouch: PropTypes.func,
+  reverse: PropTypes.bool
 }
