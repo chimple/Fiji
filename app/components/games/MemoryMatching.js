@@ -87,7 +87,7 @@ export default class MemoryMatching extends Component {
       edgeColor='deepskyblue'
       pressedTileColor='goldenrod'
       pressedEdgeColor='darkgoldenrod'
-      textColor='#FFFFFF'
+      textColor='black'
       style={{
         width: this.props.style.width,
         height: this.props.style.height
@@ -95,7 +95,7 @@ export default class MemoryMatching extends Component {
       statusStyles = {{
         H: {
           View: {
-           
+            backgroundColor: '#ff80ab'
           },
           Text: {
             opacity: 0
@@ -103,7 +103,7 @@ export default class MemoryMatching extends Component {
         },
         V: {
           View: {
-            backgroundColor: '#24B2EA'
+            backgroundColor: '#fcc066'
           },
           Text: {
             opacity: 1
@@ -125,7 +125,7 @@ export default class MemoryMatching extends Component {
 
   _onStatusChange(id, view, prevStatus, currentStatus) {
     console.log("Rajesh-Data-onstatuschange:", id , prevStatus, currentStatus);
-    currentStatus == 'D' && view.zoomOut(100)
+    currentStatus == 'D' && view.zoomOut(250)
     currentStatus == 'H' && view.flipInY(250) 
   }
 
