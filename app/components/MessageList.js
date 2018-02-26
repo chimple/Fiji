@@ -162,8 +162,6 @@ toggleSticker = ()=>{
                 />
               </View>
             }
-
-            
           {this.state.emoji &&
             <View style={{ height: 300 }}>
               <Tabbed onPress={this.onPress.bind(this)} />
@@ -185,8 +183,6 @@ toggleSticker = ()=>{
     else {
       return (
         <View >
-          <View style={{ flex: this.state.emoFlex }} >
-
             <View style={styles.input}>
               <TouchableOpacity onPress={this.toggleEmo}  >
                 <Icon name="insert-emoticon" size={40} color="#900" />
@@ -218,7 +214,7 @@ toggleSticker = ()=>{
               friend={this.props.friend}
             />
           </View>
-        </View>
+        // </View>
       );
     }
   }
