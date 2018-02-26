@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react'
 
 import { FlatList, View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import PropTypes from 'prop-types'
-import Icon from 'react-native-vector-icons/MaterialIcons'
 import GameTitle from './GameTitle'
 
 export default class GameCategoryList extends PureComponent {
@@ -11,57 +10,28 @@ export default class GameCategoryList extends PureComponent {
 
   _keyExtractor = (item, index) => item._id
 
-  _renderItem1 = ({item}) => (
-    /* <TouchableOpacity style={styles.EachGameViewStyle}>
-    </TouchableOpacity>
-    */
-    
-      <GameTitle
-      title={item}
-      onPressItem={this.props.onPressItem}
-      />
-    
-     
-  )
-
   _renderItem = ({item}) => (
     /*<Text>
       { item.category }
     </Text>*/
-    <View style={styles.CategoryCardViewStyle}>
-      <View style={styles.CategoryHeaderViewStyle}>
-        <Text style={styles.CategoryHeaderStyle}>{ item.category }</Text>
-      </View>
-      <View style={styles.CategoryGamesViewStyle}>
-          <View style={styles.IconViewStyle}> 
-            <Icon name="keyboard-arrow-left" color="white" size={35} style={styles.IconStyle} onPress={this._scrollToForwardIndex} />
-          </View>
-          <View style={{ flex:12 }}>               
-            <FlatList
-            showsHorizontalScrollIndicator={false}
-            horizontal={true}
-            data={item.games}
-            keyExtractor={this._keyExtractor}
-            renderItem={ this._renderItem1 }
-            />
-          </View>
-          <View style={styles.IconViewStyle}>
-            <Icon name="keyboard-arrow-right" color="white" size={35} style={styles.IconStyle} onPress={this._scrollToBackwardIndex} />
-          </View>
-      </View>
-    </View>
+      <GameTitle
+      title={item}
+      onPressItem={this.props.onPressItem}
+      />
     
   )
 
   render() {
     return (
       <View style={styles.GameCategoryListStyle}>
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        data={this.props.games}
-        keyExtractor={this._keyExtractor}
-        renderItem={this._renderItem}
-      />
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          horizontal={false}
+          numColumns={2}
+          data={this.props.games}
+          keyExtractor={this._keyExtractor}
+          renderItem={this._renderItem}
+        />
       </View>
     )
   }
@@ -77,84 +47,82 @@ const styles = StyleSheet.create({
     flex:1,
     backgroundColor:'white',
   },
-  CategoryCardViewStyle:{
-    flex:1, 
-    height:150, 
-    //width:330, 
-    marginTop:'8%',
-    marginBottom:'8%',
-    //alignSelf:'center',
-    marginHorizontal:'4%',
-  },
-  CategoryHeaderViewStyle:{
-    flex:2 ,
-    justifyContent:'center', 
-    alignItems:'center', 
-    backgroundColor:'#dadbc5', 
-    borderTopLeftRadius:20, 
-    borderTopRightRadius:20
-  },
-  CategoryHeaderStyle:{
-    fontSize:25, 
-    fontWeight:"bold", 
-    color:'#19a4f2'
-  },
-  CategoryGamesViewStyle:{
-    flex:4 ,
-    //padding:'4%',
-    //paddingTop:'7%',
-    //paddingBottom:'7%',
-    //paddingBottom:'4%',
-    backgroundColor:'#eaefef',
-    flexDirection:'row',
-    //backgroundColor:'red',
-    //justifyContent:'space-around', 
-    alignContent:"center", 
-    borderBottomLeftRadius:20, 
-    borderBottomRightRadius:20
-  },
-  /*EachGameButtonStyle:{ 
-    //justifyContent:'center',
-    //alignItems:'center',
-    //alignContent:"space-around",
-    //marginHorizontal:'2%,
-    backgroundColor:'red',
-    //borderWidth:4,
-    //borderRadius:50,
-    paddingRight:'2%',
-    paddingLeft:'2%'
-   },*/
-  /*EachGameViewStyle:{
-    //borderColor:'black',  
-    //borderWidth:1,
-    //justifyContent:'center',
-    borderRadius:40, 
-    height:85, 
-    width:85,
-    backgroundColor:'black',
-    //borderWidth:2,
-    marginTop:'8%',
-    marginBottom:'8%',
-    //paddingLeft:"4%"
-  },*/
-  /*TextStyle:{
-    fontSize:20,
-    fontWeight:'bold',
-    color:'black',
-  },*/
-  IconViewStyle:{
-    flex:1,
-    justifyContent:"center",
-    //backgroundColor:'black',
-    //alignItems:"center",
-    paddingRight:'3%',
-    //backgroundColor:'black',
-    //marginBottom:'5%',
-    //marginTop:'5%'
-  },
-  IconStyle:{
-    color:'#19a4f2'
-  }
+  // CategoryCardViewStyle:{
+  //   flex:1, 
+  //   height:150, 
+  //   //width:330, 
+  //   marginTop:'8%',
+  //   marginBottom:'8%',
+  //   //alignSelf:'center',
+  //   marginHorizontal:'4%',
+  // },
+  // CategoryHeaderViewStyle:{
+  //   flex:2 ,
+  //   justifyContent:'center', 
+  //   alignItems:'center', 
+  //   backgroundColor:'#dadbc5', 
+  //   borderTopLeftRadius:20, 
+  //   borderTopRightRadius:20
+  // },
+  // CategoryHeaderStyle:{
+  //   fontSize:25, 
+  //   fontWeight:"bold", 
+  //   color:'#19a4f2'
+  // },
+  // CategoryGamesViewStyle:{
+  //   //padding:'4%',
+  //   //paddingTop:'7%',
+  //   //paddingBottom:'7%',
+  //   //paddingBottom:'4%',
+  //   backgroundColor:'#eaefef',
+  //   //backgroundColor:'red',
+  //   //justifyContent:'space-around', 
+  //   alignContent:"center", 
+  //   borderBottomLeftRadius:20, 
+  //   borderBottomRightRadius:20
+  // },
+  // /*EachGameButtonStyle:{ 
+  //   //justifyContent:'center',
+  //   //alignItems:'center',
+  //   //alignContent:"space-around",
+  //   //marginHorizontal:'2%,
+  //   backgroundColor:'red',
+  //   //borderWidth:4,
+  //   //borderRadius:50,
+  //   paddingRight:'2%',
+  //   paddingLeft:'2%'
+  //  },*/
+  // /*EachGameViewStyle:{
+  //   //borderColor:'black',  
+  //   //borderWidth:1,
+  //   //justifyContent:'center',
+  //   borderRadius:40, 
+  //   height:85, 
+  //   width:85,
+  //   backgroundColor:'black',
+  //   //borderWidth:2,
+  //   marginTop:'8%',
+  //   marginBottom:'8%',
+  //   //paddingLeft:"4%"
+  // },*/
+  // /*TextStyle:{
+  //   fontSize:20,
+  //   fontWeight:'bold',
+  //   color:'black',
+  // },*/
+  // IconViewStyle:{
+  //   flex:1,
+  //   justifyContent:"center",
+  //   //backgroundColor:'black',
+  //   //alignItems:"center",
+  //   paddingRight:'3%',
+  //   //backgroundColor:'black',
+  //   //marginBottom:'5%',
+  //   //marginTop:'5%'
+  // },
+  // IconStyle:{
+  //   color:'#19a4f2'
+  // }
 });
 
 

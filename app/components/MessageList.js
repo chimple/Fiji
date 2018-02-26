@@ -162,8 +162,6 @@ toggleSticker = ()=>{
                 />
               </View>
             }
-
-            
           {this.state.emoji &&
             <View style={{ height: 300 }}>
               {/* <Tabbed onPress={this.onPress.bind(this)} /> */}
@@ -185,8 +183,6 @@ toggleSticker = ()=>{
     else {
       return (
         <View >
-          <View style={{ flex: this.state.emoFlex }} >
-
             <View style={styles.input}>
               <TouchableOpacity onPress={this.toggleEmo}  >
                 <Icon name="insert-emoticon" size={40} color="#900" />
@@ -211,14 +207,32 @@ toggleSticker = ()=>{
                   size={40} color="#900" />
               </TouchableOpacity>
             </View>
-            <TabbedView
-              packs={this.props.packs}
-              tabPress={this.ontabPress}
-              onPress={this.onPressGetSticker}
-              friend={this.props.friend}
-            />
-          </View>
-        </View>
+            {this.state.sticker &&
+              <View style={{ height: 300 }}>
+                <TabbedView
+                  packs={this.props.packs}
+                  tabPress={this.ontabPress}
+                  onPress={this.onPressGetSticker}
+                  friend={this.props.friend}
+                />
+              </View>
+            }
+          {this.state.emoji &&
+            <View style={{ height: 300 }}>
+              {/* <Tabbed onPress={this.onPress.bind(this)} /> */}
+              <Emoticons
+              //  ref={component => this._textInput = component}
+ 	         onEmoticonPress={(e)=>this.onPress(e.code)}
+ 	         onBackspacePress={(e)=>this.onbackPress()}
+ 	          show={this.state.showEmoticons}
+           concise={false}
+           asyncRender={true}       
+ 	          showHistoryBar={true}
+ 	         showPlusBar={false}
+  />  
+            </View>
+          }
+           </View>
       );
     }
   }

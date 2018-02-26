@@ -25,16 +25,6 @@ class StoryScreen extends Component {
     };
   }
 
-  // componentWillMount() {
-  //   this.setState(prevState => ({
-  //     stories: [
-  //       ...prevState.stories,
-  //       [this.props.story.pages[this.state.page].dialog[this.state.count], 
-  //       {bg: this.props.story.pages[this.state.page].bg}]
-  //     ]
-  //   }))
-  // };
-
   _renderState() {
     // var page = this.getState;
     var dialog = this.props.story.pages[this.state.page].dialog;
@@ -42,7 +32,6 @@ class StoryScreen extends Component {
     if (this.state.count < dialog.length) {
       this.setState({ count: this.state.count + 1 });
       console.log("counter value is : ", this.state.count);
-      // this.state.stories.push({text:'this is suhas',speaker:'Alice'})
 
       this.setState(prevState => ({
         stories: [
@@ -76,7 +65,13 @@ class StoryScreen extends Component {
 
   _renderItem = ({ item, index }) => (
     <View >
-      <StorySection item={item} index={index} page={this.state.page} count={this.state.count} bg={this.props.story.pages[this.state.page].bg} />
+      <StorySection
+      story={this.props.story} 
+      item={item} 
+      index={index} 
+      page={this.state.page} 
+      count={this.state.count} 
+      bg={this.props.story.pages[this.state.page].bg} />
     </View>
   )
 
@@ -88,11 +83,6 @@ class StoryScreen extends Component {
       )
     } else {
       if (this.props.story._id) {
-        // let svg = Buffer.from(this.props.story.pages[this.state.page].bg, 'base64').toString('utf8')
-        // const h = Dimensions.get("window").height
-        // const w = Dimensions.get("window").width
-        // const length = h > w ? h : w
-
         return (
           <View style={{ flex: 1, backgroundColor: 'blue'}}>
             <View style={styles.headerViewStyle}>
@@ -107,17 +97,6 @@ class StoryScreen extends Component {
                 }} />
             </View>
             <View style={{ flex: 1 }}>
-              {/* <ImageBackground style={styles.backgroundImageStyle}
-               source={{ uri: 'data:image/svg+xml;base64,' + this.props.story.pages[this.state.page].bg, }}
-              > */}
-              {/* <SvgUri
-                style={{ flex: 1, position: 'absolute' }}
-                width={length}
-                height={length}
-                //source={{ uri:'data:image/svg+xml;base64,' + this.props.story.pages[this.state.page].bg }}
-                svgXmlData={svg}
-              >
-              </SvgUri> */}
 
               <FlatList
                 data={this.state.stories}

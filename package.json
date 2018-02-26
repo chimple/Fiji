@@ -41,6 +41,7 @@
     "react-native-super-grid": "^2.0.2",
     "react-native-svg": "^6.0.1-rc.1",
     "react-native-svg-uri": "^1.2.3",
+    "react-native-tts": "^1.5.0",
     "react-native-vector-icons": "^4.4.3",
     "react-navigation": "^1.0.0-beta.22",
     "react-redux": "^5.0.6",
@@ -49,10 +50,10 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^3.3.12",
-    "@storybook/addon-links": "^3.3.12",
-    "@storybook/addons": "^3.3.12",
-    "@storybook/react-native": "^3.3.12",
+    "@storybook/addon-actions": "^3.3.13",
+    "@storybook/addon-links": "^3.3.13",
+    "@storybook/addons": "^3.3.13",
+    "@storybook/react-native": "^3.3.13",
     "babel-core": "^6.26.0",
     "babel-jest": "22.0.4",
     "babel-preset-es2015": "^6.24.1",

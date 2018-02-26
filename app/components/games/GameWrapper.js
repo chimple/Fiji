@@ -20,6 +20,7 @@ export default class GameWrapper extends Component {
       <ProgressBar
         fillStyle={{}}
         backgroundStyle={{ backgroundColor: '#cccccc', borderRadius: 2 }}
+        fillStyle={{ backgroundColor: this.props.progressBarColor }}
         style={{ width: this.props.style.width }}
         progress={this.state.progress}
       />
@@ -27,6 +28,7 @@ export default class GameWrapper extends Component {
       <ProgressBar
         fillStyle={{}}
         backgroundStyle={{ backgroundColor: '#cccccc', borderRadius: 2 }}
+        fillStyle={{ backgroundColor: this.props.progressBarColor }}
         style={{ width: this.props.style.width }}
         progress={1}
         duration={20000}
@@ -74,5 +76,6 @@ GameWrapper.propTypes = {
   onEnd: PropTypes.func,
   onScore: PropTypes.func,
   gameComponent: PropTypes.func,
-  gameData: PropTypes.array
+  gameData: PropTypes.array,
+  progressBarColor: PropTypes.string
 }
