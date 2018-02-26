@@ -8,7 +8,6 @@ export default class Dialog extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      imageMode: this.props.index != 0,
       autoPlay: false
     }
   }
@@ -63,9 +62,9 @@ export default class Dialog extends React.Component {
     this.setState({ imageMode: !this.state.imageMode })
   }
 
-  _renderAnimation = (animation) => (
+  _renderAnimation = (animation, size) => (
     <AnimationView
-      style={{ height: 256, width: 256, alignSelf: 'center' }}
+      style={{ height: size, width: size, alignSelf: 'center' }}
       animationCharacter={animation}
       autoPlay={this.props.index == 0 || this.state.autoPlay}
       onFinish={this._onSwitch}
@@ -78,12 +77,12 @@ export default class Dialog extends React.Component {
         {this.props.character
           ?
           <View style={this.props.left ? styles.leftItem : styles.rightItem}>
-            {this._renderCharacter(this.props.character, this.props.animation)}
+            {this._renderAnimation(this.props.animation, 96)}
             {this._renderText(this.props.text)}
           </View>
           :
           <View style={styles.centerItem}>
-            {this.props.animation && this._renderAnimation(this.props.animation)}
+            {this.props.animation && this._renderAnimation(this.props.animation, 256)}
             {this.props.text && this._renderText(this.props.text)}
           </View>
         }

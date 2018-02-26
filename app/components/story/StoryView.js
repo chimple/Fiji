@@ -37,7 +37,7 @@ export default class StoryView extends React.PureComponent {
   _renderItem = ({ item, index }) => (
     <Dialog
       index={index}
-      character={item.character && this.graphics[item.character]}
+      character={item.character}
       left={item.character && this.props.data.characters[item.character] == 'left'}
       animation={item.animation && this.props.data.animations[item.animation]}
       text={item.text}
@@ -50,7 +50,6 @@ export default class StoryView extends React.PureComponent {
 
   _renderSectionHeader = ({ section }) => {
     const w = Dimensions.get("window").width
-    console.log(Dimensions.get("window"))
     return (
       <SvgUri
         width={w}
@@ -92,7 +91,7 @@ export default class StoryView extends React.PureComponent {
           }
         )).reverse()
       }
-      LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
+      // LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
       this.props.character || this.props.animation ||
       setTimeout(() => {
         this._disableNext(false)
