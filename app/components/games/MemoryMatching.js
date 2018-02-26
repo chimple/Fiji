@@ -86,7 +86,7 @@ export default class MemoryMatching extends Component {
       edgeColor='deepskyblue'
       pressedTileColor='goldenrod'
       pressedEdgeColor='darkgoldenrod'
-      textColor='#FFFFFF'
+      textColor='black'
       style={{
         width: this.props.style.width,
         height: this.props.style.height
@@ -94,7 +94,7 @@ export default class MemoryMatching extends Component {
       statusStyles = {{
         H: {
           View: {
-           
+            backgroundColor: '#ff80ab'
           },
           Text: {
             opacity: 0
@@ -102,7 +102,7 @@ export default class MemoryMatching extends Component {
         },
         V: {
           View: {
-            backgroundColor: '#24B2EA'
+            backgroundColor: '#fcc066'
           },
           Text: {
             opacity: 1
