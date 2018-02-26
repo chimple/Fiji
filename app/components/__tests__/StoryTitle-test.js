@@ -14,3 +14,51 @@ it('renders correctly', () => {
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })
+
+// it('Mocking the function', () => {
+//   const tree = renderer.create(
+//     <StoryTitle 
+//     title = { titles[0] }
+//     onPressItem={jest.fn()}
+//   />
+// ).getInstance()
+// tree._onPress()
+// // tree._onPress(users[3])
+//   expect(tree).toMatchSnapshot();
+// });
+
+it('Mocking the function', () => {
+  const tree = renderer.create(
+    <StoryTitle 
+    title = { titles[0] }
+    onPressItem={jest.fn()}
+  />
+).getInstance()
+tree.handler(jest.fn())
+// tree._onPress(users[3])
+  expect(tree).toMatchSnapshot();
+});
+
+// it('Mocking the function', () => {
+//   const tree = renderer.create(
+//     <StoryTitle 
+//     title = { titles[0] }
+//     onPressItem={jest.fn()}
+//   />
+// ).getInstance()
+// tree.componentWillMount()
+// // tree._onPress(users[3])
+//   expect(tree).toMatchSnapshot();
+// });
+
+// it('Mocking the function', () => {
+//   const tree = renderer.create(
+//     <StoryTitle 
+//     title = { titles[0] }
+//     onPressItem={jest.fn()}
+//   />
+// ).getInstance()
+// tree.componentWillUnmount()
+// // tree._onPress(users[3])
+//   expect(tree).toMatchSnapshot();
+// });

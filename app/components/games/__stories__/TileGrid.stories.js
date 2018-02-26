@@ -9,11 +9,17 @@ storiesOf('TileGrid', module)
     numRows={3}
     numCols={4}
     data={['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P']}
-    tileColor='skyblue'
-    edgeColor='deepskyblue'
-    pressedTileColor='goldenrod'
-    pressedEdgeColor='darkgoldenrod'
-    textColor='purple'        
+    statuses={['Z','Z','Z','Z','Z','Z','Z','Z','Z','Z','Z','Z','Z','Z','Z','Z']}
+    statusStyles={{
+      Z: {
+        View: {
+          backgroundColor: '#24B2EA'
+        },
+        Text: {
+          color: '#FFFFFF'
+        }    
+      }
+    }}
     style={{
       width: 300,
       height: 400

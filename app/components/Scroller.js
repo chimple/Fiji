@@ -1,7 +1,6 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, FlatList, Dimensions, Image, PanResponder } from 'react-native'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
-import FacebookTabBar from './FacebookTabBar'
 import { titles } from '../../config/jest/mockData'
 
 const window = Dimensions.get('window')

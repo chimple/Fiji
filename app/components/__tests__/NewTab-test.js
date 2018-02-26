@@ -21,10 +21,25 @@ import renderer from 'react-test-renderer';
 //npm test -- --coverage User-test
 //this above command is used to test indivisual component
 
+const sticker=[stickers];
+
 it('this is user 0', () => {
+  console.log('this is stickers',sticker)
   const tree = renderer.create(
-  <FacebookTabBar tabData={stickers} />
+  <FacebookTabBar tabData={sticker} />
 ).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
+
+it('Mocking the function', () => {
+  const tree = renderer.create(
+    <FacebookTabBar 
+    tabData={sticker}
+    goToPage={jest.fn()}
+    onPressTab={jest.fn()}
+    />
+).getInstance()
+tree.updatedId(sticker[0])
+  expect(tree).toMatchSnapshot();
+});

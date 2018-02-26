@@ -11,7 +11,7 @@ it('renders correctly', () => {
   const tree = renderer.create(
     <TapHome 
         data={{
-            answer: 15,
+            answer: '15',
             serial: ['9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'],
         }}
         style = {{
@@ -22,6 +22,19 @@ it('renders correctly', () => {
         onScore={()=>{}}
         onEnd={()=>{}}  
     />
-  ).toJSON()
+  ).getInstance()
+
+  tree.componentWillUnmount()
+  tree.componentDidMount()
+  tree._timer()
+  tree._clickText()
+  if (tree.props.data.answer == tree.props.data.serial[tree.state.count])
+  {
+    expect(tree.state.status).toEqual('selected')
+  }
+  else{
+    expect(tree.state.status).toEqual('neutral') 
+  }
+  tree. _onStatusChange(1,'neutral', 'selected')
   expect(tree).toMatchSnapshot()
 })
