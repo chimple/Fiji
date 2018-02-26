@@ -1,46 +1,76 @@
 import React from 'react'
-import { View, Text, SectionList, Dimensions, Animated, TouchableOpacity, UIManager, LayoutAnimation } from 'react-native'
+import {
+  View, Text, SectionList, Dimensions, Animated,
+  TouchableOpacity, TouchableWithoutFeedback, UIManager, LayoutAnimation
+} from 'react-native'
 import { Buffer } from 'buffer'
 import SvgUri from 'react-native-svg-uri'
 import LottieView from 'lottie-react-native';
+import PropTypes from 'prop-types'
 
 class AnimationView extends React.Component {
   constructor(props) {
     super(props)
-    console.log('AnimationView()')
     this.state = {
       progress: new Animated.Value(0),
+      isPlaying: false
     };
   }
 
   componentDidMount() {
-    console.log('AnimationView.componentDidMount')
-    this.props.autoPlay &&
-    Animated.timing(this.state.progress, {
-      toValue: 1,
-      duration: 2000,
-    }).start(({ finished }) => {
-      if (finished) this.props.onFinish()
-    })
+    this.props.autoPlay && this._play()
+  }
+
+  _play = () => {
+    !this.state.isPlaying &&
+      this.setState((prevState, props) => {
+        Animated.timing(prevState.progress, {
+          toValue: 1,
+          duration: props.duration,
+        }).start(({ finished }) => {
+          if (finished) {
+            this.state.progress.setValue(0)
+            this.setState({...this.state, isPlaying: false})
+          }
+        })
+        return {
+          ...prevState,
+          isPlaying: true
+        }
+      })
   }
 
   render() {
     return (
-      <LottieView style={this.props.style}
-        source={this.props.animationCharacter}
-        progress={this.state.progress} />
+      <TouchableWithoutFeedback onPress={() => this._play()}>
+        <LottieView style={this.props.style}
+          source={this.props.animationCharacter}
+          progress={this.state.progress} />
+      </TouchableWithoutFeedback>
     )
   }
+}
+
+AnimationView.defaultProps = {
+  duration: 2000
+}
+
+AnimationView.propTypes = {
+  duration: PropTypes.number,
+  animationCharacter: PropTypes.object,
+  onFinish: PropTypes.func,
+  autoPlay: PropTypes.bool
 }
 
 class Dialog extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      imageMode: false,
+      imageMode: this.props.index != 0,
       autoPlay: false
     }
   }
+
   _renderCharacter = (character, animation) => {
     return (
       <View style={{ height: 100, width: 100, justifyContent: 'flex-end' }}>
@@ -59,7 +89,7 @@ class Dialog extends React.Component {
             <AnimationView
               style={{ height: 96, width: 96, alignSelf: 'center' }}
               animationCharacter={animation}
-              autoPlay={this.props.index==0 || this.state.autoPlay}
+              autoPlay={this.props.index == 0 || this.state.autoPlay}
               onFinish={this._onSwitch}
             />
           }
@@ -70,7 +100,8 @@ class Dialog extends React.Component {
 
   _onSwitch = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.linear)
-    this.setState({ ...this.state, imageMode: !this.state.imageMode})
+    this.setState({ ...this.state, imageMode: true })
+    this.props.onFinish()
   }
 
   _onClick = () => {
@@ -90,20 +121,28 @@ class Dialog extends React.Component {
     this.setState({ imageMode: !this.state.imageMode })
   }
 
+  _renderAnimation = (animation) => (
+    <AnimationView
+      style={{ height: 256, width: 256, alignSelf: 'center' }}
+      animationCharacter={animation}
+      autoPlay={this.props.index == 0 || this.state.autoPlay}
+      onFinish={this._onSwitch}
+    />
+  )
+
   render() {
-    const speaker = this.props.dialog.speaker
-    const left = this.props.character && this.props.character.left
     return (
-      <View style={[styles.itemContainer, { backgroundColor: this.props.dialog.color }]}>
-        {speaker
+      <View style={[styles.itemContainer, this.props.style]}>
+        {this.props.character
           ?
-          <View style={left ? styles.leftItem : styles.rightItem}>
-            {this._renderCharacter(this.props.character.character, this.props.animation)}
-            {this._renderText(this.props.dialog.text)}
+          <View style={this.props.left ? styles.leftItem : styles.rightItem}>
+            {this._renderCharacter(this.props.character, this.props.animation)}
+            {this._renderText(this.props.text)}
           </View>
           :
           <View style={styles.centerItem}>
-            {this._renderText(this.props.dialog.text)}
+            {this.props.animation && this._renderAnimation(this.props.animation)}
+            {this.props.text && this._renderText(this.props.text)}
           </View>
         }
       </View>
@@ -117,7 +156,7 @@ export default class Scroller extends React.PureComponent {
     UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true)
     const dialogs = props.data.pages.map(
       (page, pageIndex) => ({
-        title: Buffer.from(page.bg, 'base64').toString('utf8'),
+        title: page.bg,
         data: page.dialog.map((val, index) => (
           {
             ...val,
@@ -128,34 +167,29 @@ export default class Scroller extends React.PureComponent {
       })
     )
     this.state = {
-      refreshing: false,
+      disableNext: false,
       currentIndex: 0,
       pageIndex: 0,
       dialogs,
       visibleDialogs: [{ data: [dialogs[0].data[0]], title: dialogs[0].title }]
     }
-    this.characters = {}
-    let left = false
-    for (const key in props.data.characters) {
-      left = !left
-      this.characters[key] = {
-        character: Buffer.from(props.data.characters[key], 'base64').toString('utf8'),
-        left
-      }
-    }
-    this.animations = {}
-    for (const key in props.data.animations) {
-      this.animations[key] =
-        JSON.parse(Buffer.from(props.data.animations[key], 'base64').toString('utf8'))
+    this.graphics = {}
+    for (const key in props.data.graphics) {
+      this.graphics[key] = Buffer.from(props.data.graphics[key], 'base64').toString('utf8')
     }
   }
 
   _renderItem = ({ item, index }) => (
     <Dialog
-      dialog={item}
       index={index}
-      character={this.characters[item.speaker]}
-      animation={this.animations[item.animation]}
+      character={item.character && this.graphics[item.character]}
+      left={item.character && this.props.data.characters[item.character] == 'left'}
+      animation={item.animation && this.props.data.animations[item.animation]}
+      text={item.text}
+      graphic={item.graphic && this.graphics[item.graphic]}
+      style={{
+        backgroundColor: item.color
+      }}
     />
   )
 
@@ -166,9 +200,13 @@ export default class Scroller extends React.PureComponent {
       <SvgUri
         width={w}
         height={w / 10}
-        svgXmlData={section.title}
+        svgXmlData={this.graphics[section.title]}
       />
     )
+  }
+
+  _disableNext = (disable) => {
+    this.setState({ ...this.state, disableNext: disable })
   }
 
   _onPress = () => {
@@ -189,6 +227,7 @@ export default class Scroller extends React.PureComponent {
         state.pageIndex
       const newState = {
         ...state,
+        disableNext: true,
         currentIndex: nextCurrentIndex,
         pageIndex: nextPageIndex,
         visibleDialogs: state.dialogs.slice(0, nextPageIndex + 1).map((page, pageIndex) => (
@@ -199,6 +238,10 @@ export default class Scroller extends React.PureComponent {
         )).reverse()
       }
       LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
+      this.props.character || this.props.animation ||
+      setTimeout(() => {
+        this._disableNext(false)
+      }, 2000)
       return newState
     })
   }
@@ -215,12 +258,13 @@ export default class Scroller extends React.PureComponent {
           sections={this.state.visibleDialogs}
           renderItem={this._renderItem}
           renderSectionHeader={this._renderSectionHeader}
-          // renderSectionFooter={this._renderSectionHeader}
           stickySectionHeadersEnabled={true}
           extraData={this.state.currentIndex}
           inverted={true}
         />
-        <TouchableOpacity onPress={this._onPress}
+        <TouchableOpacity
+          onPress={this._onPress}
+          disabled={this.state.disableNext}
           style={{
             position: 'absolute',
             bottom: 20,
