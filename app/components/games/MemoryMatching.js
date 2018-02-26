@@ -124,7 +124,7 @@ export default class MemoryMatching extends Component {
 
   _onStatusChange(id, view, prevStatus, currentStatus) {
     console.log("Rajesh-Data-onstatuschange:", id , prevStatus, currentStatus);
-    currentStatus == 'D' && view.zoomOut(100)
+    currentStatus == 'D' && view.zoomOut(250)
     currentStatus == 'H' && view.flipInY(250) 
   }
 
