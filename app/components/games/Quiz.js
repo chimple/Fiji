@@ -51,11 +51,6 @@ export default class Quiz extends Component {
       }
     }
     
-
-    _onPress = () => {
-    }
-
-       
     render() {
 
       const cellSize = Math.min(
@@ -82,7 +77,6 @@ export default class Quiz extends Component {
           <Animatable.View ref="questionView">
           <Tile
             id={0}
-            onPress={this._onPress}
             tileColor='#24B2EA'
             edgeColor='black'
             pressedTileColor='goldenrod'
@@ -110,6 +104,7 @@ export default class Quiz extends Component {
           
 
        <TileGrid
+        delegateTouch={this.props.delegateTouch}
         numRows={SIZE}
         numCols={SIZE}
         data={this.props.data.choices}
@@ -165,5 +160,6 @@ export default class Quiz extends Component {
   runIndex: PropTypes.number,
   onScore: PropTypes.func,
   onEnd: PropTypes.func,
+  delegateTouch: PropTypes.func,
   setProgress: PropTypes.func
   }
