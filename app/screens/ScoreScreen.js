@@ -1,19 +1,24 @@
 import React, {PureComponent} from 'react'
-import {FlatList,View, Text, StyleSheet, ImageBackground, ActivityIndicator } from 'react-native'
+import {FlatList,View, Text, StyleSheet, ImageBackground, ActivityIndicator, TouchableOpacity } from 'react-native'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import SvgUri from 'react-native-svg-uri'
 import { Buffer } from 'buffer'
-import { fetchGameHighScores } from '../redux/score' 
+import { fetchGameHighScores, finalizeScore } from '../redux/score' 
 
 class ScoreScreen extends PureComponent{
-    componentDidMount(){
+    componentWillMount() {
+        this.props.dispatch(finalizeScore(this.props.user._id, this.props.game._id, this.props.currentScore))
         this.props.dispatch(fetchGameHighScores(this.props.game._id))
+    }
+    componentDidMount(){
+        //this.props.dispatch(fetchGameHighScores(this.props.game._id))
         console.log(this.props.user.name)
         console.log(this.props.game.name)
         console.log(this.props.item.name)
         console.log(this.props.currentScore)
+        console.log("scorescreen",this.props.keys)
     }
 
     _keyExtractor = (item, index) => item._id
@@ -21,15 +26,18 @@ class ScoreScreen extends PureComponent{
     _renderItem = ({item}) => (
         <View style={styles.RankingStyle}><Text style={{fontWeight:'bold', fontSize:30,}}>{item.score}</Text></View>
     )
+   
     render(){
-        var UserHighScore
+    
+        var UserLastScore
         if(this.props.gameHighScores.length)
             for( i=0; i<this.props.gameHighScores.length ; i++ ){
                 if(this.props.gameHighScores[i].user_id==this.props.user._id){
-                    UserHighScore = this.props.gameHighScores[i].score
+                    UserLastScore = this.props.gameHighScores[i].score
                     break
                 }
             }
+            console.log("the score of gamehighscore length is ", this.props.gameHighScores.length)
         return(
             this.props.isFetching
                 ?
@@ -42,12 +50,12 @@ class ScoreScreen extends PureComponent{
                             <View style={styles.PlayerScoreViewStyle}>
                                 <ImageBackground style={[styles.PlayerScoreStyle, {width:20, height:100, alignSelf:'center'}]} source={{uri:'data:image/png;base64,' + this.props.user.image }} ><Text style={{fontWeight:'bold', fontSize:20,}}>{this.props.currentScore}</Text></ImageBackground>
                                 <View style={styles.CharacterStyle}></View>
-                                <View style={styles.PlayerScoreStyle}><Text style={{fontWeight:'bold', fontSize:50,}}>B</Text></View>
+                                <View style={styles.PlayerScoreStyle}><Text style={{fontWeight:'bold', fontSize:50,}}>{UserLastScore}</Text></View>
                             </View>
                             <View style={styles.OptionStyle}>
-                                <View style={[styles.EachOptionStyle, {backgroundColor:'#bac2d1'}]}><Text style={{fontSize:20,fontWeight:'bold', color:'black'}}>Home</Text></View>
-                                <View style={[styles.EachOptionStyle, {backgroundColor:'grey'}]}><Text style={{fontSize:20,fontWeight:'bold', color:'black'}}>Exit</Text></View>
-                                <View style={[styles.EachOptionStyle, {backgroundColor:'#91b587'}]}><Text style={{fontSize:20,fontWeight:'bold', color:'black'}}>Next</Text></View>
+                                <TouchableOpacity onPress={()=> this.props.navigation.goBack(this.props.keys)} style={[styles.EachOptionStyle, {backgroundColor:'#bac2d1'}]}><Text style={{fontSize:20,fontWeight:'bold', color:'black'}}>Home</Text></TouchableOpacity>
+                                <TouchableOpacity style={[styles.EachOptionStyle, {backgroundColor:'grey'}]}><Text style={{fontSize:20,fontWeight:'bold', color:'black'}}>Restart</Text></TouchableOpacity>
+                                <TouchableOpacity style={[styles.EachOptionStyle, {backgroundColor:'#91b587'}]}><Text style={{fontSize:20,fontWeight:'bold', color:'black'}}>Next</Text></TouchableOpacity>
                             </View>
                             <View style={styles.RankingViewStyle}>
                                 <FlatList

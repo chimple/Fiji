@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, FlatList, Dimensions, Image, PanResponder } from 'react-native'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
-import FacebookTabBar from './FacebookTabBar'
+import { titles } from '../../config/jest/mockData'
 
 const window = Dimensions.get('window')
 const imageDimensions = {
@@ -30,15 +30,15 @@ class MyListItem extends React.PureComponent {
 }
 
 export default class Scroller extends React.PureComponent {
-  state = { selected: (new Map(): Map<string, boolean>) ,  num_items: 1};
-
-  componentDidUpdate = (prevProps, prevState) => {
-    this.tabView.goToPage(this.state.num_items-1)
-  }
-
-  _onScrollEnd = (id) => {
-    console.log('end'+ id)
-    id>=this.state.num_items && this.setState({...this.state, num_items: this.state.num_items+1})
+  constructor(props) {
+    super(props)
+    this.state = {
+      selected: (new Map(): Map<string, boolean>),
+      num_items: 1,
+      refreshing: false,
+      data: props.data[0]
+    };
+  
   }
 
   _keyExtractor = (item, index) => item.id;
@@ -63,27 +63,31 @@ export default class Scroller extends React.PureComponent {
     />
   );
 
+  _onRefresh = () => {
+    this.setState({ ...this.state, refreshing: true })
+    setTimeout(() => {
+      this.setState({
+        ...this.state,
+        data: {...this.state.data, data: [{id: 1, title: '1'},...this.state.data.data]},
+        refreshing: false
+      })
+    }, 5000)
+  }
+
   render() {
     return (
-      <ScrollableTabView
-        renderTabBar={() => <FacebookTabBar />}
-        initialPage={this.state.num_items-1}
-        ref={(tabView) => { this.tabView = tabView; }}
-        // page={this.state.num_items-1}
-      >
-        {this.props.data.slice(0,this.state.num_items).map((item)=>(
-          <FlatList
-          id={item.id}
-          key={item.id}
-          tabLabel={item.tabLabel}
-          data={item.data}
-          extraData={this.state}
-          renderItem={this._renderItem}
-          onEndReached={()=>this._onScrollEnd(item.id)}
-          onEndReachedThreshold={0.1}
-        />
-        ))}
-      </ScrollableTabView>
-    );
+      <FlatList
+        id={this.state.data.id}
+        key={this.state.data.id}
+        ref="scroller"
+        tabLabel={this.state.data.tabLabel}
+        data={this.state.data.data}
+        extraData={this.state}
+        renderItem={this._renderItem}
+        inverted={true}
+        onRefresh={this._onRefresh}
+        refreshing={this.state.refreshing}
+      />
+    )
   }
 }

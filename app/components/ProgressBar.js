@@ -62,7 +62,9 @@ export default class ProgressBar extends Component {
 ProgressBar.propTypes = {
   initialProgress: PropTypes.number,
   progress: PropTypes.number,
-  onEnd: PropTypes.func
+  onEnd: PropTypes.func,
+  backgroundStyle: PropTypes.object,
+  fillStyle: PropTypes.object
 }
 
 ProgressBar.defaultProps = {

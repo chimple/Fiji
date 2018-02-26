@@ -3,7 +3,7 @@
 exports[`renders correctly 1`] = `
 <View
   accessibilityComponentType={undefined}
-  accessibilityLabel={undefined}
+  accessibilityLabel="Alice in Wonderland"
   accessibilityTraits={undefined}
   accessible={true}
   collapsable={undefined}
@@ -22,18 +22,15 @@ exports[`renders correctly 1`] = `
     Object {
       "borderBottomLeftRadius": 30,
       "borderBottomRightRadius": 30,
-      "borderColor": "black",
       "borderTopLeftRadius": 30,
       "borderTopRightRadius": 30,
-      "borderWidth": 2,
       "flex": 1,
       "height": 140,
       "marginBottom": "12%",
-      "marginLeft": "3%",
-      "marginRight": "3%",
+      "marginLeft": 15,
       "marginTop": "20%",
       "opacity": 1,
-      "width": 105,
+      "width": 225,
     }
   }
   testID={undefined}
@@ -42,14 +39,16 @@ exports[`renders correctly 1`] = `
   <View
     style={
       Object {
+        "alignContent": "center",
+        "alignItems": "center",
         "backgroundColor": "#19a4f2",
+        "borderColor": "black",
         "borderTopLeftRadius": 30,
         "borderTopRightRadius": 30,
+        "borderWidth": 2,
         "flex": 2,
         "flexDirection": "row",
         "flexWrap": "wrap",
-        "justifyContent": "flex-start",
-        "padding": "1%",
       }
     }
   >
@@ -62,7 +61,7 @@ exports[`renders correctly 1`] = `
           "color": "black",
           "fontSize": 20,
           "fontWeight": "bold",
-          "marginTop": "1%",
+          "marginTop": "2%",
         }
       }
     >
@@ -73,6 +72,9 @@ exports[`renders correctly 1`] = `
     style={
       Object {
         "alignItems": "center",
+        "backgroundColor": "red",
+        "borderBottomLeftRadius": 30,
+        "borderBottomRightRadius": 30,
         "flex": 3,
         "padding": "4%",
       }
@@ -82,10 +84,7 @@ exports[`renders correctly 1`] = `
       style={
         Object {
           "borderColor": "black",
-          "borderRadius": 60,
           "borderWidth": 2,
-          "height": "100%",
-          "width": "100%",
         }
       }
     />
