@@ -32,23 +32,28 @@ export default class Quiz extends Component {
 
     _onStatusChange(id, view, prevStatus, currentStatus) {
       console.log('onstatuschange:', prevStatus, currentStatus)
-      currentStatus == 'Selected' && view.zoomIn(250)
+      currentStatus == 'Neutral' && view.zoomIn(250)
     }
 
     _clickTile = (id, view) => {
-      if (id == this.props.data.answerIndex) {                
+      console.log(id);
+      console.log(view);
+      if(this.state.statuses[id] == 'Selected'){
+        this.setState({...this.state})
+      } else {
+     if (id == this.props.data.answerIndex) { 
+      this.refs.questionView.zoomIn(250);   
         view.zoomOut(250).then((endState) => {
-          this.props.setProgress && this.props.setProgress(1)
-          this.refs.questionView.zoomIn(250);
+          this.props.setProgress(1)
           this.props.onScore && this.props.onScore(2)
             this.setState({...this.state,
-              statuses: this.state.statuses.map(()=>'Neutral')})
-              view.zoomIn(250);
-            this.props.onEnd()
+              statuses: this.state.statuses.map(()=>'Selected')})
+          this.props.onEnd()
         })
+        view.zoomIn(250);    
       } else {
         view.shake(250);
-      }
+      }}
     }
     
     render() {
@@ -87,10 +92,10 @@ export default class Quiz extends Component {
             statusStyles={{
               'Same': {
                 View: {
-                  backgroundColor: '#24B2EA'
+                  backgroundColor: '#ffb300'
                 },
                 Text: {
-                  color: 'white'
+                  color: 'black'
                 }
               }
             }}
@@ -123,18 +128,18 @@ export default class Quiz extends Component {
         statusStyles = {{
           Neutral: {
             View: {
-              backgroundColor: '#24B2EA'
+              backgroundColor: '#ffffff'
             },
             Text: {
-              color: '#FFFFFF'
+              color: ' black'
             }
           },
           Selected: {
             View: {
-              backgroundColor: '#24B2EA'
+              backgroundColor: 'green'
             },
             Text: {
-              color: '#FFFFFF'
+              color: 'black'
             }
           }
         }}
