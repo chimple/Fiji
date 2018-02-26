@@ -26,6 +26,8 @@ export default class GameCategoryList extends PureComponent {
       <View style={styles.GameCategoryListStyle}>
         <FlatList
           showsVerticalScrollIndicator={false}
+          horizontal={false}
+          numColumns={2}
           data={this.props.games}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}

@@ -65,10 +65,11 @@ class GameScreen extends Component {
     console.log('GameScreen', this.props.navigation.state.params.play)
     console.log('GameScreen', this.props.navigation.state.params.key)
     const GameComponent = GameComponents[this.props.navigation.state.params.game._id]
+    const navParams = this.props.navigation.state.params
     return (
       this.state.gameOver
         ?
-        <ScoreScreen keys={this.props.navigation.state.params.key} navigation={this.props.navigation} currentScore={this.props.myScore} item={this.props.navigation.state.params.item} game={this.props.navigation.state.params.game} user={this.props.navigation.state.params.user} />
+        <ScoreScreen keys={navParams.key} navigation={this.props.navigation} currentScore={this.props.myScore} item={navParams.item} game={navParams.game} user={navParams.user} />
         :
         this.props.isFetching
           ?
@@ -76,23 +77,31 @@ class GameScreen extends Component {
           :
           this.props.gameData.length
             ?
-            this.props.navigation.state.params.mode == 'SINGLE'
+            navParams.mode == 'SINGLE'
               ?
               <SingleGame
                 myScore={this.props.myScore}
-                play={this.props.navigation.state.params.play}
+                play={navParams.play}
                 gameComponent={GameComponent}
                 onEnd={this._onEnd}
                 onScore={this._onScore}
-                gameData={this.props.gameData} />
+                gameData={this.props.gameData}
+                backgroundColor={navParams.game.backgroundColor}
+                headerColor={navParams.game.headerColor}
+                progressBarColor={navParams.game.progressBarColor}
+              />
               :
               <HeadToHeadGame
                 myScore={this.props.myScore}
-                play={this.props.navigation.state.params.play}
+                play={navParams.play}
                 gameComponent={GameComponent}
                 onEnd={this._onEnd}
                 onScore={this._onScore}
-                gameData={this.props.gameData} />
+                gameData={this.props.gameData} 
+                backgroundColor={navParams.game.backgroundColor}
+                headerColor={navParams.game.headerColor}
+                progressBarColor={navParams.game.progressBarColor}
+              />
             :
             <View>
               <Text>No games found</Text>

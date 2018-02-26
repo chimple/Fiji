@@ -19,7 +19,7 @@ export default class ModeScreen extends PureComponent{
                         play: 'TRIES'
                     }
                     )} 
-                    style={styles.TouchableStyle}
+                    style={[styles.TouchableStyle, {backgroundColor:'#fcc066'}]}
                     accessibilityLabel="OfflineTries"
                     >
                         <Text style={styles.TextStyle}>OfflineTries</Text>
@@ -34,7 +34,7 @@ export default class ModeScreen extends PureComponent{
                         play: 'TIMED'
                     }
                     )} 
-                    style={styles.TouchableStyle}
+                    style={[styles.TouchableStyle, {backgroundColor:'#fc7466'}]}
                     accessibilityLabel="OfflineTimed"
                     >
                         <Text style={styles.TextStyle}>OfflineTimed</Text>
@@ -51,7 +51,7 @@ export default class ModeScreen extends PureComponent{
                         play: 'TRIES'
                     }
                     )} 
-                    style={styles.TouchableStyle}
+                    style={[styles.TouchableStyle, {backgroundColor:'#fc66a2'}]}
                     accessibilityLabel="OnlineTries"
                     >
                         <Text style={styles.TextStyle}>OnlineTries</Text>
@@ -66,7 +66,7 @@ export default class ModeScreen extends PureComponent{
                         play: 'TIMED'
                     }
                     )} 
-                    style={styles.TouchableStyle}
+                    style={[styles.TouchableStyle, {backgroundColor:'#52c5ce'}]}
                     accessibilityLabel="OnlineTimed"
                     >
                         <Text style={styles.TextStyle}>OnlineTimed</Text>
@@ -80,12 +80,11 @@ export default class ModeScreen extends PureComponent{
 
 const styles = StyleSheet.create({
     TouchableStyle:{
-        backgroundColor: '#114234',
         alignItems:'center',
         justifyContent:'center',
         flex:1,
-        borderWidth:2,
         borderColor:'black',
+        borderWidth:1
     },
     TextStyle:{
         fontSize: 25,
