@@ -9,6 +9,7 @@ export function touchDelegate(WrappedComponent) {
     }
 
     _callTile = (nativeEvent) => {
+      console.log('_callTile')
       this._tiles.forEach(({ view, callback, reverse }) => {
         view.measure((x, y, width, height, pageX, pageY) => {
           const xLow = reverse ? pageX - width : pageX
@@ -28,7 +29,7 @@ export function touchDelegate(WrappedComponent) {
         <WrappedComponent
           onStartShouldSetResponder={(e) => true}
           onStartShouldSetResponderCapture={(e) => true}
-          onTouchStart={({ nativeEvent }) => this._callTile(nativeEvent)}
+          onResponderGrant={({ nativeEvent }) => this._callTile(nativeEvent)}
           delegateTouch={this._addToTiles}
           {...this.props}
         />
