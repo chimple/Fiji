@@ -66,5 +66,6 @@ TileGrid.propTypes = {
   numRows: PropTypes.number,
   numCols: PropTypes.number,
   data: PropTypes.array,
-  delegateTouch: PropTypes.func
+  delegateTouch: PropTypes.func,
+  reverse: PropTypes.bool
 }

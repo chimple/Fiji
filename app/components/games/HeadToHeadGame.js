@@ -5,19 +5,41 @@ import Orientation from 'react-native-orientation'
 import GameWrapper from './GameWrapper'
 import HeadToHeadPlayScreen from '../../screens/HeadToHeadPlayScreen';
 import Nimo from '../Nimo'
-import { touchDelegate } from './touchDelegate'
+// import { touchDelegate } from './touchDelegate'
 
 const TOP_HEIGHT = 40
 const BOTTOM_PADDING = 5
 const HEADER_TO_REMOVE = 50
 
-class HeadToHeadGame extends Component {
+export default class HeadToHeadGame extends Component {
+  _tiles = []
   constructor(props) {
     super(props)
     this.state = {
       myScore: 0,
       otherScore: 0,
     }
+  }
+
+  _addToTiles = (tile) => {
+    console.log(tile)
+    this._tiles.push(tile)
+  }
+
+  _callTile = (nativeEvent) => {
+    console.log('_callTile')
+    this._tiles.forEach(({ view, callback, reverse }) => {
+      view.measure((x, y, width, height, pageX, pageY) => {
+        const xLow = reverse ? pageX - width : pageX
+        const xHigh = reverse ? pageX : pageX + width
+        const yLow = reverse ? pageY - height : pageY
+        const yHigh = reverse ? pageY : pageY + height
+        if (nativeEvent.pageX <= xHigh && nativeEvent.pageX >= xLow
+          && nativeEvent.pageY <= yHigh && nativeEvent.pageY >= yLow) {
+          callback()
+        }
+      })
+    })
   }
 
   _addMyScore = (addToScore) => {
@@ -52,6 +74,9 @@ class HeadToHeadGame extends Component {
 
     return (
       <View
+        onStartShouldSetResponder={(e) => true}
+        onStartShouldSetResponderCapture={(e) => true}
+        onResponderGrant={({ nativeEvent }) => this._callTile(nativeEvent)}
         style={[styles.container, {backgroundColor: this.props.backgroundColor}]}>
         <View style={{flex:1, transform:[{scaleY:-1},{scaleX:-1}]}}>
           <View style={[styles.header, {backgroundColor: this.props.headerColor}]}>
@@ -67,7 +92,7 @@ class HeadToHeadGame extends Component {
           </View>
           <GameWrapper
             gameComponent={this.props.gameComponent}
-            delegateTouch={this.props.delegateTouch}
+            delegateTouch={this._addToTiles}
             reverse={true}
             play={this.props.play}
             onEnd={this.props.onEnd}
@@ -157,4 +182,4 @@ HeadToHeadGame.propTypes = {
   delegateTouch: PropTypes.func
 }
 
-export default touchDelegate(HeadToHeadGame)
+// export default touchDelegate(HeadToHeadGame)

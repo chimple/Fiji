@@ -3,12 +3,13 @@ import { View, Text, ActivityIndicator, StyleSheet, Dimensions } from 'react-nat
 import PropTypes from 'prop-types'
 import GameWrapper from './GameWrapper'
 import Nimo from '../Nimo'
-import { touchDelegate } from './touchDelegate'
+// import { touchDelegate } from './touchDelegate'
 
 const TOP_HEIGHT = 100
 const BOTTOM_PADDING = 80
 
-class SingleGame extends Component {
+export default class SingleGame extends Component {
+  _tiles = []
   constructor(props) {
     super(props)
     this.state = {
@@ -16,6 +17,26 @@ class SingleGame extends Component {
     }
   }
 
+  _addToTiles = (tile) => {
+    this._tiles.push(tile)
+  }
+
+  _callTile = (nativeEvent) => {
+    console.log('_callTile')
+    this._tiles.forEach(({ view, callback, reverse }) => {
+      view.measure((x, y, width, height, pageX, pageY) => {
+        const xLow = reverse ? pageX - width : pageX
+        const xHigh = reverse ? pageX : pageX + width
+        const yLow = reverse ? pageY - height : pageY
+        const yHigh = reverse ? pageY : pageY + height
+        if (nativeEvent.pageX <= xHigh && nativeEvent.pageX >= xLow
+          && nativeEvent.pageY <= yHigh && nativeEvent.pageY >= yLow) {
+          callback()
+        }
+      })
+    })
+  }
+  
   componentDidMount() {
     Dimensions.addEventListener("change", this._dimChangeHandler)
   }
@@ -28,6 +49,9 @@ class SingleGame extends Component {
     const { width, height } = this.state.window
     return (
       <View
+        onStartShouldSetResponder={(e) => true}
+        onStartShouldSetResponderCapture={(e) => true}
+        onResponderGrant={({ nativeEvent }) => this._callTile(nativeEvent)}
         style={[styles.container, {backgroundColor: this.props.backgroundColor}]}>
         <View style={[styles.header, {backgroundColor: this.props.headerColor}]}>
           <Text style={[styles.info, {backgroundColor: this.props.backgroundColor}]}>
@@ -42,6 +66,7 @@ class SingleGame extends Component {
         </View>
         <GameWrapper
           gameComponent={this.props.gameComponent}
+          delegateTouch={this._addToTiles}
           play={this.props.play}
           onEnd={this.props.onEnd}
           onScore={this.props.onScore}
@@ -106,4 +131,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default touchDelegate(SingleGame)
+// export default touchDelegate(SingleGame)

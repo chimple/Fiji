@@ -10,6 +10,7 @@ import * as Animatable from 'react-native-animatable';
 
 export default class Tile extends Component {
   _onPressIn = () => {
+    console.log('_onPressIn')
     this.props.onPress(this.props.id, this.refs.view)
   }
 
