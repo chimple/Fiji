@@ -4,9 +4,10 @@ import { Dimensions } from 'react-native'
 import TapWrongGridcomponent from '../games/TapWrongGridComponent';
 //import { titles } from '../../../config/jest/mockData'
 import renderer from 'react-test-renderer';
-import { View } from 'react-native-animatable';
+import { View, Animatable } from 'react-native-animatable';
 const window = Dimensions.get("window")
 it('renders correctly', () => {
+  const todo = {id:1, view:true};
     const tree = renderer.create(
       <TapWrongGridcomponent 
       data={{
@@ -19,12 +20,13 @@ it('renders correctly', () => {
       }}
      
       
-      >
-       
-      </TapWrongGridcomponent>
+      />
+      
+      
     ).getInstance()
    
     tree.onButtonPress(1)
+  
     expect(tree).toMatchSnapshot()
   })
   

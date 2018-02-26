@@ -127,7 +127,7 @@ exports[`renders correctly 1`] = `
           }
         }
       >
-        X
+        O
       </Text>
     </View>
   </View>
@@ -188,7 +188,7 @@ exports[`renders correctly 1`] = `
           }
         }
       >
-        O
+        X
       </Text>
     </View>
   </View>
