@@ -30,7 +30,7 @@ export default class TapWrongGridComponent extends Component {
         // Randomizing array
 
         for (let w = 0; w <  this.props.data.others.length; w++) {
-            randNum = Math.floor(Math.random() * (arr3.length+ this.props.data.others.length-1)) + 0;
+            randNum = Math.floor(Math.random() * (arr3.length)) + 0;
             console.log("random num", randNum);
             temp = arr3[randNum];
             arr3[randNum] =  this.props.data.others[w];
