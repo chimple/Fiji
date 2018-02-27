@@ -107,6 +107,7 @@ export default class TapWrongGridComponent extends Component {
             <Animatable.View 
             ref='view1' >
             <TileGrid
+                delegateTouch={this.props.delegateTouch}
                 numRows={SIZE}
                 numCols={this.state.arr3.length}
                 statuses={this.state.statuses}
@@ -148,5 +149,6 @@ TapWrongGridComponent.propTypes = {
     data: PropTypes.object.isRequired,
     onScore: PropTypes.func,
     onEnd: PropTypes.func,
+    delegateTouch: PropTypes.func,
     setProgress: PropTypes.func
 }
