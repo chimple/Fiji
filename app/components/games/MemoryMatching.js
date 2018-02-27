@@ -78,6 +78,8 @@ export default class MemoryMatching extends Component {
   render() {
     return (
       <TileGrid
+      delegateTouch={this.props.delegateTouch}
+      reverse={this.props.reverse}
       numRows={SIZE}
       numCols={SIZE}
       data={this.state.shuffledArray}
@@ -232,5 +234,7 @@ MemoryMatching.propTypes = {
   data: PropTypes.object,
   onScore: PropTypes.func,
   onEnd: PropTypes.func,
+  delegateTouch: PropTypes.func,
+  reverse: PropTypes.bool,
   setProgress: PropTypes.func
 }

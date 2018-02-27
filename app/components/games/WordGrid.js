@@ -78,6 +78,8 @@ export default class WordGrid extends Component {
   render() {
   return (
       <TileGrid
+        delegateTouch={this.props.delegateTouch}
+        reverse={this.props.reverse}
         numRows={SIZE}
         numCols={SIZE}
         data={this.state.letters}
@@ -156,5 +158,6 @@ WordGrid.propTypes = {
   runIndex: PropTypes.number,
   onScore: PropTypes.func,
   onEnd: PropTypes.func,
+  delegateTouch: PropTypes.func,
   setProgress: PropTypes.func
 }
