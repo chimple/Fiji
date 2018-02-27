@@ -2,11 +2,14 @@ import React, { Component } from 'react'
 import { View, Text, ActivityIndicator, StyleSheet, Dimensions } from 'react-native'
 import PropTypes from 'prop-types'
 import GameWrapper from './GameWrapper'
+import Nimo from '../Nimo'
+// import { touchDelegate } from './touchDelegate'
 
 const TOP_HEIGHT = 100
 const BOTTOM_PADDING = 80
 
 export default class SingleGame extends Component {
+  _tiles = []
   constructor(props) {
     super(props)
     this.state = {
@@ -14,6 +17,25 @@ export default class SingleGame extends Component {
     }
   }
 
+  _addToTiles = (tile) => {
+    this._tiles.push(tile)
+  }
+
+  _callTile = (nativeEvent) => {
+    this._tiles.forEach(({ view, callback, reverse }) => {
+      view.measure((x, y, width, height, pageX, pageY) => {
+        const xLow = reverse ? pageX - width : pageX
+        const xHigh = reverse ? pageX : pageX + width
+        const yLow = reverse ? pageY - height : pageY
+        const yHigh = reverse ? pageY : pageY + height
+        if (nativeEvent.pageX <= xHigh && nativeEvent.pageX >= xLow
+          && nativeEvent.pageY <= yHigh && nativeEvent.pageY >= yLow) {
+          callback()
+        }
+      })
+    })
+  }
+  
   componentDidMount() {
     Dimensions.addEventListener("change", this._dimChangeHandler)
   }
@@ -26,24 +48,29 @@ export default class SingleGame extends Component {
     const { width, height } = this.state.window
     return (
       <View
-        style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.info}>
+        onStartShouldSetResponder={(e) => true}
+        onStartShouldSetResponderCapture={(e) => true}
+        onResponderGrant={({ nativeEvent }) => this._callTile(nativeEvent)}
+        style={[styles.container, {backgroundColor: this.props.backgroundColor}]}>
+        <View style={[styles.header, {backgroundColor: this.props.headerColor}]}>
+          <Text style={[styles.info, {backgroundColor: this.props.backgroundColor}]}>
             {this.props.myScore}
           </Text>
-          <View style={styles.icon}>
-
-          </View>
+          <Nimo
+            style={styles.nimo}    
+          />
           <Text style={styles.info}>
 
           </Text>
         </View>
         <GameWrapper
           gameComponent={this.props.gameComponent}
+          delegateTouch={this._addToTiles}
           play={this.props.play}
           onEnd={this.props.onEnd}
           onScore={this.props.onScore}
           gameData={this.props.gameData}
+          progressBarColor={this.props.progressBarColor}
           style={{
             height: this.state.window.height - TOP_HEIGHT - BOTTOM_PADDING,
             width: this.state.window.width
@@ -58,6 +85,17 @@ export default class SingleGame extends Component {
 
 }
 
+SingleGame.propTypes = {
+  myScore: PropTypes.number,
+  play: PropTypes.string,
+  onEnd: PropTypes.func,
+  onScore: PropTypes.func,
+  gameComponent: PropTypes.func,
+  gameData: PropTypes.array,
+  backgroundColor: PropTypes.string,
+  headerColor: PropTypes.string,
+  progressBarColor: PropTypes.string
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -77,26 +115,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#34E8E8'
   },
   info: {
-    height: TOP_HEIGHT - BOTTOM_PADDING,
-    width: TOP_HEIGHT - BOTTOM_PADDING,
+    height: TOP_HEIGHT * 3 / 4,
+    width: TOP_HEIGHT,
+    borderRadius: TOP_HEIGHT/4,
     backgroundColor: '#B1D63E',
     color: '#FFFFFF',
     textAlign: 'center',
     textAlignVertical: 'center',
-    fontSize: TOP_HEIGHT - BOTTOM_PADDING
+    fontSize: 24
   },
-  icon: {
-    height: TOP_HEIGHT - BOTTOM_PADDING,
-    width: TOP_HEIGHT - BOTTOM_PADDING,
-    backgroundColor: '#B1D63E'
+  nimo: {
+    height: TOP_HEIGHT,
+    width: TOP_HEIGHT
   }
 })
 
-SingleGame.propTypes = {
-  myScore: PropTypes.number,
-  play: PropTypes.string,
-  onEnd: PropTypes.func,
-  onScore: PropTypes.func,
-  gameComponent: PropTypes.func,
-  gameData: PropTypes.array  
-}
+// export default touchDelegate(SingleGame)

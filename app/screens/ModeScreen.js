@@ -2,6 +2,9 @@ import React, {PureComponent} from 'react'
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native'
 
 export default class ModeScreen extends PureComponent{
+    componentDidMount(){
+        console.log(this.props.navigation.state.params.key)
+    }
     render(){
         return(
             <View style={{flex:1}}>
@@ -11,12 +14,13 @@ export default class ModeScreen extends PureComponent{
                         item: this.props.navigation.state.params.item,
                         game: this.props.navigation.state.params.game,
                         user: this.props.navigation.state.params.user,
+                        key:this.props.navigation.state.params.key,
                         mode: 'HEAD_TO_HEAD',
                         play: 'TRIES'
                     }
                     )} 
-                    style={styles.TouchableStyle}
-                    accessibilityLabel={OfflineTries}
+                    style={[styles.TouchableStyle, {backgroundColor:'#fcc066'}]}
+                    accessibilityLabel="OfflineTries"
                     >
                         <Text style={styles.TextStyle}>OfflineTries</Text>
                     </TouchableOpacity>
@@ -25,12 +29,13 @@ export default class ModeScreen extends PureComponent{
                         item: this.props.navigation.state.params.item,
                         game: this.props.navigation.state.params.game,
                         user: this.props.navigation.state.params.user,
+                        key:this.props.navigation.state.params.key,
                         mode: 'HEAD_TO_HEAD',
                         play: 'TIMED'
                     }
                     )} 
-                    style={styles.TouchableStyle}
-                    accessibilityLabel={OfflineTimed}
+                    style={[styles.TouchableStyle, {backgroundColor:'#fc7466'}]}
+                    accessibilityLabel="OfflineTimed"
                     >
                         <Text style={styles.TextStyle}>OfflineTimed</Text>
                     </TouchableOpacity>
@@ -41,12 +46,13 @@ export default class ModeScreen extends PureComponent{
                         item: this.props.navigation.state.params.item,
                         game: this.props.navigation.state.params.game,
                         user: this.props.navigation.state.params.user,
+                        key:this.props.navigation.state.params.key,
                         mode: 'SINGLE',
                         play: 'TRIES'
                     }
                     )} 
-                    style={styles.TouchableStyle}
-                    accessibilityLabel={OnlineTries}
+                    style={[styles.TouchableStyle, {backgroundColor:'#fc66a2'}]}
+                    accessibilityLabel="OnlineTries"
                     >
                         <Text style={styles.TextStyle}>OnlineTries</Text>
                     </TouchableOpacity>
@@ -55,12 +61,13 @@ export default class ModeScreen extends PureComponent{
                         item: this.props.navigation.state.params.item,
                         game: this.props.navigation.state.params.game,
                         user: this.props.navigation.state.params.user,
+                        key:this.props.navigation.state.params.key,
                         mode: 'SINGLE',
                         play: 'TIMED'
                     }
                     )} 
-                    style={styles.TouchableStyle}
-                    accessibilityLabel={OnlineTimed}
+                    style={[styles.TouchableStyle, {backgroundColor:'#52c5ce'}]}
+                    accessibilityLabel="OnlineTimed"
                     >
                         <Text style={styles.TextStyle}>OnlineTimed</Text>
                     </TouchableOpacity>
@@ -73,12 +80,11 @@ export default class ModeScreen extends PureComponent{
 
 const styles = StyleSheet.create({
     TouchableStyle:{
-        backgroundColor: '#114234',
         alignItems:'center',
         justifyContent:'center',
         flex:1,
-        borderWidth:2,
         borderColor:'black',
+        borderWidth:1
     },
     TextStyle:{
         fontSize: 25,

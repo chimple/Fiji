@@ -90,10 +90,16 @@ class CamPage extends Component {
                         }}
                     />
                 </View>
+<<<<<<< HEAD
                 <View style={{ alignItems: 'flex-end' }}
                 accessibilityLabel = "CHECK"
                 >
                 
+=======
+                <View 
+                style={{ alignItems: 'flex-end' }} 
+                accessibilityLabel="CHECK">
+>>>>>>> master
                     <Icon
                         containerStyle={{
                             width: width * 0.97,

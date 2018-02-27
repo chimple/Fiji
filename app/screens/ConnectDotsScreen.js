@@ -5,8 +5,6 @@ import TileGrid from '../components/games/TileGrid';
 
 const SIZE = 3
 
-var count1=0;
-
 export default class ConnectDotsScreen extends Component {
   constructor(props) {
     super(props)
@@ -26,22 +24,25 @@ export default class ConnectDotsScreen extends Component {
     .map((a) => a[1])
   
     var randomnumber = Math.floor(Math.random() * (4 - 0 + 1)) + 0;
-
+    const rindex = new Array(shuffledData.length)
     let letters = new Array(SIZE * SIZE)
     for (let i = 0; i < letters.length; i++){
       letters[i]='null';
     }
+    let h=1;
     let i=randomnumber;
+    rindex[0]=i;
     let j=0;
    
-    
-    if(((SIZE==3)&&(i==0||i==1||i==2||i==3||i==4)) ||((SIZE==4|| SIZE==5)&&(i==0||i==1||i==2||i==3||i==4||i==5||i==6)))
+   
+    if(i==0||i==1||i==2||i==3||i==4)
     {
     
     while(shuffledData[j])
     {
     letters[i]=shuffledData[j];
-
+    rindex[h]=i;
+    h++;
     i++;
     j++
     console.log("the log is in the conditiin",i)
@@ -51,6 +52,8 @@ export default class ConnectDotsScreen extends Component {
       while(shuffledData[j]){
        
                letters[i]=shuffledData[j];
+               rindex[h]=i;
+               h++;
                 j++;
                 i--;
                 console.log("is it is true then go others",i)
@@ -58,12 +61,16 @@ export default class ConnectDotsScreen extends Component {
                   i=i+SIZE+1;
                   while(shuffledData[j]){
                    letters[i]=shuffledData[j];
+                   rindex[h]=i;
+                   h++;
                    j++;
                    i++;
                 if(i==(SIZE*SIZE)){
                   i=i+SIZE-1;
                   while(shuffledData[j]){
                    letters[i]=shuffledData[j];
+                   rindex[h]=i;
+                   h++;
                    j++;
                    i--;
                    
@@ -90,7 +97,7 @@ export default class ConnectDotsScreen extends Component {
   }
   let currentIndex = 0
   return ({
-    
+    rindex,
     letters,
     shuffledData,
     currentIndex,
@@ -107,6 +114,7 @@ export default class ConnectDotsScreen extends Component {
    
     return (
       <TileGrid
+        delegateTouch={this.props.delegateTouch}
         numRows={SIZE}
         numCols={SIZE}
         data={this.state.letters}
@@ -154,16 +162,18 @@ export default class ConnectDotsScreen extends Component {
   _clickTile = (id, view) => {
    
    const currentIndex = this.state.currentIndex
-
+   console.log(" index of the dead lock for shanking ", this.state.rindex)
     if (this.state.letters[id] == this.props.data.serial[this.state.currentIndex]) {
-      this.props.onScore && this.props.onScore(2)
+  
       view.pulse(10).then((endState) => {
         this.setState({...this.state,
         statuses: this.state.statuses.map((val, index)=> {
         return id == index ? 'invisible' : val})})
         })
+        this.props.onScore && this.props.onScore(2) 
       this.props.setProgress && this.props.setProgress((currentIndex + 1) / this.props.data.serial.length)
       this.setState({...this.state, currentIndex: currentIndex + 1})
+     
       if (currentIndex == this.props.data.serial.length-1) {
         console.log(" currnt index , length ",currentIndex,this.props.data.serial.length)
         view.pulse(10).then((endState) => {
@@ -174,9 +184,12 @@ export default class ConnectDotsScreen extends Component {
        
         this.props.onEnd()
       } 
-    } else {
-      
-      view.shake(250)
+     
+    } else { let flag=0;
+      for(var i=0;i<=currentIndex;i++){
+          if(id===this.state.rindex[i]){flag=1}
+         }
+          if(flag==0){ view.bounce(800); }
      
     }
   }
@@ -187,5 +200,6 @@ ConnectDotsScreen.propTypes = {
   runIndex: PropTypes.number,
   onScore: PropTypes.func,
   onEnd: PropTypes.func,
+  delegateTouch: PropTypes.func,
   setProgress: PropTypes.func
 }

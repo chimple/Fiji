@@ -10,6 +10,7 @@ import { fetchUsers } from '../redux/users'
 class SelectFriendScreen extends Component {
   componentDidMount() {
     this.props.dispatch(fetchUsers())
+    console.log(this.props.navigation.state.params.key)
   }
 
   render() {
@@ -39,7 +40,8 @@ class SelectFriendScreen extends Component {
         game: this.props.navigation.state.params.game,
         user: this.props.navigation.state.params.user,
         mode: this.props.navigation.state.params.mode,
-        play: this.props.navigation.state.params.play
+        play: this.props.navigation.state.params.play,
+        key:this.props.navigation.state.params.key
      })
   }
 }

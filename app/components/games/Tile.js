@@ -10,6 +10,7 @@ import * as Animatable from 'react-native-animatable';
 
 export default class Tile extends Component {
   _onPressIn = () => {
+    console.log('_onPressIn')
     this.props.onPress(this.props.id, this.refs.view)
   }
 
@@ -33,6 +34,14 @@ export default class Tile extends Component {
     if (prevProps.status != this.props.status) {
       this._onStatusChange(prevProps.status, this.props.status)
     }
+  }
+
+  componentDidMount() {
+    this.props.delegateTouch && this.props.delegateTouch({
+      view: this.refs.inner,
+      callback: this._onPressIn,
+      reverse: this.props.reverse
+    })
   }
 
   render() {
@@ -63,19 +72,10 @@ export default class Tile extends Component {
           }
         ]}
       >
-        {/* <View style={{
-          height: this.props.tileHeight,
-          width: this.props.tileWidth,
-          backgroundColor: this.state.selected ? this.props.pressedEdgeColor : this.props.edgeColor,
-          borderRadius: 8,
-          position: 'absolute',
-          top: -this.props.tileHeight / 2 + 5,
-          left: -this.props.tileWidth / 2
-        }} /> */}
-        <TouchableWithoutFeedback
-          onPressIn={() => this._onPressIn()}
-        >
           <View
+            ref="inner"
+            onStartShouldSetResponder={(e)=>true}
+            onResponderGrant={(e)=>{this._onPressIn()}}
             style={{
               height: this.props.style.height,
               width: this.props.style.width,
@@ -92,13 +92,13 @@ export default class Tile extends Component {
             }} >
             <Text style={{
               backgroundColor: 'transparent',
-              fontSize: Math.max(20, this.props.style.height - 40),
+              // fontSize: Math.max(20, this.props.style.width - 40),
+              fontSize: 24,
               ...stylesForText
             }}>
               {this.props.text}
             </Text>
           </View>
-        </TouchableWithoutFeedback>
       </Animatable.View>
     )
   }
@@ -106,6 +106,7 @@ export default class Tile extends Component {
 
 Tile.propTypes = {
   id: PropTypes.number,
+  accessibilityLabel: PropTypes.string,
   status: PropTypes.string,
   onPress: PropTypes.func,
   onStatusChange: PropTypes.func,
@@ -114,4 +115,6 @@ Tile.propTypes = {
   edgeColor: PropTypes.string,
   pressedEdgeColor: PropTypes.string,
   text: PropTypes.string,
+  delegateTouch: PropTypes.func,
+  reverse: PropTypes.bool
 }

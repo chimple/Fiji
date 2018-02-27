@@ -12,11 +12,6 @@ import {
 } from 'react-native';
 
 const SIZE = 4
-arryCheck =[];
-arryID =[];
-let k =0;
-let Matched =0;
-let progressCnt =1;
 
 export default class MemoryMatching extends Component {
   constructor(props) {
@@ -25,6 +20,13 @@ export default class MemoryMatching extends Component {
   }
 
   _initBoard = (props) => {
+
+    let arryCheck =[];
+    let arryID =[];
+    let k =0;
+    let Matched =0;
+    let progressCnt =1;
+
     let arry = new Array(SIZE * SIZE);
     let j =0;
     const data=props.data.map( function (item, i){
@@ -49,7 +51,7 @@ export default class MemoryMatching extends Component {
 
     console.log("Rajesh-Status-Data",statuses);
 
-    return ({ shuffledArray , statuses })
+    return ({ shuffledArray , statuses , arryCheck , arryID , k , Matched , progressCnt })
 
   }
 
@@ -75,6 +77,7 @@ export default class MemoryMatching extends Component {
   render() {
     return (
       <TileGrid
+      delegateTouch={this.props.delegateTouch}
       numRows={SIZE}
       numCols={SIZE}
       data={this.state.shuffledArray}
@@ -84,7 +87,7 @@ export default class MemoryMatching extends Component {
       edgeColor='deepskyblue'
       pressedTileColor='goldenrod'
       pressedEdgeColor='darkgoldenrod'
-      textColor='#FFFFFF'
+      textColor='black'
       style={{
         width: this.props.style.width,
         height: this.props.style.height
@@ -92,7 +95,7 @@ export default class MemoryMatching extends Component {
       statusStyles = {{
         H: {
           View: {
-           
+            backgroundColor: '#ff80ab'
           },
           Text: {
             opacity: 0
@@ -100,7 +103,7 @@ export default class MemoryMatching extends Component {
         },
         V: {
           View: {
-            backgroundColor: '#24B2EA'
+            backgroundColor: '#fcc066'
           },
           Text: {
             opacity: 1
@@ -122,7 +125,7 @@ export default class MemoryMatching extends Component {
 
   _onStatusChange(id, view, prevStatus, currentStatus) {
     console.log("Rajesh-Data-onstatuschange:", id , prevStatus, currentStatus);
-    currentStatus == 'D' && view.zoomOut(100)
+    currentStatus == 'D' && view.zoomOut(250)
     currentStatus == 'H' && view.flipInY(250) 
   }
 
@@ -139,24 +142,24 @@ export default class MemoryMatching extends Component {
       return id == index ? 'V' : val})})
 
     view.flipInY(250).then((endState) => {
-      arryCheck[k] = this.state.shuffledArray[id]; 
-      arryID[k] =id;
-      console.log("Rajesh-Id-Data",arryID);
+      this.state.arryCheck[this.state.k] = this.state.shuffledArray[id]; 
+      this.state.arryID[this.state.k] =id;
+      console.log("Rajesh-Id-Data",this.state.arryID);
 
-      if(arryCheck.length===2)
+      if(this.state.arryCheck.length===2)
       {      
-        if(arryCheck[0]===arryCheck[1])
+        if(this.state.arryCheck[0]===this.state.arryCheck[1])
           {
-            Matched++;     
-            if(Matched == 8)
+            this.state.Matched++;     
+            if(this.state.Matched == 8)
              this.props.onEnd();  
 
             this.props.onScore(2);
-            this.props.setProgress((progressCnt) / (this.state.shuffledArray.length/2));
-            progressCnt++;
-            const first = arryID[0];
-            const second = arryID[1];
-            console.log("Checking",arryID);
+            this.props.setProgress((this.state.progressCnt) / (this.state.shuffledArray.length/2));
+            this.state.progressCnt++;
+            const first = this.state.arryID[0];
+            const second = this.state.arryID[1];
+            console.log("Checking",this.state.arryID);
             setTimeout( () => {
               this.setState({...this.state,
                 statuses: this.state.statuses.map((val, index)=> {
@@ -165,8 +168,8 @@ export default class MemoryMatching extends Component {
           }
         else
           { 
-            const first = arryID[0];
-            const second = arryID[1];
+            const first = this.state.arryID[0];
+            const second = this.state.arryID[1];
             setTimeout( () => {
               this.setState({...this.state,
                 statuses: this.state.statuses.map((val, index)=> {
@@ -174,16 +177,16 @@ export default class MemoryMatching extends Component {
           }, 0);    
           }
 
-          arryID = [];
-          arryCheck = [];
-          k=0;
+          this.state.arryID = [];
+          this.state.arryCheck = [];
+          this.state.k=0;
           console.log("Rajesh-Status-data",this.state.statuses);
-          return {statuses};
+          return this.state.statuses
       
       }
-      console.log("arryCheck",arryCheck); 
-      console.log("Value of K",k);
-      k++;   
+      console.log("arryCheck",this.state.arryCheck); 
+      console.log("Value of K",this.state.k);
+      this.state.k++;   
     })
    // console.log("Rajesh-Status-data",this.state.statuses);
   }
@@ -194,5 +197,6 @@ MemoryMatching.propTypes = {
   data: PropTypes.object,
   onScore: PropTypes.func,
   onEnd: PropTypes.func,
+  delegateTouch: PropTypes.func,
   setProgress: PropTypes.func
 }

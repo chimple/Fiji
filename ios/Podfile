@@ -16,6 +16,8 @@ target 'Fiji' do
 
   pod 'react-native-image-resizer', :path => '../node_modules/react-native-image-resizer'
 
+  pod 'TextToSpeech', :path => '../node_modules/react-native-tts'
+
   target 'FijiTests' do
     inherit! :search_paths
     # Pods for testing
