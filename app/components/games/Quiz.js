@@ -7,6 +7,8 @@ import Tile from './Tile';
 import TileGrid from './TileGrid';
 
 const SIZE = 2;
+var colors = ['#fff', '#e56c25'];
+var quecolors = ['#ffb300', '#ed2d85']
 
 export default class Quiz extends Component {
     constructor(props) {
@@ -19,8 +21,12 @@ export default class Quiz extends Component {
       for (let i = 0; i < statuses.length; i++) {
         statuses[i] = 'Neutral';
       }
+      var color = colors[Math.floor(Math.random()*colors.length)];
+      var quecolor = quecolors[Math.floor(Math.random()*quecolors.length)];
       return ({
-        statuses
+        statuses,
+        color,
+        quecolor
       });
     }
   
@@ -32,7 +38,7 @@ export default class Quiz extends Component {
 
     _onStatusChange(id, view, prevStatus, currentStatus) {
       console.log('onstatuschange:', prevStatus, currentStatus)
-      currentStatus == 'Neutral' && view.zoomIn(250)
+      currentStatus == 'Neutral' && view.zoomIn(250); 
     }
 
     _clickTile = (id, view) => {
@@ -41,7 +47,7 @@ export default class Quiz extends Component {
       if(this.state.statuses[id] == 'Selected'){
         this.setState({...this.state})
       } else {
-     if (id == this.props.data.answerIndex) { 
+     if (id == this.props.data.answerIndex) {    
       this.refs.questionView.zoomIn(250);   
         view.zoomOut(250).then((endState) => {
           this.props.setProgress(1)
@@ -92,10 +98,10 @@ export default class Quiz extends Component {
             statusStyles={{
               'Same': {
                 View: {
-                  backgroundColor: '#ffb300'
+                  backgroundColor: this.state.quecolor
                 },
                 Text: {
-                  color: 'black'
+                  color: '#000'
                 }
               }
             }}
@@ -128,10 +134,10 @@ export default class Quiz extends Component {
         statusStyles = {{
           Neutral: {
             View: {
-              backgroundColor: '#ffffff'
+              backgroundColor: this.state.color
             },
             Text: {
-              color: ' black'
+              color: '#000'
             }
           },
           Selected: {
@@ -139,7 +145,7 @@ export default class Quiz extends Component {
               backgroundColor: 'green'
             },
             Text: {
-              color: 'black'
+              color: '#000'
             }
           }
         }}
