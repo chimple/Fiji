@@ -63,7 +63,7 @@ export default class TapWrongGridComponent extends Component {
 
    
     onButtonPress = (id, view) => {
-
+      //  this.refs.view1.wobble(1000);
      let j = 0;
      let proArray = [];
 
@@ -91,7 +91,9 @@ export default class TapWrongGridComponent extends Component {
             this.props.onScore(2);
             this.props.setProgress(this.state.num /  this.props.data.others.length);
             if (this.state.numOFWrongElem ==  this.props.data.others.length) {
-               setTimeout( () => { this.props.onEnd();},100)
+                this.refs.view1.zoomIn(1000);
+               this.setState({statuses: this.state.statuses.map(()=>'selected')})
+               setTimeout( () => { this.props.onEnd();},1500)
             }
         
         } else {
@@ -102,25 +104,30 @@ export default class TapWrongGridComponent extends Component {
     render() {
 
         return (
+            <Animatable.View 
+            ref='view1' >
             <TileGrid
                 numRows={SIZE}
                 numCols={this.state.arr3.length}
                 statuses={this.state.statuses}
                 data={this.state.arr3}
-                tileColor='#24B2EA'
-                edgeColor='deepskyblue'
-                pressedTileColor='goldenrod'
-                pressedEdgeColor='darkgoldenrod'
-                textColor='#FFFFFF'
                 onStatusChange={this._onStatusChange}
                 statusStyles = {{
                     neutral: {
                       View: {
-                        backgroundColor: '#24B2EA'
+                        backgroundColor: '#ed2d85'
                       },
                       Text: {
-                        color: '#FFFFFF'
+                        color: 'black'
                       }
+                    },
+                    selected: {
+                        View: {
+                            backgroundColor:'#ffffff'
+                          },
+                          Text: {
+                            color: 'black'
+                          }
                     }
                   }}
                 style={{
@@ -129,6 +136,8 @@ export default class TapWrongGridComponent extends Component {
                 }}
                 onPress={this.onButtonPress}
             />
+
+            </Animatable.View>
         );
 
     }

@@ -18,7 +18,9 @@ it('renders correctly', () => {
         width: window.width,
         height: window.height
       }}
-     
+      onScore={()=>{}}
+      setProgress={()=>{}}
+       onEnd={()=>{}}     
       
       />
       
