@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import PropTypes from 'prop-types'
 import ProgressBar from '../ProgressBar'
+import * as Animatable from 'react-native-animatable';
 
 export default class GameWrapper extends Component {
   constructor(props) {
@@ -41,6 +42,7 @@ export default class GameWrapper extends Component {
       }}
       >
         {ProgressBarComponent}
+        <Animatable.View ref="game">
         <GameComponent
           data={this.props.gameData[this.state.dataIndex]}
           delegateTouch={this.props.delegateTouch}
@@ -54,6 +56,7 @@ export default class GameWrapper extends Component {
             width: this.props.style.width
           }}
         />
+        </Animatable.View>
       </View>
     )
   }
@@ -66,7 +69,10 @@ export default class GameWrapper extends Component {
   _onEnd = () => {
     let dataIndex = this.state.dataIndex
     if (++dataIndex < this.props.gameData.length) {
-      this.setState(...this.state, { dataIndex })
+      this.refs.game.bounceOutRight(250).then(()=>{
+        this.setState(...this.state, { dataIndex })
+        this.refs.game.bounceInLeft(250)
+      })
     } else {
       this.props.onEnd()
     }
