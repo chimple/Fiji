@@ -37,6 +37,10 @@ export const story_alice_in_wonderland = storyJson['docs'].filter(function (doc)
   return doc._id == 'story:alice-in-wonderland'
 })[0]
 
+export const story_chicken_and_duck = storyJson['docs'].filter(function (doc) {
+  return doc._id == 'story:chicken-and-duck'
+})[0]
+
 export const users = usersJson['docs']
 
 export const messages = userAliceJson['docs'].filter(function(doc) {
