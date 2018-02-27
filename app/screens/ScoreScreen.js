@@ -26,6 +26,7 @@ class ScoreScreen extends PureComponent{
     _renderItem = ({item}) => (
         <View style={styles.RankingStyle}><Text style={{fontWeight:'bold', fontSize:30,}}>{item.score}</Text></View>
     )
+   
     render(){
     
         var UserLastScore
@@ -36,6 +37,7 @@ class ScoreScreen extends PureComponent{
                     break
                 }
             }
+            console.log("the score of gamehighscore length is ", this.props.gameHighScores.length)
         return(
             this.props.isFetching
                 ?

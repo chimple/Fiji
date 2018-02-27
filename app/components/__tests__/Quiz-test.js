@@ -1,7 +1,7 @@
 import 'react-native';
 import React from 'react';
 import Quiz from '../games/Quiz';
-import { Dimensions } from 'react-native';
+import { Dimensions, View } from 'react-native';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
@@ -46,7 +46,11 @@ it('renders correctly', () => {
       onScore={(score) => { this.props.dispatch(addMyScore(score)) }}
       onEnd={() => { this.setState(...this.state, { gameOver: true }) }}
       />
-    ).toJSON()
+    ).getInstance()
+    tree.componentWillReceiveProps(tree.props)
+    tree._initBoard(tree.props)
+    tree._clickTile('1', 'view')   
+    tree._onStatusChange('1', 'view', 'Neutral', 'Selected')
     expect(tree).toMatchSnapshot()
   })
 

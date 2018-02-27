@@ -5,10 +5,6 @@ import * as Animatable from 'react-native-animatable'
 import Tile from './Tile'
 
 export default class TileGrid extends PureComponent {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     console.log('TileGrid.render')
     const cellSize = Math.min(
@@ -29,6 +25,8 @@ export default class TileGrid extends PureComponent {
           <Tile
             key={id}
             id={id}
+            delegateTouch={this.props.delegateTouch}
+            reverse={this.props.reverse}
             accessibilityLabel={'Tile_'+String(row)+String(col)}
             onPress={this.props.onPress}
             onRender={this.props.onRender}
@@ -67,5 +65,7 @@ TileGrid.propTypes = {
   onStatusChange: PropTypes.func,
   numRows: PropTypes.number,
   numCols: PropTypes.number,
-  data: PropTypes.array
+  data: PropTypes.array,
+  delegateTouch: PropTypes.func,
+  reverse: PropTypes.bool
 }

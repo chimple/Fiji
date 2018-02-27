@@ -126,6 +126,7 @@
       "user_id": "alice",
       "score": 10
     },
+  
     {
       "_id": "high-score:game:word:mad-hatter",
       "user_id": "mad-hatter",
@@ -168,6 +169,21 @@
     },
     {
       "_id": "high-score:game:tap-home:alice",
+      "user_id": "alice",
+      "score": 10
+    },
+    {
+      "_id": "high-score:game:connect-dots:mad-hatter",
+      "user_id": "mad-hatter",
+      "score": 20
+    },
+    {
+      "_id": "high-score:game:connect-dots:white-rabbit",
+      "user_id": "white-rabbit",
+      "score": 30
+    },
+    {
+      "_id": "high-score:game:connect-dots:alice",
       "user_id": "alice",
       "score": 10
     },
