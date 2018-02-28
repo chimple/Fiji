@@ -1,15 +1,15 @@
 import 'react-native';
 import React from 'react';
 import { Dimensions } from 'react-native';
-import ConnectDotsScreen from '../../screens/ConnectDotsScreen';
+import ConnectDots from '../games/ConnectDots';
 
 import renderer from 'react-test-renderer';
 const window = Dimensions.get("window")
 it('renders correctly', () => {
-  const todo = { id: 0, view: true };
-  console.log(view);
+ 
+
   const tree = renderer.create(
-    <ConnectDotsScreen
+    <ConnectDots
     
     data={{
       serial: ['1','2','3','4','5'],
@@ -24,7 +24,7 @@ it('renders correctly', () => {
     
    />
  ).getInstance()
- tree._clickTile(todo)
+ tree._clickTile(1,)
  
   expect(tree).toMatchSnapshot()
 });
