@@ -19,12 +19,12 @@ export default class AnimationView extends React.Component {
   _play = () => {
     !this.state.isPlaying &&
       this.setState((prevState, props) => {
+        this.state.progress.setValue(0)
         Animated.timing(prevState.progress, {
           toValue: 1,
           duration: props.duration,
         }).start(({ finished }) => {
           if (finished) {
-            this.state.progress.setValue(0)
             this.setState({...this.state, isPlaying: false})
           }
         })
