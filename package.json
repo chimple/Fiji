@@ -26,7 +26,6 @@
     "cuid": "^2.0.1",
     "jest-cli": "^22.0.6",
     "lottie-react-native": "^2.3.1",
-    "pouchdb-react-native": "^6.4.0",
     "react": "16.2.0",
     "react-native": "0.53.0",
     "react-native-animatable": "^1.2.4",

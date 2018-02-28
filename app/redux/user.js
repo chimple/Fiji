@@ -1,4 +1,4 @@
-import { usersDB, remoteUsersDB } from '../db'
+// import { usersDB, remoteUsersDB } from '../db'
 import { syncUser } from './auth'
 
 const ADD_USER_REQUEST = 'Fiji/user/ADD_USER_REQUEST'
@@ -56,18 +56,18 @@ export const addUser = (user) => async(dispatch) => {
   // console.log("please save the data"+user.image)
   try {
     dispatch(addUserRequest())
-    const response = await usersDB.post({
-      name: user.name,
-      image: user.image
-    })
-    const addedUser = await usersDB.get(response.id)
-    dispatch(addUserSuccess(addedUser))
-    const syncResult = await usersDB.sync(remoteUsersDB)
-    console.log('this is syncResult',syncResult)
-    dispatch(syncUser(addedUser))
+  //   const response = await usersDB.post({
+  //     name: user.name,
+  //     image: user.image
+  //   })
+  //   const addedUser = await usersDB.get(response.id)
+  //   dispatch(addUserSuccess(addedUser))
+  //   const syncResult = await usersDB.sync(remoteUsersDB)
+  //   console.log('this is syncResult',syncResult)
+  //   dispatch(syncUser(addedUser))
   } catch(error) {
-    console.log('_getAllUser: ' + error)
-    dispatch(addUserFailure(error))
+  //   console.log('_getAllUser: ' + error)
+  //   dispatch(addUserFailure(error))
   }
 }
 

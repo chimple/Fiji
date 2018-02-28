@@ -1,4 +1,4 @@
-import { contentDB, remoteContentDB } from '../db'
+// import { contentDB, remoteContentDB } from '../db'
 
 const FETCH_GAME_HIGH_SCORES_REQUEST = 'Fiji/game/FETCH_GAME_HIGH_SCORES_REQUEST'
 const FETCH_GAME_HIGH_SCORES_SUCCESS = 'Fiji/game/FETCH_GAME_HIGH_SCORES_SUCCESS'
@@ -71,11 +71,12 @@ export const resetScore = () => ({
 export const fetchGameHighScores = (game_id) => async (dispatch, getState) => {
   try {
     dispatch(fetchGameHighScoresRequest())
-    const result = await contentDB.allDocs({
-      startkey: 'high-score:' + game_id,
-      endkey: 'high-score:' + game_id + '\ufff0',
-      include_docs: true
-    })
+    // const result = await contentDB.allDocs({
+    //   startkey: 'high-score:' + game_id,
+    //   endkey: 'high-score:' + game_id + '\ufff0',
+    //   include_docs: true
+    // })
+    const result = require('../../config/seed/content.json').docs.filter((val)=>val._id.startsWith('high-score:'+ game_id))
     const highScores = result.rows
       .map(function (row) { return row.doc })
       .sort((a, b) => {
@@ -89,38 +90,38 @@ export const fetchGameHighScores = (game_id) => async (dispatch, getState) => {
 }
 
 export const finalizeScore = (user_id, game_id, myScore) => async (dispatch, getState) => {
-  console.log(myScore)
-  let currentHighScoreDoc = null
-  try {
-    currentHighScoreDoc = await contentDB.get('high-score:' + game_id + ':' + user_id)
-  } catch (error) {
-    console.log('finalizeScore: ' + error)
-  }
-  console.log(currentHighScoreDoc)
-  console.log(currentHighScoreDoc.score)
-  try {
-    if (currentHighScoreDoc == null) {
-      const result = await contentDB.put({
-        _id: 'high-score:' + game_id + ':' + user_id,
-        user_id,
-        score: myScore
-      })
-      console.log(result)      
-    } else if(myScore > currentHighScoreDoc.score) {
-      console.log('updating score:'+myScore)
-      const result = await contentDB.put({
-        _id: 'high-score:' + game_id + ':' + user_id,
-        _rev: currentHighScoreDoc._rev,
-        user_id,
-        score: myScore
-      })
-      console.log(result)
-    } else {
-      console.log('here')
-    }
-  } catch (error) {
-    console.log('finalizeScore: ' + error)
-  }
+  // console.log(myScore)
+  // let currentHighScoreDoc = null
+  // try {
+  //   currentHighScoreDoc = await contentDB.get('high-score:' + game_id + ':' + user_id)
+  // } catch (error) {
+  //   console.log('finalizeScore: ' + error)
+  // }
+  // console.log(currentHighScoreDoc)
+  // console.log(currentHighScoreDoc.score)
+  // try {
+  //   if (currentHighScoreDoc == null) {
+  //     const result = await contentDB.put({
+  //       _id: 'high-score:' + game_id + ':' + user_id,
+  //       user_id,
+  //       score: myScore
+  //     })
+  //     console.log(result)      
+  //   } else if(myScore > currentHighScoreDoc.score) {
+  //     console.log('updating score:'+myScore)
+  //     const result = await contentDB.put({
+  //       _id: 'high-score:' + game_id + ':' + user_id,
+  //       _rev: currentHighScoreDoc._rev,
+  //       user_id,
+  //       score: myScore
+  //     })
+  //     console.log(result)
+  //   } else {
+  //     console.log('here')
+  //   }
+  // } catch (error) {
+  //   console.log('finalizeScore: ' + error)
+  // }
 }
 
 export default reducer

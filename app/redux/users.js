@@ -1,4 +1,4 @@
-import { usersDB, remoteUsersDB } from '../db'
+// import { usersDB, remoteUsersDB } from '../db'
 
 const FETCH_USERS_REQUEST = 'Fiji/users/FETCH_USERS_REQUEST'
 const FETCH_USERS_SUCCESS = 'Fiji/users/FETCH_USERS_SUCCESS'
@@ -44,20 +44,21 @@ export const fetchUsersFailure = () => ({
 })
 
 export const fetchUsers = () => async(dispatch) => {
-  dispatch(fetchUsersRequest())
-  try {
-    const syncResult = await usersDB.sync(remoteUsersDB)
-    console.log(syncResult)
-  } catch(error) {
-    console.log('_getAllUsers: ' + error)
-  }
-  try {
-    const result = await usersDB.allDocs({include_docs: true})
-    dispatch(fetchUsersSuccess(result.rows.map(function(row) { return row.doc})))
-  } catch(error) {
-    console.log('_getAllUsers: ' + error)
-    dispatch(fetchUsersFailure())
-  }
+  // dispatch(fetchUsersRequest())
+  // try {
+  //   const syncResult = await usersDB.sync(remoteUsersDB)
+  //   console.log(syncResult)
+  // } catch(error) {
+  //   console.log('_getAllUsers: ' + error)
+  // }
+  // try {
+  //   const result = await usersDB.allDocs({include_docs: true})
+  //   dispatch(fetchUsersSuccess(result.rows.map(function(row) { return row.doc})))
+  // } catch(error) {
+  //   console.log('_getAllUsers: ' + error)
+  //   dispatch(fetchUsersFailure())
+  // }
+  dispatch(fetchUsersSuccess(require('../../config/seed/users.json').docs))
 
 }
 

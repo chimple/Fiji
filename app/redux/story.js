@@ -1,4 +1,4 @@
-import { contentDB, remoteContentDB, storyDB, remoteStoryDB } from '../db'
+// import { contentDB, remoteContentDB, storyDB, remoteStoryDB } from '../db'
 
 const FETCH_TITLES_REQUEST = 'Fiji/story/FETCH_TITLES_REQUEST'
 const FETCH_TITLES_SUCCESS = 'Fiji/story/FETCH_TITLES_SUCCESS'
@@ -82,45 +82,47 @@ export const fetchStoryFailure = () => ({
 
 export const fetchTitles = () => async(dispatch, getState) => {
     dispatch(fetchTitlesRequest())
-    try {
-      const replResult = await contentDB.replicate.from(remoteContentDB)
-    } catch (error) {
-      console.log('fetchTitles.replication: ' + error)
-    }
-    try {
-      const result = await contentDB.allDocs({
-        startkey: 'storytitle:', 
-        endkey: 'storytitle:'+'\ufff0', 
-        include_docs: true
-      })
-      console.log('fetchTitles')
-      console.log(result)
-      dispatch(fetchTitlesSuccess(result.rows.map(function(row) { return row.doc})))
-    } catch(error) {
-      console.log('fetchTitles: ' + error)
-      dispatch(fetchTitlesFailure())
-    }
+    // try {
+    //   const replResult = await contentDB.replicate.from(remoteContentDB)
+    // } catch (error) {
+    //   console.log('fetchTitles.replication: ' + error)
+    // }
+    // try {
+    //   const result = await contentDB.allDocs({
+    //     startkey: 'storytitle:', 
+    //     endkey: 'storytitle:'+'\ufff0', 
+    //     include_docs: true
+    //   })
+    //   console.log('fetchTitles')
+    //   console.log(result)
+    //   dispatch(fetchTitlesSuccess(result.rows.map(function(row) { return row.doc})))
+    // } catch(error) {
+    //   console.log('fetchTitles: ' + error)
+    //   dispatch(fetchTitlesFailure())
+    // }
+    dispatch(fetchTitlesSuccess(require('../../config/seed/content.json').filter((doc)=>doc._id.startsWith('storytitle:'))))
 }
 
 export const fetchStory = ( title ) => async(dispatch, getState) => {
   dispatch(fetchStoryRequest())
   const storyId = 'story:' + title._id.substring(11)
-  try {
-    const result = await remoteStoryDB.replicate.to(storyDB, {
-      doc_ids: [storyId]
-    })
-  } catch (error) {
-    console.log('fetchStory: '+error)
-  }
-  try {
-    // story._id is storytitle:xyz, so strip out storytitle:
-    const doc = await storyDB.get(storyId)
-    console.log(doc)
-    dispatch(fetchStorySuccess(doc))
-  } catch(error) {
-      console.log('fetchStory: ' + error)
-      dispatch(fetchStoryFailure())
-  }
+  // try {
+  //   const result = await remoteStoryDB.replicate.to(storyDB, {
+  //     doc_ids: [storyId]
+  //   })
+  // } catch (error) {
+  //   console.log('fetchStory: '+error)
+  // }
+  // try {
+  //   // story._id is storytitle:xyz, so strip out storytitle:
+  //   const doc = await storyDB.get(storyId)
+  //   console.log(doc)
+  //   dispatch(fetchStorySuccess(doc))
+  // } catch(error) {
+  //     console.log('fetchStory: ' + error)
+  //     dispatch(fetchStoryFailure())
+  // }
+  dispatch(fetchStorySuccess(require('../../config/seed/story.json').filter((doc)=>doc._id==storyId))[0])
 }
 
 export default reducer

@@ -1,4 +1,4 @@
-import { contentDB, remoteContentDB } from '../db'
+// import { contentDB, remoteContentDB } from '../db'
 
 const FETCH_STICKER_PACKS_REQUEST = 'Fiji/game/FETCH_STICKER_PACKS_REQUEST'
 const FETCH_STICKER_PACKS_SUCCESS = 'Fiji/game/FETCH_STICKER_PACKS_SUCCESS'
@@ -128,15 +128,15 @@ export const fetchStickers = ( pack_id ) => async(dispatch, getState) => {
 }
 
 export const fetchSticker = ( sticker_id ) => async(dispatch, getState) => {
-  try {
-    dispatch(fetchStickerRequest())
-    const sticker = await contentDB.get(sticker_id)
-    console.log(sticker)
-    dispatch(fetchStickerSuccess(sticker))
-  } catch(error) {
-      console.log('fetchSticker: ' + error)
-      dispatch(fetchStickerFailure())
-  }
+  // try {
+  //   dispatch(fetchStickerRequest())
+  //   const sticker = await contentDB.get(sticker_id)
+  //   console.log(sticker)
+  //   dispatch(fetchStickerSuccess(sticker))
+  // } catch(error) {
+  //     console.log('fetchSticker: ' + error)
+  //     dispatch(fetchStickerFailure())
+  // }
 }
 
 export const fetchStickerPacks = () => async(dispatch, getState) => {

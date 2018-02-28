@@ -1,5 +1,5 @@
-import PouchDB from 'pouchdb-react-native';
-import { remoteURL } from '../db';
+// import PouchDB from 'pouchdb-react-native';
+// import { remoteURL } from '../db';
 
 const START_CHAT_REQUEST = 'Fiji/chat/START_CHAT_REQUEST'
 const START_CHAT_SUCCESS = 'Fiji/chat/START_CHAT_SUCCESS'
@@ -72,13 +72,14 @@ export const addMessage = (message) => ({
 export const startChat = (friend) => {
   return function(dispatch, getState) {
     dispatch(startChatRequest(friend))
-    let userDB = new PouchDB('user_' + getState().auth.user._id)
-    userDB.allDocs({startkey: 'chat:'+friend._id+'\ufff0', endkey: 'chat:'+friend._id, include_docs: true, descending: true}).then(function (result) {
-      console.log(result)
-        dispatch(startChatSuccess(result.rows.map(function(row) { return row.doc})))
-      }).catch(function (err) {
-          console.log('startChat: ' + err)
-      })
+    // let userDB = new PouchDB('user_' + getState().auth.user._id)
+    // userDB.allDocs({startkey: 'chat:'+friend._id+'\ufff0', endkey: 'chat:'+friend._id, include_docs: true, descending: true}).then(function (result) {
+    //   console.log(result)
+    //     dispatch(startChatSuccess(result.rows.map(function(row) { return row.doc})))
+    //   }).catch(function (err) {
+    //       console.log('startChat: ' + err)
+    //   })
+    dispatch(startChatSuccess(require('../../config/seed/user_alice.json').docs))
   }
 }
 
@@ -86,35 +87,35 @@ export const sendMessage = (friend, message, type) => {
   console.log("this is chat send ");
   console.log(friend, message);
   return function(dispatch, getState) {
-    let userDB = new PouchDB('user_' + getState().auth.user._id)
-    let now = (new Date()).toJSON()
-    let msg = {
-      _id: 'chat:' + friend._id + ':' + now,
-      sender: getState().auth.user._id,
-      message:{
-          type: type,
-           content: message,
-      }    
-    }
+    // let userDB = new PouchDB('user_' + getState().auth.user._id)
+    // let now = (new Date()).toJSON()
+    // let msg = {
+    //   _id: 'chat:' + friend._id + ':' + now,
+    //   sender: getState().auth.user._id,
+    //   message:{
+    //       type: type,
+    //        content: message,
+    //   }    
+    // }
     dispatch(addMessage(msg))
-    userDB.put(msg).then(function (response) {
-      let friendDB = new PouchDB('user_' + friend._id)
-      let friendMsg = {
-        _id: 'chat:' + getState().auth.user._id + ':' + now,
-        sender: getState().auth.user._id,
-        message:{
-          type:type,
-          content: message,
-       }   
-      }  
-      friendDB.put(friendMsg).then(function (resp) {
-        friendDB.replicate.to(remoteURL + 'user_' + friend._id).then(function (result) {
-          console.log(result)
-        }).catch(function (err) {
-          console.log(err)
-        }) 
-      })
-    })
+    // userDB.put(msg).then(function (response) {
+    //   let friendDB = new PouchDB('user_' + friend._id)
+    //   let friendMsg = {
+    //     _id: 'chat:' + getState().auth.user._id + ':' + now,
+    //     sender: getState().auth.user._id,
+    //     message:{
+    //       type:type,
+    //       content: message,
+    //    }   
+    //   }  
+    //   friendDB.put(friendMsg).then(function (resp) {
+    //     friendDB.replicate.to(remoteURL + 'user_' + friend._id).then(function (result) {
+    //       console.log(result)
+    //     }).catch(function (err) {
+    //       console.log(err)
+    //     }) 
+    //   })
+    // })
   }
 }
 
