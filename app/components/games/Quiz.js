@@ -7,6 +7,8 @@ import Tile from './Tile';
 import TileGrid from './TileGrid';
 
 const SIZE = 2;
+var colors = ['#fff', '#e56c25'];
+var quecolors = ['#ffb300', '#ed2d85']
 
 export default class Quiz extends Component {
   constructor(props) {
@@ -19,8 +21,12 @@ export default class Quiz extends Component {
     for (let i = 0; i < statuses.length; i++) {
       statuses[i] = 'Neutral';
     }
+    var color = colors[Math.floor(Math.random() * colors.length)];
+    var quecolor = quecolors[Math.floor(Math.random() * quecolors.length)];
     return ({
-      statuses
+      statuses,
+      color,
+      quecolor
     });
   }
 
@@ -94,10 +100,10 @@ export default class Quiz extends Component {
             statusStyles={{
               'Same': {
                 View: {
-                  backgroundColor: '#ffb300'
+                  backgroundColor: this.state.quecolor
                 },
                 Text: {
-                  color: 'black'
+                  color: '#000'
                 }
               }
             }}
@@ -112,7 +118,6 @@ export default class Quiz extends Component {
 
         <TileGrid
           delegateTouch={this.props.delegateTouch}
-          reverse={this.props.reverse}
           numRows={SIZE}
           numCols={SIZE}
           data={this.props.data.choices}
@@ -131,10 +136,10 @@ export default class Quiz extends Component {
           statusStyles={{
             Neutral: {
               View: {
-                backgroundColor: '#ffffff'
+                backgroundColor: this.state.color
               },
               Text: {
-                color: 'black'
+                color: '#000'
               }
             },
             Selected: {
@@ -142,7 +147,7 @@ export default class Quiz extends Component {
                 backgroundColor: 'green'
               },
               Text: {
-                color: 'black'
+                color: '#000'
               }
             }
           }}
