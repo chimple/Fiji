@@ -47,7 +47,7 @@ class ScoreScreen extends PureComponent{
                         ?
                 
                         <View style={styles.ScoreCardStyle}>
-                            <View style={styles.PlayerScoreViewStyle}>
+                            <View style={[styles.PlayerScoreViewStyle, {backgroundColor:this.props.backgroundColor}]}>
                                 <ImageBackground style={[styles.PlayerScoreStyle, {width:20, height:100, alignSelf:'center'}]} source={{uri:'data:image/png;base64,' + this.props.user.image }} ><Text style={{fontWeight:'bold', fontSize:20,}}>{this.props.currentScore}</Text></ImageBackground>
                                 <View style={styles.CharacterStyle}></View>
                                 <View style={styles.PlayerScoreStyle}><Text style={{fontWeight:'bold', fontSize:50,}}>{UserLastScore}</Text></View>
@@ -95,7 +95,6 @@ const styles = StyleSheet.create({
     },
     PlayerScoreViewStyle:{
         flex:3,
-        backgroundColor:'#edca2f',
         flexDirection:'row'
     },
     RankingViewStyle:{
