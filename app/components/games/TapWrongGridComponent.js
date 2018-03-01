@@ -109,6 +109,7 @@ export default class TapWrongGridComponent extends Component {
             ref='view1' >
             <TileGrid
                 delegateTouch={this.props.delegateTouch}
+                reverse={this.props.reverse}
                 numRows={SIZE}
                 numCols={this.state.arr1.length}
                 statuses={this.state.statuses}

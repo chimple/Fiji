@@ -18,6 +18,7 @@ export default class SingleGame extends Component {
   }
 
   _addToTiles = (tile) => {
+    console.log(tile)
     this._tiles.push(tile)
   }
 
@@ -50,7 +51,7 @@ export default class SingleGame extends Component {
       <View
         onStartShouldSetResponder={(e) => true}
         onStartShouldSetResponderCapture={(e) => true}
-        onResponderGrant={({ nativeEvent }) => this._callTile(nativeEvent)}
+        onTouchStart={({ nativeEvent }) => this._callTile(nativeEvent)}
         style={[styles.container, {backgroundColor: this.props.backgroundColor}]}>
         <View style={[styles.header, {backgroundColor: this.props.headerColor}]}>
           <Text style={[styles.info, {backgroundColor: this.props.backgroundColor}]}>
@@ -65,6 +66,7 @@ export default class SingleGame extends Component {
         </View>
         <GameWrapper
           gameComponent={this.props.gameComponent}
+          reverse={false}
           delegateTouch={this._addToTiles}
           play={this.props.play}
           onEnd={this.props.onEnd}
