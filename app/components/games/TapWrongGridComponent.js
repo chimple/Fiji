@@ -14,11 +14,11 @@ export default class TapWrongGridComponent extends Component {
 
     _initBoard = (props) => {
     
-        let arr4 = [];
+        let arr2 = [];
         let num = 0;
         let statuses = [];
        let numOFWrongElem=0;
-       let arr3 = this.props.data.word.map(function (element, i) {
+       let arr1 = this.props.data.word.map(function (element, i) {
 
             return element;
         });
@@ -26,30 +26,30 @@ export default class TapWrongGridComponent extends Component {
        var randNum = 0;
         var temp = 0;
         var temp1 = 0;
-  let lenOfArr3=arr3.length;
+  let lenOfArr1=arr1.length;
         // Randomizing array
 
         for (let w = 0; w <  this.props.data.others.length; w++) {
-            randNum = Math.floor(Math.random() * (arr3.length)) + 0;
+            randNum = Math.floor(Math.random() * (arr1.length)) + 0;
             console.log("random num", randNum);
-            temp = arr3[randNum];
-            arr3[randNum] =  this.props.data.others[w];
-            for (let q = randNum; q < (lenOfArr3 +( this.props.data.others.length-1)); q++) {
-                temp1 = arr3[q + 1];
-                arr3[q + 1] = temp;
+            temp = arr1[randNum];
+            arr1[randNum] =  this.props.data.others[w];
+            for (let q = randNum; q < (lenOfArr1 +( this.props.data.others.length-1)); q++) {
+                temp1 = arr1[q + 1];
+                arr1[q + 1] = temp;
                 temp = temp1;
-                console.log("arr3[q],arr2[w]", arr3[q], this.props.data.others[w]);
+                console.log("arr1[q],arr2[w]", arr1[q], this.props.data.others[w]);
                 
             }
         }
        
-        for (let l = 0; l < arr3.length; l++) {
+        for (let l = 0; l < arr1.length; l++) {
             statuses[l] = 'neutral';
         }
         return ({
-            arr3,
+            arr1,
             statuses,
-            arr4,
+            arr2,
             num,
             numOFWrongElem
         })
@@ -67,8 +67,8 @@ export default class TapWrongGridComponent extends Component {
      let j = 0;
      let proArray = [];
 
-        for (let i = 0; i < this.state.arr3.length; i++) {
-        proArray[i] = this.state.arr3[i];
+        for (let i = 0; i < this.state.arr1.length; i++) {
+        proArray[i] = this.state.arr1[i];
         }
        
         proArray=proArray.filter((val,index) => index!=id)
@@ -87,12 +87,13 @@ export default class TapWrongGridComponent extends Component {
             this.state.num++;
             this.state.numOFWrongElem++;
        
-       this.setState( {...this.state,arr3:this.state.arr3.filter((val,index)=> index!=id)})
+       this.setState( {...this.state,arr1:this.state.arr1.filter((val,index)=> index!=id)})
             this.props.onScore(2);
             this.props.setProgress(this.state.num /  this.props.data.others.length);
             if (this.state.numOFWrongElem ==  this.props.data.others.length) {
-                this.refs.view1.zoomIn(1000);
+              
                this.setState({statuses: this.state.statuses.map(()=>'selected')})
+               this.refs.view1.zoomIn(1000);
                setTimeout( () => { this.props.onEnd();},1500)
             }
         
@@ -109,9 +110,9 @@ export default class TapWrongGridComponent extends Component {
             <TileGrid
                 delegateTouch={this.props.delegateTouch}
                 numRows={SIZE}
-                numCols={this.state.arr3.length}
+                numCols={this.state.arr1.length}
                 statuses={this.state.statuses}
-                data={this.state.arr3}
+                data={this.state.arr1}
                 onStatusChange={this._onStatusChange}
                 statusStyles = {{
                     neutral: {
