@@ -2,75 +2,90 @@
   {
     "_id": "game:memory-matching",
     "name": "Memory Matching",
-    "backgroundColor": "#734052",
+    "backgroundColor": "#8e1b5d",
+    "scoreScreenBackgroundColor":"#734052",
     "headerColor": "#381d2a",
     "progressBarColor": "#ff80ab",
+    "offlineTriesBackgroundColor":"#ff80ab",
+    "offlineTimedBackgroundColor":"#ef6583",
+    "onlineTriesBackgroundColor":"#d33d6f",
+    "onlineTimedBackgroundColor":"#892f52",
     "nimo": "pig",
     "sets": [
       {
         "_id": "letters",
         "name": "Letters",
-        "backgroundColor": "#52c5ce"
+        "backgroundColor": "#fcc066"
       },
       {
         "_id": "numbers",
         "name": "Numbers",
-        "backgroundColor": "#fc7466"
+        "backgroundColor": "#ff80ab"
       },
       {
         "_id": "images",
         "name": "Images",
-        "backgroundColor": "#fc66a2"
+        "backgroundColor": "#734052"
       }
     ]
   },
   {
     "_id": "game:tap-home",
     "name": "Tap Home",
-    "backgroundColor": "#f39b6d",
+    "backgroundColor": "#ffd0b8",
+    "scoreScreenBackgroundColor":"#fed2b7",
     "headerColor": "#fed2b7",
     "progressBarColor": "#9d4e6e",
+    "offlineTriesBackgroundColor":"#734052",
+    "offlineTimedBackgroundColor":"#f2636f",
+    "onlineTriesBackgroundColor":"#f39b6d",
+    "onlineTimedBackgroundColor":"#fed2b7",
     "nimo": "bear",
     "sets": [
       {
         "_id": "letters",
         "name": "Letters",
-        "backgroundColor": "#52c5ce"
+        "backgroundColor": "#fed2b7"
       },
       {
         "_id": "numbers",
         "name": "Numbers",
-        "backgroundColor": "#fc7466"
+        "backgroundColor": "#f39b6d"
       },
       {
         "_id": "images",
         "name": "Images",
-        "backgroundColor": "#fc66a2"
+        "backgroundColor": "#f2636f"
       }
     ]
   },
   {
     "_id": "game:reflex",
     "name": "Reflex",
-    "backgroundColor": "#f39b6d",
-    "headerColor": "#fed2b7",
+    "backgroundColor": "#fff3c0",
+    "headerColor": "#fff3c0",
+    "scoreScreenBackgroundColor":"#ffd278",
     "progressBarColor": "#9d4e6e",
+    "offlineTriesBackgroundColor":"#d32f2f",
+    "offlineTimedBackgroundColor":"#ff8a65",
+    "onlineTriesBackgroundColor":"#ffd278",
+    "onlineTimedBackgroundColor":"#fff3c0",
     "nimo": "bear",    
     "sets": [
       {
         "_id": "letters",
         "name": "Letters",
-        "backgroundColor": "#52c5ce"
+        "backgroundColor": "#fff3c0"
       },
       {
         "_id": "numbers",
         "name": "Numbers",
-        "backgroundColor": "#fc7466"
+        "backgroundColor": "#ffd278"
       },
       {
         "_id": "images",
         "name": "Images",
-        "backgroundColor": "#fc66a2"
+        "backgroundColor": "#d32f2f"
       }
     ]
   },
@@ -79,7 +94,12 @@
     "name": "Tap-wrong",
     "backgroundColor": "#f7ebcb",
     "headerColor": "#52c5ce",
+    "scoreScreenBackgroundColor":"#52c5ce",
     "progressBarColor": "#000000",
+    "offlineTriesBackgroundColor":"#ff9751",
+    "offlineTimedBackgroundColor":"#52c5ce",
+    "onlineTriesBackgroundColor":"#ed2d85",
+    "onlineTimedBackgroundColor":"#fed2b7",
     "nimo": "panda",
     "sets": [
       {
@@ -90,87 +110,102 @@
       {
         "_id": "numbers",
         "name": "Numbers",
-        "backgroundColor": "#fc7466"
+        "backgroundColor": "#ed2d85"
       },
       {
         "_id": "images",
         "name": "Images",
-        "backgroundColor": "#fc66a2"
+        "backgroundColor": "#fed2b7"
       }
     ]
   },
   {
     "_id": "game:word",
     "name": "Word",
-    "backgroundColor": "#f9b757",
+    "backgroundColor": "#d13f3f",
+    "scoreScreenBackgroundColor":"#f9b757",
     "headerColor": "#c14d4d",
     "progressBarColor": "#fff176",
+    "offlineTriesBackgroundColor":"#f9bf8c",
+    "offlineTimedBackgroundColor":"#fff176",
+    "onlineTriesBackgroundColor":"#f9b757",
+    "onlineTimedBackgroundColor":"#f9b757",
     "nimo": "cheetah",
     "sets": [
       {
         "_id": "letters",
         "name": "Letters",
-        "backgroundColor": "#52c5ce"
+        "backgroundColor": "#fff176"
       },
       {
         "_id": "numbers",
         "name": "Numbers",
-        "backgroundColor": "#fc7466"
+        "backgroundColor": "#f9b757"
       },
       {
         "_id": "images",
         "name": "Images",
-        "backgroundColor": "#fc66a2"
+        "backgroundColor": "#f9b757"
       }
     ]
   },
   {
     "_id": "game:multiple-choice",
     "name": "Multiple-choice",
-    "backgroundColor": "#f2636f",
-    "headerColor": "#fffac2",
+    "backgroundColor": "#fffac2",
+    "scoreScreenBackgroundColor":"#fffac2",
+    "headerColor": "#8ecd4e",
     "progressBarColor": "#9d4e70",
+    "offlineTriesBackgroundColor":"#fffac2",
+    "offlineTimedBackgroundColor":"#ffc599",
+    "onlineTriesBackgroundColor":"#ffb300",
+    "onlineTimedBackgroundColor":"#f2636f",
     "nimo": "cat",
     "sets": [
       {
         "_id": "letters",
         "name": "Letters",
-        "backgroundColor": "#52c5ce"
+        "backgroundColor": "#fffac2"
       },
       {
         "_id": "numbers",
         "name": "Numbers",
-        "backgroundColor": "#fc7466"
+        "backgroundColor": "#ffb300"
       },
       {
         "_id": "images",
         "name": "Images",
-        "backgroundColor": "#fc66a2"
+        "backgroundColor": "#734052"
       }
     ]
   },
   {
     "_id": "game:connect-dots",
     "name": "Connect-dots",
-    "backgroundColor": "#f5c5b7",
+    "backgroundColor": "#51204d",
+    "scoreScreenBackgroundColor":"#f5c5b7",
     "headerColor": "#4e434c",
     "progressBarColor": "#fff176",
+    "offlineTriesBackgroundColor":"#f5c5b7",
+    "offlineTimedBackgroundColor":"#e37b40",
+    "onlineTriesBackgroundColor":"#af2e19",
+    "onlineTimedBackgroundColor":"#8d032a",
     "nimo": "fox",
     "sets": [
       {
         "_id": "letters",
         "name": "Letters",
-        "backgroundColor": "#52c5ce"
+        "backgroundColor": "#f5c5b7"
       },
       {
         "_id": "numbers",
         "name": "Numbers",
-        "backgroundColor": "#fc7466"
+        "backgroundColor": "#e37b40"
       },
       {
         "_id": "images",
         "name": "Images",
-        "backgroundColor": "#fc66a2"
+        "backgroundColor": "#8d032a"
       }
     ]
   }

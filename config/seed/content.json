@@ -82,35 +82,6 @@
       "title": "Phantasmagoria16"
     },
     {
-      "_id": "game:memory-matching",
-      "title": "memory-matching"
-    },
-    {
-      "_id": "game:reflex",
-      "title": "reflex"
-    },
-    {
-      "_id": "game:tap-wrong",
-      "title": "tap-wrong"
-    },
-    {
-      "_id": "game:word",
-      "title": "word"
-    },
-    {
-      "_id": "game:multiple-choice",
-      "title": "multiple-choice"
-    },
-    {
-      "_id": "game:tap-home",
-      "title": "tap-home"
-    },
-    
-    {
-      "_id": "game:connect-dots",
-      "title": "connect-dots"
-    },
-    {
       "_id": "high-score:game:memory-matching:mad-hatter",
       "user_id": "mad-hatter",
       "score": 20
@@ -219,140 +190,175 @@
     {
       "_id": "game:memory-matching",
       "name": "Memory Matching",
-      "screen": "Game1",
-      "category": "Read",
+      "backgroundColor": "#734052",
+      "headerColor": "#381d2a",
+      "progressBarColor": "#ff80ab",
+      "nimo": "pig",
       "sets": [
         {
           "_id": "letters",
-          "name": "Letters"
+          "name": "Letters",
+          "backgroundColor": "#52c5ce"
         },
         {
           "_id": "numbers",
-          "name": "Numbers"
+          "name": "Numbers",
+          "backgroundColor": "#fc7466"
         },
         {
           "_id": "images",
-          "name": "Images"
+          "name": "Images",
+          "backgroundColor": "#fc66a2"
         }
       ]
     },
     {
       "_id": "game:tap-home",
       "name": "Tap Home",
-      "screen": "Game2",
-      "category": "Read",
+      "backgroundColor": "#f39b6d",
+      "headerColor": "#fed2b7",
+      "progressBarColor": "#9d4e6e",
+      "nimo": "bear",
       "sets": [
         {
           "_id": "letters",
-          "name": "Letters"
+          "name": "Letters",
+          "backgroundColor": "#52c5ce"
         },
         {
           "_id": "numbers",
-          "name": "Numbers"
+          "name": "Numbers",
+          "backgroundColor": "#fc7466"
         },
         {
           "_id": "images",
-          "name": "Images"
+          "name": "Images",
+          "backgroundColor": "#fc66a2"
         }
       ]
     },
     {
       "_id": "game:reflex",
       "name": "Reflex",
-      "screen": "Reflex",
-      "category": "listening",
+      "backgroundColor": "#f39b6d",
+      "headerColor": "#fed2b7",
+      "progressBarColor": "#9d4e6e",
+      "nimo": "bear",    
       "sets": [
         {
           "_id": "letters",
-          "name": "Letters"
+          "name": "Letters",
+          "backgroundColor": "#52c5ce"
         },
         {
           "_id": "numbers",
-          "name": "Numbers"
+          "name": "Numbers",
+          "backgroundColor": "#fc7466"
         },
         {
           "_id": "images",
-          "name": "Images"
+          "name": "Images",
+          "backgroundColor": "#fc66a2"
         }
       ]
     },
     {
       "_id": "game:tap-wrong",
       "name": "Tap-wrong",
-      "screen": "Game3",
-      "category": "listening",
+      "backgroundColor": "#f7ebcb",
+      "headerColor": "#52c5ce",
+      "progressBarColor": "#000000",
+      "nimo": "panda",
       "sets": [
         {
           "_id": "letters",
-          "name": "Letters"
+          "name": "Letters",
+          "backgroundColor": "#52c5ce"
         },
         {
           "_id": "numbers",
-          "name": "Numbers"
+          "name": "Numbers",
+          "backgroundColor": "#fc7466"
         },
         {
           "_id": "images",
-          "name": "Images"
+          "name": "Images",
+          "backgroundColor": "#fc66a2"
         }
       ]
     },
     {
       "_id": "game:word",
       "name": "Word",
-      "screen": "Game4",
-      "category": "writing",
+      "backgroundColor": "#f9b757",
+      "headerColor": "#c14d4d",
+      "progressBarColor": "#fff176",
+      "nimo": "cheetah",
       "sets": [
         {
           "_id": "letters",
-          "name": "Letters"
+          "name": "Letters",
+          "backgroundColor": "#52c5ce"
         },
         {
           "_id": "numbers",
-          "name": "Numbers"
+          "name": "Numbers",
+          "backgroundColor": "#fc7466"
         },
         {
           "_id": "images",
-          "name": "Images"
+          "name": "Images",
+          "backgroundColor": "#fc66a2"
         }
       ]
     },
     {
       "_id": "game:multiple-choice",
       "name": "Multiple-choice",
-      "screen": "Game6",
-      "category": "writing",
+      "backgroundColor": "#f2636f",
+      "headerColor": "#fffac2",
+      "progressBarColor": "#9d4e70",
+      "nimo": "cat",
       "sets": [
         {
           "_id": "letters",
-          "name": "Letters"
+          "name": "Letters",
+          "backgroundColor": "#52c5ce"
         },
         {
           "_id": "numbers",
-          "name": "Numbers"
+          "name": "Numbers",
+          "backgroundColor": "#fc7466"
         },
         {
           "_id": "images",
-          "name": "Images"
+          "name": "Images",
+          "backgroundColor": "#fc66a2"
         }
       ]
     },
     {
       "_id": "game:connect-dots",
       "name": "Connect-dots",
-      "screen": "Game5",
-      "category": "reading",
+      "backgroundColor": "#f5c5b7",
+      "headerColor": "#4e434c",
+      "progressBarColor": "#fff176",
+      "nimo": "fox",
       "sets": [
         {
           "_id": "letters",
-          "name": "Letters"
+          "name": "Letters",
+          "backgroundColor": "#52c5ce"
         },
         {
           "_id": "numbers",
-          "name": "Numbers"
+          "name": "Numbers",
+          "backgroundColor": "#fc7466"
         },
         {
           "_id": "images",
-          "name": "Images"
+          "name": "Images",
+          "backgroundColor": "#fc66a2"
         }
       ]
     }

@@ -69,7 +69,7 @@ class GameScreen extends Component {
     return (
       this.state.gameOver
         ?
-        <ScoreScreen keys={navParams.key} navigation={this.props.navigation} currentScore={this.props.myScore} item={navParams.item} game={navParams.game} user={navParams.user} />
+        <ScoreScreen backgroundColor={navParams.game.scoreScreenBackgroundColor} keys={navParams.key} navigation={this.props.navigation} currentScore={this.props.myScore} item={navParams.item} game={navParams.game} user={navParams.user} />
         :
         this.props.isFetching
           ?
