@@ -10,7 +10,11 @@ import data, {
   fetchMatchData,
   fetchSerialData,
   fetchConsecutiveData,
-  fetchWordData
+  fetchWordData,
+  fetchEquationData,
+  fetchCrosswordData,
+  fetchTrueOrFalseData,
+  fetchRollingData
 } from '../data'
 
 // test reducers
@@ -83,3 +87,28 @@ it('handles fetchWordData action', () => {
   store.dispatch(fetchWordData('set:letters', 5, 4, 3))
   expect(store.getActions()).toMatchSnapshot()
 })
+
+it('handles fetchEquationData action', () => {
+  const store = mockStore(initialState)
+  store.dispatch(fetchEquationData('set:sum', 3, 2))
+  expect(store.getActions()).toMatchSnapshot()
+})
+
+it('handles fetchCrosswordData action', () => {
+  const store = mockStore(initialState)
+  store.dispatch(fetchCrosswordData('set:letters', 5, 2))
+  expect(store.getActions()).toMatchSnapshot()
+})
+
+it('handles fetchTrueOrFalseData action', () => {
+  const store = mockStore(initialState)
+  store.dispatch(fetchTrueOrFalseData('set:letters', 3))
+  expect(store.getActions()).toMatchSnapshot()
+})
+
+it('handles fetchRollingData action', () => {
+  const store = mockStore(initialState)
+  store.dispatch(fetchRollingData('set:letters', 5, 7, 2))
+  expect(store.getActions()).toMatchSnapshot()
+})
+
