@@ -47,14 +47,6 @@ export default class ReflexBoard extends Component {
       animRef={(el) => {
         this.state.letters[id].ref = el
       }}
-      measureRef={(el)=>{console.log(el)
-        this.props.delegateTouch
-        && el
-        && this.props.delegateTouch({
-          view: el,
-          callback: ()=>{this._clickTile(id)},
-          reverse: this.props.reverse
-        })}}
       style={style}
       text={this.state.letters[id].text}
     />

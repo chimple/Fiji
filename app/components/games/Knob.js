@@ -14,6 +14,16 @@ export default class Knob extends Component {
     this.props.onPress(this.props.id)
   }
 
+  _onRef = (view) => {
+    view 
+    && this.props.delegateTouch 
+    && this.props.delegateTouch({
+      view,
+      callback: this._onPressIn,
+      reverse: this.props.reverse
+    })
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.text != nextProps.text
       || this.props.style.height != nextProps.style.height
@@ -38,7 +48,7 @@ export default class Knob extends Component {
         ]}
       >
         <View
-          ref={this.props.measureRef}
+          ref={this._onRef}
           onStartShouldSetResponder={(e) => true}
           onResponderGrant={(e) => { this._onPressIn() }}
           style={{
