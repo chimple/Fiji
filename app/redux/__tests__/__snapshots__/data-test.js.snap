@@ -116,6 +116,174 @@ Array [
 ]
 `;
 
+exports[`handles fetchCrosswordData action 1`] = `
+Array [
+  Object {
+    "type": "Fiji/game/FETCH_GAME_DATA_REQUEST",
+  },
+  Object {
+    "gameData": Array [
+      Object {
+        "crossword": Array [
+          Array [
+            "E",
+            null,
+            null,
+            null,
+            null,
+          ],
+          Array [
+            "A",
+            null,
+            null,
+            null,
+            null,
+          ],
+          Array [
+            "T",
+            "I",
+            "G",
+            "E",
+            "R",
+          ],
+          Array [
+            null,
+            null,
+            null,
+            null,
+            "A",
+          ],
+          Array [
+            null,
+            null,
+            null,
+            null,
+            "T",
+          ],
+        ],
+        "start": Array [
+          Array [
+            "image",
+            Array [
+              0,
+              0,
+            ],
+            "down",
+          ],
+          Array [
+            "image",
+            Array [
+              2,
+              0,
+            ],
+            "lToR",
+          ],
+          Array [
+            "image",
+            Array [
+              2,
+              4,
+            ],
+            "down",
+          ],
+        ],
+      },
+      Object {
+        "crossword": Array [
+          Array [
+            "E",
+            null,
+            null,
+            null,
+            null,
+          ],
+          Array [
+            "A",
+            null,
+            null,
+            null,
+            null,
+          ],
+          Array [
+            "T",
+            "I",
+            "G",
+            "E",
+            "R",
+          ],
+          Array [
+            null,
+            null,
+            null,
+            null,
+            "A",
+          ],
+          Array [
+            null,
+            null,
+            null,
+            null,
+            "T",
+          ],
+        ],
+        "start": Array [
+          Array [
+            "image",
+            Array [
+              0,
+              0,
+            ],
+            "down",
+          ],
+          Array [
+            "image",
+            Array [
+              2,
+              0,
+            ],
+            "lToR",
+          ],
+          Array [
+            "image",
+            Array [
+              2,
+              4,
+            ],
+            "down",
+          ],
+        ],
+      },
+    ],
+    "type": "Fiji/game/FETCH_GAME_DATA_SUCCESS",
+  },
+]
+`;
+
+exports[`handles fetchEquationData action 1`] = `
+Array [
+  Object {
+    "type": "Fiji/game/FETCH_GAME_DATA_REQUEST",
+  },
+  Object {
+    "gameData": Array [
+      Object {
+        "answer": 10,
+        "firstNum": 8,
+        "op": "+",
+        "secondNum": 2,
+      },
+      Object {
+        "answer": 9,
+        "firstNum": 5,
+        "op": "+",
+        "secondNum": 4,
+      },
+    ],
+    "type": "Fiji/game/FETCH_GAME_DATA_SUCCESS",
+  },
+]
+`;
+
 exports[`handles fetchMatchData action 1`] = `
 Array [
   Object {
@@ -198,6 +366,133 @@ Array [
 ]
 `;
 
+exports[`handles fetchRollingData action 1`] = `
+Array [
+  Object {
+    "type": "Fiji/game/FETCH_GAME_DATA_REQUEST",
+  },
+  Object {
+    "gameData": Array [
+      Object {
+        "answer": Array [
+          "A",
+          "P",
+          "P",
+          "L",
+          "E",
+        ],
+        "choices": Array [
+          Array [
+            "X",
+            "Y",
+            "Z",
+            "A",
+            "B",
+            "C",
+            "D",
+          ],
+          Array [
+            "M",
+            "N",
+            "O",
+            "P",
+            "Q",
+            "R",
+            "S",
+          ],
+          Array [
+            "M",
+            "N",
+            "O",
+            "P",
+            "Q",
+            "R",
+            "S",
+          ],
+          Array [
+            "I",
+            "J",
+            "K",
+            "L",
+            "M",
+            "N",
+            "O",
+          ],
+          Array [
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H",
+          ],
+        ],
+        "question": "Fruit",
+      },
+      Object {
+        "answer": Array [
+          "A",
+          "P",
+          "P",
+          "L",
+          "E",
+        ],
+        "choices": Array [
+          Array [
+            "X",
+            "Y",
+            "Z",
+            "A",
+            "B",
+            "C",
+            "D",
+          ],
+          Array [
+            "M",
+            "N",
+            "O",
+            "P",
+            "Q",
+            "R",
+            "S",
+          ],
+          Array [
+            "M",
+            "N",
+            "O",
+            "P",
+            "Q",
+            "R",
+            "S",
+          ],
+          Array [
+            "I",
+            "J",
+            "K",
+            "L",
+            "M",
+            "N",
+            "O",
+          ],
+          Array [
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H",
+          ],
+        ],
+        "question": "Fruit",
+      },
+    ],
+    "type": "Fiji/game/FETCH_GAME_DATA_SUCCESS",
+  },
+]
+`;
+
 exports[`handles fetchSerialData action 1`] = `
 Array [
   Object {
@@ -265,6 +560,34 @@ Array [
           "359",
           "360",
         ],
+      },
+    ],
+    "type": "Fiji/game/FETCH_GAME_DATA_SUCCESS",
+  },
+]
+`;
+
+exports[`handles fetchTrueOrFalseData action 1`] = `
+Array [
+  Object {
+    "type": "Fiji/game/FETCH_GAME_DATA_REQUEST",
+  },
+  Object {
+    "gameData": Array [
+      Object {
+        "answer": "Fruit",
+        "question": "Apple is a:",
+        "wrongChoice": "Animal",
+      },
+      Object {
+        "answer": "Fruit",
+        "question": "Apple is a:",
+        "wrongChoice": "Animal",
+      },
+      Object {
+        "answer": "Fruit",
+        "question": "Apple is a:",
+        "wrongChoice": "Animal",
       },
     ],
     "type": "Fiji/game/FETCH_GAME_DATA_SUCCESS",

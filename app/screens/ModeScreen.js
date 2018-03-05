@@ -9,38 +9,6 @@ export default class ModeScreen extends PureComponent{
         return(
             <View style={{flex:1}}>
                 <View style={{flexDirection:'row', flex:1}}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CommonGameScreen',
-                    {
-                        item: this.props.navigation.state.params.item,
-                        game: this.props.navigation.state.params.game,
-                        user: this.props.navigation.state.params.user,
-                        key:this.props.navigation.state.params.key,
-                        mode: 'HEAD_TO_HEAD',
-                        play: 'TRIES'
-                    }
-                    )} 
-                    style={[styles.TouchableStyle, {backgroundColor:'#fcc066'}]}
-                    accessibilityLabel="OfflineTries"
-                    >
-                        <Text style={styles.TextStyle}>OfflineTries</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CommonGameScreen',
-                    {
-                        item: this.props.navigation.state.params.item,
-                        game: this.props.navigation.state.params.game,
-                        user: this.props.navigation.state.params.user,
-                        key:this.props.navigation.state.params.key,
-                        mode: 'HEAD_TO_HEAD',
-                        play: 'TIMED'
-                    }
-                    )} 
-                    style={[styles.TouchableStyle, {backgroundColor:'#fc7466'}]}
-                    accessibilityLabel="OfflineTimed"
-                    >
-                        <Text style={styles.TextStyle}>OfflineTimed</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={{flexDirection:'row', flex:1}}>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('PlayWith',
                     {
                         item: this.props.navigation.state.params.item,
@@ -51,7 +19,7 @@ export default class ModeScreen extends PureComponent{
                         play: 'TRIES'
                     }
                     )} 
-                    style={[styles.TouchableStyle, {backgroundColor:'#fc66a2'}]}
+                    style={[styles.TouchableStyle, {backgroundColor:this.props.navigation.state.params.game.onlineTriesBackgroundColor}]}
                     accessibilityLabel="OnlineTries"
                     >
                         <Text style={styles.TextStyle}>OnlineTries</Text>
@@ -66,10 +34,42 @@ export default class ModeScreen extends PureComponent{
                         play: 'TIMED'
                     }
                     )} 
-                    style={[styles.TouchableStyle, {backgroundColor:'#52c5ce'}]}
+                    style={[styles.TouchableStyle, {backgroundColor:this.props.navigation.state.params.game.onlineTimedBackgroundColor}]}
                     accessibilityLabel="OnlineTimed"
                     >
                         <Text style={styles.TextStyle}>OnlineTimed</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={{flexDirection:'row', flex:1}}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CommonGameScreen',
+                    {
+                        item: this.props.navigation.state.params.item,
+                        game: this.props.navigation.state.params.game,
+                        user: this.props.navigation.state.params.user,
+                        key:this.props.navigation.state.params.key,
+                        mode: 'HEAD_TO_HEAD',
+                        play: 'TRIES'
+                    }
+                    )} 
+                    style={[styles.TouchableStyle, {backgroundColor:this.props.navigation.state.params.game.offlineTriesBackgroundColor}]}
+                    accessibilityLabel="OfflineTries"
+                    >
+                        <Text style={styles.TextStyle}>OfflineTries</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CommonGameScreen',
+                    {
+                        item: this.props.navigation.state.params.item,
+                        game: this.props.navigation.state.params.game,
+                        user: this.props.navigation.state.params.user,
+                        key:this.props.navigation.state.params.key,
+                        mode: 'HEAD_TO_HEAD',
+                        play: 'TIMED'
+                    }
+                    )} 
+                    style={[styles.TouchableStyle, {backgroundColor:this.props.navigation.state.params.game.offlineTimedBackgroundColor}]}
+                    accessibilityLabel="OfflineTimed"
+                    >
+                        <Text style={styles.TextStyle}>OfflineTimed</Text>
                     </TouchableOpacity>
                 </View>
             </View>

@@ -18,6 +18,7 @@ export default class SingleGame extends Component {
   }
 
   _addToTiles = (tile) => {
+    console.log(tile)
     this._tiles.push(tile)
   }
 
@@ -65,6 +66,7 @@ export default class SingleGame extends Component {
         </View>
         <GameWrapper
           gameComponent={this.props.gameComponent}
+          reverse={false}
           delegateTouch={this._addToTiles}
           play={this.props.play}
           onEnd={this.props.onEnd}
